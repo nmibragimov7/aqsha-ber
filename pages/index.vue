@@ -2,8 +2,7 @@
   <div class='row '>
     <template v-for='(card, index) in cards'>
       <div :key='index' class='col-12 col-lg-4'>
-        <Card
-              classes='block'>
+        <Card>
           <p>{{card.title}}</p>
           <p>{{card.description}}</p>
         </Card>
@@ -27,9 +26,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-//.block {
-//  display: flex;
-//  flex-direction: column;
-//  align-items: center;
-//}
+
 </style>

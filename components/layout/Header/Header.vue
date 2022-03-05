@@ -2,7 +2,6 @@
   <div class='header'>
     <div class='container'>
       <img class='header__logo' src='~/assets/images/logo.png' alt='Logo'/>
-
       <div class='header__bars'></div>
       <div class='header__item'>
         <img class='header__logo--large' src='~/assets/images/logo-large.png' alt='Logo'/>

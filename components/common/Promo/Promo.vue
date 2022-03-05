@@ -1,13 +1,13 @@
 <template>
   <div class='promo'>
-    <p class='promo__title m-0 mb-5'>мгновенные выплаты</p>
-    <p class='promo__description m-0 mb-5'>на карту и наличными</p>
-    <BaseInput class='mb-2'
+    <p class='promo__title'>мгновенные выплаты</p>
+    <p class='promo__description'>на карту и наличными</p>
+    <BaseInput class='mb-4'
                placeholder='Введите ИИН'
                icon='document'
                classes='header'/>
-    <BaseButton classes='mb-2'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
-    <p class='m-0 mb-2'>нажимая на кнопку “рассчитать сумму кредита”
+    <BaseButton classes='mb-4'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+    <p class='m-0'>нажимая на кнопку “рассчитать сумму кредита”
       вы даете свое согласие на сбор и обработку данных</p>
   </div>
 </template>
@@ -41,13 +41,16 @@ export default {
     font-size: 74px;
     font-weight: 800;
     text-transform: uppercase;
+    margin: 0 0 30px;
   }
   &__description {
     font-size: 42px;
     font-weight: 300;
+    white-space: nowrap;
+    margin: 0 0 60px;
   }
   @media (min-width: 900px) {
-    bottom: 20%;
+    bottom: 25%;
     left: 25%;
     backdrop-filter: none;
     background: inherit;
