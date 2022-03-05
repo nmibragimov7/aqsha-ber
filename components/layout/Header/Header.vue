@@ -1,18 +1,20 @@
 <template>
   <div class='header'>
     <div class='container'>
-      <img class='header__logo' src='~/assets/images/logo.png' alt='Logo'/>
+      <img class='header__logo' src='~/assets/images/logo.png' alt='Logo' />
       <div class='header__bars'></div>
       <div class='header__item'>
-        <img class='header__logo--large' src='~/assets/images/logo-large.png' alt='Logo'/>
+        <img class='header__logo--large' src='~/assets/images/logo-large.png' alt='Logo' />
         <div class='header__navs'>
-          <div :key='index'
-               v-for='(menu, index) in menus'
-               class='header__nav p-3 ml-4'>
-              <nuxt-link :to="menu.path">{{menu.title}}</nuxt-link>
+          <div v-for='(menu, index) in menus'
+               :key='index'
+               class='header__nav p-2 ml-2'>
+            <nuxt-link :to='menu.path'>{{ menu.title }}</nuxt-link>
           </div>
-          <div class='header__nav p-3 ml-4'>
-            <nuxt-link to="/login">Вход</nuxt-link> / <nuxt-link to="/register">Регистрация</nuxt-link>
+          <div class='header__nav p-2 ml-2'>
+            <nuxt-link to='/login'>Вход</nuxt-link>
+            /
+            <nuxt-link to='/register'>Регистрация</nuxt-link>
           </div>
         </div>
       </div>
@@ -21,7 +23,7 @@
 </template>
 
 <script>
-import {menus} from "../../../fixstures/menus";
+import { menus } from '../../../fixstures/menus'
 
 export default {
   name: 'Header',
@@ -39,6 +41,7 @@ export default {
   @media (min-width: 900px) {
     padding: 0;
   }
+
   &__item,
   &__navs {
     display: none;
@@ -48,11 +51,13 @@ export default {
       display: flex;
     }
   }
+
   &__nav {
     color: #FFF;
     font-size: 24px;
     text-decoration: underline;
     white-space: nowrap;
+
     & a {
       color: #FFF;
       font-size: 24px;
@@ -60,6 +65,7 @@ export default {
       white-space: nowrap;
     }
   }
+
   &__logo {
     position: absolute;
     top: 1%;
@@ -68,6 +74,7 @@ export default {
     @media (min-width: 900px) {
       display: none;
     }
+
     &--large {
       display: none;
       @media (min-width: 900px) {
@@ -75,6 +82,7 @@ export default {
       }
     }
   }
+
   &__bars {
     cursor: pointer;
     position: relative;
@@ -87,6 +95,7 @@ export default {
     @media (min-width: 900px) {
       display: none;
     }
+
     &::before,
     &::after {
       width: 37px;
@@ -102,9 +111,11 @@ export default {
       left: 0;
       will-change: transform;
     }
+
     &::before {
       -webkit-transform: translateY(-8px);
     }
+
     &:after {
       transform: translateY(8px);
     }

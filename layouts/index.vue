@@ -1,20 +1,19 @@
 <template>
   <div>
     <div class='promo__wrap'>
-      <Header/>
+      <Header />
       <div class='container'>
-        <Promo/>
+        <Promo />
       </div>
     </div>
-    <div class='container'>
-      <Nuxt/>
-    </div>
+    <Nuxt />
   </div>
 </template>
 
 <script>
-import Header from '../components/layout/Header/Header';
-import Promo from '../components/common/Promo/Promo';
+import Header from '../components/layout/Header/Header'
+import Promo from '../components/common/Promo/Promo'
+
 export default {
   components: { Promo, Header }
 }
@@ -30,11 +29,13 @@ export default {
     height: 100vh;
     padding: 15px 0;
     border-radius: 0 0 33px 33px;
+    margin-bottom: 5%;
     @media (min-width: 900px) {
       background-repeat: no-repeat, no-repeat;
-      background-position: 100% bottom, center;
-      background-size: 60%, 100%;
+      background-position: 80% bottom, center;
+      background-size: 40%, 100%;
       padding: 50px 0 0 0;
+      margin-bottom: 5%;
     }
   }
 }

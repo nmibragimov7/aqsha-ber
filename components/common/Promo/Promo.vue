@@ -29,28 +29,32 @@ export default {
   left: 50%;
   padding: 40px 25px;
   background: rgba(255, 255, 255, 0.36);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
   transform: translateX(-50%);
   border-radius: 10px;
+  z-index: 10;
   &__title,
   &__description {
     display: none;
     color: #FFF;
   }
+
   &__title {
     font-size: 74px;
     font-weight: 800;
     text-transform: uppercase;
     margin: 0 0 30px;
   }
+
   &__description {
     font-size: 42px;
     font-weight: 300;
     white-space: nowrap;
     margin: 0 0 60px;
   }
+
   @media (min-width: 900px) {
-    bottom: 25%;
+    bottom: 10%;
     left: 25%;
     backdrop-filter: none;
     background: inherit;
