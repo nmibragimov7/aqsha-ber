@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='py-3'>
     <div class='container'>
       <div class='row align-items-stretch'>
         <template v-for='(card, index) in cards'>
@@ -29,12 +29,11 @@
       <div class='row align-items-stretch'>
         <template v-for='(information, index) in infos'>
           <div :key='index' class='col-12 col-lg-6'>
-            <Card classes='info'>
-<!--              :class='[{"info__first": information.image === "get"}, {"info__last": information.image === "repay"}]'-->
-<!--              :style='{backgroundImage: `url(${require("@/assets/images/"+information.image+".png")})`}'-->
+            <Card classes='info'
+                  :class='[{"info__first": information.image === "get"}, {"info__last": information.image === "repay"}]'>
               <p class='card__title'>{{ information.title }}</p>
               <ul class='card__descriptions'>
-                <li v-for='(d, index) in information.description' :key='index'>{{ d }}</li>
+                <li v-for='(d, idx) in information.description' :key='idx'>{{ d }}</li>
               </ul>
               <BaseButton classes='card__button'>
                 <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>ПОДРОБНЕЕ</nuxt-link>
@@ -42,6 +41,70 @@
             </Card>
           </div>
         </template>
+      </div>
+      <h2 class='m-0 types__title'>Виды микрокредитов</h2>
+      <div class='row align-items-stretch'>
+        <div class='col-12 col-lg-6'>
+          <Card classes='p-0 types__item'>
+            <div
+              class='types__header types__header--first d-flex flex-column justify-content-center align-items-center'>
+              <p class='types__header--title m-0'>До 152 000 ₸</p>
+              <p class='types__header--text m-0'>на 30 дней</p>
+            </div>
+            <div class='types__body d-flex flex-column justify-content-center align-items-center'>
+              <p class='types__body--title m-0 mb-4'>Стандартный (Базовый)</p>
+              <p class='types__body--text m-0 mb-4'>Когда нужно немного денег до зарплаты, а вернуть удобно одним
+                платежом
+                в течение месяца. Можно продлить.</p>
+              <BaseButton classes='card__button' :width='60'>
+                <nuxt-link style='text-decoration: none; color: #FFF' to=''>ПОДРОБНЕЕ</nuxt-link>
+              </BaseButton>
+            </div>
+          </Card>
+        </div>
+        <div class='col-12 col-lg-6'>
+          <Card classes='p-0 types__item'>
+            <div class='types__header types__header--last d-flex flex-column justify-content-center align-items-center'>
+              <p class='types__header--title m-0'>До 1 000 000 ₸</p>
+              <p class='types__header--text m-0'>ОТ 6 ДО 12 МЕСЯЦЕВ</p>
+            </div>
+            <div class='types__body d-flex flex-column justify-content-center align-items-center'>
+              <p class='types__body--title m-0 mb-4'>Комфортный</p>
+              <p class='types__body--text m-0 mb-4'>Для постоянных клиентов с хорошей историей — крупные суммы и удобные
+                сроки погашения в течение года.
+                Можно продлить.</p>
+              <BaseButton classes='card__button' :width='60'>
+                <nuxt-link style='text-decoration: none; color: #FFF' to=''>ПОДРОБНЕЕ</nuxt-link>
+              </BaseButton>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+    <div class='promo__wrap' style='min-height: 50vh; border-radius: 33px'>
+      <div class='container d-flex flex-column align-items-center about'>
+        <NuxtLink to='/' class='about__img'>
+          <img src='@/assets/images/logo-large.svg' alt='About' />
+        </NuxtLink>
+        <h3 class='m-0 mb-4 about__title'>О компании</h3>
+        <p class='m-0 mb-4'>Простой и надежный сервис для быстрого получения микрокредитов.
+          <br>
+          <br>
+          Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
+          <br>
+          <br>
+          Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
+          за минуту. Получить деньги можно на карту или наличными.
+        </p>
+        <div class='d-flex justify-content-around align-items-center w-100 mb-4'>
+          <NuxtLink to='/'>
+            <p class='about__link'>Документы</p>
+          </NuxtLink>
+          <NuxtLink to='/'>
+            <p class='about__link'>Контакты</p>
+          </NuxtLink>
+        </div>
+        <BaseButton classes='mb-4'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
       </div>
     </div>
   </div>
@@ -138,6 +201,7 @@ export default {
   &__title {
     font-size: 34px;
     font-weight: 800;
+    line-height: 100%;
     @media (min-width: 900px) {
       margin-bottom: 30px !important;
     }
@@ -172,25 +236,119 @@ export default {
   }
 }
 
-//.info {
-//  background-repeat: no-repeat !important;
-//  background-size: 70% !important;
-//  padding: 55% 10% 8% 10% !important;
-//  @media (min-width: 900px) {
-//    padding: 50% 10% 8% 10% !important;
-//  }
-//  &__first {
-//    background-position: 0% 0% !important;
-//    @media (min-width: 900px) {
-//      background-position: -20% 0% !important;
-//    }
-//  }
-//  &__last {
-//    background-position: 0% 0% !important;
-//    @media (min-width: 900px) {
-//      background-position: 0% 0% !important;
-//      background-position: 20% 0% !important;
-//    }
-//  }
-//}
+.info {
+  padding: 55% 10% 8% 10% !important;
+  @media (min-width: 900px) {
+    padding: 50% 10% 8% 10% !important;
+  }
+
+  &__first {
+    background: url("assets/images/get.png") 0% 0% no-repeat !important;
+    @media (min-width: 900px) {
+      background: url("assets/images/get-large.png") 0% 0% no-repeat !important;
+      background-position: -20% 0% !important;
+    }
+  }
+
+  &__last {
+    background: url("assets/images/repay.png") 100% 0% no-repeat !important;
+    @media (min-width: 900px) {
+      background: url("assets/images/repay-large.png") 0% 0% no-repeat !important;
+      background-position: 20% 0% !important;
+    }
+  }
+}
+
+.types {
+  &__item {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 6% !important;
+    @media (min-width: 900px) {
+      font-size: 64px;
+    }
+  }
+
+  &__header {
+    width: 100%;
+    padding: 30px 0;
+
+    &--title {
+      font-weight: 800;
+      font-size: 46px;
+      @media (min-width: 900px) {
+        font-size: 72px;
+      }
+    }
+
+    &--text {
+      font-size: 24px;
+    }
+
+    &--first {
+      background: linear-gradient(226.59deg, #FFDF11 27.08%, #FF8D65 112.49%);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    &--last {
+      background: linear-gradient(226.59deg, #FF8D65 27.08%, #3A2784 112.49%);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 10px 10px 0px 0px;
+      color: #FFF;
+    }
+  }
+
+  &__body {
+    padding: 30px 0;
+    @media (min-width: 900px) {
+      padding: 50px 0;
+    }
+
+    &--title {
+      font-size: 26px;
+      font-weight: 800;
+      @media (min-width: 900px) {
+        font-size: 42px;
+      }
+    }
+
+    &--text {
+      @media (min-width: 900px) {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.about {
+  color: #FFF;
+  text-align: center;
+  padding: 0 45px;
+
+  &__img {
+    max-width: 300px;
+
+    & > img {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 46px;
+    font-weight: 800;
+  }
+
+  &__link {
+    color: #FFF;
+    text-decoration: underline;
+  }
+}
 </style>

@@ -1,20 +1,22 @@
 <template>
   <div class='header'>
-    <div class='container'>
-      <img class='header__logo' src='~/assets/images/logo.png' alt='Logo' />
-      <div class='header__bars'></div>
+    <div class='container header__container d-flex align-items-center'>
+      <NuxtLink to='/' class='header__logo'>
+        <img src='~/assets/images/logo.svg' alt='Logo' />
+      </NuxtLink>
+      <button class='header__bars'></button>
       <div class='header__item'>
-        <img class='header__logo--large' src='~/assets/images/logo-large.png' alt='Logo' />
-        <div class='header__navs'>
-          <div v-for='(menu, index) in menus'
-               :key='index'
-               class='header__nav p-2 ml-2'>
-            <nuxt-link :to='menu.path'>{{ menu.title }}</nuxt-link>
-          </div>
-          <div class='header__nav p-2 ml-2'>
-            <nuxt-link to='/login'>Вход</nuxt-link>
-            /
-            <nuxt-link to='/register'>Регистрация</nuxt-link>
+        <div class='header__navs flex-grow-1 d-flex'>
+          <NuxtLink v-for='(menu, index) in menus'
+                    :key='index'
+                    :to='menu.path'
+                    class='header__nav p-2 ml-2'>
+            {{ menu.title }}
+          </NuxtLink>
+          <div class='header__signBtns p-2 ml-2'>
+            <nuxt-link class='header__nav' to='/login'>Вход</nuxt-link>
+            <span class='header__nav'>/</span>
+            <nuxt-link class='header__nav' to='/register'>Регистрация</nuxt-link>
           </div>
         </div>
       </div>
@@ -37,71 +39,38 @@ export default {
 
 <style lang='scss' scoped>
 .header {
-  padding: 15px 0;
-  @media (min-width: 900px) {
-    padding: 0;
-  }
+  padding: 23px 5px 5px;
 
-  &__item,
-  &__navs {
-    display: none;
-    justify-content: space-between;
-    align-items: center;
-    @media (min-width: 900px) {
-      display: flex;
-    }
-  }
-
-  &__nav {
-    color: #FFF;
-    font-size: 24px;
-    text-decoration: underline;
-    white-space: nowrap;
-
-    & a {
-      color: #FFF;
-      font-size: 24px;
-      text-decoration: underline;
-      white-space: nowrap;
-    }
+  &__container {
+    position: relative;
+    justify-content: center;
   }
 
   &__logo {
-    position: absolute;
-    top: 1%;
-    left: 50%;
-    transform: translateX(-50%);
-    @media (min-width: 900px) {
-      display: none;
-    }
+    max-width: 115px;
 
-    &--large {
-      display: none;
-      @media (min-width: 900px) {
-        display: block;
-      }
+    & > img {
+      width: 100%;
     }
   }
 
   &__bars {
     cursor: pointer;
-    position: relative;
-    width: 37px;
+    position: absolute;
+    left: 21px;
+    top: 8px;
+    width: 38px;
+    border: none;
     height: 5px;
     background-color: #FFF;
-    border-radius: 4px;
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
-    @media (min-width: 900px) {
-      display: none;
-    }
 
     &::before,
     &::after {
-      width: 37px;
+      width: 38px;
       height: 5px;
       background-color: #FFF;
-      border-radius: 4px;
       -webkit-transition: 0.2s ease-in-out;
       transition: 0.2s ease-in-out;
       content: '';
@@ -113,11 +82,34 @@ export default {
     }
 
     &::before {
-      -webkit-transform: translateY(-8px);
+      -webkit-transform: translateY(-10px);
     }
 
     &:after {
-      transform: translateY(8px);
+      transform: translateY(10px);
+    }
+  }
+
+  &__item {
+    display: none;
+  }
+
+  &__nav {
+    text-decoration: underline;
+    color: #FFF;
+    font-size: 24px;
+  }
+
+  @media (min-width: 768px) {
+    &__container {
+      justify-content: space-between;
+    }
+    &__bars {
+      display: none;
+    }
+    &__item {
+      display: flex;
+      align-items: center;
     }
   }
 }
