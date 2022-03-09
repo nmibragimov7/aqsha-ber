@@ -44,41 +44,24 @@
       </div>
       <h2 class='m-0 types__title'>Виды микрокредитов</h2>
       <div class='row align-items-stretch'>
-        <div class='col-12 col-lg-6'>
-          <Card classes='p-0 types__item'>
-            <div
-              class='types__header types__header--first d-flex flex-column justify-content-center align-items-center'>
-              <p class='types__header--title m-0'>До 152 000 ₸</p>
-              <p class='types__header--text m-0'>на 30 дней</p>
-            </div>
-            <div class='types__body d-flex flex-column justify-content-center align-items-center'>
-              <p class='types__body--title m-0 mb-4'>Стандартный (Базовый)</p>
-              <p class='types__body--text m-0 mb-4'>Когда нужно немного денег до зарплаты, а вернуть удобно одним
-                платежом
-                в течение месяца. Можно продлить.</p>
-              <BaseButton classes='card__button' :width='60'>
-                <nuxt-link style='text-decoration: none; color: #FFF' to=''>ПОДРОБНЕЕ</nuxt-link>
-              </BaseButton>
-            </div>
-          </Card>
-        </div>
-        <div class='col-12 col-lg-6'>
-          <Card classes='p-0 types__item'>
-            <div class='types__header types__header--last d-flex flex-column justify-content-center align-items-center'>
-              <p class='types__header--title m-0'>До 1 000 000 ₸</p>
-              <p class='types__header--text m-0'>ОТ 6 ДО 12 МЕСЯЦЕВ</p>
-            </div>
-            <div class='types__body d-flex flex-column justify-content-center align-items-center'>
-              <p class='types__body--title m-0 mb-4'>Комфортный</p>
-              <p class='types__body--text m-0 mb-4'>Для постоянных клиентов с хорошей историей — крупные суммы и удобные
-                сроки погашения в течение года.
-                Можно продлить.</p>
-              <BaseButton classes='card__button' :width='60'>
-                <nuxt-link style='text-decoration: none; color: #FFF' to=''>ПОДРОБНЕЕ</nuxt-link>
-              </BaseButton>
-            </div>
-          </Card>
-        </div>
+        <template v-for='(type, index) in types'>
+          <div :key='index' class='col-12 col-lg-6'>
+            <Card classes='p-0 types__item'>
+              <div class='types__header d-flex flex-column justify-content-center align-items-center'
+                          :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
+                <p class='types__header--title m-0'>{{type.header.title}}</p>
+                <p class='types__header--text m-0'>{{type.header.text}}</p>
+              </div>
+              <div class='types__body d-flex flex-column justify-content-center align-items-center'>
+                <p class='types__body--title m-0 mb-4'>{{type.body.title}}</p>
+                <p class='types__body--text m-0 mb-4'>{{type.body.text}}</p>
+                <BaseButton classes='card__button' :width='60'>
+                  <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>ПОДРОБНЕЕ</nuxt-link>
+                </BaseButton>
+              </div>
+            </Card>
+          </div>
+        </template>
       </div>
     </div>
     <div class='promo__wrap' style='min-height: 50vh; border-radius: 33px'>
@@ -107,21 +90,47 @@
         <BaseButton classes='mb-4'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
       </div>
     </div>
+    <div class='container'>
+      <h2 class='m-0 types__title'>Частые вопросы</h2>
+      <template v-for='(faq, index) in faqs'>
+        <Accordion :key='index'
+                   :activeIndex='activeFaqIndex'
+                   @faqHandler='faqHandler'
+                   :index='index'
+                   :question='faq.question'
+                   :answer='faq.answer'/>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import { cards, infos } from '../fixstures/cards'
+import { cards, infos, types } from '../fixstures/cards'
+import { faqs } from '../fixstures/accordions'
 import Card from '../components/common/Card/Card'
 import BaseButton from '../components/base/BaseButton/BaseButton'
+import Accordion from '../components/common/Accordion/Accordion'
 
 export default {
-  components: { BaseButton, Card },
+  components: { Accordion, BaseButton, Card },
   layout: 'index',
   data() {
     return {
       cards,
-      infos
+      infos,
+      types,
+      faqs,
+      activeFaqIndex: null
+    }
+  },
+  methods: {
+    faqHandler(index) {
+      console.log(index)
+      if(index === this.activeFaqIndex) {
+        this.activeFaqIndex = null;
+        return;
+      }
+      this.activeFaqIndex = index;
     }
   }
 }
@@ -332,6 +341,10 @@ export default {
   color: #FFF;
   text-align: center;
   padding: 0 45px;
+  margin-bottom: 10%;
+  @media (min-width: 900px) {
+    margin-bottom: 5%;
+  }
 
   &__img {
     max-width: 300px;
