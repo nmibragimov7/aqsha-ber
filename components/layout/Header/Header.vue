@@ -100,6 +100,8 @@ export default {
     transition: 0.2s ease-in-out;
     transform: translateY(-100%);
     padding: 80px 20px 0 20px;
+    z-index: 10;
+    box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
     @media (min-width: 900px) {
       display: none;
     }
