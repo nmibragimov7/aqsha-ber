@@ -55,7 +55,7 @@ export default {
   background: rgba(255, 255, 255, 0.36);
   backdrop-filter: blur(15px);
   border-radius: 10px;
-  padding: 37px 31px 30px;
+  padding: 37px 31px 70px;
   margin-top: -4px;
 
   &__text {

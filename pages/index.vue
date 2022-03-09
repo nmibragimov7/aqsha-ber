@@ -90,8 +90,8 @@
         <BaseButton classes='mb-4'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
       </div>
     </div>
-    <div class='container'>
-      <h2 class='m-0 types__title'>Частые вопросы</h2>
+    <div class='container mb-5'>
+      <h2 class='m-0 types__title mt-5'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
                    :activeIndex='activeFaqIndex'

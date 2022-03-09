@@ -58,6 +58,13 @@ export default {
   border: 2px solid #FFF !important;
   padding-left: 90px !important;
 }
+.footer__input {
+  border: 0 !important;
+  border-radius: 0px !important;
+  border-bottom: 2px solid #FFF !important;
+  background: transparent !important;
+  text-align: center;
+}
 .input {
   background: #FFFFFF;
   border: 1px solid #E1EDF7;
