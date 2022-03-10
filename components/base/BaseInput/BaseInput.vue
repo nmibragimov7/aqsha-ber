@@ -3,16 +3,16 @@
     <label>
       <span class='input__label'>{{ label }}</span>
       <input
-        :type="type"
-        :placeholder="placeholder"
+        :type='type'
+        :placeholder='placeholder'
         :class="['input', `${classes}__input`]"
-        :value="value"
-        :readonly="readonly"
+        :value='value'
+        :readonly='readonly'
         @input="$emit('input', $event.target.value)"
       />
       <img v-if='icon'
            class='input__icon'
-           :src='require(`@/assets/images/${icon}.svg`)'/>
+           :src='require(`@/assets/images/${icon}.svg`)' />
     </label>
   </div>
 </template>
@@ -26,15 +26,15 @@ export default {
     },
     type: {
       type: String,
-      default: "text"
+      default: 'text'
     },
     label: {
       type: String,
-      default: ""
+      default: ''
     },
     placeholder: {
       type: String,
-      default: ""
+      default: ''
     },
     readonly: {
       type: Boolean,
@@ -42,22 +42,31 @@ export default {
     },
     classes: {
       type: String,
-      default: ""
+      default: ''
     },
     icon: {
       type: String,
-      default: ""
+      default: ''
     }
   }
 }
 </script>
 
 <style lang='scss' scoped>
+.signIn__input {
+  color: #322443 !important;
+
+  &::placeholder {
+    color: #A59FAC !important;
+  }
+}
+
 .header__input {
   background: inherit !important;
   border: 2px solid #FFF !important;
   padding-left: 90px !important;
 }
+
 .footer__input {
   border: 0 !important;
   border-radius: 0px !important;
@@ -65,6 +74,7 @@ export default {
   background: transparent !important;
   text-align: center;
 }
+
 .input {
   background: #FFFFFF;
   border: 1px solid #E1EDF7;
@@ -76,22 +86,27 @@ export default {
   font-size: 22px;
   color: #FFF;
   width: 100%;
+
   &::placeholder {
     color: #FFF;
     font-size: 22px;
   }
+
   &__label {
     position: absolute;
     font-size: 12px;
   }
+
   &__icon {
     position: absolute;
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
+
   &__wrap {
     position: relative;
+
     & label {
       position: relative;
     }

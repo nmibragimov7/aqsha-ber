@@ -13,7 +13,7 @@
           <img src='~/assets/images/logo-small.svg' alt='Logo' />
         </NuxtLink>
         <div class='container'>
-          <NuxtLink to='/' class='header__pop-up-menu--link'>
+          <NuxtLink to='/login' class='header__pop-up-menu--link'>
             <p class='m-0 mb-4'>Главная</p>
           </NuxtLink>
           <NuxtLink to='/' class='header__pop-up-menu--link'>
@@ -27,9 +27,9 @@
           </NuxtLink>
           <hr class='mb-4'>
           <div>
-            <nuxt-link class='header__pop-up-menu--link' to='/login'>Вход</nuxt-link>
+            <span class='header__pop-up-menu--link' @click='signInHandler'>Вход</span>
             <span class='header__pop-up-menu--link'>/</span>
-            <nuxt-link class='header__pop-up-menu--link' to='/register'>Регистрация</nuxt-link>
+            <span class='header__pop-up-menu--link'>Регистрация</span>
           </div>
         </div>
       </div>
@@ -49,14 +49,17 @@
         </div>
       </div>
     </div>
+    <SignInModal/>
   </div>
 </template>
 
 <script>
 import { menus } from '../../../fixstures/menus'
+import SignInModal from '../../common/modal/SignInModal/SignInModal'
 
 export default {
   name: 'Header',
+  components: { SignInModal },
   data() {
     return {
       menus,
@@ -66,6 +69,10 @@ export default {
   methods: {
     barsHandler() {
       this.isOpen = !this.isOpen;
+    },
+    signInHandler() {
+      this.isOpen = false;
+      this.$modal.show("signIn");
     }
   }
 }
