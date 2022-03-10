@@ -24,7 +24,7 @@
             </NuxtLink>
             <hr class='mb-4'>
             <div class="mb-5">
-              <nuxt-link class='header__pop-up-menu--link' to='/login'>Вход</nuxt-link>
+              <span class='header__pop-up-menu--link' @click='signInHandler'>Вход</span>
               <span class='header__pop-up-menu--link'>/</span>
               <nuxt-link class='header__pop-up-menu--link' to='/register'>Регистрация</nuxt-link>
             </div>
