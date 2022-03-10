@@ -1,15 +1,15 @@
 export const menus = [
   {
     title: "Главная",
-    path: ""
+    path: "/"
   },
   {
     title: "Документы",
-    path: ""
+    path: "/documents"
   },
   {
-    title: "Получение и погашение",
-    path: ""
+    title: "Способы получения и погашения",
+    path: "/give-methods"
   },
   {
     title: "Контакты",

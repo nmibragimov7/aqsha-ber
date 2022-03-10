@@ -5,20 +5,22 @@
         <h2 class='promo__title my-2'>мгновенные выплаты</h2>
         <h2 class='promo__description mt-1'>на карту и наличными</h2>
       </div>
-      <div class="promo__img">
-        <img src="@/assets/images/header-background2.png" class="w-100" alt="">
-      </div>
-      <div class="form">
-        <div class="mb-3">
-          <BaseInput
-            placeholder='Введите ИИН'
-            icon='document'
-            classes='header'/>
+      <div>
+        <div class="promo__img">
+          <img src="@/assets/images/header-background2.png" class="w-100" alt="">
         </div>
-        <div class="mb-3">
-          <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+        <div class="form">
+          <div class="mb-3">
+            <BaseInput
+              placeholder='Введите ИИН'
+              icon='document'
+              classes='header'/>
+          </div>
+          <div class="mb-3">
+            <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+          </div>
+          <p class="mt-0 mb-1 form__text"> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и обработку данных</p>
         </div>
-        <p class="mt-0 mb-1 form__text"> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и обработку данных</p>
       </div>
     </div>
   </div>
@@ -35,7 +37,9 @@ export default {
   color: #FFF;
   width: 100%;
   flex-grow: 1;
-
+  &__img{
+    margin-bottom: -3px;
+  }
   &__text {
     text-align: center;
   }
@@ -55,8 +59,8 @@ export default {
   background: rgba(255, 255, 255, 0.36);
   backdrop-filter: blur(15px);
   border-radius: 10px;
-  padding: 37px 31px 70px;
-  margin-top: -4px;
+  padding: 37px 31px;
+  margin-bottom: -40px;
 
   &__text {
     text-align: center;

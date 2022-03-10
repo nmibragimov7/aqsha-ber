@@ -9,29 +9,27 @@
       <div class='header__pop-up-menu' :class='[{"header__pop-up-menu--active": isOpen}]'>
         <div class='header__bars header__bars--active'
              @click='barsHandler'></div>
-        <NuxtLink to='/' class='header__pop-up-menu--logo'>
-          <img src='~/assets/images/logo-small.svg' alt='Logo' />
-        </NuxtLink>
         <div class='container'>
-          <NuxtLink to='/login' class='header__pop-up-menu--link'>
-            <p class='m-0 mb-4'>Главная</p>
-          </NuxtLink>
-          <NuxtLink to='/' class='header__pop-up-menu--link'>
-            <p class='m-0 mb-4'>Способы получения и погашения</p>
-          </NuxtLink>
-          <NuxtLink to='/' class='header__pop-up-menu--link'>
-            <p class='m-0 mb-4'>Документы</p>
-          </NuxtLink>
-          <NuxtLink to='/' class='header__pop-up-menu--link'>
-            <p class='m-0 mb-4'>Контакты</p>
-          </NuxtLink>
-          <hr class='mb-4'>
-          <div>
-            <span class='header__pop-up-menu--link' @click='signInHandler'>Вход</span>
-            <span class='header__pop-up-menu--link'>/</span>
-            <span class='header__pop-up-menu--link'>Регистрация</span>
+          <div class="px-3">
+            <div class="d-flex justify-content-end mb-4">
+              <NuxtLink to='/'>
+                <img class="header__pop-up-menu--logo" src='~/assets/images/logo-small.svg' alt='Logo' />
+              </NuxtLink>
+            </div>
+            <NuxtLink v-for='(menu, index) in menus'
+                      :key='index'
+                      :to='menu.path'
+                      class='header__pop-up-menu--link'>
+              <p class='py-2 mb-3 mt-0'>{{ menu.title }}</p>
+            </NuxtLink>
+            <hr class='mb-4'>
+            <div class="mb-5">
+              <nuxt-link class='header__pop-up-menu--link' to='/login'>Вход</nuxt-link>
+              <span class='header__pop-up-menu--link'>/</span>
+              <nuxt-link class='header__pop-up-menu--link' to='/register'>Регистрация</nuxt-link>
+            </div>
           </div>
-        </div>
+          </div>
       </div>
       <div class='header__item'>
         <div class='header__navs flex-grow-1 d-flex'>
@@ -102,25 +100,27 @@ export default {
     left: 0;
     background: #F8F9F9;
     border-radius: 0 0 30px 30px;
-    height: 50vh;
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
     transform: translateY(-100%);
-    padding: 80px 20px 0 20px;
+    padding: 20px 0 20px;
+    opacity: 1;
+    visibility: hidden;
     z-index: 10;
-    box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 23px 33px rgba(0, 0, 0, 0.05);
     @media (min-width: 900px) {
       display: none;
     }
 
     &--active {
       transform: translateY(0%);
+      opacity: 1;
+      visibility: visible;
     }
 
     &--logo {
-      position: absolute;
-      top: 5px;
-      right: 26px;
+      max-width: 100px;
+      width: 100%;
     }
 
     &--link {
@@ -133,7 +133,7 @@ export default {
     cursor: pointer;
     position: absolute;
     left: 21px;
-    top: 8px;
+    top: 10px;
     width: 38px;
     border: none;
     height: 5px;
@@ -142,8 +142,8 @@ export default {
     transition: 0.2s ease-in-out;
 
     &--active {
-      top: 31px;
-      left: 26px;
+      top: 40px;
+      left: 28px;
       background-color: #322443;
       transform: rotate(90deg);
 
