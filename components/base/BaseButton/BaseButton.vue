@@ -1,7 +1,7 @@
 <template>
   <div :style='{width: width + "%"}'>
     <button :class="['button', classes]"
-            :style='{color: color ? color : "#000"}'
+            :style="{color:color,backgroundColor:bg}"
             :disabled='disabled || isLoading'
             v-on="$listeners">
       <slot></slot>
@@ -32,6 +32,10 @@ export default {
     color: {
       type: String,
       default: ''
+    },
+    bg: {
+      type: String,
+      default: ""
     }
   }
 }
@@ -40,15 +44,16 @@ export default {
 <style lang='scss' scoped>
 .button {
   width: 100%;
-  height: 50px;
   font-weight: 600;
   text-align: center;
   background: #FFDF11;
   color: #000;
   border: none;
   cursor: pointer;
-  padding: 15px 20px;
+  padding: 16px 20px;
+  font-size: 20px;
   border-radius: 42px;
+
   &:focus,
   &:hover,
   &:active {

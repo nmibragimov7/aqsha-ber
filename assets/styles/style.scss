@@ -1,11 +1,5 @@
 @import "variables";
-
-/*!
- * Bootstrap Grid v4.1.3 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @-ms-viewport {
   width: device-width;
 }
@@ -25,7 +19,7 @@ body {
   margin: 0;
   color: $fontColor;
   background-color: $backgroundColor;
-  font-family: Circe, sans-serif;
+  font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   //line-height: 20px;
 }
@@ -39,6 +33,10 @@ body {
   .container {
     max-width: 1218px;
   }
+}
+
+.text-center{
+  text-align: center;
 }
 
 .w-100{
@@ -59,7 +57,7 @@ body {
 
   &__wrap {
     background: url("assets/images/header-background.png") no-repeat center/cover;
-    height: 100vh;
+    max-height: 100vh;
     border-radius: 0 0 33px 33px;
   }
 }

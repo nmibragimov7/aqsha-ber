@@ -1,5 +1,5 @@
 <template>
-  <div class='py-3'>
+  <div class='py-3 mt-5'>
     <div class='container'>
       <div class='row align-items-stretch'>
         <template v-for='(card, index) in cards'>
@@ -113,7 +113,7 @@ import Accordion from '../components/common/Accordion/Accordion'
 
 export default {
   components: { Accordion, BaseButton, Card },
-  layout: 'index',
+  layout: 'landing',
   data() {
     return {
       cards,

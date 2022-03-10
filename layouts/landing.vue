@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class='promo__wrap'>
+    <div class='promo__wrap d-flex flex-column'>
       <Header/>
       <Promo />
     </div>
