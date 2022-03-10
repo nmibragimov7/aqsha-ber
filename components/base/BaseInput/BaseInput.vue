@@ -1,5 +1,5 @@
 <template>
-  <div class='input__wrap'>
+  <div :class="['input__wrap', `${wrapClasses}`]">
     <label>
       <span class='input__label'>{{ label }}</span>
       <input
@@ -8,6 +8,7 @@
         :class="['input', `${classes}__input`]"
         :value='value'
         :readonly='readonly'
+        v-mask='mask'
         @input="$emit('input', $event.target.value)"
       />
       <img v-if='icon'
@@ -44,16 +45,24 @@ export default {
       type: String,
       default: ''
     },
+    wrapClasses: {
+      type: String,
+      default: ''
+    },
     icon: {
       type: String,
       default: ''
+    },
+    mask: {
+      type: String,
+      required: false
     }
   }
 }
 </script>
 
 <style lang='scss' scoped>
-.signIn__input {
+.username__input {
   color: #322443 !important;
 
   &::placeholder {
