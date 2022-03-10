@@ -77,18 +77,19 @@ export default {
 
 .input {
   background: #FFFFFF;
-  border: 1px solid #E1EDF7;
+  border: 1px solid rgba(162, 162, 201, 0.47);;
   border-radius: 10px;
   padding: 15px 15px;
   outline: none;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
-  color: #FFF;
+  color: rgba(0, 0, 0, 0.5);
   width: 100%;
 
   &::placeholder {
-    color: #FFF;
+    color: rgba(0, 0, 0, 0.25);
+    text-align: center;
     font-size: 22px;
   }
 
