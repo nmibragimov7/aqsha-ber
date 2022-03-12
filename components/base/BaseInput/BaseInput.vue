@@ -75,6 +75,12 @@ export default {
 .header__input {
   background: inherit !important;
   border: 2px solid #FFF !important;
+  padding-left: 80px !important;
+  color: #FFF !important;
+
+  &::placeholder {
+    color: #FFF !important;
+  }
 }
 
 .footer__input {
@@ -83,6 +89,10 @@ export default {
   border-bottom: 2px solid #FFF !important;
   background: transparent !important;
   text-align: center;
+
+  &::placeholder {
+    color: #FFF !important;
+  }
 }
 
 .input {
@@ -99,7 +109,7 @@ export default {
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.25);
-    text-align: center;
+    //text-align: center;
     font-size: 22px;
   }
 

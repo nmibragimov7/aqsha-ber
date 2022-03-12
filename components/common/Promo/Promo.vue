@@ -17,18 +17,27 @@
               classes='header'/>
           </div>
           <div class="mb-3">
-            <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+            <BaseButton @click='getHandler'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
           </div>
           <p class="mt-0 mb-1 form__text"> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и обработку данных</p>
         </div>
       </div>
     </div>
+    <ProcessedModal/>
   </div>
 </template>
 
 <script>
+import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
 export default {
-  name: 'Promo'
+  name: 'Promo',
+  components: { ProcessedModal },
+  methods: {
+    getHandler() {
+      console.log("kek")
+      this.$modal.show("processed")
+    }
+  }
 }
 </script>
 
