@@ -3,17 +3,17 @@
     <label>
       <span class='input__label'>{{ label }}</span>
       <input
+        v-mask='mask'
         :type='type'
         :placeholder='placeholder'
         :class="['input', `${classes}__input`]"
         :value='value'
         :readonly='readonly'
-        v-mask='mask'
         @input="$emit('input', $event.target.value)"
       />
       <img v-if='icon'
            class='input__icon'
-           :src='require(`@/assets/images/${icon}.svg`)' />
+           :src='require(`@/assets/images/${icon}.svg`)'/>
     </label>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
   name: 'BaseInput',
   props: {
     value: {
+      type: String,
       default: null
     },
     type: {
@@ -55,7 +56,8 @@ export default {
     },
     mask: {
       type: String,
-      required: false
+      required: false,
+      default: ""
     }
   }
 }
@@ -73,7 +75,6 @@ export default {
 .header__input {
   background: inherit !important;
   border: 2px solid #FFF !important;
-  padding-left: 90px !important;
 }
 
 .footer__input {

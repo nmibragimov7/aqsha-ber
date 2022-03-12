@@ -23,12 +23,13 @@
           <span class="ml-2 info__info">15 дней</span>
         </div>
         <div class="loader d-flex justify-content-between mt-3">
-          <div v-for="num in 10" :key="num" class="loader__dot"></div>
+          <div v-for="num in 10" :key="num" :style="{animationDelay:`${num*0.1}s`}"
+               class="loader__dot loader__dot-purple"></div>
         </div>
         <div class="mt-4">
-          **************
+          <div class="py-2">**************</div>
           <BaseInput v-model="code" placeholder="ПРОМОКОД"/>
-          *********
+          <div class="py-2 mt-2">**************</div>
         </div>
         <div class="d-flex mt-3 justify-content-between align-items-center">
           <span class="mr-2 info__bold">Процент по микрокредиту:</span>
@@ -50,7 +51,7 @@
           <span class="page__dotted"></span>
           <span class="ml-2 info__title">000 000₸</span>
         </div>
-        <BaseButton classes="mt-3">
+        <BaseButton classes="mt-4" @click="giveToMoney">
           Получить деньги
         </BaseButton>
       </div>
@@ -63,6 +64,11 @@ export default {
   data() {
     return {
       code: ""
+    }
+  },
+  methods: {
+    giveToMoney() {
+      this.$router.push("/approved/select-card")
     }
   }
 }
@@ -103,7 +109,8 @@ export default {
   &__title {
     font-size: 20px;
   }
-  &__bold{
+
+  &__bold {
     font-weight: bold;
   }
 
@@ -123,11 +130,15 @@ export default {
     //animation-iteration-count: infinite;
     //animation-timing-function: linear;
     //animation-delay: 1s;
+    &-purple {
+      background: linear-gradient(226.59deg, #974ECD 27.08%, #be86e7 112.49%);
+      animation-duration: 1.7s;
+    }
   }
 }
 
 @keyframes loaderDot {
-  0%,100% {
+  0%, 100% {
     transform: scale(1.5);
   }
   50% {
