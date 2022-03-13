@@ -13,7 +13,7 @@
       />
       <img v-if='icon'
            class='input__icon'
-           :src='require(`@/assets/images/${icon}.svg`)'/>
+           :src='require(`@/assets/images/${icon}.svg`)' />
     </label>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
     mask: {
       type: String,
       required: false,
-      default: ""
+      default: ''
     }
   }
 }
