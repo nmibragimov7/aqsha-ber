@@ -28,7 +28,6 @@ import BaseButton from '../../components/base/BaseButton/BaseButton'
 import Header from '../../components/layout/Header/Header'
 
 export default {
-  name: 'third-step',
   components: { Header, BaseButton },
   methods: {
     stepHandler() {

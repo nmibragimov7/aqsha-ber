@@ -14,15 +14,13 @@
         <div class='page__form'>
           <div class='row mb-5'>
             <div class='col-3'>
-              <div class='page__avatar'>
-<!--                <img src='~/assets/images/avatar-icon.png' alt='Avatar icon' />-->
-              </div>
+              <div class='page__avatar'></div>
             </div>
             <div class='col-9'>
               <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку.</p>
             </div>
           </div>
-          <BaseButton classes='self__button'>Открыть камеру</BaseButton>
+          <BaseButton classes='self__button' @click='stepHandler'>Открыть камеру</BaseButton>
         </div>
       </div>
     </div>
@@ -34,8 +32,12 @@ import BaseButton from '../../components/base/BaseButton/BaseButton'
 import Header from '../../components/layout/Header/Header'
 
 export default {
-  name: 'fourth-step',
-  components: { Header, BaseButton }
+  components: { Header, BaseButton },
+  methods: {
+    stepHandler() {
+      this.$router.replace("/get-money/fifth-step")
+    }
+  }
 }
 </script>
 
@@ -74,7 +76,6 @@ export default {
   }
 
   &__avatar {
-    //padding: 10px 0;
     width: 100%;
     height: 100%;
     background: url("assets/images/circle.svg") no-repeat 50% 20%, url("assets/images/avatar-icon.png") no-repeat center;

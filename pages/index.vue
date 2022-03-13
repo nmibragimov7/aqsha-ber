@@ -64,13 +64,13 @@
         </template>
       </div>
     </div>
-    <div class='promo__wrap' style='min-height: 50vh'>
+    <div class='promo__wrap' style='border-radius: 33px'>
       <div class='container d-flex flex-column align-items-center about'>
         <NuxtLink to='/' class='about__img'>
           <img src='@/assets/images/logo-large.svg' alt='About' />
         </NuxtLink>
-        <h3 class='m-0 mb-4 about__title'>О компании</h3>
-        <p class='m-0 mb-4'>Простой и надежный сервис для быстрого получения микрокредитов.
+        <h3 class='m-0 mb-3 about__title'>О компании</h3>
+        <p class='m-0 mb-3'>Простой и надежный сервис для быстрого получения микрокредитов.
           <br>
           <br>
           Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
@@ -79,7 +79,7 @@
           Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
           за минуту. Получить деньги можно на карту или наличными.
         </p>
-        <div class='d-flex justify-content-around align-items-center w-100 mb-4'>
+        <div class='d-flex justify-content-around align-items-center w-100 mb-3'>
           <NuxtLink to='/'>
             <p class='about__link'>Документы</p>
           </NuxtLink>
@@ -340,8 +340,8 @@ export default {
 .about {
   color: #FFF;
   text-align: center;
-  padding: 0 45px;
-  margin-bottom: 10%;
+  padding: 20px 45px;
+  margin-bottom: 8%;
   @media (min-width: 900px) {
     margin-bottom: 5%;
   }
