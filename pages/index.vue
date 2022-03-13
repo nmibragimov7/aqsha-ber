@@ -64,7 +64,7 @@
         </template>
       </div>
     </div>
-    <div class='promo__wrap' style='min-height: 50vh; border-radius: 33px'>
+    <div class='promo__wrap' style='min-height: 50vh'>
       <div class='container d-flex flex-column align-items-center about'>
         <NuxtLink to='/' class='about__img'>
           <img src='@/assets/images/logo-large.svg' alt='About' />

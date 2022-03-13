@@ -4,7 +4,7 @@
     <div class="container page__wrap">
       <div class="page__body px-4">
         <h1 class="text-center page__title mb-4">Документы</h1>
-        <ul class="page__list px-4 py-5 mb-4">
+        <ul class="page__list p-4 mb-4">
           <li class="mb-4 py-1">Правила предоставления микрокредитов</li>
           <li class="mb-4 py-1">Политика обработки данных</li>
           <li class="mb-4 py-1">Политика информационной безопасности</li>
