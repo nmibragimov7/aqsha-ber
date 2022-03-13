@@ -125,7 +125,6 @@ export default {
   },
   methods: {
     faqHandler(index) {
-      console.log(index)
       if(index === this.activeFaqIndex) {
         this.activeFaqIndex = null;
         return;

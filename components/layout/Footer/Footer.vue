@@ -1,7 +1,7 @@
 <template>
-  <div class='footer__wrap py-5 px-4'>
+  <div class='footer__wrap'>
     <div class='container'>
-      <div class='footer d-flex flex-column'>
+      <div class='footer d-flex flex-column p-5'>
         <div class='footer__form d-flex flex-column align-items-center mb-4'>
           <h3 class='footer__form--title m-0 mb-4'>Не нашли ответа на свой вопрос?</h3>
           <p class='footer__form--text m-0 mb-4'>Оставьте свои контактные данные, чтобы мы могли связаться с вами!</p>
@@ -82,7 +82,8 @@ export default {
   }
 
   &__wrap {
-    background: url("assets/images/header-background.png") no-repeat center/cover;
+    background-image: linear-gradient(45deg, #8055A1, #6C83F3,#AE6E9C);
+    border-radius: 33px 33px 0 0;
   }
 
   &__form {
