@@ -6,8 +6,8 @@
         <h1 class="text-center page__title mb-4">Способы получения</h1>
         <div class="page__option mb-3">
           <div class="px-3 py-4">
-            <label class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
+            <label class="d-flex align-items-center justify-content-between mb-4">
+            <span class="d-inline-flex align-items-center mr-2">
               <span class="page__option-image mr-3">
                 <img src="/svg/pay-cards.svg" class="w-100" alt="">
               </span>
@@ -21,7 +21,7 @@
         <div class="page__option mb-3">
           <div class="px-3 py-4">
             <label class="d-flex align-items-center justify-content-between mb-1">
-            <span class="d-inline-flex align-items-center">
+            <span class="d-inline-flex align-items-center mr-2">
               <span class="page__option-image mr-3">
                 <img src="/svg/kazpochta.svg" class="w-100" alt="">
               </span>
@@ -35,7 +35,7 @@
         <div class="page__option mb-3">
           <div class="px-3 py-4">
             <label class="d-flex align-items-center justify-content-between mb-1">
-            <span class="d-inline-flex align-items-center">
+            <span class="d-inline-flex align-items-center mr-2">
               <span class="page__option-image mr-3">
                 <img src="/svg/qiwi-wallet.svg" class="w-100" alt="">
               </span>
@@ -45,11 +45,11 @@
             </label>
           </div>
         </div>
-        <div class="page__option mb-3">
+        <div class="page__option mb-4">
           <div class="px-3 py-4">
             <label class="d-flex align-items-center justify-content-between mb-1">
             <span class="d-inline-flex align-items-center">
-              <span class="page__option-image mr-3">
+              <span class="page__option-image mr-3 mr-2">
                 <img src="/svg/halyk-pay.svg" class="w-100" alt="">
               </span>
               <span class="title">Наличными
@@ -59,7 +59,7 @@
             </label>
           </div>
         </div>
-        <BaseButton bg="#3A2784" color="#fff">
+        <BaseButton bg="#3A2784" color="#fff" @click="goToConfirm">
           ПОДТВЕРДИТЬ
         </BaseButton>
       </div>
@@ -80,6 +80,11 @@ export default {
     return {
       cardNumber: "",
       isCard: ""
+    }
+  },
+  methods: {
+    goToConfirm() {
+      this.$router.push("/approved/confirm")
     }
   }
 }
@@ -128,7 +133,8 @@ export default {
     color: #A0A0C5;
   }
 }
-.title{
+
+.title {
   font-size: 22px;
   font-weight: bold;
 }
