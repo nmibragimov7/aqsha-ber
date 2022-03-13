@@ -12,19 +12,19 @@
                :class='[{"steps__dot--active": num === 5}]'></div>
         </div>
         <div class='page__form mb-3'>
-          <div class='mb-2'>
+          <div class='mb-2 d-flex justify-content-between align-items-center'>
             <span class='page__form--text'>Имя:</span>
-            <span>················································</span>
+            <span class="page__dotted"></span>
             <span>Иван</span>
           </div>
-          <div class='mb-2'>
+          <div class='mb-2 d-flex justify-content-between align-items-center'>
             <span class='page__form--text'>Фамилия:</span>
-            <span>········································</span>
+            <span class="page__dotted"></span>
             <span>Иванов</span>
           </div>
-          <div>
+          <div class='d-flex justify-content-between align-items-center'>
             <span class='page__form--text'>Отчество:</span>
-            <span>········································</span>
+            <span class="page__dotted"></span>
             <span>Иванович</span>
           </div>
         </div>
@@ -104,6 +104,13 @@ export default {
   &__step {
     font-size: 24px;
     font-weight: 700;
+  }
+
+  &__dotted {
+    height: 8px;
+    margin: 0 9px;
+    flex-grow: 1;
+    border-bottom: 2px dotted #000;
   }
 
   &__form {
