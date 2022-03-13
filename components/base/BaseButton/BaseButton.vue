@@ -53,6 +53,7 @@ export default {
   padding: 16px 20px;
   font-size: 20px;
   border-radius: 42px;
+  text-transform: uppercase;
 
   &:focus,
   &:hover,

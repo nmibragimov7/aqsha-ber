@@ -36,7 +36,8 @@ export default {
       default: "Подписание договора"
     },
     subtitle: {
-      type: String
+      type: String,
+      default: ""
     }
   },
   methods: {
