@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header/>
+    <Header logoSmall/>
     <div class="container page__wrap">
       <div class="page__body px-4">
         <div class="text-center page__info">
