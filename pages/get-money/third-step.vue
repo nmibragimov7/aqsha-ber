@@ -16,7 +16,7 @@
           <img src='~/assets/images/document.png'
                alt='Scan'
                class='mb-3' />
-          <BaseButton classes='scan__button--next'>Далее</BaseButton>
+          <BaseButton classes='scan__button--next' @click='stepHandler'>Далее</BaseButton>
         </div>
       </div>
     </div>
@@ -29,7 +29,12 @@ import Header from '../../components/layout/Header/Header'
 
 export default {
   name: 'third-step',
-  components: { Header, BaseButton }
+  components: { Header, BaseButton },
+  methods: {
+    stepHandler() {
+      this.$router.replace("/get-money/fourth-step")
+    }
+  }
 }
 </script>
 
