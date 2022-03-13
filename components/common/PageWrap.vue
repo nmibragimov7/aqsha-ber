@@ -5,9 +5,9 @@
       <div class="page__body px-4">
         <div class="text-center page__info">
           <slot name="header">
-            <h1 class="page__title mb-0">Подписание договора</h1>
-            <p class="mt-1">
-              Внимательно ознакомьтесь с условиями оформления вашего кредита
+            <h1 class="page__title mb-0">{{ title }}</h1>
+            <p v-if="subtitle" class="mt-1">
+              {{ subtitle }}
             </p>
           </slot>
         </div>
@@ -23,7 +23,29 @@
     </div>
   </div>
 </template>
+<script>
+import Header from "@/components/layout/Header/Header.vue";
 
+export default {
+  components: {
+    Header,
+  },
+  props: {
+    title: {
+      type: String,
+      default: "Подписание договора"
+    },
+    subtitle: {
+      type: String
+    }
+  },
+  methods: {
+    goToMain() {
+      this.$router.push("/")
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .page {
@@ -50,8 +72,6 @@
     font-size: 24px;
     font-weight: 500;
   }
-
-
 
   &__content {
     background: #fff;
