@@ -1,8 +1,9 @@
 <template>
   <div class='header'>
-    <div class='container header__container d-flex align-items-center'>
-      <NuxtLink to='/' class='header__logo'>
-        <img src='~/assets/images/logo.svg' alt='Logo' />
+    <div class='container header__container d-flex align-items-center'
+         :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}]'>
+      <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
+        <img src='~/assets/images/logo.svg' alt='Logo'/>
       </NuxtLink>
       <div class='header__bars'
            @click='barsHandler'></div>
@@ -57,6 +58,12 @@ import SignInModal from '../../common/modal/SignInModal/SignInModal'
 
 export default {
   name: 'Header',
+  props: {
+    logoSmall: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: { SignInModal },
   data() {
     return {
@@ -87,6 +94,14 @@ export default {
 
   &__logo {
     max-width: 115px;
+
+    &--small {
+      max-width: 84px;
+
+      @media (min-width: 900px) {
+        max-width: 115px;
+      }
+    }
 
     & > img {
       width: 100%;

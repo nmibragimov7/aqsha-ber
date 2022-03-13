@@ -34,8 +34,11 @@ export default {
   components: { ProcessedModal },
   methods: {
     getHandler() {
-      console.log("kek")
-      this.$modal.show("processed")
+      this.$modal.show("processed");
+      setTimeout(() => {
+        this.$modal.hide("processed");
+        this.$router.replace("get-money");
+      }, 5000);
     }
   }
 }
