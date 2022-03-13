@@ -31,21 +31,23 @@
         <div class='page__form d-flex flex-column align-items-end'>
           <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
           <div class='mb-1'>
-            <BaseInput v-model='form.city' placeholder='Город'/>
+            <BaseInput v-model='form.city' placeholder='Город' />
           </div>
           <div class='mb-1'>
-            <BaseInput v-model='form.street' placeholder='Улица'/>
+            <BaseInput v-model='form.street' placeholder='Улица' />
           </div>
-          <div class='row mb-2'>
-            <div class='col'>
-              <BaseInput v-model='form.home' classes='mb-3' placeholder='Дом'/>
+          <div class='row'>
+            <div class='col-6'>
+              <BaseInput v-model='form.home' placeholder='Дом' />
             </div>
-            <div class='col'>
-              <BaseInput v-model='form.apartment' placeholder='Квартира'/>
+            <div class='col-6 mb-2'>
+              <BaseInput v-model='form.apartment' placeholder='Квартира' />
+            </div>
+            <div class='col-6 ml-auto'>
+              <p class='page__form--desc m-0'>- Если нет номера квартиры, поставьте прочерк</p>
             </div>
           </div>
-          <p class='page__form--desc mb-3'>- Если нет номера квартиры, поставьте прочерк</p>
-          <BaseButton classes='page__form--button'>подтвердить</BaseButton>
+          <BaseButton classes='page__form--button' @click='stepHandler'>подтвердить</BaseButton>
         </div>
       </div>
     </div>
@@ -56,16 +58,22 @@
 import Header from '../../components/layout/Header/Header'
 import BaseInput from '../../components/base/BaseInput/BaseInput'
 import BaseButton from '../../components/base/BaseButton/BaseButton'
+
 export default {
   components: { BaseButton, BaseInput, Header },
   data() {
     return {
       form: {
-        city: "",
-        street: "",
-        home: "",
-        apartment: ""
+        city: '',
+        street: '',
+        home: '',
+        apartment: ''
       }
+    }
+  },
+  methods: {
+    stepHandler() {
+      this.$router.replace("/register/sixth-step")
     }
   }
 }

@@ -53,7 +53,7 @@ export default {
     },
     stepHandler() {
       this.$modal.hide('getMoney')
-      this.$router.replace("/get-money/second-step")
+      this.$router.replace("/register/second-step")
     }
   }
 }

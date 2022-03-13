@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     stepHandler() {
-      this.$router.replace("/get-money/third-step")
+      this.$router.replace("/register/third-step")
     }
   }
 }

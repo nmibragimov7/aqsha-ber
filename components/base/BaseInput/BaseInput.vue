@@ -1,7 +1,7 @@
 <template>
   <div :class="['input__wrap', `${wrapClasses}`]">
     <label>
-      <span class='input__label'>{{ label }}</span>
+      <span class='input__label' v-if='label'>{{ label }}</span>
       <input
         v-mask='mask'
         :type='type'
@@ -109,13 +109,17 @@ export default {
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.25);
-    //text-align: center;
     font-size: 22px;
   }
 
   &__label {
     position: absolute;
     font-size: 12px;
+    top: -9px;
+    left: 15px;
+    background: #FFF;
+    padding: 3px;
+    color: rgba(50, 36, 67, 0.5);
   }
 
   &__icon {
@@ -127,10 +131,6 @@ export default {
 
   &__wrap {
     position: relative;
-
-    & label {
-      position: relative;
-    }
   }
 }
 </style>

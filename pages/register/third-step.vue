@@ -31,7 +31,7 @@ export default {
   components: { Header, BaseButton },
   methods: {
     stepHandler() {
-      this.$router.replace("/get-money/fourth-step")
+      this.$router.replace("/register/fourth-step")
     }
   }
 }
