@@ -5,30 +5,20 @@
          class='code--close'
          @click='close' />
     <p class='text-center m-0 mb-3 code__title'>Введите код из СМС</p>
-    <!--        <div class='d-flex justify-content-between align-items-center mb-3'>-->
-    <!--          <template v-for='(input, index) in form.code'>-->
-    <!--            <div :key='index' class='mr-1 ml-1'>-->
-    <!--              <label>-->
-    <!--                <input-->
-    <!--                  class='code__input'-->
-    <!--                  :value='input'-->
-    <!--                  @input="inputHandler($event, index)"-->
-    <!--                />-->
-    <!--              </label>-->
-    <!--            </div>-->
-    <!--          </template>-->
-    <!--        </div>-->
-    <label class='d-flex justify-content-between align-items-center mb-3'>
-      <div v-for='(input, index) in code'
-           :key='index'
-           contenteditable='true'
-           @input='inputHandler($event, index)'
-           :ref='"input-" + index'
-           class='code__input'>{{ input }}
+    <div class='code__input--wrap'>
+      <div class='position__absolute'>
+        <div class='d-flex align-items-center justify-content-between mb-3'>
+          <input :value='data'
+                 @input='inputHandler($event)'
+                 class='position__absolute code__input--hidden'/>
+          <div v-for='num in 4'
+               :key='num'
+               class='code__input'></div>
+        </div>
+        <BaseButton classes='code__button' @click='sendCode'>{{ btnText }}</BaseButton>
+        <p class='text-center code__text'>Отправить еще раз</p>
       </div>
-    </label>
-    <BaseButton classes='code__button' @click='sendCode'>{{ btnText }}</BaseButton>
-    <p class='text-center code__text'>Отправить еще раз</p>
+    </div>
   </div>
 </template>
 
@@ -43,7 +33,7 @@ export default {
       default: ''
     },
     code: {
-      type: Array
+      type: String
     },
     btnText: {
       type: String,
@@ -51,23 +41,35 @@ export default {
     }
   },
   components: { BaseButton },
+  data() {
+    return {
+      data: ''
+    }
+  },
   methods: {
-    inputHandler(event, index) {
-      this.$refs['input-' + index][0].innerHTML = event.data
-      this.$emit('inputHandler', event.data, index)
-      // this.form.code[index] = event.target.value
-      // if(event.target.value.length > 1) {
-      //   event.target.value = this.form.code[index];
-      //   return;
-      // }
-      // this.form.code[index] = event.target.value;
+    inputHandler(event) {
+      let space = ""
+      if(event.inputType === 'insertText') {
+        if(event.target.value.length > 10) {
+          event.target.value = this.data
+          return;
+        }
+        if(event.target.value.length < 10) space = "  "
+        this.data = event.target.value + space
+      } else if(event.inputType !== 'insertText' && event.target.value.length < 9) {
+        this.data = event.target.value.slice(0, -2)
+      } else {
+        this.data = event.target.value
+      }
+
+      this.$emit('inputHandler', this.data.replace(/\D+/gi, ''))
     },
     sendCode() {
       switch (this.name) {
         case 'signIn':
           console.log('signIn')
           break
-        case 'getMoney':
+        case 'sendCode':
           this.$emit('stepHandler')
           break
       }
@@ -77,8 +79,8 @@ export default {
         case 'signIn':
           this.$modal.hide('signIn')
           break
-        case 'getMoney':
-          this.$modal.hide('getMoney')
+        case 'sendCode':
+          this.$modal.hide('sendCode')
           break
       }
     }
@@ -87,6 +89,12 @@ export default {
 </script>
 
 <style lang='scss'>
+.position {
+
+  &__absolute {
+    position: absolute;
+  }
+}
 .code {
   position: relative;
 
@@ -100,19 +108,41 @@ export default {
   }
 
   &__input {
-    color: #7080A9;
-    font-weight: 800;
-    font-size: 72px;
-    background: rgba(162, 162, 201, 0.06);
+    height: 125px;
+    //color: #7080A9;
+    //font-weight: 800;
+    //font-size: 72px;
     border: 1px solid rgba(162, 162, 201, 0.47);
     border-radius: 10px;
     border: 1px solid #A2A2C9;
     margin: 0 5px;
     box-sizing: border-box;
     width: 70px;
-    height: auto;
+    //height: auto;
     padding: 15px;
     outline: none;
+
+    &--wrap {
+      position: relative;
+      width: 320px;
+      height: 284px;
+    }
+
+    &--hidden {
+      width: 100%;
+      height: 125px;
+      color: #7080A9;
+      font-size: 72px;
+      font-weight: 800;
+      padding: 0 20px;
+      border: none;
+      background: inherit;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
   }
 
   &__text {

@@ -1,11 +1,11 @@
 <template>
-  <modal name='getMoney' :width='370' height='auto'>
+  <modal name='sendCode' :width='370' height='auto'>
     <div class='modal-getMoney d-flex flex-column align-items-center'>
-      <SendCode name='getMoney'
+      <SendCode name='sendCode'
                 :code='code'
                 btnText='ДАЛЕЕ'
                 @stepHandler='(value, index) => $emit("stepHandler", value, index)'
-                @inputHandler='(value, index) => $emit("inputHandler", value, index)' />
+                @inputHandler='(value, index) => $emit("inputHandler", value)' />
     </div>
   </modal>
 </template>
@@ -14,10 +14,10 @@
 import SendCode from '../../SendCode/SendCode'
 
 export default {
-  name: 'getMoneyModal',
+  name: 'SendCodeModal',
   props: {
     code: {
-      type: Array
+      type: String
     }
   },
   components: { SendCode }

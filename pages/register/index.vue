@@ -20,11 +20,11 @@
           <p class='text-center m-0 mb-3'>Проверьте номер телефона — на него придет смс с кодом</p>
           <BaseInput v-model='form.phone'
                      placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _' />
-          <BaseButton classes='mt-3' @click='$modal.show("getMoney")'>получить смс</BaseButton>
+          <BaseButton classes='mt-3' @click='$modal.show("sendCode")'>получить смс</BaseButton>
         </div>
       </div>
     </div>
-    <GetMoneyModal :code='form.code'
+    <SendCodeModal :code='form.code'
                    @stepHandler='stepHandler'
                    @inputHandler='inputHandler' />
   </div>
@@ -32,27 +32,27 @@
 
 <script>
 import Header from '../../components/layout/Header/Header'
-import GetMoneyModal from '../../components/common/modal/getMoneyModal/getMoneyModal'
+import SendCodeModal from '../../components/common/modal/SendCodeModal/SendCodeModal'
 import BaseInput from '../../components/base/BaseInput/BaseInput'
 import BaseButton from '../../components/base/BaseButton/BaseButton'
 
 export default {
-  name: 'get-money',
-  components: { BaseButton, BaseInput, GetMoneyModal, Header },
+  name: 'register',
+  components: { BaseButton, BaseInput, SendCodeModal, Header },
   data() {
     return {
       form: {
         phone: null,
-        code: ['', '', '', '']
+        code: ''
       }
     }
   },
   methods: {
-    inputHandler(value, index) {
-      this.form.code[index] = value
+    inputHandler(value) {
+      this.form.code = value
     },
     stepHandler() {
-      this.$modal.hide('getMoney')
+      this.$modal.hide('sendCode')
       this.$router.replace("/register/second-step")
     }
   }
