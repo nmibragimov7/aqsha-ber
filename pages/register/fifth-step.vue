@@ -5,7 +5,7 @@
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 5 из 6</p>
         <p class='text-center page__text m-0 mb-2'>Личная информация</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-5'>
+        <div class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
@@ -36,7 +36,7 @@
           <div class='mb-1'>
             <BaseInput v-model='form.street' placeholder='Улица' />
           </div>
-          <div class='row'>
+          <div class='row mb-3'>
             <div class='col-6'>
               <BaseInput v-model='form.home' placeholder='Дом' />
             </div>

@@ -1,6 +1,6 @@
 <template>
   <div class='page__form'>
-    <div class='row mb-5'
+    <div class='row mb-3'
          v-for='(block, index) in blocks'
          :key='index'>
       <div class='col-4'>
@@ -10,7 +10,7 @@
         <p class='m-0'>{{ block.text }}</p>
       </div>
     </div>
-    <BaseButton classes='page__button--scan mb-2'>Сканировать</BaseButton>
+    <BaseButton :classes='classes'>{{text}}</BaseButton>
     <BasePickFile name='load-document'
                   icon='load-icon'
                   text='Загрузить'
@@ -24,6 +24,16 @@ import BasePickFile from '../../base/BasePickFile/BasePickFile'
 
 export default {
   name: 'ScanDocForm',
+  props: {
+    classes: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    }
+  },
   components: { BasePickFile, BaseButton },
   data() {
     return {
@@ -68,6 +78,9 @@ export default {
     }
 
     &--scan {
+      padding: 16px !important;
+      text-transform: capitalize !important;
+      box-shadow: none !important;
       font-size: 14px !important;
       background: url("assets/images/scan-icon.png") no-repeat 20% 50%, rgba(162, 162, 201, 0.06) !important;
     }

@@ -5,23 +5,32 @@
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
         <p class='text-center page__text m-0 mb-2'>Сделайте селфи</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-5'>
+        <div class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
                :class='[{"steps__dot--active": num === 4}]'></div>
         </div>
-        <div class='page__form'>
+        <div v-if='!isLoadedFile' class='page__form'>
           <div class='row mb-5'>
             <div class='col-3'>
               <div class='page__avatar'></div>
             </div>
             <div class='col-9'>
-              <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку.</p>
+              <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и
+                попадает в рамку.</p>
             </div>
           </div>
-          <BaseButton classes='self__button' @click='stepHandler'>Открыть камеру</BaseButton>
+          <BaseButton classes='page__button--camera mb-2'
+                      @click='stepHandler'>Открыть камеру</BaseButton>
+          <BasePickFile name='load-document'
+                        icon='load-icon'
+                        text='Загрузить'
+                        @pickFile='pickFile' />
         </div>
+        <PickDocResult v-else
+                       path='/register/fifth-step'
+                       @goBack='goBack'/>
       </div>
     </div>
   </div>
@@ -30,12 +39,27 @@
 <script>
 import BaseButton from '../../components/base/BaseButton/BaseButton'
 import Header from '../../components/layout/Header/Header'
+import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
 
 export default {
-  components: { Header, BaseButton },
+  components: { PickDocResult, Header, BaseButton },
+  data() {
+    return {
+      isLoadedFile: false,
+      file: null
+    }
+  },
   methods: {
     stepHandler() {
-      this.$router.replace("/register/fifth-step")
+      this.$router.replace('/register/fifth-step')
+    },
+    pickFile(file) {
+      this.file = file
+      this.isLoadedFile = !!file
+    },
+    goBack() {
+      this.file = null
+      this.isLoadedFile = false
     }
   }
 }
@@ -78,18 +102,20 @@ export default {
   &__avatar {
     width: 100%;
     height: 100%;
-    background: url("assets/images/circle.svg") no-repeat 50% 20%, url("assets/images/avatar-icon.png") no-repeat center;
+    background: url("assets/images/circle.svg") no-repeat 50% 32px, url("assets/images/avatar-icon.png") no-repeat center;
   }
-}
-
-.self {
 
   &__button {
-    font-size: 14px !important;
-    background: url("assets/images/self-icon.svg") no-repeat 20% 50%, rgba(162, 162, 201, 0.06) !important;
-    border: 1px solid rgba(162, 162, 201, 0.47) !important;
-    border-radius: 24.5px !important;
-    text-transform: capitalize !important;
+
+    &--camera {
+      font-size: 14px !important;
+      background: url("assets/images/self-icon.svg") no-repeat 20% 50%, rgba(162, 162, 201, 0.06) !important;
+      border: 1px solid rgba(162, 162, 201, 0.47) !important;
+      box-shadow: none !important;
+      border-radius: 24.5px !important;
+      text-transform: capitalize !important;
+      padding: 15px !important;
+    }
   }
 }
 </style>

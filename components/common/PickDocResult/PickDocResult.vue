@@ -1,9 +1,9 @@
 <template>
   <div class='page__form d-flex flex-column align-items-center'>
-    <div class='page__feedback text-center mb-3'>Успешно отсканировано</div>
+    <div class='page__feedback text-center mb-4'>Успешно отсканировано</div>
     <img src='~/assets/images/document.png'
          alt='Scan'
-         class='mb-3' />
+         class='mb-4' />
     <BaseButton classes='page__button--prev mb-2' @click='$emit("goBack")'>Назад</BaseButton>
     <BaseButton classes='page__button--next'
                 @click='stepHandler'>Далее</BaseButton>
@@ -41,7 +41,7 @@ export default {
     width: 100%;
     background: url("assets/images/check-icon.svg") no-repeat 90% 50%, rgba(162, 162, 201, 0.06);
     font-size: 14px;
-    padding: 15px 0;
+    padding: 8px 0;
     color: #81C688;
     border: 1px solid #81C688;
     box-sizing: border-box;
@@ -51,9 +51,11 @@ export default {
   &__button {
 
     &--prev {
+      box-shadow: none !important;
       border: 1px solid rgba(162, 162, 201, 0.47) !important;
       font-size: 14px !important;
       background: rgba(162, 162, 201, 0.06) !important;
+      padding: 15px !important;
     }
 
     &--next {

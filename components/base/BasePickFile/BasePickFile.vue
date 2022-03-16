@@ -61,7 +61,7 @@ export default {
     background: rgba(162, 162, 201, 0.06);
     border: 1px solid rgba(162, 162, 201, 0.47);
     cursor: pointer;
-    padding: 16px;
+    padding: 7px;
     border-radius: 42px;
     position: relative;
 

@@ -5,13 +5,16 @@
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 3 из 6</p>
         <p class='text-center page__text m-0 mb-2'>Сделайте фото оборотной стороны удостоверения личности</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-5'>
+        <div class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
                :class='[{"steps__dot--active": num === 3}]'></div>
         </div>
-        <ScanDocForm v-if='!isLoadedFile' @pickFile='pickFile'/>
+        <ScanDocForm v-if='!isLoadedFile'
+                     classes='page__button--scan mb-2'
+                     text='Сканировать'
+                     @pickFile='pickFile'/>
         <PickDocResult v-else
                        path='/register/fourth-step'
                        @goBack='goBack'/>

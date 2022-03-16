@@ -10,7 +10,7 @@
         <p class='text-center page__text m-0 mb-2'>Пройдите все 6 шагов, чтобы зарегистрироваться. После этого вы
           сможете
           выбрать сумму микрокредита и подписать договор.</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-5'>
+        <div class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
