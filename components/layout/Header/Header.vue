@@ -85,7 +85,7 @@ export default {
 
 <style lang='scss' scoped>
 .header {
-  padding: 23px 5px 5px;
+  padding: 20px 5px 5px;
 
   &__container {
     position: relative;
@@ -141,6 +141,9 @@ export default {
     &--link {
       text-decoration: none;
       color: #322443;
+      &.nuxt-link-exact-active{
+        font-weight: bold;
+      }
     }
   }
 

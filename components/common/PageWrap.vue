@@ -50,30 +50,30 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 30vh;
+  background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  min-height: 25vh;
   border-radius: 0 0 20px 20px;
-
-  &__wrap {
+  &__wrap{
     position: relative;
   }
-
-  &__body {
+  &__body{
     position: absolute;
-    right: 0;
-    top: 0;
-    left: 0;
+    right:0;
+    top:0;
+    left:0;
   }
-
-  &__info {
-    color: #fff;
-  }
-
   &__title {
+    margin-top:0;
+    color: #fff;
     font-size: 24px;
     font-weight: 500;
   }
 
+
+  &__info {
+    color: #fff;
+  }
+  
   &__content {
     background: #fff;
     border-radius: 15px;

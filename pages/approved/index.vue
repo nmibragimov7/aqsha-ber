@@ -14,17 +14,16 @@
           <span class="page__dotted"></span>
           <span class="ml-2 info__info">152 000 ₸</span>
         </div>
-        <div class="loader d-flex justify-content-between mt-3">
-          <div v-for="num in 10" :key="num" :style="{animationDelay:`${num*0.1}s`}" class="loader__dot"></div>
+        <div class="input__range mt-3">
+          <input type="range" min="0" max="152000">
         </div>
         <div class="d-flex mt-3 justify-content-between align-items-center">
           <span class="mr-2 info__title">Срок возврата</span>
           <span class="page__dotted"></span>
           <span class="ml-2 info__info">15 дней</span>
         </div>
-        <div class="loader d-flex justify-content-between mt-3">
-          <div v-for="num in 10" :key="num" :style="{animationDelay:`${num*0.1}s`}"
-               class="loader__dot loader__dot-purple"></div>
+        <div class="input__range mt-3">
+          <input type="range" min="0" max="152000">
         </div>
         <div class="mt-4">
           <div class="py-2">**************</div>
@@ -120,29 +119,23 @@ export default {
   }
 }
 
-.loader {
-  &__dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: linear-gradient(226.59deg, #FFDF11 27.08%, #FF8D65 112.49%);
-    animation: loaderDot ease-in-out 1.5s infinite;
-    //animation-iteration-count: infinite;
-    //animation-timing-function: linear;
-    //animation-delay: 1s;
-    &-purple {
-      background: linear-gradient(226.59deg, #974ECD 27.08%, #be86e7 112.49%);
-      animation-duration: 1.7s;
+.input__range{
+  &>input{
+    width:100%;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    //border-top: 2px solid black;
+    &::-webkit-slider-thumb{
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: linear-gradient(226.59deg, #FFDF11 27.08%, #FF8D65 112.49%);
+      cursor: ew-resize;
+      transition: background .3s ease-in-out;
     }
   }
 }
 
-@keyframes loaderDot {
-  0%, 100% {
-    transform: scale(1.5);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
 </style>

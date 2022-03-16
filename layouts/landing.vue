@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-white">
     <div class='promo__wrap d-flex flex-column'>
       <Header/>
       <Promo />

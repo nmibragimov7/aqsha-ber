@@ -1,54 +1,65 @@
 <template>
-  <div class='py-3 mt-5'>
+  <div class='py-3'>
     <div class='container'>
       <div class='row align-items-stretch'>
         <template v-for='(card, index) in cards'>
           <div :key='index' class='col-12 col-lg-4'>
             <Card>
-              <img class='card__image'
-                   :src='"~/assets/images/"+card.image+".png"'
-                   :alt='card.title' />
-              <p class='card__title'>{{ card.title }}</p>
-              <p class='card__description'>{{ card.description }}</p>
+              <div class="px-3">
+                <img class='card__image'
+                     :src='"~/assets/images/"+card.image+".png"'
+                     :alt='card.title' />
+                <p class='card__title'>{{ card.title }}</p>
+                <p class='card__description'>{{ card.description }}</p>
+              </div>
             </Card>
           </div>
         </template>
       </div>
     </div>
     <div class='promotion__wrap'>
-      <div class='promotion'>
-        <div class='promotion__block'>
-          <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
-          <BaseButton classes='promotion__button' color='#FFF'>Подробнее</BaseButton>
+      <div class="container">
+        <div class='promotion'>
+          <div class='promotion__block'>
+            <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
+            <BaseButton classes='promotion__button' color='#FFF'>Подробнее</BaseButton>
+          </div>
+          <img class='promotion__image' src='~/assets/images/pig.png' />
+          <img class='promotion__image--large' src='~/assets/images/pig-large.png' />
         </div>
-        <img class='promotion__image' src='~/assets/images/pig.png' />
-        <img class='promotion__image--large' src='~/assets/images/pig-large.png' />
       </div>
     </div>
-    <div class='container'>
-      <div class='row align-items-stretch'>
-        <template v-for='(information, index) in infos'>
-          <div :key='index' class='col-12 col-lg-6'>
-            <Card classes='info'
-                  :class='[{"info__first": information.image === "get"}, {"info__last": information.image === "repay"}]'>
-              <p class='card__title'>{{ information.title }}</p>
-              <ul class='card__descriptions'>
-                <li v-for='(d, idx) in information.description' :key='idx'>{{ d }}</li>
-              </ul>
-              <BaseButton classes='card__button'>
-                <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>ПОДРОБНЕЕ</nuxt-link>
-              </BaseButton>
-            </Card>
-          </div>
-        </template>
+    <div class='bg-bodyBg'>
+      <div class=" bg-white hands pb-4 container">
+        <div class='row align-items-stretch'>
+          <template v-for='(information, index) in infos'>
+            <div :key='index' class='col-12 col-lg-6'>
+              <Card classes='info bg-white'>
+                <img src="@/assets/images/get.png" class="info__get w-100" v-if='information.image === "get"' alt="qweqw">
+                <img src="@/assets/images/repay.png" class="info__repay w-100" v-if='information.image === "repay"' alt="qwqe">
+                <div class="px-4">
+                  <p class='card__title'>{{ information.title }}</p>
+                  <ul class='card__descriptions'>
+                    <li v-for='(d, idx) in information.description' :key='idx'>{{ d }}</li>
+                  </ul>
+                  <BaseButton classes='card__button'>
+                    <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>ПОДРОБНЕЕ</nuxt-link>
+                  </BaseButton>
+                </div>
+              </Card>
+            </div>
+          </template>
+        </div>
       </div>
+    </div>
+    <div class="container bg-bodyBg pt-5">
       <h2 class='m-0 types__title'>Виды микрокредитов</h2>
       <div class='row align-items-stretch'>
         <template v-for='(type, index) in types'>
           <div :key='index' class='col-12 col-lg-6'>
             <Card classes='p-0 types__item'>
               <div class='types__header d-flex flex-column justify-content-center align-items-center'
-                          :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
+                   :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
                 <p class='types__header--title m-0'>{{type.header.title}}</p>
                 <p class='types__header--text m-0'>{{type.header.text}}</p>
               </div>
@@ -64,22 +75,20 @@
         </template>
       </div>
     </div>
-    <div class='promo__wrap' style='border-radius: 33px'>
+    <div class='promo__wrap company'>
       <div class='container d-flex flex-column align-items-center about'>
         <NuxtLink to='/' class='about__img'>
           <img src='@/assets/images/logo-large.svg' alt='About' />
         </NuxtLink>
-        <h3 class='m-0 mb-3 about__title'>О компании</h3>
-        <p class='m-0 mb-3'>Простой и надежный сервис для быстрого получения микрокредитов.
-          <br>
-          <br>
-          Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
-          <br>
-          <br>
-          Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
-          за минуту. Получить деньги можно на карту или наличными.
+        <h3 class='m-0 mb-4 about__title'>О компании</h3>
+        <p class='m-0 mb-1'>Простой и надежный сервис для быстрого получения микрокредитов.
         </p>
-        <div class='d-flex justify-content-around align-items-center w-100 mb-3'>
+        <p class="my-2">
+          Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
+        </p>
+        <p class="my-2"> Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
+          за минуту. Получить деньги можно на карту или наличными.</p>
+        <div class='d-flex justify-content-around align-items-center w-100 mb-3 mt-2'>
           <NuxtLink to='/'>
             <p class='about__link'>Документы</p>
           </NuxtLink>
@@ -91,7 +100,7 @@
       </div>
     </div>
     <div class='container mb-5'>
-      <h2 class='m-0 types__title mt-5'>Частые вопросы</h2>
+      <h2 class='m-0 types__title'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
                    :activeIndex='activeFaqIndex'
@@ -137,7 +146,6 @@ export default {
 
 <style lang='scss'>
 .row {
-  margin-bottom: 10%;
   @media (min-width: 900px) {
     margin-bottom: 5%;
   }
@@ -153,7 +161,7 @@ export default {
   }
 
   &__title {
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 800;
     margin-bottom: 15px;
   }
@@ -174,6 +182,12 @@ export default {
   &__button {
     background: #3A2784 !important;
   }
+}
+
+.hands{
+  border-bottom-left-radius: 33px;
+  border-bottom-right-radius: 33px;
+  overflow: hidden;
 }
 
 .promotion {
@@ -245,32 +259,27 @@ export default {
 }
 
 .info {
-  padding: 55% 10% 8% 10% !important;
-  @media (min-width: 900px) {
-    padding: 50% 10% 8% 10% !important;
-  }
 
-  &__first {
-    background: url("assets/images/get.png") 0% 0% no-repeat !important;
-    @media (min-width: 900px) {
-      background: url("assets/images/get-large.png") 0% 0% no-repeat !important;
-      background-position: -20% 0% !important;
-    }
+  &__get,&__repay {
+    //background: url("assets/images/get.png") 0% 0% no-repeat !important;
+    //@media (min-width: 900px) {
+    //  background: url("assets/images/get-large.png") 0% 0% no-repeat !important;
+    //  background-position: -20% 0% !important;
+    //}
+    position: relative;
   }
-
-  &__last {
-    background: url("assets/images/repay.png") 100% 0% no-repeat !important;
-    @media (min-width: 900px) {
-      background: url("assets/images/repay-large.png") 0% 0% no-repeat !important;
-      background-position: 20% 0% !important;
-    }
+  &__get{
+    left:-20px;
+  }
+  &__repay {
+    right:-20px;
   }
 }
 
 .types {
   &__item {
     background: #FFFFFF;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 4px rgb(0, 0, 0,0.2);
     border-radius: 10px;
   }
 
@@ -286,7 +295,7 @@ export default {
 
   &__header {
     width: 100%;
-    padding: 30px 0;
+    padding: 28px 0;
 
     &--title {
       font-weight: 800;
@@ -339,7 +348,7 @@ export default {
 .about {
   color: #FFF;
   text-align: center;
-  padding: 20px 45px;
+  padding: 20px 45px 0;
   margin-bottom: 8%;
   @media (min-width: 900px) {
     margin-bottom: 5%;
@@ -360,7 +369,11 @@ export default {
 
   &__link {
     color: #FFF;
+    font-weight: bold;
     text-decoration: underline;
   }
+}
+.company{
+  transform: translateY(-60px);
 }
 </style>
