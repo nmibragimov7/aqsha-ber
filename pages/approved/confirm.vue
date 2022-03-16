@@ -1,51 +1,69 @@
 <template>
-  <div class="page">
-    <Header/>
-    <div class="container page__wrap">
-      <div class="page__body px-4">
-        <div class="text-center page__info">
-          <h1 class="page__title mb-0">Подписание договора</h1>
-          <p class="mt-1">
+  <div class='page'>
+    <Header />
+    <div class='container page__wrap'>
+      <div class='page__body px-4'>
+        <div class='text-center page__info'>
+          <h1 class='page__title mb-0'>Подписание договора</h1>
+          <p class='mt-1'>
             Внимательно ознакомьтесь с условиями оформления вашего кредита
           </p>
         </div>
-        <ul class="page__list p-4">
-          <li class="mb-4 d-flex justify-content-between align-items-center">
+        <ul class='page__list p-4'>
+          <li class='mb-4 d-flex justify-content-between align-items-center'>
             <b>Сумма микрокредита:</b>
-            <span class="page__dotted"></span>
-            <span class="ml-2 info__info">000 000₸</span>
+            <span class='page__dotted'></span>
+            <span class='ml-2 info__info'>000 000₸</span>
           </li>
-          <li class="mb-4 d-flex justify-content-between align-items-center">
+          <li class='mb-4 d-flex justify-content-between align-items-center'>
             <b>Срок погашения:</b>
-            <span class="page__dotted"></span>
-            <span class="ml-2 info__info">000 000₸</span>
+            <span class='page__dotted'></span>
+            <span class='ml-2 info__info'>000 000₸</span>
           </li>
-          <li class=" d-flex justify-content-between align-items-center">
+          <li class=' d-flex justify-content-between align-items-center'>
             <b>Сумма к погашению:</b>
-            <span class="page__dotted"></span>
-            <span class="ml-2 info__info">000 000₸</span>
+            <span class='page__dotted'></span>
+            <span class='ml-2 info__info'>000 000₸</span>
           </li>
         </ul>
-        <p class="text-center  my-4 page__hint">Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
-        <BaseButton bg="#3A2784" @click="confirm" color="#fff">
+        <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
+        <BaseButton bg='#3A2784' @click='confirm' color='#fff'>
           ПОДТВЕРДИТЬ
         </BaseButton>
       </div>
     </div>
+    <SendCodeModal :code='form.code'
+                   @stepHandler='stepHandler'
+                   @inputHandler='inputHandler'/>
   </div>
 </template>
 <script>
-import Header from "@/components/layout/Header/Header";
-
+import Header from '@/components/layout/Header/Header'
+import SendCodeModal from '@/components/common/modal/SendCodeModal/SendCodeModal'
 
 export default {
   components: {
+    SendCodeModal,
     Header
+  },
+  data() {
+    return {
+      form: {
+        code: ''
+      }
+    }
   },
   methods: {
     confirm() {
+      this.$modal.show("sendCode")
+    },
+    inputHandler(value) {
+      this.form.code = value
+    },
+    stepHandler() {
+      this.$modal.hide('sendCode')
       this.$router.push({
-        path: "/feedback",
+        path: '/feedback',
         query: {
           smsError: true
         }
@@ -55,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .page {
   background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
   min-height: 30vh;
