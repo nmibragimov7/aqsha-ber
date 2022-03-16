@@ -6,6 +6,7 @@
         v-mask='mask'
         :type='type'
         :placeholder='placeholder'
+        :style="{color}"
         :class="['input', `${classes}__input`]"
         :value='value'
         :readonly='readonly'
@@ -13,7 +14,7 @@
       />
       <img v-if='icon'
            class='input__icon'
-           :src='require(`@/assets/images/${icon}.svg`)' />
+           :src='require(`@/assets/images/${icon}.svg`)'/>
     </label>
   </div>
 </template>
@@ -45,6 +46,10 @@ export default {
     classes: {
       type: String,
       default: ''
+    },
+    color: {
+      type: String,
+      default: "#000"
     },
     wrapClasses: {
       type: String,
@@ -86,12 +91,17 @@ export default {
 .footer__input {
   border: 0 !important;
   border-radius: 0px !important;
-  border-bottom: 2px solid #FFF !important;
+  border-bottom: 2px solid rgba(255,255,255,0.4) !important;
   background: transparent !important;
   text-align: center;
-
+  &:focus{
+    border-bottom: 2px solid rgb(255,255,255) !important;
+    &::placeholder {
+      color: rgb(255,255,255) !important;
+    }
+  }
   &::placeholder {
-    color: #FFF !important;
+    color: rgba(255,255,255,0.4) !important;
   }
 }
 

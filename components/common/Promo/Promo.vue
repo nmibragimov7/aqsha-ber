@@ -12,19 +12,20 @@
         <div class='form'>
           <div class='mb-3'>
             <BaseInput
+              v-model="valueInput"
               placeholder='Введите ИИН'
               icon='document'
-              classes='header' />
+              classes='header'/>
           </div>
           <div class='mb-3'>
             <BaseButton @click='getHandler'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
           </div>
-          <p class='mt-0 mb-1 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и
+          <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и
             обработку данных</p>
         </div>
       </div>
     </div>
-    <ProcessedModal />
+    <ProcessedModal/>
   </div>
 </template>
 
@@ -33,7 +34,12 @@ import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
 
 export default {
   name: 'Promo',
-  components: { ProcessedModal },
+  components: {ProcessedModal},
+  data() {
+    return {
+      valueInput: ""
+    }
+  },
   methods: {
     getHandler() {
       this.$modal.show('processed')
@@ -53,7 +59,7 @@ export default {
   flex-grow: 1;
 
   &__img {
-    margin-bottom: -3px;
+    margin-bottom: -31px;
   }
 
   &__text {
@@ -75,12 +81,14 @@ export default {
   background: rgba(255, 255, 255, 0.36);
   backdrop-filter: blur(15px);
   border-radius: 10px;
-  padding: 37px 31px;
-  margin-bottom: -40px;
+  position: relative;
+  top: 20px;
+  padding: 34px 26px 40px;
 
   &__text {
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 24px;
   }
 }
 </style>

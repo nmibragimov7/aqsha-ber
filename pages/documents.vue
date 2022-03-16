@@ -36,8 +36,8 @@ export default {
 <style scoped lang="scss">
 
 .page {
-  background-image: linear-gradient(45deg, #8055A1, #6C83F3,#AE6E9C);
-  min-height: 30vh;
+  background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  min-height: 25vh;
   border-radius: 0 0 20px 20px;
   &__wrap{
     position: relative;
@@ -49,6 +49,7 @@ export default {
     left:0;
   }
   &__title {
+    margin-top:0;
     color: #fff;
     font-size: 24px;
     font-weight: 500;

@@ -1,19 +1,24 @@
 <template>
   <div class='footer__wrap'>
     <div class='container'>
-      <div class='footer d-flex flex-column p-5'>
+      <div class='footer d-flex flex-column py-5 px-3'>
         <div class='footer__form d-flex flex-column align-items-center mb-4'>
           <h3 class='footer__form--title m-0 mb-4'>Не нашли ответа на свой вопрос?</h3>
           <p class='footer__form--text m-0 mb-4'>Оставьте свои контактные данные, чтобы мы могли связаться с вами!</p>
           <BaseInput v-model='name'
                      placeholder='Имя'
                      class='mb-3'
+
+                     color="#fff"
                      classes='footer'/>
           <BaseInput v-model='phone'
                      placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
+                     mask="+7 (###) ###-##-##"
+                     color="#fff"
                      class='mb-3'
                      classes='footer'/>
           <BaseInput v-model='anything'
+                     color="#fff"
                      placeholder='Что-то еще?'
                      class='mb-5'
                      classes='footer'/>
@@ -82,8 +87,7 @@ export default {
   }
 
   &__wrap {
-    background-image: linear-gradient(45deg, #8055A1, #6C83F3,#AE6E9C);
-    border-radius: 33px 33px 0 0;
+    background: linear-gradient(60deg, #F17C85 0%, #a258c5 27.08%, #5D54AB 49.32%, #3854e3 85.59%);
   }
 
   &__form {

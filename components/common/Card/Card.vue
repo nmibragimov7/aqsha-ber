@@ -18,10 +18,12 @@ export default {
 
 <style lang='scss' scoped>
 .card {
-  background: #F8F9F9;
   text-align: center;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
   cursor: pointer;
+  background: rgb(255, 255, 255);
   @media (min-width: 900px) {
     margin-bottom: 0;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
