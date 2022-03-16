@@ -8,12 +8,14 @@
     <div class='code__input--wrap'>
       <div class='position__absolute'>
         <div class='d-flex align-items-center justify-content-between mb-3'>
-          <input :value='data'
-                 @input='inputHandler($event)'
-                 class='position__absolute code__input--hidden'/>
-          <div v-for='num in 4'
-               :key='num'
-               class='code__input'></div>
+          <div v-for='idx of codeLength' :key='idx'>
+            <input
+              :ref='`input_${idx}`'
+              type='text'
+              @keydown='onKeyDown($event, idx)'
+              class='code__input'
+              @input='inputHandler($event, idx)'>
+          </div>
         </div>
         <BaseButton classes='code__button' @click='sendCode'>{{ btnText }}</BaseButton>
         <p class='text-center code__text'>Отправить еще раз</p>
@@ -43,26 +45,52 @@ export default {
   components: { BaseButton },
   data() {
     return {
-      data: ''
+      data: '',
+      codeLength: 4
     }
   },
   methods: {
-    inputHandler(event) {
-      let space = ""
-      if(event.inputType === 'insertText') {
-        if(event.target.value.length > 10) {
-          event.target.value = this.data
-          return;
+    inputHandler(event, idx) {
+      if (event.inputType === 'insertFromPaste') {
+        const letters = event.target.value.trim().split('')
+        let idx = 1
+        for (const letter of letters) {
+          if (letter.trim().length) {
+            this.$refs[`input_${idx}`][0].value = letter
+            idx++
+            if (idx > this.codeLength) {
+              idx = 1
+            }
+          }
         }
-        if(event.target.value.length < 10) space = "  "
-        this.data = event.target.value + space
-      } else if(event.inputType !== 'insertText' && event.target.value.length < 9) {
-        this.data = event.target.value.slice(0, -2)
       } else {
-        this.data = event.target.value
+        if (event.target.value.length > 1) {
+          event.target.value = event.target.value.slice(1)
+        }
+        if (event.inputType !== 'deleteContentBackward') {
+          if (idx === this.codeLength) {
+            this.$refs.input_1[0].focus()
+          } else {
+            this.$refs[`input_${idx + 1}`][0].focus()
+          }
+        }
       }
 
-      this.$emit('inputHandler', this.data.replace(/\D+/gi, ''))
+      this.data = ''
+      for(let index = 1; index <= this.codeLength; index++) {
+        if(this.$refs[`input_${index}`][0].value) {
+          this.data += `${this.$refs[`input_${index}`][0].value}`
+        }
+      }
+      this.$emit('inputHandler', this.data)
+    },
+    onKeyDown(event, idx) {
+      if (event.key === 'Backspace' && idx !== 1) {
+        if (!event.target.value.length) {
+          const input = this.$refs[`input_${idx - 1}`][0]
+          input.focus()
+        }
+      }
     },
     sendCode() {
       switch (this.name) {
@@ -95,6 +123,7 @@ export default {
     position: absolute;
   }
 }
+
 .code {
   position: relative;
 
@@ -109,17 +138,17 @@ export default {
 
   &__input {
     height: 125px;
-    //color: #7080A9;
-    //font-weight: 800;
-    //font-size: 72px;
+    color: #7080A9;
+    font-weight: 800;
+    font-size: 72px;
     border: 1px solid rgba(162, 162, 201, 0.47);
     border-radius: 10px;
     border: 1px solid #A2A2C9;
     margin: 0 5px;
     box-sizing: border-box;
     width: 70px;
-    //height: auto;
-    padding: 15px;
+    padding: 15px 10px;
+    text-align: center;
     outline: none;
 
     &--wrap {

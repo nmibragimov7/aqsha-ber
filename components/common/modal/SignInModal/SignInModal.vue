@@ -35,7 +35,7 @@ export default {
     return {
       form: {
         username: '',
-        code: ['', '', '', '']
+        code: ''
       },
       isSendCode: false
     }
@@ -44,8 +44,8 @@ export default {
     sendCodeHandler() {
       if (this.form.username.length) this.isSendCode = true
     },
-    inputHandler(value, index) {
-      this.form.code[index] = value
+    inputHandler(value) {
+      this.form.code = value
     }
   }
 }

@@ -5,7 +5,7 @@
                 :code='code'
                 btnText='ДАЛЕЕ'
                 @stepHandler='(value, index) => $emit("stepHandler", value, index)'
-                @inputHandler='(value, index) => $emit("inputHandler", value)' />
+                @inputHandler='value => $emit("inputHandler", value)' />
     </div>
   </modal>
 </template>
