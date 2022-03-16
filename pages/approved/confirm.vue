@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header />
+    <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <div class='text-center page__info'>
@@ -34,7 +34,7 @@
     </div>
     <SendCodeModal :code='form.code'
                    @stepHandler='stepHandler'
-                   @inputHandler='inputHandler'/>
+                   @inputHandler='inputHandler' />
   </div>
 </template>
 <script>
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     confirm() {
-      this.$modal.show("sendCode")
+      this.$modal.show('sendCode')
     },
     inputHandler(value) {
       this.form.code = value

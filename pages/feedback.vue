@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page__bg pb-3">
-      <Header/>
+      <Header logoSmall />
       <div class="container">
         <div v-if="creditDenied">
           <h1 class="text-center page__title my-2">Отказано</h1>
