@@ -1,5 +1,5 @@
 <template>
-  <div class="profile__block p-2 px-4">
+  <div class="profile__block p-4 mt-4">
     <h2 class="history__title text-center">Кредитная история</h2>
     <div class="history__line"/>
     <div class="history__content">
@@ -27,18 +27,18 @@
           </div>
         </div>
       </div>
-      <!--      <div class="row">-->
-      <!--        <div class="col-6">-->
-      <!--          <BaseButton>продлить</BaseButton>-->
-      <!--        </div>-->
-      <!--        <div class="col-6">-->
-      <!--          <BaseButton>погасить</BaseButton>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class='row'>
+        <div class='col-6'>
+          <BaseButton classes='profile__button profile__button--blue'>продлить</BaseButton>
+        </div>
+        <div class='col-6'>
+          <BaseButton classes='profile__button'>погасить</BaseButton>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-<style scoped lang="scss">
+<style lang="scss">
 .history {
   &__line {
     border: 1px solid #D3D3E6;
@@ -58,6 +58,18 @@
   &__content{
     @media screen and (max-width:375px) {
         font-size: 14px;
+    }
+  }
+}
+
+.profile {
+
+  &__button {
+    font-size: 11px !important;
+
+    &--blue {
+      background: #3A2784 !important;
+      color: #FFF !important;
     }
   }
 }

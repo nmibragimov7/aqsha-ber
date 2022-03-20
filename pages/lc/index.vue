@@ -36,28 +36,7 @@
       <BaseButton bg='#3A2784' color='#fff' classes='mt-3'>
         + новый микрокредит
       </BaseButton>
-      <div class='profile__block p-4 mt-4'>
-        <h2 class='profile__title text-center'>Кредитная история</h2>
-        <div class='profile__line'></div>
-        <div>
-          <div class='row'>
-            <div class='col-4 d-inline-flex align-items-center profile__text'><b>152 000тг</b></div>
-            <div class='col-4 d-inline-flex align-items-center profile__text'><span>до 20.02.15</span></div>
-            <div class='col-4 d-inline-flex align-items-center profile__text'>
-              <p class='mr-2'>Текущий</p>
-              <img src='/svg/info__ic.svg' alt=''>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-6'>
-              <BaseButton classes='profile__button profile__button--blue'>продлить</BaseButton>
-            </div>
-            <div class='col-6'>
-              <BaseButton classes='profile__button'>погасить</BaseButton>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CreditHistory/>
       <div class='profile__block p-4 mt-4'>
         <BaseInput v-model='password'
                    class='mb-3'
@@ -85,10 +64,10 @@
 import PageWrap from '@/components/common/PageWrap.vue'
 import BaseInput from '@/components/base/BaseInput/BaseInput'
 import BaseButton from '@/components/base/BaseButton/BaseButton'
-// import CreditHistory from "@/components/common/CreditHistory/CreditHistory.vue";
+import CreditHistory from '@/components/common/CreditHistory/CreditHistory'
 
 export default {
-  components: { BaseButton, BaseInput, PageWrap },
+  components: { CreditHistory, BaseButton, BaseInput, PageWrap },
   data() {
     return {
       password: null,
@@ -129,15 +108,6 @@ export default {
 
   &__text {
     font-size: 14px;
-  }
-
-  &__button {
-    font-size: 11px !important;
-
-    &--blue {
-      background: #3A2784 !important;
-      color: #FFF !important;
-    }
   }
 
   &__level {
