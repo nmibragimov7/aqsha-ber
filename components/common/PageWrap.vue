@@ -5,7 +5,7 @@
       <div class="page__body px-4">
         <div class="text-center page__info">
           <slot name="header">
-            <h1 class="page__title mb-0">{{ title }}</h1>
+            <h1 class="page__title">{{ title }}</h1>
             <p v-if="subtitle" class="mt-1">
               {{ subtitle }}
             </p>
@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
-  min-height: 25vh;
+  min-height: 25vh !important;
   border-radius: 0 0 20px 20px;
   &__wrap{
     position: relative;
@@ -73,7 +73,7 @@ export default {
   &__info {
     color: #fff;
   }
-  
+
   &__content {
     background: #fff;
     border-radius: 15px;

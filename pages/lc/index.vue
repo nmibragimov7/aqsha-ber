@@ -38,39 +38,17 @@
       <BaseButton bg="#3A2784" color="#fff" classes="mt-3">
         + новый микрокредит
       </BaseButton>
-      <div class="profile__block p-4 mt-4">
-        <h2 class="profile__title text-center">Кредитная история</h2>
-        <div class="profile__line">
-
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-3 d-inline-flex align-items-center"><b>152 000тг</b></div>
-            <div class="col-3 d-inline-flex align-items-center"><span>до 20.02.15</span></div>
-            <div class="col-3 d-inline-flex align-items-center"><p>Текущий</p></div>
-            <div class="col-3 d-inline-flex align-items-center">
-              <div>
-                <img src="/svg/info__ic.svg" alt="" class="w-100">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <BaseButton>продлить</BaseButton>
-            </div>
-            <div class="col-6">
-              <BaseButton>погасить</BaseButton>
-            </div>
-          </div>
-        </div>
+      <div class="mt-4">
+        <CreditHistory/>
       </div>
     </template>
   </PageWrap>
 </template>
 <script>
+import CreditHistory from "@/components/common/CreditHistory/CreditHistory.vue";
 import PageWrap from "@/components/common/PageWrap.vue";
 export default {
-  components: {PageWrap}
+  components: {CreditHistory, PageWrap}
 }
 </script>
 
@@ -91,12 +69,6 @@ export default {
     font-size: 18px;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
   }
-  &__title{
-    font-size: 26px;
-    font-weight: 600;
-  }
-  &__line{
-    border: 1px solid #D3D3E6;
-  }
+
 }
 </style>
