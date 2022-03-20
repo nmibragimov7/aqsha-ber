@@ -4,9 +4,9 @@
       <span class='input__label' v-if='label'>{{ label }}</span>
       <input
         v-mask='mask'
-        :type='type'
+        :type='visibility'
         :placeholder='placeholder'
-        :style="{color}"
+        :style='{color}'
         :class="['input', `${classes}__input`]"
         :value='value'
         :readonly='readonly'
@@ -14,7 +14,12 @@
       />
       <img v-if='icon'
            class='input__icon'
-           :src='require(`@/assets/images/${icon}.svg`)'/>
+           :src='require(`@/assets/images/${icon}.svg`)' />
+      <img v-if='type === "password"'
+           @click='passwordHandler'
+           class='input__password'
+           :class='[{ "input__password--hidden": visibility === "password" }]'
+           :src='visibility !== "password" ? require(`@/assets/images/shown.svg`) : require(`@/assets/images/hidden.svg`)' />
     </label>
   </div>
 </template>
@@ -49,7 +54,7 @@ export default {
     },
     color: {
       type: String,
-      default: "#000"
+      default: '#000'
     },
     wrapClasses: {
       type: String,
@@ -63,6 +68,16 @@ export default {
       type: String,
       required: false,
       default: ''
+    }
+  },
+  data() {
+    return {
+      visibility: this.type
+    }
+  },
+  methods: {
+    passwordHandler() {
+      this.visibility === 'text' ? this.visibility = 'password' : this.visibility = 'text'
     }
   }
 }
@@ -91,17 +106,20 @@ export default {
 .footer__input {
   border: 0 !important;
   border-radius: 0px !important;
-  border-bottom: 2px solid rgba(255,255,255,0.4) !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4) !important;
   background: transparent !important;
   text-align: center;
-  &:focus{
-    border-bottom: 2px solid rgb(255,255,255) !important;
+
+  &:focus {
+    border-bottom: 2px solid rgb(255, 255, 255) !important;
+
     &::placeholder {
-      color: rgb(255,255,255) !important;
+      color: rgb(255, 255, 255) !important;
     }
   }
+
   &::placeholder {
-    color: rgba(255,255,255,0.4) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
   }
 }
 
@@ -130,6 +148,7 @@ export default {
     background: #FFF;
     padding: 3px;
     color: rgba(50, 36, 67, 0.5);
+    line-height: 100%;
   }
 
   &__icon {
@@ -141,6 +160,17 @@ export default {
 
   &__wrap {
     position: relative;
+  }
+
+  &__password {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &--hidden {
+      transform: translateY(0);
+    }
   }
 }
 </style>

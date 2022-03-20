@@ -3,9 +3,9 @@
     <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <p class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
+        <p v-if='!isAuth' class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
         <p class='text-center page__text m-0 mb-2'>Сделайте селфи</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-3'>
+        <div v-if='!isAuth' class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
@@ -29,6 +29,8 @@
                         @pickFile='pickFile' />
         </div>
         <PickDocResult v-else
+                       :file='file'
+                       :isAuth='isAuth'
                        path='/register/fifth-step'
                        @goBack='goBack'/>
       </div>
@@ -47,6 +49,11 @@ export default {
     return {
       isLoadedFile: false,
       file: null
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters['auth/isAuth']
     }
   },
   methods: {

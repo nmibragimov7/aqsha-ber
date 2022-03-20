@@ -126,6 +126,7 @@ export default {
     &--desc {
       color: #974ECD;
       font-size: 10px;
+      line-height: 150%;
     }
 
     &--button {

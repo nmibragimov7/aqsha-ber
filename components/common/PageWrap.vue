@@ -5,7 +5,7 @@
       <div class="page__body px-4">
         <div class="text-center page__info">
           <slot name="header">
-            <h1 class="page__title mb-0">{{ title }}</h1>
+            <h1 class="page__title mb-2">{{ title }}</h1>
             <p v-if="subtitle" class="mt-1">
               {{ subtitle }}
             </p>
@@ -73,7 +73,7 @@ export default {
   &__info {
     color: #fff;
   }
-  
+
   &__content {
     background: #fff;
     border-radius: 15px;

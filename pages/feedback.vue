@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     goToMain() {
-      this.$router.push("/")
+      this.$router.push("/lc")
     }
   }
 }

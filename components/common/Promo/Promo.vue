@@ -12,20 +12,22 @@
         <div class='form'>
           <div class='mb-3'>
             <BaseInput
-              v-model="valueInput"
+              v-model='valueInput'
               placeholder='Введите ИИН'
               icon='document'
-              classes='header'/>
+              classes='header' />
           </div>
           <div class='mb-3'>
-            <BaseButton @click='getHandler'>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+            <BaseButton @click='getHandler' classes='promo__button'>
+              {{ isAuth ? 'ПОЛУЧИТЬ ДЕНЬГИ' : 'Рассчитать сумму кредита!' }}
+            </BaseButton>
           </div>
           <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор и
             обработку данных</p>
         </div>
       </div>
     </div>
-    <ProcessedModal/>
+    <ProcessedModal />
   </div>
 </template>
 
@@ -34,14 +36,23 @@ import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
 
 export default {
   name: 'Promo',
-  components: {ProcessedModal},
+  components: { ProcessedModal },
   data() {
     return {
-      valueInput: ""
+      valueInput: ''
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters['auth/isAuth']
     }
   },
   methods: {
     getHandler() {
+      if (this.isAuth) {
+        this.$router.replace('register/second-step')
+        return
+      }
       this.$modal.show('processed')
       setTimeout(() => {
         this.$modal.hide('processed')
@@ -52,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .promo {
   color: #FFF;
   width: 100%;
@@ -74,6 +85,10 @@ export default {
   &__description {
     font-size: 14px;
     font-weight: normal;
+  }
+
+  &__button {
+    font-size: 16px !important;
   }
 }
 

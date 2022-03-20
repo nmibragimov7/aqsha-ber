@@ -3,10 +3,10 @@
     <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <p class='text-center page__step m-0 mb-2'>Шаг 2 из 6</p>
+        <p v-if='!isAuth' class='text-center page__step m-0 mb-2'>Шаг 2 из 6</p>
         <p v-if='!isLoadedFile' class='text-center page__text m-0 mb-2'>Сделайте фото лицевой стороны вашего удостоверения личности</p>
         <p v-else class='text-center page__text m-0 mb-2'>Сделайте фото обратной стороны удостоверения личности</p>
-        <div class='steps d-flex align-items-center justify-content-between mb-3'>
+        <div v-if='!isAuth' class='steps d-flex align-items-center justify-content-between mb-3'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
@@ -17,6 +17,7 @@
                      text='Сканировать'
                      @pickFile='pickFile'/>
         <PickDocResult v-else
+                       :file='file'
                        path='/register/third-step'
                        @goBack='goBack'/>
       </div>
@@ -35,6 +36,11 @@ export default {
     return {
       isLoadedFile: false,
       file: null
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters['auth/isAuth']
     }
   },
   methods: {

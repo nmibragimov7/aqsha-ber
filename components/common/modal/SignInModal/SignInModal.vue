@@ -17,6 +17,7 @@
         <SendCode name='signIn'
                   :code='form.code'
                   btnText='подтвердить'
+                  @sendCode='sendCode'
                   @inputHandler='inputHandler' />
       </template>
     </div>
@@ -46,6 +47,10 @@ export default {
     },
     inputHandler(value) {
       this.form.code = value
+    },
+    sendCode() {
+      this.$store.commit('auth/setAuth', true)
+      this.$modal.hide('signIn')
     }
   }
 }

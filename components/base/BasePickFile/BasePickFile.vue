@@ -7,6 +7,7 @@
       </div>
     </label>
     <input
+      accept='image/*'
       ref='fileInput'
       @input='pickFile'
       type='file'

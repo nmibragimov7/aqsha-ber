@@ -95,7 +95,7 @@ export default {
     sendCode() {
       switch (this.name) {
         case 'signIn':
-          console.log('signIn')
+          this.$emit('sendCode')
           break
         case 'sendCode':
           this.$emit('stepHandler')
