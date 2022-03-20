@@ -24,7 +24,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/modal.js',
-    '~plugins/vmask.js'
+    '~plugins/vmask.js',
+    '~plugins/axios.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,7 +44,17 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy:true
+  },
+  proxy:{
+    "/api":{
+      target:"https://bis.kreditomat.kz:4624",
+      pathRewrite:{
+        '^/api/':'/apiv2/'
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
