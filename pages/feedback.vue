@@ -15,7 +15,7 @@
             К сожалению, вы исчерпали попытки ввода кода.
           </p>
         </div>
-        <div v-else-if="giveToMoney">
+        <div class="give_money" v-else-if="giveToMoney">
           <h1 class="text-center page__title my-2">152 000 ₸</h1>
           <p class="text-center page__description">
             Оформление закончено: вы получите одобренную сумму выбранным вами способом
@@ -23,11 +23,11 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mt-4">
       <div v-if="smsError || creditDenied" class="d-flex justify-content-center px-5 mt-4">
         <img src="@/assets/images/warning.png" class="w-100" alt="">
       </div>
-      <BaseButton bg="#FFDF11" classes="mt-4" @click="goToMain">
+      <BaseButton v-if="giveToMoney" bg="#FFDF11" classes="mt-4" @click="goToMain">
         В личный кабинет
       </BaseButton>
       <BaseButton bg="#3A2784" color="#fff" classes="mt-3" @click="goToMain">
@@ -97,7 +97,7 @@ export default {
     max-width: 60%;
     &.giveToMoney{
       right: auto;
-      left:-26%;
+      left:-28%;
       top:80px;
       z-index: 1;
     }
@@ -110,6 +110,13 @@ export default {
       transform: rotate(-47.42deg);
       right: auto;
     }
+  }
+}
+.give_money{
+  position: relative;
+  z-index: 2;
+  & .page__title{
+    font-size: 66px;
   }
 }
 </style>

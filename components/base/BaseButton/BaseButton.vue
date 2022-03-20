@@ -51,7 +51,7 @@ export default {
   color: #000;
   border: none;
   cursor: pointer;
-  padding: 13px;
+  padding: 15px;
   font-size: 20px;
   border-radius: 42px;
   text-transform: uppercase;

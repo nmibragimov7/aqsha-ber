@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
-  min-height: 25vh;
+  min-height: 25vh !important;
   border-radius: 0 0 20px 20px;
   &__wrap{
     position: relative;

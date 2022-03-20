@@ -85,6 +85,7 @@
 import PageWrap from '@/components/common/PageWrap.vue'
 import BaseInput from '@/components/base/BaseInput/BaseInput'
 import BaseButton from '@/components/base/BaseButton/BaseButton'
+// import CreditHistory from "@/components/common/CreditHistory/CreditHistory.vue";
 
 export default {
   components: { BaseButton, BaseInput, PageWrap },
@@ -97,9 +98,9 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-.page {
-  &__header {
+<style lang="scss" scoped>
+.page{
+  &__header{
 
   }
 }

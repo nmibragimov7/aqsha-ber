@@ -8,7 +8,7 @@
               <div class="px-3">
                 <img class='card__image'
                      :src='"~/assets/images/"+card.image+".png"'
-                     :alt='card.title' />
+                     :alt='card.title'/>
                 <p class='card__title'>{{ card.title }}</p>
                 <p class='card__description'>{{ card.description }}</p>
               </div>
@@ -24,8 +24,8 @@
             <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
             <BaseButton classes='promotion__button' color='#FFF'>Подробнее</BaseButton>
           </div>
-          <img class='promotion__image' src='~/assets/images/pig.png' />
-          <img class='promotion__image--large' src='~/assets/images/pig-large.png' />
+          <img class='promotion__image' src='~/assets/images/pig.png'/>
+          <img class='promotion__image--large' src='~/assets/images/pig-large.png'/>
         </div>
       </div>
     </div>
@@ -35,8 +35,10 @@
           <template v-for='(information, index) in infos'>
             <div :key='index' class='col-12 col-lg-6'>
               <Card classes='info bg-white'>
-                <img src="@/assets/images/get.png" class="info__get w-100" v-if='information.image === "get"' alt="qweqw">
-                <img src="@/assets/images/repay.png" class="info__repay w-100" v-if='information.image === "repay"' alt="qwqe">
+                <img src="@/assets/images/get.png" class="info__get w-100" v-if='information.image === "get"'
+                     alt="qweqw">
+                <img src="@/assets/images/repay.png" class="info__repay w-100" v-if='information.image === "repay"'
+                     alt="qwqe">
                 <div class="px-4">
                   <p class='card__title'>{{ information.title }}</p>
                   <ul class='card__descriptions'>
@@ -60,12 +62,12 @@
             <Card classes='p-0 types__item'>
               <div class='types__header d-flex flex-column justify-content-center align-items-center'
                    :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
-                <p class='types__header--title m-0'>{{type.header.title}}</p>
-                <p class='types__header--text m-0'>{{type.header.text}}</p>
+                <p class='types__header--title m-0'>{{ type.header.title }}</p>
+                <p class='types__header--text m-0'>{{ type.header.text }}</p>
               </div>
               <div class='types__body d-flex flex-column justify-content-center align-items-center'>
-                <p class='types__body--title m-0 mb-4'>{{type.body.title}}</p>
-                <p class='types__body--text m-0 mb-4'>{{type.body.text}}</p>
+                <p class='types__body--title m-0 mb-4'>{{ type.body.title }}</p>
+                <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
                 <BaseButton classes='card__button' :width='60'>
                   <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>ПОДРОБНЕЕ</nuxt-link>
                 </BaseButton>
@@ -78,7 +80,7 @@
     <div class='promo__wrap company'>
       <div class='container d-flex flex-column align-items-center about'>
         <NuxtLink to='/' class='about__img'>
-          <img src='@/assets/images/logo-large.svg' alt='About' />
+          <img src='@/assets/images/logo-large.svg' alt='About'/>
         </NuxtLink>
         <h3 class='m-0 mb-4 about__title'>О компании</h3>
         <p class='m-0 mb-1'>Простой и надежный сервис для быстрого получения микрокредитов.
@@ -114,14 +116,14 @@
 </template>
 
 <script>
-import { cards, infos, types } from '../fixstures/cards'
-import { faqs } from '../fixstures/accordions'
+import {cards, infos, types} from '../fixstures/cards'
+import {faqs} from '../fixstures/accordions'
 import Card from '../components/common/Card/Card'
 import BaseButton from '../components/base/BaseButton/BaseButton'
 import Accordion from '../components/common/Accordion/Accordion'
 
 export default {
-  components: { Accordion, BaseButton, Card },
+  components: {Accordion, BaseButton, Card},
   layout: 'landing',
   data() {
     return {
@@ -134,13 +136,13 @@ export default {
   },
   methods: {
     faqHandler(index) {
-      if(index === this.activeFaqIndex) {
+      if (index === this.activeFaqIndex) {
         this.activeFaqIndex = null;
         return;
       }
       this.activeFaqIndex = index;
     }
-  }
+  },
 }
 </script>
 
@@ -184,7 +186,7 @@ export default {
   }
 }
 
-.hands{
+.hands {
   border-bottom-left-radius: 33px;
   border-bottom-right-radius: 33px;
   overflow: hidden;
@@ -260,7 +262,7 @@ export default {
 
 .info {
 
-  &__get,&__repay {
+  &__get, &__repay {
     //background: url("assets/images/get.png") 0% 0% no-repeat !important;
     //@media (min-width: 900px) {
     //  background: url("assets/images/get-large.png") 0% 0% no-repeat !important;
@@ -268,18 +270,20 @@ export default {
     //}
     position: relative;
   }
-  &__get{
-    left:-20px;
+
+  &__get {
+    left: -20px;
   }
+
   &__repay {
-    right:-20px;
+    right: -20px;
   }
 }
 
 .types {
   &__item {
     background: #FFFFFF;
-    box-shadow: 0 4px 4px rgb(0, 0, 0,0.2);
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.2);
     border-radius: 10px;
   }
 
@@ -373,7 +377,8 @@ export default {
     text-decoration: underline;
   }
 }
-.company{
+
+.company {
   transform: translateY(-60px);
 }
 </style>
