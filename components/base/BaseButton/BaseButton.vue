@@ -1,6 +1,6 @@
 <template>
   <div :style='{width: width + "%"}'>
-    <button :class="['button', classes]"
+    <button :class="['button', classes,{normal}]"
             :style="{color:color,backgroundColor:bg}"
             :disabled='disabled || isLoading'
             v-on="$listeners">
@@ -36,6 +36,10 @@ export default {
     bg: {
       type: String,
       default: ""
+    },
+    normal:{
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -60,6 +64,10 @@ export default {
   &:hover,
   &:active {
     outline: none;
+  }
+  &.normal{
+    font-size: 15px;
+    text-transform: none;
   }
 }
 </style>

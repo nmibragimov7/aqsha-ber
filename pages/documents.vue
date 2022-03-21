@@ -4,14 +4,16 @@
     <div class="container page__wrap">
       <div class="page__body px-4">
         <h1 class="text-center page__title mb-4">Документы</h1>
-        <ul class="page__list p-4 mb-4">
-          <li class="mb-4 py-1">Правила предоставления микрокредитов</li>
-          <li class="mb-4 py-1">Политика обработки данных</li>
-          <li class="mb-4 py-1">Политика информационной безопасности</li>
-          <li class="mb-4 py-1">Лицензия</li>
-          <li class="mb-4 py-1">Договор о предоставлении микрокредита</li>
-          <li class="mb-1 py-1">Реквизиты ТОО МФО «Взаймы»</li>
-        </ul>
+        <div class="bg-white p-3 page__content mb-4">
+          <ul class="page__list p-0 m-0">
+            <li class="py-1">Правила предоставления микрокредитов</li>
+            <li class="py-1">Политика обработки данных</li>
+            <li class="py-1">Политика информационной безопасности</li>
+            <li class="py-1">Лицензия</li>
+            <li class="py-1">Договор о предоставлении микрокредита</li>
+            <li class="py-1">Реквизиты ТОО МФО «Взаймы»</li>
+          </ul>
+        </div>
         <BaseButton @click="goToMain" bg="#3A2784" color="#fff">
           На главную
         </BaseButton>
@@ -54,13 +56,13 @@ export default {
     font-size: 24px;
     font-weight: 500;
   }
-
-  &__list {
-    background: #fff;
-    list-style: none;
+  &__content{
     border-radius: 15px;
-    color: #322443;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
+    color: #322443;
+  }
+  &__list {
+    list-style: none;
 
     & > li {
       text-decoration: underline;

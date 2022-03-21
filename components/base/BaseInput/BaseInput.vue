@@ -1,7 +1,7 @@
 <template>
   <div :class="['input__wrap', `${wrapClasses}`]">
     <label>
-      <span class='input__label' v-if='label'>{{ label }}</span>
+      <span v-if='label' class='input__label'>{{ label }}</span>
       <input
         v-mask='mask'
         :type='visibility'
@@ -16,10 +16,15 @@
            class='input__icon'
            :src='require(`@/assets/images/${icon}.svg`)' />
       <img v-if='type === "password"'
-           @click='passwordHandler'
+           draggable="false"
            class='input__password'
            :class='[{ "input__password--hidden": visibility === "password" }]'
-           :src='visibility !== "password" ? require(`@/assets/images/shown.svg`) : require(`@/assets/images/hidden.svg`)' />
+           :src='visibility !== "password" ? require(`@/assets/images/shown.svg`) : require(`@/assets/images/hidden.svg`)'
+           @mousedown='passwordHandler("text")'
+           @mouseup="passwordHandler('password')"
+           @mouseleave="passwordHandler('password')"
+           @touchstart="passwordHandler('text')"
+           @touchcancel="passwordHandler('password')" />
     </label>
   </div>
 </template>
@@ -76,8 +81,10 @@ export default {
     }
   },
   methods: {
-    passwordHandler() {
-      this.visibility === 'text' ? this.visibility = 'password' : this.visibility = 'text'
+    passwordHandler(type) {
+      console.log('kek')
+      this.visibility = type
+      // this.visibility === 'text' ? this.visibility = 'password' : this.visibility = 'text'
     }
   }
 }
@@ -102,7 +109,6 @@ export default {
     color: #FFF !important;
   }
 }
-
 .footer__input {
   border: 0 !important;
   border-radius: 0px !important;
@@ -171,6 +177,13 @@ export default {
     &--hidden {
       transform: translateY(0);
     }
+  }
+}
+.change__password{
+  &__input{
+    color: #afafc0 !important;
+    font-size: 26px !important;
+    padding: 12px 60px 12px 15px;
   }
 }
 </style>

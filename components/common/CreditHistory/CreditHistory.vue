@@ -2,42 +2,24 @@
   <div class="profile__block p-4 mt-4">
     <h2 class="history__title text-center">Кредитная история</h2>
     <div class="history__line"/>
-    <div class="history__content">
-      <div class="d-flex my-3 align-items-center justify-content-between">
-        <div class="mr-2"><b>152 000тг</b></div>
-        <div class="mr-2"><span>до 20.02.15</span></div>
-        <div>
-          <div class="d-flex align-items-center">
-            <p class="my-0 mr-2">Текущий</p>
-            <div class="d-flex history__info-img">
-              <img src="/svg/info__ic.svg" alt="" class="w-100">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex my-3 align-items-center justify-content-between">
-        <div class="mr-2"><b>152 000тг</b></div>
-        <div class="mr-2"><span>до 20.02.15</span></div>
-        <div>
-          <div class="d-flex align-items-center">
-            <p class="my-0 mr-2">Текущий</p>
-            <div class="d-flex history__info-img">
-              <img src="/svg/info__ic.svg" alt="" class="w-100">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-6'>
-          <BaseButton classes='profile__button profile__button--blue'>продлить</BaseButton>
-        </div>
-        <div class='col-6'>
-          <BaseButton classes='profile__button'>погасить</BaseButton>
-        </div>
-      </div>
+    <HistoryCard/>
+    <div class="d-flex flex-column align-items-center mt-4">
+      <button class="history__show-more d-inline-flex align-items-center">Показать полностью
+        <img class="ml-1" src="@/assets/images/arrow.svg" alt="">
+      </button>
+      <BaseButton bg="#3A2784" color="#fff" classes="mt-3" normal>Как погасить</BaseButton>
     </div>
   </div>
 </template>
+<script>
+import HistoryCard from "@/components/common/CreditHistory/HistoryCard.vue"
+
+export default {
+  components: {
+    HistoryCard
+  }
+}
+</script>
 <style lang="scss">
 .history {
   &__line {
@@ -55,9 +37,18 @@
       min-width: 25px;
     }
   }
-  &__content{
-    @media screen and (max-width:375px) {
-        font-size: 14px;
+  &__show-more{
+    background: none;
+    border:none;
+    font-weight: 600;
+    cursor: pointer;
+    &:focus{
+      outline: none;
+    }
+  }
+  &__content {
+    @media screen and (max-width: 375px) {
+      font-size: 14px;
     }
   }
 }
@@ -66,6 +57,8 @@
 
   &__button {
     font-size: 11px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
 
     &--blue {
       background: #3A2784 !important;

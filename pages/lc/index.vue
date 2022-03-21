@@ -40,14 +40,19 @@
       <div class='profile__block p-4 mt-4'>
         <BaseInput v-model='password'
                    class='mb-3'
+                   classes="change__password"
                    type='password'
-                   placeholder='Старый пароль' />
-        <BaseInput v-model='newPassword'
+                   :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
+        <BaseInput v-if="isPassExist" v-model='newPassword'
                    class='mb-3'
                    type='password'
+                   classes="change__password"
                    placeholder='Новый пароль' />
         <div class='d-flex justify-content-between mb-3'>
-          <div v-for='num in 4' :key='num' class='profile__level'></div>
+          <div v-for='num in 4' :key='num' :class="{'mr-2':num <4}">
+            <div class='profile__level'/>
+            <span class="profile__level-hint">Ненадежный</span>
+          </div>
         </div>
         <p class='m-0 mb-3 text-center profile__description'>
           Должен состоять минимум из 8 символов и содержать
@@ -71,7 +76,8 @@ export default {
   data() {
     return {
       password: null,
-      newPassword: null
+      newPassword: null,
+      isPassExist:false
     }
   }
 }
@@ -112,14 +118,24 @@ export default {
 
   &__level {
     background: linear-gradient(89.77deg, #FF8D65 23.04%, #974ECD 99.94%);
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     height: 6px;
-    margin-right: 12px;
-    width: 25%;
-
-    &:last-child {
-      margin-right: 0;
+    &:nth-child(1){
+      background: linear-gradient(90.12deg, #FF8D65 60%, #974ECD 85.86%);
+    }
+    &:nth-child(2){
+      background: linear-gradient(90.12deg, #FF8D65 30%, #974ECD 85.86%);
+    }
+    &:nth-of-type(3){
+      background: linear-gradient(90.12deg, #FF8D65 5%, #974ECD 85.86%);
+    }
+    &:nth-of-type(4){
+      background: linear-gradient(90.12deg, #FF8D65 0%, #974ECD 85.86%);
+    }
+    &-hint{
+      font-size:9px;
+      color: #EB5757;
     }
   }
 
