@@ -65,7 +65,7 @@ export default {
       this.$router.push({
         path: '/feedback',
         query: {
-          smsError: true
+          giveMoney: true
         }
       })
     }

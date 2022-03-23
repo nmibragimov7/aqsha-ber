@@ -15,9 +15,9 @@
             К сожалению, вы исчерпали попытки ввода кода.
           </p>
         </div>
-        <div class="give_money" v-else-if="giveToMoney">
+        <div class="give_money" v-else-if="giveMoney">
           <h1 class="text-center page__title my-2">152 000 ₸</h1>
-          <p class="text-center page__description">
+          <p class="text-center page__description mt-4">
             Оформление закончено: вы получите одобренную сумму выбранным вами способом
           </p>
         </div>
@@ -27,14 +27,14 @@
       <div v-if="smsError || creditDenied" class="d-flex justify-content-center px-5 mt-4">
         <img src="@/assets/images/warning.png" class="w-100" alt="">
       </div>
-      <BaseButton v-if="giveToMoney" bg="#FFDF11" classes="mt-4" @click="goToMain">
+      <BaseButton v-if="giveMoney" bg="#FFDF11" classes="mt-4" @click="goToMain">
         В личный кабинет
       </BaseButton>
       <BaseButton bg="#3A2784" color="#fff" classes="mt-3" @click="goToMain">
         На главную
       </BaseButton>
     </div>
-    <div v-if="smsError || giveToMoney" class="page__decor" :class="{giveToMoney}">
+    <div v-if="smsError || giveMoney" class="page__decor" :class="{giveMoney}">
       <img src="/svg/money_decor.svg" class="w-100" alt="">
     </div>
     <div v-if="smsError" class="page__decor page__decor--back">
@@ -55,13 +55,13 @@ export default {
     return {
       creditDenied: false,
       smsError: false,
-      giveToMoney: false
+      giveMoney: false
     }
   },
   mounted() {
     this.creditDenied = this.$route.query.creditDenied;
     this.smsError = this.$route.query.smsError;
-    this.giveToMoney = this.$route.query.giveToMoney;
+    this.giveMoney = this.$route.query.giveMoney;
   },
   methods: {
     goToMain() {
