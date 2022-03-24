@@ -26,6 +26,7 @@ export default {
     '~plugins/modal.js',
     '~plugins/vmask.js',
     '~plugins/axios.js',
+    {src:"~plugins/watchWindow.js",mode:"client"},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

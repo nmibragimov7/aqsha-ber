@@ -1,12 +1,20 @@
 <template>
-  <div ref="rangeWrap" class="range__wrap d-flex align-items-center justify-content-between">
-    <div v-for="dot in 16" :key="dot" class="range__dot" :ref="`dot_${dot}`" :class="{'mr-1':dot<16}"/>
-    <input ref="range" type="range" class="range__range" min="0" :step="2000" :max="max" @input="changeHandler($event)">
-    <!--      <div ref="left_dot" class="range__dot range__dot-left"/>-->
-    <!--      <div ref="right_dot" class="range__dot range__dot-right"/>-->
+  <div class="range__wrap d-flex align-items-center justify-content-between"
+       :draggable="false"
+       @touchstart="mouseDownHandler($event,'mobile')"
+       @touchmove="mouseMoveHandler"
+       @mouseleave="mouseUpHandler" @mousedown="mouseDownHandler" @mousemove="mouseMoveHandler">
+    <div v-for="(dot,idx) in 16" :key="dot" :ref="`dot_${dot}`" :draggable="false" class="range__dot" :class="{
+      'active':idx=== (activeIdx+2),
+      'activeFirstDecor':idx===activeIdx || idx === (activeIdx+4),
+      'activeSecondDecor': idx===(activeIdx+1) || idx === (activeIdx+3),
+      'purple':purple
+    }"/>
   </div>
+
 </template>
 <script>
+
 export default {
   props: {
     value: {
@@ -16,47 +24,64 @@ export default {
     max: {
       type: Number,
       default: 10
+    },
+    purple: {
+      type: Boolean,
+      default: false
     }
   },
-  watch: {
-    value: {
-      handler() {
-        this.calculateDotPositions()
-      },
+  data() {
+    return {
+      activeIdx: 0,
+      position: 0,
+      isClicked: false,
+      space: 0
     }
   },
   mounted() {
     // this.calculateDotPositions()
+    if (this.contentDisplay === "desktop") {
+      this.space = this.$refs.dot_2[0].offsetLeft - this.$refs.dot_1[0].offsetWidth
+    } else {
+      this.space = this.$refs.dot_2[0].offsetLeft
+    }
   },
   methods: {
-    changeHandler(event) {
-      this.$emit("input", parseInt(event.target.value))
+    mouseDownHandler($event) {
+      this.isClicked = true
+      if (this.contentDisplay === "desktop") {
+        this.position = $event.clientX
+      } else {
+        this.position = $event.targetTouches ? $event.targetTouches[0].clientX : this.position
+      }
+      // this.position = $event.clientX
     },
-    calculateDotPositions() {
-      const percent = this.value / this.max * 100
-      const fullWidthWrap = this.$refs.rangeWrap.offsetWidth
-      // const fullWidth = this.$refs.rangeWrap.offsetWidth
-      const offSetRange = (percent * fullWidthWrap / 100)
-      for (let i = 0; i <= 16; i++) {
-        if (this.$refs[`dot_${i}`]) {
-          this.$refs[`dot_${i}`][0].style.width = `16px`
-          this.$refs[`dot_${i}`][0].style.height = `16px`
-          const offsetLeftDot = this.$refs[`dot_${i}`][0].offsetLeft
-          if (this.isBig(offsetLeftDot, offSetRange)) {
-            this.$refs[`dot_${i}`][0].style.width = `20px`
-            this.$refs[`dot_${i}`][0].style.height = `20px`
-          }
+    mouseMoveHandler($event) {
+      if (this.isClicked) {
+        let positionCurrent = 0
+        if (this.contentDisplay === "desktop") {
+          positionCurrent = $event.clientX
+        } else {
+          positionCurrent = $event.targetTouches ? $event.targetTouches[0].clientX : this.position
+        }
+        const isLeft = positionCurrent - this.position
 
+        if (isLeft > this.space && this.activeIdx < 11) {
+          this.activeIdx++;
+          this.position = positionCurrent
+        } else if (isLeft <= -this.space && this.activeIdx > 0) {
+          this.activeIdx--;
+          this.position = positionCurrent
         }
       }
     },
-    isBig(offsetDot, offSetRange) {
-      const fullWidth = offsetDot+16
-      if(offSetRange >offsetDot && fullWidth<offSetRange){
-        console.log(offSetRange,offsetDot,fullWidth)
-        return true
-      }
-    }
+    mouseUpHandler($event) {
+      console.log('mouseup')
+      this.isClicked = false
+    },
+    changeHandler(event) {
+      this.$emit("input", parseInt(event.target.value))
+    },
   },
 
 }
@@ -68,26 +93,6 @@ export default {
     position: relative;
   }
 
-  &__range {
-    position: absolute;
-    left: 32px;
-    right: 32px;
-    top: 50%;
-    transform: translateY(-50%);
-    -webkit-appearance: none;
-    appearance: none;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    margin: 0;
-    //border-top: 2px solid black;
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 32px;
-      width: 32px;
-      @extend .range__dot-bg;
-    }
-  }
 
   &__dot-bg {
     border-radius: 50%;
@@ -98,36 +103,29 @@ export default {
 
   &__dot {
     background: linear-gradient(269.47deg, #FF8D65 0%, #FFDF11 100%);
-    width: 16px;
-    height: 16px;
+    width: 11px;
+    height: 11px;
     border-radius: 100%;
-    //&::before {
-    //  @extend .range__dot-bg;
-    //  position: absolute;
-    //  transform: translateY(-50%);
-    //  top: 50%;
-    //  width:22px;
-    //  height: 22px;
-    //}
-    &-left, &-right {
-      content: "";
-      width: 22px;
-      height: 22px;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-
-      //&::before {
-      //  left: -28px;
-      //}
+    transition: 0.3s;
+    @media screen and (min-width: 700px) {
+      width: 14px;
+      height: 14px;
     }
 
-    &-left {
-      background: black;
+    &.purple {
+      background: linear-gradient(270deg, #512EA8 0%, #92518F 95.59%);
     }
 
-    &-right {
-      left: 57%;
+    &.active {
+      transform: scale(1.9);
+    }
+
+    &.activeFirstDecor {
+      transform: scale(1.3);
+    }
+
+    &.activeSecondDecor {
+      transform: scale(1.64);
     }
   }
 }
