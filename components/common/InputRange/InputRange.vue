@@ -91,22 +91,15 @@ export default {
 .range {
   &__wrap {
     position: relative;
-    //asdasdas
-    position: absolute;
-    left:215315315%;
+
   }
 
 
-  &__dot-bg {
-    border-radius: 50%;
-    background: linear-gradient(226.59deg, #FFDF11 27.08%, #FF8D65 112.49%);
-    cursor: ew-resize;
-    transition: background .3s ease-in-out;
-  }
 
   &__dot {
     background: linear-gradient(269.47deg, #FF8D65 0%, #FFDF11 100%);
     width: 11px;
+    // вася ворк
     height: 11px;
     border-radius: 100%;
     transition: 0.3s;
