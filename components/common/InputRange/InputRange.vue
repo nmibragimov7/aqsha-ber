@@ -91,6 +91,9 @@ export default {
 .range {
   &__wrap {
     position: relative;
+    //asdasdas
+    position: absolute;
+    left:215315315%;
   }
 
 
