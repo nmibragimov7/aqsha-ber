@@ -1,13 +1,13 @@
 <template>
-  <div :class="['input__wrap', `${wrapClasses}`]">
+  <div :class="['input__wrap']" :style='{width: width + "%"}'>
     <label>
       <span v-if='label' class='input__label'>{{ label }}</span>
       <input
         v-mask='mask'
         :type='visibility'
         :placeholder='placeholder'
-        :style='{color}'
-        :class="['input', `${classes}`]"
+        :style='{color, backgroundColor: bg}'
+        :class="['input', `${classes}`, {'input__promo': isPromo, 'input__footer': isFooter, 'input__password': isPassword}]"
         :value='value'
         :readonly='readonly'
         @input="$emit('input', $event.target.value)"
@@ -17,7 +17,7 @@
            :src='require(`@/assets/images/${icon}.svg`)' />
       <img v-if='type === "password"'
            draggable="false"
-           class='input__password'
+           class='input__password--icon'
            :class='[{ "input__password--hidden": visibility === "password" }]'
            :src='visibility !== "password" ? require(`@/assets/images/shown.svg`) : require(`@/assets/images/hidden.svg`)'
            @mousedown='passwordHandler("text")'
@@ -36,6 +36,10 @@ export default {
     value: {
       type: String,
       default: null
+    },
+    width: {
+      type: Number,
+      default: 100
     },
     type: {
       type: String,
@@ -61,9 +65,9 @@ export default {
       type: String,
       default: '#000'
     },
-    wrapClasses: {
+    bg: {
       type: String,
-      default: ''
+      default: ""
     },
     icon: {
       type: String,
@@ -73,6 +77,18 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    isPromo: {
+      type: Boolean,
+      default: false
+    },
+    isFooter: {
+      type: Boolean,
+      default: false
+    },
+    isPassword: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -91,44 +107,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.username__input {
-  color: #322443 !important;
-
-  &::placeholder {
-    color: #A59FAC !important;
-  }
-}
-
-.header__input {
-  background: inherit !important;
-  border: 2px solid #FFF !important;
-  padding-left: 80px !important;
-  color: #FFF !important;
-
-  &::placeholder {
-    color: #FFF !important;
-  }
-}
-.footer__input {
-  border: 0 !important;
-  border-radius: 0px !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4) !important;
-  background: transparent !important;
-  text-align: center;
-
-  &:focus {
-    border-bottom: 2px solid rgb(255, 255, 255) !important;
-
-    &::placeholder {
-      color: rgb(255, 255, 255) !important;
-    }
-  }
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
-  }
-}
-
 .input {
   background: #FFFFFF;
   border: 1px solid rgba(162, 162, 201, 0.47);;
@@ -169,21 +147,49 @@ export default {
   }
 
   &__password {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    color: #afafc0;
+    font-size: 26px;
+    padding: 12px 60px 12px 15px;
 
-    &--hidden {
-      transform: translateY(0);
+    &--icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &--hidden {
+        transform: translateY(0);
+      }
     }
   }
-}
-.change__password{
-  &__input{
-    color: #afafc0 !important;
-    font-size: 26px !important;
-    padding: 12px 60px 12px 15px;
+
+  &__promo {
+    border: 2px solid #FFF;
+    padding-left: 80px;
+
+    &::placeholder {
+      color: #FFF;
+    }
+  }
+
+  &__footer {
+    border: 0;
+    border-radius: 0px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    text-align: center;
+
+    &:focus {
+      border-bottom: 2px solid rgb(255, 255, 255);
+
+      &::placeholder {
+        color: rgb(255, 255, 255);
+      }
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
   }
 }
 </style>

@@ -55,6 +55,8 @@ export default {
     padding: 20px 40px;
     font-weight: 700;
     height: 80px;
+    line-height: 150%;
+
     @media (min-width: 900px) {
       padding: 35px 70px;
     }

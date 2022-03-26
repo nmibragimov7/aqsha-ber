@@ -6,7 +6,6 @@
         <BaseInput v-model='form.username'
                    placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
                    mask='+7 (# # #) # # # - # # - # #'
-                   classes='username'
                    class='mb-3' />
         <BaseButton classes='modal-signIn__button'
                     @click='sendCodeHandler'>ВХОД

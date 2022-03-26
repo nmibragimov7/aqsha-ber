@@ -1,13 +1,13 @@
 <template>
   <div :style='{width: width + "%"}'>
-    <button v-if="!icon" :class="['button', classes,{normal,uppercase}]"
-            :style="{color:color,backgroundColor:bg}"
+    <button v-if="!icon" :class="['button', classes, {normal, uppercase}]"
+            :style="{color: color, backgroundColor: bg}"
             :disabled='disabled || isLoading'
             v-on="$listeners">
       <slot></slot>
     </button>
-    <button v-if="icon" :class="['button button__icon-wrap', classes,{normal,uppercase}]"
-            :style="{color:color,backgroundColor:bg}"
+    <button v-if="icon" :class="['button button__icon-wrap', classes, {normal, uppercase}]"
+            :style="{color: color, backgroundColor: bg}"
             :disabled='disabled || isLoading'
             v-on="$listeners">
       <span class="button__icon-wrap-width">

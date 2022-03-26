@@ -14,6 +14,9 @@
             <BaseInput
               v-model='valueInput'
               placeholder='Введите ИИН'
+              bg='transparent'
+              color='#FFF'
+              isPromo
               icon='document'
               classes='header' />
           </div>
@@ -63,7 +66,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .promo {
   color: #FFF;
   width: 100%;

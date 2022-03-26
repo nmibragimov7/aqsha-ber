@@ -8,20 +8,19 @@
           <BaseInput v-model='name'
                      placeholder='Имя'
                      class='mb-3'
-
                      color="#fff"
-                     classes='footer'/>
+                     isFooter />
           <BaseInput v-model='phone'
                      placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
                      mask="+7 (###) ###-##-##"
                      color="#fff"
                      class='mb-3'
-                     classes='footer'/>
+                     isFooter />
           <BaseInput v-model='anything'
                      color="#fff"
                      placeholder='Что-то еще?'
                      class='mb-5'
-                     classes='footer'/>
+                     isFooter />
           <BaseButton classes='footer__form--button'>Оставить заявку</BaseButton>
         </div>
         <div class='footer__block'>
