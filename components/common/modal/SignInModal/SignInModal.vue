@@ -15,7 +15,7 @@
       <template v-if='isSendCode'>
         <SendCode name='signIn'
                   :code='form.code'
-                  btnText='подтвердить'
+                  btn-text='подтвердить'
                   @sendCode='sendCode'
                   @inputHandler='inputHandler' />
       </template>

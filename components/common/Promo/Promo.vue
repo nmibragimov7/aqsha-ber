@@ -16,12 +16,12 @@
               placeholder='Введите ИИН'
               bg='transparent'
               color='#FFF'
-              isPromo
+              is-promo
               icon='document'
               classes='header' />
           </div>
           <div class='mb-3'>
-            <BaseButton @click='getHandler' classes='promo__button'>
+            <BaseButton classes='promo__button' @click='getHandler'>
               {{ isAuth ? 'ПОЛУЧИТЬ ДЕНЬГИ' : 'Рассчитать сумму кредита!' }}
             </BaseButton>
           </div>

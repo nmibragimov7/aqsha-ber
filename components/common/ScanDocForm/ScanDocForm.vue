@@ -12,7 +12,7 @@
         <p class='m-0'>{{ block.text }}</p>
       </div>
     </div>
-    <BaseButton :icon="icon" @click="openCamera" classes="mb-2">{{ text }}</BaseButton>
+    <BaseButton :icon="icon" classes="mb-2" @click="openCamera">{{ text }}</BaseButton>
     <BasePickFile name='load-document'
                   text='Загрузить'
                   @pickFile='pickFile'/>

@@ -4,33 +4,37 @@
          @click='$emit("faqHandler", index)'>
       <img src='~/assets/images/arrow.svg'
            class='accordion__img'
-           :class='[{"accordion__img--active": activeIndex === index}]'/>
+           :class='[{"accordion__img--active": activeIndex === index}]' alt=""/>
       <img src='~/assets/images/arrow-large.svg'
            class='accordion__img--large'
-           :class='[{"accordion__img--active": activeIndex === index}]'/>
-      <p class='m-0'>{{question}}</p>
+           :class='[{"accordion__img--active": activeIndex === index}]' alt=""/>
+      <p class='m-0'>{{ question }}</p>
     </div>
-    <div class='accordion__answer' v-if='activeIndex === index && answer.length'>
-      <p v-for='(item, index) in answer'
-         :key='index'
-         class='m-0 mb-2'>{{item}}</p>
+    <div v-if='activeIndex === index && answer.length' class='accordion__answer'>
+      <p v-for='(item, idx) in answer'
+         :key='idx'
+         class='m-0 mb-2'>{{ item }}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Accordion',
+  name: "Accordion",
   props: {
     question: {
       type: String,
       default: ""
     },
     answer: {
-      type: Array
+      type: Array,
+      default() {
+        return []
+      }
     },
     activeIndex: {
-      default: null
+      default: null,
+      type:[String,Number]
     },
     index: {
       type: Number,

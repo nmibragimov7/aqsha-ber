@@ -41,12 +41,12 @@
         <BaseInput v-model='password'
                    class='mb-3'
                    type='password'
-                   isPassword
+                   is-paassword
                    :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
         <BaseInput v-if="isPassExist" v-model='newPassword'
                    class='mb-3'
                    type='password'
-                   isPassword
+                   is-password
                    placeholder='Новый пароль' />
         <div class='d-flex justify-content-between mb-3'>
           <div v-for='num in 4' :key='num' :class="{'mr-2':num <4}">

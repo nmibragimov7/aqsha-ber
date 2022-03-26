@@ -2,9 +2,9 @@
   <div class="wrap" :class="{open:isOpen}">
     <div class="wrap__video-wrap">
       <video ref="videoRef" class="wrap__video"></video>
-      <p class="text-center" v-if="isLoading">Грузится</p>
+      <p v-if="isLoading" class="text-center">Грузится</p>
       <div class="wrap__footer">
-        <BaseButton @click="snapShot" bg="#3A2784" color="#fff" classes="mb-3">Сделать фото</BaseButton>
+        <BaseButton bg="#3A2784" color="#fff" classes="mb-3" @click="snapShot">Сделать фото</BaseButton>
         <BaseButton bg="rgba(162, 162, 201, 0.06);" @click="closeCamera">Отмена</BaseButton>
       </div>
     </div>
@@ -45,7 +45,6 @@ export default {
             }
             this.$refs.videoRef.play()
           } catch (e) {
-            console.log(e)
             this.closeCamera({message: "Закрыли доступ к камере"})
           }
         } else {

@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     passwordHandler(type) {
-      console.log('kek')
       this.visibility = type
       // this.visibility === 'text' ? this.visibility = 'password' : this.visibility = 'text'
     }
