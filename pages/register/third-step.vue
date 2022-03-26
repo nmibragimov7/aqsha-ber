@@ -12,7 +12,7 @@
                :class='[{"steps__dot--active": num === 3}]'></div>
         </div>
         <ScanDocForm v-if='!isLoadedFile'
-                     classes='page__button--scan mb-2'
+                     icon="scan_icon.png"
                      text='Сканировать'
                      @pickFile='pickFile'/>
         <PickDocResult v-else

@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logoSmall/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 6 из 6</p>
@@ -11,43 +11,42 @@
                class='steps__dot'
                :class='[{"steps__dot--active": num === 6}]'></div>
         </div>
-        <div class='page__form d-flex flex-column align-items-end'>
-          <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
+        <div class='page__form d-flex flex-column mt-4'>
           <div class='mb-3'>
-            <BaseInput v-model='form.placeOfWork' label='Место работы (название)' />
+            <BaseInput v-model='form.placeOfWork' label='Место работы (название)'/>
           </div>
           <div class='mb-3'>
-            <BaseInput v-model='form.position' label='Должность' />
+            <BaseInput v-model='form.position' label='Должность'/>
           </div>
-          <div class='row mb-3'>
+          <div class="row justify-content-between ">
             <div class='col-6'>
-              <BaseInput v-model='form.income' classes='mb-3' label='Ежемес. доходы' />
+              <BaseInput v-model='form.income' label='Ежемес. доходы'/>
             </div>
-            <div class='col-6 mb-2'>
-              <BaseInput v-model='form.expenses' label='Ежемес. расходы' />
+            <div class='col-6'>
+              <BaseInput v-model='form.expenses' label='Ежемес. расходы'/>
             </div>
           </div>
-          <BaseButton classes='page__form--button'>подтвердить</BaseButton>
         </div>
+        <BaseButton uppercase classes='page__form--button mt-3'>подтвердить</BaseButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '../../components/layout/Header/Header'
-import BaseInput from '../../components/base/BaseInput/BaseInput'
-import BaseButton from '../../components/base/BaseButton/BaseButton'
+import Header from "../../components/layout/Header/Header"
+import BaseInput from "../../components/base/BaseInput/BaseInput"
+import BaseButton from "../../components/base/BaseButton/BaseButton"
 
 export default {
-  components: { BaseButton, BaseInput, Header },
+  components: {BaseButton, BaseInput, Header},
   data() {
     return {
       form: {
-        placeOfWork: '',
-        position: '',
-        income: '',
-        expenses: ''
+        placeOfWork: "",
+        position: "",
+        income: "",
+        expenses: ""
       }
     }
   }

@@ -13,7 +13,7 @@
                :class='[{"steps__dot--active": num === 2}]'></div>
         </div>
         <ScanDocForm v-if='!isLoadedFile'
-                     classes='page__button--scan mb-2'
+                     icon="scan_icon.png"
                      text='Сканировать'
                      @pickFile='pickFile'/>
         <PickDocResult v-else
@@ -29,7 +29,6 @@
 import Header from '../../components/layout/Header/Header'
 import ScanDocForm from '../../components/common/ScanDocForm/ScanDocForm'
 import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
-
 export default {
   components: { PickDocResult, ScanDocForm,  Header },
   data() {

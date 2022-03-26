@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logoSmall/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p v-if='!isAuth' class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
@@ -11,23 +11,23 @@
                class='steps__dot'
                :class='[{"steps__dot--active": num === 4}]'></div>
         </div>
-        <div v-if='!isLoadedFile' class='page__form'>
-          <div class='row mb-5'>
-            <div class='col-3'>
-              <div class='page__avatar'></div>
-            </div>
-            <div class='col-9'>
-              <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и
-                попадает в рамку.</p>
-            </div>
-          </div>
-          <BaseButton classes='page__button--camera mb-2'
-                      @click='stepHandler'>Открыть камеру</BaseButton>
-          <BasePickFile name='load-document'
-                        icon='load-icon'
-                        text='Загрузить'
-                        @pickFile='pickFile' />
-        </div>
+        <!--        <div v-if='!isLoadedFile' class='page__form'>-->
+        <!--          <div class='row mb-5'>-->
+        <!--            <div class='col-3'>-->
+        <!--              <div class='page__avatar'></div>-->
+        <!--            </div>-->
+        <!--            <div class='col-9'>-->
+        <!--              <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и-->
+        <!--                попадает в рамку.</p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <ScanDocForm v-if='!isLoadedFile'
+                     classes='page__button--scan mb-2'
+                     :blocks="blocks"
+                     icon="self-icon"
+                     text='Открыть камеру'
+                     @pickFile='pickFile'/>
         <PickDocResult v-else
                        :file='file'
                        :isAuth='isAuth'
@@ -39,26 +39,30 @@
 </template>
 
 <script>
-import BaseButton from '../../components/base/BaseButton/BaseButton'
-import Header from '../../components/layout/Header/Header'
-import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
+import Header from "../../components/layout/Header/Header"
+import PickDocResult from "../../components/common/PickDocResult/PickDocResult"
+import ScanDocForm from "@/components/common/ScanDocForm/ScanDocForm";
 
 export default {
-  components: { PickDocResult, Header, BaseButton },
+  components: {PickDocResult, Header, ScanDocForm},
   data() {
     return {
       isLoadedFile: false,
-      file: null
+      file: null,
+      blocks:[{
+        img: "selfi_get",
+        text: "Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку."
+      }]
     }
   },
   computed: {
     isAuth() {
-      return this.$store.getters['auth/isAuth']
+      return this.$store.getters["auth/isAuth"]
     }
   },
   methods: {
     stepHandler() {
-      this.$router.replace('/register/fifth-step')
+      this.$router.replace("/register/fifth-step")
     },
     pickFile(file) {
       this.file = file

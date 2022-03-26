@@ -7,7 +7,7 @@
         :type='visibility'
         :placeholder='placeholder'
         :style='{color}'
-        :class="['input', `${classes}__input`]"
+        :class="['input', `${classes}`]"
         :value='value'
         :readonly='readonly'
         @input="$emit('input', $event.target.value)"
@@ -137,8 +137,8 @@ export default {
   outline: none;
   font-style: normal;
   font-weight: normal;
-  font-size: 22px;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: 17px;
+  color: #322443;
   width: 100%;
 
   &::placeholder {

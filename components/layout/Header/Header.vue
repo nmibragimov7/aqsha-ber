@@ -5,11 +5,17 @@
       <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
         <img src='~/assets/images/logo.svg' alt='Logo'/>
       </NuxtLink>
-      <div class='header__bars'
-           @click='barsHandler'></div>
+      <div class="header__bars__wrap" @click="barsHandler">
+        <div class="header__bars"/>
+        <div class="header__bars"/>
+        <div class="header__bars"/>
+      </div>
       <div class='header__pop-up-menu' :class='[{"header__pop-up-menu--active": isOpen}]'>
-        <div class='header__bars header__bars--active'
-             @click='barsHandler'></div>
+        <div class="header__bars__wrap active" @click="barsHandler">
+          <div class="header__bars"/>
+          <div class="header__bars"/>
+          <div class="header__bars"/>
+        </div>
         <div class='container'>
           <div class="px-3">
             <div class="d-flex justify-content-end mb-4">
@@ -89,6 +95,7 @@ export default {
 
   &__container {
     position: relative;
+    z-index: 100;
     justify-content: center;
   }
 
@@ -148,51 +155,32 @@ export default {
   }
 
   &__bars {
-    cursor: pointer;
-    position: absolute;
-    left: 21px;
-    top: 10px;
-    width: 38px;
-    border: none;
+    &__wrap{
+      cursor: pointer;
+      position: absolute;
+      left: 21px;
+      top: 10px;
+      width: 38px;
+      height: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      &.active{
+        transform: rotate(90deg);
+        top: 40px;
+        left: 28px;
+        &> .header__bars{
+          background-color: #322443;
+        }
+      }
+
+    }
+
     height: 5px;
     background-color: #FFF;
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
 
-    &--active {
-      top: 40px;
-      left: 28px;
-      background-color: #322443;
-      transform: rotate(90deg);
-
-      &::before,
-      &::after {
-        background-color: #322443 !important;
-      }
-    }
-
-    &::before,
-    &::after {
-      width: 38px;
-      height: 5px;
-      background-color: #FFF;
-      -webkit-transition: 0.2s ease-in-out;
-      transition: 0.2s ease-in-out;
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      will-change: transform;
-    }
-
-    &::before {
-      -webkit-transform: translateY(-10px);
-    }
-
-    &:after {
-      transform: translateY(10px);
-    }
   }
 
   &__item {

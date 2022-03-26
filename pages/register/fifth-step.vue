@@ -28,26 +28,24 @@
             <span>Иванович</span>
           </div>
         </div>
-        <div class='page__form d-flex flex-column align-items-end'>
+        <div class='page__form d-flex flex-column'>
           <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
-          <div class='mb-1'>
-            <BaseInput v-model='form.city' placeholder='Город' />
+          <div class='mb-3'>
+            <BaseInput v-model='form.city' classes="text-center" placeholder='Город' />
           </div>
-          <div class='mb-1'>
-            <BaseInput v-model='form.street' placeholder='Улица' />
+          <div class='mb-3'>
+            <BaseInput v-model='form.street' classes="text-center" placeholder='Улица' />
           </div>
-          <div class='row mb-3'>
+          <div class="row mb-3 justify-content-between">
             <div class='col-6'>
-              <BaseInput v-model='form.home' placeholder='Дом' />
+              <BaseInput v-model='form.home' classes="text-center" placeholder='Дом' />
             </div>
-            <div class='col-6 mb-2'>
-              <BaseInput v-model='form.apartment' placeholder='Квартира' />
-            </div>
-            <div class='col-6 ml-auto'>
-              <p class='page__form--desc m-0'>- Если нет номера квартиры, поставьте прочерк</p>
+            <div class='col-6'>
+              <BaseInput v-model='form.apartment' classes="text-center" placeholder='Квартира' />
+              <p class='page__form--desc text-center mt-2'>- Если нет номера квартиры, поставьте прочерк</p>
             </div>
           </div>
-          <BaseButton classes='page__form--button' @click='stepHandler'>подтвердить</BaseButton>
+          <BaseButton uppercase classes='page__form--button' @click='stepHandler'>подтвердить</BaseButton>
         </div>
       </div>
     </div>

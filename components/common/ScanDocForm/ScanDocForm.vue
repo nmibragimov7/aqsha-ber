@@ -1,58 +1,91 @@
 <template>
   <div class='page__form'>
-    <div class='row mb-3'
-         v-for='(block, index) in blocks'
-         :key='index'>
+    <div v-for='(block, index) in blocks'
+         :key='index'
+         class='row mb-3 d-flex align-items-center'>
       <div class='col-4'>
-        <img :src='"~/assets/images/" + block.img + ".svg"' alt='Scan' />
+        <div>
+          <img class="w-100" :src='"~/assets/images/" + block.img + ".svg"' alt='Scan'/>
+        </div>
       </div>
       <div class='col-8'>
         <p class='m-0'>{{ block.text }}</p>
       </div>
     </div>
-    <BaseButton :classes='classes'>{{text}}</BaseButton>
+    <BaseButton :icon="icon" @click="openCamera" classes="mb-2">{{ text }}</BaseButton>
     <BasePickFile name='load-document'
-                  icon='load-icon'
                   text='Загрузить'
-                  @pickFile='pickFile' />
+                  @pickFile='pickFile'/>
+    <CapturePhoto :is-open="cameraIsOpen" @close="closeCamera"/>
+    <input ref="fileInput"
+           type="file"
+           style="display: none"
+           accept="image/*"
+           capture="environment"
+           @change="fileInputHandler">
   </div>
 </template>
 
 <script>
-import BaseButton from '../../base/BaseButton/BaseButton'
-import BasePickFile from '../../base/BasePickFile/BasePickFile'
+import BaseButton from "../../base/BaseButton/BaseButton"
+import BasePickFile from "../../base/BasePickFile/BasePickFile"
+import CapturePhoto from "@/components/common/CapturePhoto/CapturePhoto.vue";
 
 export default {
-  name: 'ScanDocForm',
+  name: "ScanDocForm",
+  components: {BasePickFile, BaseButton, CapturePhoto},
+  mixins: ["watchWindow"],
   props: {
-    classes: {
-      type: String,
-      default: ''
-    },
     text: {
       type: String,
-      default: ''
+      default: ""
+    },
+    icon: {
+      type: String,
+      default: ""
+    },
+    blocks: {
+      type: Array,
+      default() {
+        return [
+          {
+            img: "scan",
+            text: "Отсканируйте обе стороны удостоверения: сначала лицевую, затем оборотную."
+          },
+          {
+            img: "photo",
+            text: "Наведите камеру на удостоверение. Расположите документ так, чтобы он попадал в рамку и убедитесь, что весь текст считывается."
+          }
+        ]
+      }
     }
   },
-  components: { BasePickFile, BaseButton },
   data() {
     return {
-      blocks: [
-        {
-          img: 'scan',
-          text: 'Отсканируйте обе стороны удостоверения: сначала лицевую, затем оборотную.'
-        },
-        {
-          img: 'photo',
-          text: 'Наведите камеру на удостоверение. Расположите документ так, чтобы он попадал в рамку и убедитесь, что весь текст считывается.'
-        }
-      ],
-      step: 1
+      step: 1,
+      cameraIsOpen: false
     }
   },
   methods: {
     pickFile(file) {
-      this.$emit('pickFile', file)
+      this.$emit("pickFile", file)
+    },
+    openCamera() {
+      if (this.contentDisplay === "mobile") {
+        this.$refs.fileInput.click()
+      } else {
+        this.cameraIsOpen = true
+      }
+    },
+    fileInputHandler(event) {
+      if (event.target.files.length) {
+        this.$emit("pickFile", event.target.files[0])
+      } else {
+        this.$emit("pickFile", null)
+      }
+    },
+    closeCamera() {
+      this.cameraIsOpen = false
     }
   }
 }
@@ -60,30 +93,11 @@ export default {
 
 <style lang='scss'>
 .page {
-
   &__form {
     padding: 50px 40px;
     background: #FFFFFF;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
-  }
-
-  &__button {
-
-    &--scan,
-    &--load {
-      border: 1px solid rgba(162, 162, 201, 0.47) !important;
-      border-radius: 24.5px !important;
-      text-transform: capitalize !important;
-    }
-
-    &--scan {
-      padding: 16px !important;
-      text-transform: capitalize !important;
-      box-shadow: none !important;
-      font-size: 14px !important;
-      background: url("assets/images/scan-icon.png") no-repeat 20% 50%, rgba(162, 162, 201, 0.06) !important;
-    }
   }
 }
 </style>
