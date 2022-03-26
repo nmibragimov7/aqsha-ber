@@ -50,13 +50,21 @@ export default ({$axios}, inject) => {
   const requests = {
     login: axiosModified.post("/Auth"),
     register:axiosModified.post("/RegisterClient"),
-    smsConfirm:axiosModified.post("/ConfirmRegisterCode"),
-    registrationConfirm:axiosModified.post("/CompleteRegistration")
+    confirmRegisterCode:axiosModified.post("/ConfirmRegisterCode"),
+    registrationComplete:axiosModified.post("/CompleteRegistration"),
+    uploadFrontSide:axiosModified.post("/UploadFrontSide"),
+    uploadSelfie:axiosModified.post("/UploadSelfie"),
+    uploadAdditionalData:axiosModified.post("/UploadAdditionalData"),
+    getClientRateAnonymous:axiosModified.post("/GetClientRateAnonymous"),
+    getClientRate:axiosModified.get("/GetClientRate"),
+    addVerificationRequest:axiosModified.post("/AddVerificationRequest"),
+    generateSignCode:axiosModified.post("/GenerateSignCode"),
+    getVerificationRequestStatus:axiosModified.get("/GetVerificationRrequestStatus"),
+    confirmContractCode:axiosModified.post("/ConfirmContractCode"),
+    processingMoney:axiosModified.post("/ProcessingMoney"),
+    getClientFIO:axiosModified.post("/GetClientFIO")
+
   }
-  // this.$requests.login({ example for request
-  //   body: {
-  //     iin: '00302050060'
-  //   }
-  // })
+
   inject("requests", requests)
 }
