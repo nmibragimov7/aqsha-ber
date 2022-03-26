@@ -27,9 +27,12 @@
             </div>
           </div>
         </div>
-        <BaseButton uppercase classes='page__form--button mt-3'>подтвердить</BaseButton>
+        <BaseButton uppercase
+                    @click='confirm'
+                    classes='page__form--button mt-3'>подтвердить</BaseButton>
       </div>
     </div>
+    <ProcessedModal/>
   </div>
 </template>
 
@@ -37,9 +40,10 @@
 import Header from "../../components/layout/Header/Header"
 import BaseInput from "../../components/base/BaseInput/BaseInput"
 import BaseButton from "../../components/base/BaseButton/BaseButton"
+import ProcessedModal from '../../components/common/modal/ProcessedModal/ProcessedModal'
 
 export default {
-  components: {BaseButton, BaseInput, Header},
+  components: { ProcessedModal, BaseButton, BaseInput, Header},
   data() {
     return {
       form: {
@@ -48,6 +52,15 @@ export default {
         income: "",
         expenses: ""
       }
+    }
+  },
+  methods: {
+    confirm() {
+      this.$modal.show('processed')
+      setTimeout(() => {
+        this.$modal.hide('processed')
+        this.$router.push('/approved')
+      }, 5000)
     }
   }
 }

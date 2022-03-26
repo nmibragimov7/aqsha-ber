@@ -14,6 +14,7 @@
             <BaseInput
               v-model='valueInput'
               placeholder='Введите ИИН'
+              mask='#### #### #### ####'
               bg='transparent'
               color='#FFF'
               is-promo

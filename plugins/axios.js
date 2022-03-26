@@ -63,7 +63,6 @@ export default ({$axios}, inject) => {
     confirmContractCode:axiosModified.post("/ConfirmContractCode"),
     processingMoney:axiosModified.post("/ProcessingMoney"),
     getClientFIO:axiosModified.post("/GetClientFIO")
-
   }
 
   inject("requests", requests)

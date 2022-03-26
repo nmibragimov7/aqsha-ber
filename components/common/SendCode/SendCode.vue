@@ -11,7 +11,7 @@
           <div v-for='idx of codeLength' :key='idx'>
             <input
               :ref='`input_${idx}`'
-              type='text'
+              type='number'
               @keydown='onKeyDown($event, idx)'
               class='code__input'
               @input='inputHandler($event, idx)'>
@@ -150,6 +150,11 @@ export default {
     padding: 15px 10px;
     text-align: center;
     outline: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
 
     &--wrap {
       position: relative;

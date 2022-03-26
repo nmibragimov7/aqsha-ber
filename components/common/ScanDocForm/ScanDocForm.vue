@@ -4,8 +4,9 @@
          :key='index'
          class='row mb-3 d-flex align-items-center'>
       <div class='col-4'>
-        <div>
-          <img class="w-100" :src='"~/assets/images/" + block.img + ".svg"' alt='Scan'/>
+        <div class='d-flex justify-content-center'>
+          <img :src='"~/assets/images/" + block.img + ".svg"'
+               :alt='block.img'/>
         </div>
       </div>
       <div class='col-8'>

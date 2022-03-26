@@ -1,15 +1,15 @@
 <template>
-  <div class="range__wrap d-flex align-items-center justify-content-between"
-       :draggable="false"
+  <div class='range__wrap d-flex align-items-center justify-content-between'
+       :draggable='false'
        @touchstart="mouseDownHandler($event,'mobile')"
-       @touchmove="mouseMoveHandler"
-       @mouseleave="mouseUpHandler" @mousedown="mouseDownHandler" @mousemove="mouseMoveHandler">
-    <div v-for="(dot,idx) in 16" :key="dot" :ref="`dot_${dot}`" :draggable="false" class="range__dot" :class="{
-      'active':idx=== (activeIdx+2),
-      'activeFirstDecor':idx===activeIdx || idx === (activeIdx+4),
+       @touchmove='mouseMoveHandler'
+       @mouseleave='mouseUpHandler' @mousedown='mouseDownHandler' @mousemove='mouseMoveHandler'>
+    <div v-for='(dot,idx) in 16' :key='dot' :ref='`dot_${dot}`' :draggable='false' class='range__dot' :class="[{
+      'active': idx === (activeIdx+2),
+      'activeFirstDecor': idx===activeIdx || idx === (activeIdx+4),
       'activeSecondDecor': idx===(activeIdx+1) || idx === (activeIdx+3),
-      'purple':purple
-    }"/>
+      'purple': purple
+    }]" />
   </div>
 
 </template>
@@ -40,16 +40,17 @@ export default {
   },
   mounted() {
     // this.calculateDotPositions()
-    if (this.contentDisplay === "desktop") {
+    if (this.contentDisplay === 'desktop') {
       this.space = this.$refs.dot_2[0].offsetLeft - this.$refs.dot_1[0].offsetWidth
     } else {
       this.space = this.$refs.dot_2[0].offsetLeft
     }
+    this.changeHandler()
   },
   methods: {
     mouseDownHandler($event) {
       this.isClicked = true
-      if (this.contentDisplay === "desktop") {
+      if (this.contentDisplay === 'desktop') {
         this.position = $event.clientX
       } else {
         this.position = $event.targetTouches ? $event.targetTouches[0].clientX : this.position
@@ -59,7 +60,7 @@ export default {
     mouseMoveHandler($event) {
       if (this.isClicked) {
         let positionCurrent = 0
-        if (this.contentDisplay === "desktop") {
+        if (this.contentDisplay === 'desktop') {
           positionCurrent = $event.clientX
         } else {
           positionCurrent = $event.targetTouches ? $event.targetTouches[0].clientX : this.position
@@ -67,33 +68,33 @@ export default {
         const isLeft = positionCurrent - this.position
 
         if (isLeft > this.space && this.activeIdx < 11) {
-          this.activeIdx++;
+          this.activeIdx++
           this.position = positionCurrent
         } else if (isLeft <= -this.space && this.activeIdx > 0) {
-          this.activeIdx--;
+          this.activeIdx--
           this.position = positionCurrent
         }
+
+        this.changeHandler()
       }
     },
     mouseUpHandler($event) {
-      console.log('mouseup')
       this.isClicked = false
     },
-    changeHandler(event) {
-      this.$emit("input", parseInt(event.target.value))
-    },
-  },
+    changeHandler() {
+      this.$emit('input', Math.round(this.max / 11 * this.activeIdx))
+    }
+  }
 
 }
 </script>
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 
 .range {
   &__wrap {
     position: relative;
 
   }
-
 
 
   &__dot {
