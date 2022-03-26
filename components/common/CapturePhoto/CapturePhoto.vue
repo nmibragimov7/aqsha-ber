@@ -1,20 +1,33 @@
 <template>
   <div class="wrap" :class="{open:isOpen}">
-    <div class="wrap__purple"/>
     <div class="wrap__video-wrap">
-      <video ref="videoRefBg" width="100%" height="100%"></video>
-      <video ref="videoRef" width="100%" style="display: none" height="100%"></video>
+      <video ref="videoRef" class="wrap__video"></video>
+      <p class="text-center" v-if="isLoading">Грузится</p>
+      <div class="wrap__footer">
+        <BaseButton @click="snapShot" bg="#3A2784" color="#fff" classes="mb-3">Сделать фото</BaseButton>
+        <BaseButton bg="rgba(162, 162, 201, 0.06);" @click="closeCamera">Отмена</BaseButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import BaseButton from "@/components/base/BaseButton/BaseButton";
+
 export default {
   name: "CapturePhoto",
+  components: {
+    BaseButton
+  },
   props: {
     isOpen: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      isLoading: true
     }
   },
   watch: {
@@ -24,24 +37,41 @@ export default {
           try {
             const stream = await navigator.mediaDevices.getUserMedia({
               audio: false,
-              video: {
-                width:"300px",
-                height:'1000px'
-              }
+              video: true
             })
-            this.$refs.videoRefBg.srcObject = stream
             this.$refs.videoRef.srcObject = stream
-            this.$refs.videoRefBg.play()
+            this.$refs.videoRef.oncanplay = () => {
+              this.isLoading = false
+            }
             this.$refs.videoRef.play()
           } catch (e) {
             console.log(e)
-            this.$emit("close", "Закрыли доступ к камере")
+            this.closeCamera({message: "Закрыли доступ к камере"})
           }
         } else {
-          this.$refs.videoRef.pause();
-          this.$emit("close", "Отмена")
+          this.closeCamera()
         }
       },
+    }
+  },
+  methods: {
+    snapShot() {
+      const canvas = document.createElement("canvas")
+      const ctx = canvas.getContext("2d")
+      // const ratio = this.$refs.videoRef.offsetWidth/this.$refs.videoRef.offsetHeight;
+      // const w = this.$refs.videoRef.offsetWidth-100;
+      // const h = parseInt(w/ratio,10);
+      canvas.width = this.$refs.videoRef.offsetWidth
+      canvas.height = this.$refs.videoRef.offsetHeight
+      ctx.drawImage(this.$refs.videoRef, 0, 0, this.$refs.videoRef.offsetWidth, this.$refs.videoRef.offsetHeight)
+      const base64 = canvas.toDataURL("image/png");
+      this.closeCamera({
+        file: base64
+      })
+    },
+    closeCamera(data = {message: "Отмена"}) {
+      this.$refs.videoRef.pause();
+      this.$emit("close", data)
     }
   }
 }
@@ -54,9 +84,11 @@ export default {
   left: 0;
   top: 0;
   right: 0;
+  background: rgba(0, 0, 0, 0.35);
   bottom: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   z-index: 10;
   opacity: 0;
   visibility: hidden;
@@ -67,18 +99,18 @@ export default {
     visibility: visible;
   }
 
-  &__purple {
-    //background: rgba(117, 122, 226, 0.87);
-    background: radial-gradient(circle at center, transparent 0 50%, rgba(117, 122, 226, 0.87) 51% 100%);
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+  &__video-wrap {
+    overflow: hidden;
+    padding: 20px;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 30px;
   }
 
-  &__video-wrap {
-    flex-grow: 1;
+  &__video {
+    max-height: 450px;
+    width: 100%;
   }
 }
 </style>

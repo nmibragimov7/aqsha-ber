@@ -10,10 +10,8 @@
             :style="{color: color, backgroundColor: bg}"
             :disabled='disabled || isLoading'
             v-on="$listeners">
-      <span class="button__icon-wrap-width">
-        <span class="button__icon d-inline-flex align-items-center">
+      <span class="button__icon">
         <img class="w-100" :src='icon.includes(".") ? require(`@/assets/images/${icon}`) : require(`@/assets/images/${icon}.svg`)' :alt='icon'/>
-      </span>
       </span>
       <span class="button__text">
         <slot></slot>
@@ -94,19 +92,17 @@ export default {
     border-radius: 24px;
     display: inline-flex;
     align-items: center;
-    &-width{
-      flex-basis: 32%;
-      display: inline-flex;
-      justify-content: flex-end;
-    }
+    justify-content: center;
   }
 
   &__icon{
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     max-width: 20px;
   }
   &__text{
     text-align: left;
+    min-width: 120px;
     margin-left: 10px;
   }
 

@@ -30,6 +30,7 @@
 import BaseButton from "../../base/BaseButton/BaseButton"
 import BasePickFile from "../../base/BasePickFile/BasePickFile"
 import CapturePhoto from "@/components/common/CapturePhoto/CapturePhoto.vue";
+import {dataUrlToFile} from "@/assets/js/dataURLtoFile";
 
 export default {
   name: "ScanDocForm",
@@ -84,7 +85,10 @@ export default {
         this.$emit("pickFile", null)
       }
     },
-    closeCamera() {
+    closeCamera(data) {
+      if(data.file){
+        this.$emit("pickFile", dataUrlToFile(data.file,"udv.png"))
+      }
       this.cameraIsOpen = false
     }
   }
