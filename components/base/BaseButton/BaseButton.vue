@@ -97,7 +97,7 @@ export default {
     &-width{
       flex-basis: 32%;
       display: inline-flex;
-      justify-content: end;
+      justify-content: flex-end;
     }
   }
 
