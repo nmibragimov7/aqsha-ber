@@ -36,24 +36,22 @@
       <BaseButton bg='#3A2784' color='#fff' classes='mt-3'>
         + новый микрокредит
       </BaseButton>
-      <CreditHistory/>
+      <CreditHistory />
       <div class='profile__block p-4 mt-4'>
         <BaseInput v-model='password'
                    class='mb-3'
                    type='password'
                    is-paassword
                    :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
-        <BaseInput v-if="isPassExist" v-model='newPassword'
+        <BaseInput v-if='isPassExist' v-model='newPassword'
                    class='mb-3'
                    type='password'
                    is-password
                    placeholder='Новый пароль' />
-        <div class='d-flex justify-content-between mb-3'>
-          <div v-for='num in 4' :key='num' :class="{'mr-2':num <4}">
-            <div class='profile__level'/>
-            <span class="profile__level-hint">Ненадежный</span>
-          </div>
+        <div class='d-flex justify-content-between'>
+          <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]'/>
         </div>
+        <span class='profile__level-hint mb-3'>Ненадежный</span>
         <p class='m-0 mb-3 text-center profile__description'>
           Должен состоять минимум из 8 символов и содержать
           хотя бы одну цифру, символ и заглавную букву.
@@ -77,15 +75,15 @@ export default {
     return {
       password: null,
       newPassword: null,
-      isPassExist:false
+      isPassExist: false
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.page{
-  &__header{
+<style lang='scss' scoped>
+.page {
+  &__header {
 
   }
 }
@@ -121,20 +119,26 @@ export default {
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     height: 6px;
-    &:nth-child(1){
+    flex-grow: 1;
+
+    &:nth-child(1) {
       background: linear-gradient(90.12deg, #FF8D65 60%, #974ECD 85.86%);
     }
-    &:nth-child(2){
+
+    &:nth-child(2) {
       background: linear-gradient(90.12deg, #FF8D65 30%, #974ECD 85.86%);
     }
-    &:nth-of-type(3){
+
+    &:nth-of-type(3) {
       background: linear-gradient(90.12deg, #FF8D65 5%, #974ECD 85.86%);
     }
-    &:nth-of-type(4){
+
+    &:nth-of-type(4) {
       background: linear-gradient(90.12deg, #FF8D65 0%, #974ECD 85.86%);
     }
-    &-hint{
-      font-size:9px;
+
+    &-hint {
+      font-size: 9px;
       color: #EB5757;
     }
   }

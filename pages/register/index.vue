@@ -19,6 +19,7 @@
         <div class='page__form'>
           <p class='text-center m-0 mb-3'>Проверьте номер телефона — на него придет смс с кодом</p>
           <BaseInput v-model='form.phone'
+                     mask='+7 (# # #) # # # - # # - # #'
                      placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _' />
           <BaseButton classes='mt-3' @click='$modal.show("sendCode")'>получить смс</BaseButton>
         </div>
