@@ -27,6 +27,7 @@
 import BaseInput from '../../../base/BaseInput/BaseInput'
 import BaseButton from '../../../base/BaseButton/BaseButton'
 import SendCode from '../../SendCode/SendCode'
+import { cleanNumber } from '../../../../helpers/maskUtils'
 
 export default {
   name: 'SignInModal',
@@ -37,7 +38,8 @@ export default {
         username: '',
         code: ''
       },
-      isSendCode: false
+      isSendCode: false,
+      isLoaded: false
     }
   },
   methods: {
@@ -48,8 +50,27 @@ export default {
       this.form.code = value
     },
     sendCode() {
-      this.$store.commit('auth/setAuth', true)
-      this.$modal.hide('signIn')
+      this.$requests.login({
+        body: {
+          username: cleanNumber(this.form.username),
+          code: this.form.code
+        },
+        options: {},
+        onStart: () => {
+          this.isLoaded = true
+        },
+        onSuccess: () => {
+          console.log('kek')
+          this.$store.commit('auth/setAuth', true)
+          this.$modal.hide('signIn')
+        },
+        onError: (e) => {
+          console.log('error', e)
+        },
+        onFinally: () => {
+          this.isLoaded = false
+        }
+      })
     }
   }
 }
