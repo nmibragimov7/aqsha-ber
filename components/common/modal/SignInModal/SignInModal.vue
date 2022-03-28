@@ -60,12 +60,10 @@ export default {
           this.isLoaded = true
         },
         onSuccess: () => {
-          console.log('kek')
           this.$store.commit('auth/setAuth', true)
           this.$modal.hide('signIn')
         },
         onError: (e) => {
-          console.log('error', e)
         },
         onFinally: () => {
           this.isLoaded = false

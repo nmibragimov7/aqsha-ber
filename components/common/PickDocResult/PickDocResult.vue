@@ -1,20 +1,25 @@
 <template>
-  <div class='page__form d-flex flex-column align-items-center'>
-    <div class='page__feedback text-center mb-4'>Успешно отсканировано</div>
-    <img :src='imagePreview'
-         v-show='showPreview'
-         alt='Scan'
-         class='mb-4' />
-    <BaseButton classes='page__button--prev mb-2' @click='$emit("goBack")'>Назад</BaseButton>
-    <BaseButton classes='page__button--next'
-                @click='stepHandler'>Далее
-    </BaseButton>
+  <div class='page__form'>
+    <div class='page__form--small d-flex flex-column align-items-center'>
+      <div class='page__feedback text-center mb-4'>Успешно отсканировано</div>
+      <img :src='imagePreview'
+           v-show='showPreview'
+           alt='Scan'
+           class='mb-4' />
+      <BaseButton prev
+                  classes='mb-2'
+                  @click='$emit("goBack")'>Назад</BaseButton>
+      <BaseButton next @click='stepHandler'>Далее</BaseButton>
+    </div>
   </div>
 </template>
 
 <script>
+import BaseButton from '../../base/BaseButton/BaseButton'
+
 export default {
   name: 'PickDocResult',
+  components: { BaseButton },
   props: {
     path: {
       type: String,
@@ -58,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .page {
 
   &__form {
@@ -67,9 +72,19 @@ export default {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
 
-    & > img {
-      width: 100%;
-      height: auto;
+    @media (min-width: 900px) {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    &--small {
+      max-width: 315px;
+      margin: 0 auto;
+
+      & > img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
@@ -82,23 +97,6 @@ export default {
     border: 1px solid #81C688;
     box-sizing: border-box;
     border-radius: 24.5px;
-  }
-
-  &__button {
-
-    &--prev {
-      box-shadow: none !important;
-      border: 1px solid rgba(162, 162, 201, 0.47) !important;
-      font-size: 14px !important;
-      background: rgba(162, 162, 201, 0.06) !important;
-      padding: 15px !important;
-    }
-
-    &--next {
-      background: #3A2784 !important;
-      color: #FFF !important;
-      border-radius: 42px !important;
-    }
   }
 }
 </style>

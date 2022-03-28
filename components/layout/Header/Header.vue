@@ -3,24 +3,24 @@
     <div class='container header__container d-flex align-items-center'
          :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}]'>
       <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
-        <img src='~/assets/images/logo.svg' alt='Logo'/>
+        <img src='~/assets/images/logo.svg' alt='Logo' />
       </NuxtLink>
-      <div class="header__bars__wrap" @click="barsHandler">
-        <div class="header__bars"/>
-        <div class="header__bars"/>
-        <div class="header__bars"/>
+      <div class='header__bars__wrap' @click='barsHandler'>
+        <div class='header__bars' />
+        <div class='header__bars' />
+        <div class='header__bars' />
       </div>
       <div class='header__pop-up-menu' :class='[{"header__pop-up-menu--active": isOpen}]'>
-        <div class="header__bars__wrap active" @click="barsHandler">
-          <div class="header__bars"/>
-          <div class="header__bars"/>
-          <div class="header__bars"/>
+        <div class='header__bars__wrap active' @click='barsHandler'>
+          <div class='header__bars' />
+          <div class='header__bars' />
+          <div class='header__bars' />
         </div>
         <div class='container'>
-          <div class="px-3">
-            <div class="d-flex justify-content-end mb-4">
+          <div class='px-3'>
+            <div class='d-flex justify-content-end mb-4'>
               <NuxtLink to='/'>
-                <img class="header__pop-up-menu--logo" src='~/assets/images/logo-small.svg' alt='Logo' />
+                <img class='header__pop-up-menu--logo' src='~/assets/images/logo-small.svg' alt='Logo' />
               </NuxtLink>
             </div>
             <NuxtLink v-for='(menu, index) in menus'
@@ -30,13 +30,13 @@
               <p class='py-2 mb-3 mt-0'>{{ menu.title }}</p>
             </NuxtLink>
             <hr class='mb-4'>
-            <div class="mb-5">
+            <div class='mb-5'>
               <span class='header__pop-up-menu--link' @click='signInHandler'>Вход</span>
               <span class='header__pop-up-menu--link'>/</span>
               <nuxt-link class='header__pop-up-menu--link' to='/register'>Регистрация</nuxt-link>
             </div>
           </div>
-          </div>
+        </div>
       </div>
       <div class='header__item'>
         <div class='header__navs flex-grow-1 d-flex'>
@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <SignInModal/>
+    <SignInModal />
   </div>
 </template>
 
@@ -79,11 +79,11 @@ export default {
   },
   methods: {
     barsHandler() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
     },
     signInHandler() {
-      this.isOpen = false;
-      this.$modal.show("signIn");
+      this.isOpen = false
+      this.$modal.show('signIn')
     }
   }
 }
@@ -91,7 +91,7 @@ export default {
 
 <style lang='scss' scoped>
 .header {
-  padding: 20px 5px 5px;
+  padding: 20px 5px;
 
   &__container {
     position: relative;
@@ -148,14 +148,15 @@ export default {
     &--link {
       text-decoration: none;
       color: #322443;
-      &.nuxt-link-exact-active{
+
+      &.nuxt-link-exact-active {
         font-weight: bold;
       }
     }
   }
 
   &__bars {
-    &__wrap{
+    &__wrap {
       cursor: pointer;
       position: absolute;
       left: 21px;
@@ -165,11 +166,13 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      &.active{
+
+      &.active {
         transform: rotate(90deg);
         top: 40px;
         left: 28px;
-        &> .header__bars{
+
+        & > .header__bars {
           background-color: #322443;
         }
       }
@@ -180,7 +183,6 @@ export default {
     background-color: #FFF;
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
-
   }
 
   &__item {
@@ -190,16 +192,19 @@ export default {
   &__link {
     text-decoration: underline;
     color: #FFF;
-    font-size: 24px;
+    font-size: 18px;
   }
 
   @media (min-width: 900px) {
+
     &__container {
-      justify-content: space-between;
+      justify-content: space-between !important;
     }
+
     &__bars {
       display: none;
     }
+
     &__item {
       display: flex;
       align-items: center;

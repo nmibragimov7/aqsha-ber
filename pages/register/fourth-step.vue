@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall/>
+    <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p v-if='!isAuth' class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
@@ -11,58 +11,50 @@
                class='steps__dot'
                :class='[{"steps__dot--active": num === 4}]'></div>
         </div>
-        <!--        <div v-if='!isLoadedFile' class='page__form'>-->
-        <!--          <div class='row mb-5'>-->
-        <!--            <div class='col-3'>-->
-        <!--              <div class='page__avatar'></div>-->
-        <!--            </div>-->
-        <!--            <div class='col-9'>-->
-        <!--              <p class='m-0'>Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и-->
-        <!--                попадает в рамку.</p>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
         <ScanDocForm v-if='!isLoadedFile'
-                     classes='page__button--scan mb-2'
-                     :blocks="blocks"
-                     icon="self-icon"
+                     classes='mb-2'
+                     :blocks='blocks'
+                     icon='self-icon'
                      text='Открыть камеру'
-                     @pickFile='pickFile'/>
+                     isFourthStep
+                     @pickFile='pickFile' />
         <PickDocResult v-else
                        :file='file'
                        :isAuth='isAuth'
                        path='/register/fifth-step'
-                       @goBack='goBack'/>
+                       @goBack='goBack' />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "../../components/layout/Header/Header"
-import PickDocResult from "../../components/common/PickDocResult/PickDocResult"
-import ScanDocForm from "@/components/common/ScanDocForm/ScanDocForm";
+import Header from '../../components/layout/Header/Header'
+import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
+import ScanDocForm from '@/components/common/ScanDocForm/ScanDocForm'
 
 export default {
-  components: {PickDocResult, Header, ScanDocForm},
+  components: { PickDocResult, Header, ScanDocForm },
   data() {
     return {
       isLoadedFile: false,
       file: null,
-      blocks:[{
-        img: "selfi_get",
-        text: "Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку."
-      }]
+      blocks: [
+        {
+          img: 'selfi_get',
+          text: ['Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку.']
+        }
+      ]
     }
   },
   computed: {
     isAuth() {
-      return this.$store.getters["auth/isAuth"]
+      return this.$store.getters['auth/isAuth']
     }
   },
   methods: {
     stepHandler() {
-      this.$router.replace("/register/fifth-step")
+      this.$router.replace('/register/fifth-step')
     },
     pickFile(file) {
       this.file = file
@@ -76,14 +68,26 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .page {
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 40vh !important;
+  min-height: 40vh;
   border-radius: 0 0 20px 20px;
+
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    min-height: 50vh;
+  }
 
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
@@ -114,19 +118,6 @@ export default {
     width: 100%;
     height: 100%;
     background: url("assets/images/circle.svg") no-repeat 50% 32px, url("assets/images/avatar-icon.png") no-repeat center;
-  }
-
-  &__button {
-
-    &--camera {
-      font-size: 14px !important;
-      background: url("assets/images/self-icon.svg") no-repeat 20% 50%, rgba(162, 162, 201, 0.06) !important;
-      border: 1px solid rgba(162, 162, 201, 0.47) !important;
-      box-shadow: none !important;
-      border-radius: 24.5px !important;
-      text-transform: capitalize !important;
-      padding: 15px !important;
-    }
   }
 }
 </style>

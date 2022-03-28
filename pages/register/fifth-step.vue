@@ -12,40 +12,46 @@
                :class='[{"steps__dot--active": num === 5}]'></div>
         </div>
         <div class='page__form mb-3'>
-          <div class='mb-2 d-flex justify-content-between align-items-center'>
-            <span class='page__form--text'>Имя:</span>
-            <span class="page__dotted"></span>
-            <span>Иван</span>
-          </div>
-          <div class='mb-2 d-flex justify-content-between align-items-center'>
-            <span class='page__form--text'>Фамилия:</span>
-            <span class="page__dotted"></span>
-            <span>Иванов</span>
-          </div>
-          <div class='d-flex justify-content-between align-items-center'>
-            <span class='page__form--text'>Отчество:</span>
-            <span class="page__dotted"></span>
-            <span>Иванович</span>
+          <div class='page__form--wrap'>
+            <div class='mb-2 d-flex justify-content-between align-items-center'>
+              <span class='page__form--text'>Имя:</span>
+              <span class="page__dotted"></span>
+              <span>Иван</span>
+            </div>
+            <div class='mb-2 d-flex justify-content-between align-items-center'>
+              <span class='page__form--text'>Фамилия:</span>
+              <span class="page__dotted"></span>
+              <span>Иванов</span>
+            </div>
+            <div class='d-flex justify-content-between align-items-center'>
+              <span class='page__form--text'>Отчество:</span>
+              <span class="page__dotted"></span>
+              <span>Иванович</span>
+            </div>
           </div>
         </div>
         <div class='page__form d-flex flex-column'>
-          <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
-          <div class='mb-3'>
-            <BaseInput v-model='form.city' classes="text-center" placeholder='Город' />
-          </div>
-          <div class='mb-3'>
-            <BaseInput v-model='form.street' classes="text-center" placeholder='Улица' />
-          </div>
-          <div class="row mb-3 justify-content-between">
-            <div class='col-6'>
-              <BaseInput v-model='form.home' classes="text-center" placeholder='Дом' />
+          <div class='page__form--wrap'>
+            <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
+            <div class='mb-3'>
+              <BaseInput v-model='form.city' classes="text-center" placeholder='Город' />
             </div>
-            <div class='col-6'>
-              <BaseInput v-model='form.apartment' classes="text-center" placeholder='Квартира' />
-              <p class='page__form--desc text-center mt-2'>- Если нет номера квартиры, поставьте прочерк</p>
+            <div class='mb-3'>
+              <BaseInput v-model='form.street' classes="text-center" placeholder='Улица' />
             </div>
+            <div class="row mb-3 justify-content-between">
+              <div class='col-6'>
+                <BaseInput v-model='form.home' classes="text-center" placeholder='Дом' />
+              </div>
+              <div class='col-6'>
+                <BaseInput v-model='form.apartment' classes="text-center" placeholder='Квартира' />
+                <p class='page__form--desc text-center mt-2'>- Если нет номера квартиры, поставьте прочерк</p>
+              </div>
+            </div>
+            <BaseButton uppercase
+                        next
+                        @click='stepHandler'>подтвердить</BaseButton>
           </div>
-          <BaseButton uppercase classes='page__form--button' @click='stepHandler'>подтвердить</BaseButton>
         </div>
       </div>
     </div>
@@ -77,14 +83,26 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .page {
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 30vh !important;
+  min-height: 30vh;
   border-radius: 0 0 20px 20px;
+
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    min-height: 50vh;
+  }
 
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
@@ -127,10 +145,13 @@ export default {
       line-height: 150%;
     }
 
-    &--button {
-      background: #3A2784 !important;
-      color: #FFF !important;
-      border-radius: 42px !important;
+    &--wrap {
+      width: 100%;
+
+      @media (min-width: 900px) {
+        width: 45%;
+        margin: 0 auto;
+      }
     }
   }
 

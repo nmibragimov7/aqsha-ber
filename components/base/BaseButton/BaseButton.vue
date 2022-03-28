@@ -1,19 +1,25 @@
 <template>
   <div :style='{width: width + "%"}'>
-    <button v-if="!icon" :class="['button', classes, {normal, uppercase}]"
-            :style="{color: color, backgroundColor: bg}"
+    <button v-if='!icon'
+            :class="['button', classes, { normal, uppercase, prev, next }]"
+            :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
-            v-on="$listeners">
+            v-on='$listeners'>
       <slot></slot>
     </button>
-    <button v-if="icon" :class="['button button__icon-wrap', classes, {normal, uppercase}]"
-            :style="{color: color, backgroundColor: bg}"
+    <button v-if='icon'
+            :class="['button button__icon-wrap',
+              classes,
+              { normal, uppercase }]"
+            :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
-            v-on="$listeners">
-      <span class="button__icon">
-        <img class="w-100" :src='icon.includes(".") ? require(`@/assets/images/${icon}`) : require(`@/assets/images/${icon}.svg`)' :alt='icon'/>
+            v-on='$listeners'>
+      <span class='button__icon'>
+        <img class='w-100'
+             :src='icon.includes(".") ? require(`@/assets/images/${icon}`) : require(`@/assets/images/${icon}.svg`)'
+             :alt='icon' />
       </span>
-      <span class="button__text">
+      <span class='button__text'>
         <slot></slot>
       </span>
     </button>
@@ -22,7 +28,7 @@
 
 <script>
 export default {
-  name: "BaseButton",
+  name: 'BaseButton',
   props: {
     width: {
       type: Number,
@@ -30,7 +36,7 @@ export default {
     },
     classes: {
       type: String,
-      default: ""
+      default: ''
     },
     isLoading: {
       type: Boolean,
@@ -42,15 +48,15 @@ export default {
     },
     color: {
       type: String,
-      default: ""
+      default: ''
     },
     bg: {
       type: String,
-      default: ""
+      default: ''
     },
     icon: {
       type: String,
-      default: ""
+      default: ''
     },
     normal: {
       type: Boolean,
@@ -59,8 +65,16 @@ export default {
     uppercase: {
       type: Boolean,
       default: false
+    },
+    prev: {
+      type: Boolean,
+      default: false
+    },
+    next: {
+      type: Boolean,
+      default: false
     }
-  },
+  }
 }
 </script>
 
@@ -95,12 +109,13 @@ export default {
     justify-content: center;
   }
 
-  &__icon{
+  &__icon {
     display: inline-flex;
     align-items: center;
     max-width: 20px;
   }
-  &__text{
+
+  &__text {
     text-align: left;
     min-width: 120px;
     margin-left: 10px;
@@ -115,6 +130,20 @@ export default {
   &.normal {
     font-size: 15px;
     text-transform: none;
+  }
+
+  &.prev {
+    box-shadow: none;
+    border: 1px solid rgba(162, 162, 201, 0.47);
+    font-size: 14px;
+    background: rgba(162, 162, 201, 0.06);
+    padding: 15px;
+  }
+
+  &.next {
+    background: #3A2784;
+    color: #FFF;
+    border-radius: 42px;
   }
 }
 </style>

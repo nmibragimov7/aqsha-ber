@@ -7,7 +7,12 @@
         :type='visibility'
         :placeholder='placeholder'
         :style='{color, backgroundColor: bg}'
-        :class="['input', `${classes}`, {'input__promo': isPromo, 'input__footer': isFooter, 'input__password': isPassword}]"
+        :class="['input',
+          `${classes}`,
+          {'input__promo': isPromo,
+          'input__footer': isFooter,
+          'input__password': isPassword,
+          'input__register': isRegister}]"
         :value='value'
         :readonly='readonly'
         @input="$emit('input', $event.target.value)"
@@ -89,6 +94,10 @@ export default {
     isPassword: {
       type: Boolean,
       default: false
+    },
+    isRegister: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -143,6 +152,10 @@ export default {
 
   &__wrap {
     position: relative;
+  }
+
+  &__register {
+    text-align: center;
   }
 
   &__password {

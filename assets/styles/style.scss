@@ -1,5 +1,6 @@
 @import "variables";
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @-ms-viewport {
   width: device-width;
 }
@@ -30,19 +31,27 @@ body {
   margin-left: auto;
   padding: 0 15px;
 }
+
 @media (min-width: 900px) {
   .container {
     max-width: 1218px;
   }
 }
-.bg-bodyBg{
+
+.bg-bodyBg {
   background-color: $backgroundColor;
 }
-.bg-white{
+
+.bg-white {
   background-color: #fff;
 }
-.text-center{
+
+.text-center {
   text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
 }
 
 .w-100 {
@@ -83,16 +92,12 @@ body {
       margin-right: 10px;
     }
 
-    @media (min-width: 700px) {
-      margin-right: 20px;
-    }
-
     &:last-child {
       margin-right: 0;
     }
 
     &--active {
-      transform: scale(1.15);
+      transform: scale(1.1);
       background: #FFC117;
     }
   }
