@@ -10,8 +10,8 @@
         <div class="header__bars"/>
         <div class="header__bars"/>
       </div>
-      <div class='header__pop-up-menu' :class='[{"header__pop-up-menu--active": isOpen}]'>
-        <div class="header__bars__wrap active" @click="barsHandler">
+      <div class='header__pop-up-menu' :class='[{"active": isOpen}]'>
+        <div class="header__bars__wrap active" @click="closeMenu">
           <div class="header__bars"/>
           <div class="header__bars"/>
           <div class="header__bars"/>
@@ -79,7 +79,10 @@ export default {
   },
   methods: {
     barsHandler() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = true;
+    },
+    closeMenu(){
+      this.isOpen = false
     },
     signInHandler() {
       this.isOpen = false;
@@ -134,7 +137,7 @@ export default {
       display: none;
     }
 
-    &--active {
+    &.active {
       transform: translateY(0%);
       opacity: 1;
       visibility: visible;
