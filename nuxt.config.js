@@ -26,6 +26,7 @@ export default {
     '~plugins/modal.js',
     '~plugins/vmask.js',
     '~plugins/axios.js',
+    '~plugins/click_outside.js',
     {src:"~plugins/watchWindow.js",mode:"client"},
   ],
 

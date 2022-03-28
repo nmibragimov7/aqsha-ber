@@ -10,7 +10,7 @@
         <div class='header__bars' />
         <div class='header__bars' />
       </div>
-      <div class='header__pop-up-menu' :class='[{"header__pop-up-menu--active": isOpen}]'>
+      <div class='header__pop-up-menu' :class='[{"active": isOpen}]'>
         <div class='header__bars__wrap active' @click='barsHandler'>
           <div class='header__bars' />
           <div class='header__bars' />
@@ -134,7 +134,7 @@ export default {
       display: none;
     }
 
-    &--active {
+    &.active {
       transform: translateY(0%);
       opacity: 1;
       visibility: visible;

@@ -5,7 +5,7 @@ const watchWindow = {
     Vue.mixin( {
       data: () => ({
         contentDisplay: null,
-        windowWidth: window.innerWidth
+        windowWidth: window.innerWidth,
       }),
       watch: {
         windowWidth: {
@@ -27,7 +27,7 @@ const watchWindow = {
         updateWidth(value) {
           if(value < 500) {
             return 'mobile';
-          } else if(value < 900) {
+          } else if(value < 950) {
             return 'tab';
           } else {
             return 'desktop'

@@ -177,7 +177,6 @@ export default {
 
   &__promo {
     border: 2px solid #FFF;
-    padding-left: 80px;
 
     &::placeholder {
       color: #FFF;
