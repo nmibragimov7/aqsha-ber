@@ -1,7 +1,7 @@
 <template>
   <div :style='{width: width + "%"}'>
     <button v-if='!icon'
-            :class="['button', classes, { normal, uppercase, prev, next }]"
+            :class="['button', classes, { normal, uppercase, prev, next, history }]"
             :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
             v-on='$listeners'>
@@ -71,6 +71,10 @@ export default {
       default: false
     },
     next: {
+      type: Boolean,
+      default: false
+    },
+    history: {
       type: Boolean,
       default: false
     }
@@ -144,6 +148,12 @@ export default {
     background: #3A2784;
     color: #FFF;
     border-radius: 42px;
+  }
+
+  &.history {
+    font-size: 11px;
+    padding-top: 7px;
+    padding-bottom: 7px;
   }
 }
 </style>

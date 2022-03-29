@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall/>
+    <Header logo-small/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 6 из 6</p>
@@ -12,24 +12,34 @@
                :class='[{"steps__dot--active": num === 6}]'></div>
         </div>
         <div class='page__form d-flex flex-column mt-4'>
-          <div class='mb-3'>
-            <BaseInput v-model='form.placeOfWork' label='Место работы (название)'/>
-          </div>
-          <div class='mb-3'>
-            <BaseInput v-model='form.position' label='Должность'/>
-          </div>
-          <div class="row justify-content-between ">
-            <div class='col-6'>
-              <BaseInput v-model='form.income' label='Ежемес. доходы'/>
+          <h5 class='text-center text-bold m-0 mb-4'>Сведения о работе</h5>
+          <div class='page__form--wrap'>
+            <div class='mb-4'>
+              <BaseInput v-model='form.placeOfWork' label='Место работы (название)'/>
             </div>
-            <div class='col-6'>
-              <BaseInput v-model='form.expenses' label='Ежемес. расходы'/>
+            <div class='mb-4'>
+              <BaseInput v-model='form.position' label='Должность'/>
             </div>
+            <div class="row justify-content-between">
+              <div class='col-6'>
+                <BaseInput v-model='form.income' label='Ежемес. доходы'/>
+              </div>
+              <div class='col-6'>
+                <BaseInput v-model='form.expenses' label='Ежемес. расходы'/>
+              </div>
+            </div>
+            <BaseButton v-if='isDesktop'
+                        uppercase
+                        next
+                        classes='mt-4'
+                        @click='confirm'>подтвердить</BaseButton>
           </div>
         </div>
-        <BaseButton uppercase
-                    @click='confirm'
-                    classes='page__form--button mt-3'>подтвердить</BaseButton>
+        <BaseButton v-if='!isDesktop'
+                    uppercase
+                    next
+                    classes='mt-4'
+                    @click='confirm'>подтвердить</BaseButton>
       </div>
     </div>
     <ProcessedModal/>
@@ -50,9 +60,13 @@ export default {
         placeOfWork: "",
         position: "",
         income: "",
-        expenses: ""
-      }
+        expenses: "",
+      },
+      isDesktop: false
     }
+  },
+  mounted() {
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
   methods: {
     confirm() {
@@ -66,14 +80,26 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .page {
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 30vh !important;
+  min-height: 40vh;
   border-radius: 0 0 20px 20px;
+
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    min-height: 50vh;
+  }
 
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
@@ -99,10 +125,13 @@ export default {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
 
-    &--button {
-      background: #3A2784 !important;
-      color: #FFF !important;
-      border-radius: 42px !important;
+    &--wrap {
+      width: 100%;
+
+      @media (min-width: 900px) {
+        width: 45%;
+        margin: 0 auto;
+      }
     }
   }
 }

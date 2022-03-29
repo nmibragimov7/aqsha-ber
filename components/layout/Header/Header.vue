@@ -64,13 +64,13 @@ import SignInModal from '../../common/modal/SignInModal/SignInModal'
 
 export default {
   name: 'Header',
+  components: { SignInModal },
   props: {
     logoSmall: {
       type: Boolean,
       default: false
     }
   },
-  components: { SignInModal },
   data() {
     return {
       menus,

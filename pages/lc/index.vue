@@ -2,10 +2,10 @@
   <PageWrap title='Личный кабинет'>
     <div class='page__header p-4'>
       <div class='row mb-2'>
-        <div class='col-6'>
+        <div class='col-6 col-lg-4'>
           <div class='profile__image h-100 w-100'></div>
         </div>
-        <div class='col-6 p-0'>
+        <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
           <p class='m-0 d-flex flex-column justify-content-between'>Иванов</p>
           <p class='m-0'>Иван</p>
           <p class='m-0'>Иванович</p>
@@ -14,51 +14,55 @@
         </div>
       </div>
       <div class='row mb-0'>
-        <div class='col-6'>
+        <div class='col-6 col-lg-4'>
           <p class='m-0'><b>Дата рождения:</b></p>
           <p class='m-0'>+ 777 200 28 77</p>
         </div>
-        <div class='col-6'>
+        <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
           <p class='m-0'><b>Пол:</b></p>
           <p class='m-0'>Мужской</p>
         </div>
-        <div class='col-6'>
+        <div class='col-6 col-lg-4'>
           <p class='m-0'><b>Телефон::</b></p>
           <p class='m-0'>28.07.2985</p>
         </div>
-        <div class='col-6'>
+        <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
           <p class='m-0'><b>E-mail:</b></p>
           <p class='m-0'>ten@mail.ru</p>
         </div>
       </div>
     </div>
     <template #page__footer>
-      <BaseButton bg='#3A2784' color='#fff' classes='mt-3'>
-        + новый микрокредит
-      </BaseButton>
+      <div class='page__action'>
+        <BaseButton bg='#3A2784' color='#fff' classes='mt-4'>
+          + новый микрокредит
+        </BaseButton>
+      </div>
       <CreditHistory />
       <div class='profile__block p-4 mt-4'>
-        <BaseInput v-model='password'
-                   class='mb-3'
-                   type='password'
-                   is-paassword
-                   :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
-        <BaseInput v-if='isPassExist' v-model='newPassword'
-                   class='mb-3'
-                   type='password'
-                   is-password
-                   placeholder='Новый пароль' />
-        <div class='d-flex justify-content-between'>
-          <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]'/>
+        <div class='profile__block--wrap'>
+          <BaseInput v-model='password'
+                     class='mb-3'
+                     type='password'
+                     is-paassword
+                     :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
+          <BaseInput v-if='isPassExist' v-model='newPassword'
+                     class='mb-3'
+                     type='password'
+                     is-password
+                     placeholder='Новый пароль' />
+          <div class='d-flex justify-content-between'>
+            <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]' />
+          </div>
+          <span class='profile__level-hint mb-3'>Ненадежный</span>
+          <p class='m-0 mb-3 text-center profile__description'>
+            Должен состоять минимум из 8 символов и содержать
+            хотя бы одну цифру, символ и заглавную букву.
+            <br>
+            <span class='profile__description--red'>Не используйте пробелы и кириллицу.</span>
+          </p>
+          <BaseButton classes='profile__button--blue'>Сохранить</BaseButton>
         </div>
-        <span class='profile__level-hint mb-3'>Ненадежный</span>
-        <p class='m-0 mb-3 text-center profile__description'>
-          Должен состоять минимум из 8 символов и содержать
-          хотя бы одну цифру, символ и заглавную букву.
-          <br>
-          <span class='profile__description--red'>Не используйте пробелы и кириллицу.</span>
-        </p>
-        <BaseButton classes='profile__button--blue'>Сохранить</BaseButton>
       </div>
     </template>
   </PageWrap>
@@ -75,8 +79,12 @@ export default {
     return {
       password: null,
       newPassword: null,
-      isPassExist: false
+      isPassExist: false,
+      isDesktop: false
     }
+  },
+  mounted() {
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   }
 }
 </script>
@@ -85,12 +93,22 @@ export default {
 .page {
   &__header {
 
+    @media (min-width: 900px) {
+      padding: 25px 100px !important;
+    }
+  }
+
+  &__action {
+    max-width: 325px;
+    margin: 0 auto;
   }
 }
 
 .profile {
+
   &__image {
     background-color: #C4C4C4;
+    max-width: 135px;
   }
 
   &__block {
@@ -99,6 +117,17 @@ export default {
     color: #322443;
     font-size: 18px;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
+
+    @media (min-width: 900px) {
+      padding: 25px 100px !important;
+    }
+
+    &--wrap {
+      @media (min-width: 900px) {
+        max-width: 385px;
+        margin: 0 auto;
+      }
+    }
   }
 
   &__title {

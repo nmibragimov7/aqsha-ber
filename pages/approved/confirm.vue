@@ -3,13 +3,13 @@
     <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <div class='text-center page__info'>
+        <div class='page__inner-container text-center page__info'>
           <h1 class='page__title mb-0'>Подписание договора</h1>
           <p class='mt-1'>
             Внимательно ознакомьтесь с условиями оформления вашего кредита
           </p>
         </div>
-        <ul class='page__list p-4'>
+        <ul class='page__inner-container page__list p-4'>
           <li class='mb-4 d-flex justify-content-between align-items-center'>
             <b>Сумма микрокредита:</b>
             <span class='page__dotted'></span>
@@ -26,10 +26,12 @@
             <span class='ml-2 info__info'>000 000₸</span>
           </li>
         </ul>
-        <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
-        <BaseButton bg='#3A2784' @click='confirm' color='#fff'>
-          ПОДТВЕРДИТЬ
-        </BaseButton>
+        <div class='page__action'>
+          <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
+          <BaseButton bg='#3A2784' @click='confirm' color='#fff'>
+            ПОДТВЕРДИТЬ
+          </BaseButton>
+        </div>
       </div>
     </div>
     <SendCodeModal :code='form.code'
@@ -76,11 +78,27 @@ export default {
 <style lang='scss' scoped>
 .page {
   background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 30vh;
+  min-height: 40vh;
   border-radius: 0 0 20px 20px;
+
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  }
+
+  &__inner-container {
+    max-width: 450px;
+    margin: 0 auto;
+  }
 
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
@@ -117,6 +135,11 @@ export default {
 
   &__hint {
     font-size: 14px;
+  }
+
+  &__action {
+    max-width: 325px;
+    margin: 0 auto;
   }
 }
 

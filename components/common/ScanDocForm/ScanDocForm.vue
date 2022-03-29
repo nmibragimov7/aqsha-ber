@@ -1,21 +1,21 @@
 <template>
   <div>
     <div v-if='isDesktop' class='row align-items-stretch'>
-      <div v-for='(block, index) in blocks'
+      <div v-for='(block, index) in items'
            :key='index'
-           :class='{"col-12": blocks.length === 1}'
+           :class='{"col-12": items.length === 1}'
            class='col-6 mb-4'>
         <div class='page__form'>
           <div class='row'>
-            <div class='col-4 d-flex justify-content-center'>
+            <div class='col-4 d-flex justify-content-center align-items-start'>
               <img :src='"~/assets/images/" + block.img + ".svg"'
                    :alt='block.img' />
             </div>
             <div class='col-8'>
-              <p v-for='(text, index) in block.text'
-                 :key='index'
-                 :class='{"mb-3": !index}'
-                 class='m-0'>{{ text }}</p>
+              <p v-for='(t, idx) in block.text'
+                 :key='idx'
+                 :class='{"mb-3": !idx}'
+                 class='m-0'>{{ t }}</p>
             </div>
           </div>
           <div v-if='isFourthStep' class='page__buttons'>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div v-else class='page__form'>
-      <div v-for='(block, index) in blocks'
+      <div v-for='(block, index) in items'
            :key='index'
            class='row mb-3 d-flex align-items-center'>
         <div class='col-4'>
@@ -44,7 +44,9 @@
           </div>
         </div>
         <div class='col-8'>
-          <p class='m-0' v-for='(text, index) in block.text' :key='index'>{{ text }}</p>
+          <p v-for='(t, idx) in block.text'
+             :key='idx'
+             class='m-0'>{{ t }}</p>
         </div>
       </div>
       <BaseButton :icon='icon' classes='mb-2' @click='openCamera'>{{ text }}</BaseButton>
@@ -91,17 +93,11 @@ export default {
         return [
           {
             img: 'scan',
-            text: this.contentDisplay === 'desktop' ? ['Отсканируйте обе стороны удостоверения: сначала лицевую, затем оборотную.'] :
-              ['Сделайте фото лицевой стороны удостоверения личности или загрузите готовое фото. Оборотную сторону удостоверения нужно будет отсканировать.'],
+            text: ['Сделайте фото лицевой стороны удостоверения личности или загрузите готовое фото. Оборотную сторону удостоверения нужно будет отсканировать.'],
           },
           {
-            img: this.contentDisplay === 'desktop' ? 'photo_2' : 'photo',
-            text: this.contentDisplay === 'desktop' ? [
-              'Как сканировать документ:',
-              '1.  наведите камеру на удостоверение личности',
-              '2.  расположите документ так, чтобы он попадал в рамку',
-              '3.  убедитесь, что фокус камеры наведен на текст'
-            ] : ['Наведите камеру на удостоверение. Расположите документ так, чтобы он попадал в рамку и убедитесь, что весь текст считывается.'],
+            img: 'photo',
+            text: ['Наведите камеру на удостоверение. Расположите документ так, чтобы он попадал в рамку и убедитесь, что весь текст считывается.'],
           }
         ]
       }
@@ -111,11 +107,35 @@ export default {
     return {
       step: 1,
       cameraIsOpen: false,
-      isDesktop: false
+      isDesktop: false,
+      items: [...this.blocks]
     }
   },
   mounted() {
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
+    if(this.isDesktop && this.text === 'Сканировать') {
+      const items = [...this.items]
+      this.items = items.map((item, idx) => {
+        if(idx === 0) {
+          return {
+            img: item.img,
+            text: ['Отсканируйте обе стороны удостоверения: сначала лицевую, затем оборотную.']
+          }
+        }
+        if(idx === 1) {
+          return {
+            img: 'photo_2',
+            text: [
+              'Как сканировать документ:',
+              '1.  наведите камеру на удостоверение личности',
+              '2.  расположите документ так, чтобы он попадал в рамку',
+              '3.  убедитесь, что фокус камеры наведен на текст'
+            ]
+          }
+        }
+        return item
+      })
+    }
   },
   methods: {
     pickFile(file) {
@@ -153,9 +173,10 @@ export default {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     height: 100%;
+    line-height: 150%;
 
     @media (min-width: 900px) {
-      padding: 50px 80px;
+      padding: 40px 30px;
     }
   }
 

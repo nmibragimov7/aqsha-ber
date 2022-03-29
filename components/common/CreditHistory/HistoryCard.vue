@@ -12,12 +12,11 @@
         </div>
       </div>
     </div>
-    <div class='row'>
-      <div class='col-6'>
-        <BaseButton classes='profile__button profile__button--blue'>продлить</BaseButton>
-      </div>
-      <div class='col-6'>
-        <BaseButton classes='profile__button'>погасить</BaseButton>
+    <div class='row history__action'>
+      <div class='col-12 d-flex justify-content-between mx-0 my-auto'>
+        <BaseButton history bg='#3A2784' color='#fff'>продлить</BaseButton>
+        <div class='mr-1'></div>
+        <BaseButton history>погасить</BaseButton>
       </div>
     </div>
     <div class="history__line mt-3"/>

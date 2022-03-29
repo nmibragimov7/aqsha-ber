@@ -5,7 +5,7 @@
       <p v-if="isLoading" class="text-center">Грузится</p>
       <div class="wrap__footer">
         <BaseButton bg="#3A2784" color="#fff" classes="mb-3" @click="snapShot">Сделать фото</BaseButton>
-        <BaseButton bg="rgba(162, 162, 201, 0.06);" @click="closeCamera">Отмена</BaseButton>
+        <BaseButton prev @click="closeCamera">Отмена</BaseButton>
       </div>
     </div>
   </div>

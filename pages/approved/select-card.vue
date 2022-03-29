@@ -1,75 +1,77 @@
 <template>
-  <div class="page">
-    <Header logoSmall />
-    <div class="container page__wrap">
-      <div class="page__body px-4">
-        <h1 class="text-center page__title mb-4">Способы получения</h1>
-        <div class="page__option mb-3">
-          <div class="px-3 py-4">
-            <label class="d-flex align-items-center justify-content-between mb-4">
-            <span class="d-inline-flex align-items-center mr-2">
-              <span class="page__option-image mr-3">
-                <img src="/svg/pay-cards.svg" class="w-100" alt="">
+  <div class='page'>
+    <Header logo-small />
+    <div class='container page__wrap'>
+      <div class='page__body px-4'>
+        <h1 class='text-center page__title mb-4'>Способы получения</h1>
+        <div class='page__option--wrap mb-5'>
+          <div class='page__option'>
+            <div class='px-3 py-4'>
+              <label class='d-flex align-items-center justify-content-between mb-4'>
+            <span class='d-inline-flex align-items-center mr-2'>
+              <span class='page__option-image mr-3'>
+                <img src='/svg/pay-cards.svg' class='w-100' alt=''>
               </span>
-              <span class="title">На карту любого банка</span>
+              <span class='title'>На карту любого банка</span>
             </span>
-              <RadioButton v-model="isCard" val="card" name="pay-method"/>
-            </label>
-            <BaseInput v-model="cardNumber" mask="####-####-####-####" placeholder="Номер дебетовой карты"/>
+                <RadioButton v-model='isCard' val='card' name='pay-method' />
+              </label>
+              <BaseInput v-model='cardNumber' mask='####-####-####-####' placeholder='Номер дебетовой карты' />
+            </div>
+          </div>
+          <div class='page__option'>
+            <div class='px-3 py-4'>
+              <label class='d-flex align-items-center justify-content-between mb-1'>
+            <span class='d-inline-flex align-items-center mr-2'>
+              <span class='page__option-image mr-3'>
+                <img src='/svg/kazpochta.svg' class='w-100' alt=''>
+              </span>
+              <span class='title'>Наличнымив АО «Казпочта»</span>
+            </span>
+                <RadioButton v-model='isCard' val='card' name='pay-method' />
+              </label>
+            </div>
+          </div>
+          <div class='page__option'>
+            <div class='px-3 py-4'>
+              <label class='d-flex align-items-center justify-content-between mb-1'>
+            <span class='d-inline-flex align-items-center mr-2'>
+              <span class='page__option-image mr-3'>
+                <img src='/svg/qiwi-wallet.svg' class='w-100' alt=''>
+              </span>
+              <span class='title'>На QIWI-кошелёк</span>
+            </span>
+                <RadioButton v-model='isCard' val='card' name='pay-method' />
+              </label>
+            </div>
+          </div>
+          <div class='page__option'>
+            <div class='px-3 py-4'>
+              <label class='d-flex align-items-center justify-content-between mb-1'>
+            <span class='d-inline-flex align-items-center'>
+              <span class='page__option-image mr-3 mr-2'>
+                <img src='/svg/halyk-pay.svg' class='w-100' alt=''>
+              </span>
+              <span class='title'>Наличнымив банкомате</span>
+            </span>
+                <RadioButton v-model='isCard' val='card' name='pay-method' />
+              </label>
+            </div>
           </div>
         </div>
-        <div class="page__option mb-3">
-          <div class="px-3 py-4">
-            <label class="d-flex align-items-center justify-content-between mb-1">
-            <span class="d-inline-flex align-items-center mr-2">
-              <span class="page__option-image mr-3">
-                <img src="/svg/kazpochta.svg" class="w-100" alt="">
-              </span>
-              <span class="title">Наличными
-в АО «Казпочта»</span>
-            </span>
-              <RadioButton v-model="isCard" val="card" name="pay-method"/>
-            </label>
-          </div>
+        <div class='page__action'>
+          <BaseButton bg='#3A2784' color='#fff' @click='goToConfirm'>
+            ПОДТВЕРДИТЬ
+          </BaseButton>
         </div>
-        <div class="page__option mb-3">
-          <div class="px-3 py-4">
-            <label class="d-flex align-items-center justify-content-between mb-1">
-            <span class="d-inline-flex align-items-center mr-2">
-              <span class="page__option-image mr-3">
-                <img src="/svg/qiwi-wallet.svg" class="w-100" alt="">
-              </span>
-              <span class="title">На QIWI-кошелёк</span>
-            </span>
-              <RadioButton v-model="isCard" val="card" name="pay-method"/>
-            </label>
-          </div>
-        </div>
-        <div class="page__option mb-4">
-          <div class="px-3 py-4">
-            <label class="d-flex align-items-center justify-content-between mb-1">
-            <span class="d-inline-flex align-items-center">
-              <span class="page__option-image mr-3 mr-2">
-                <img src="/svg/halyk-pay.svg" class="w-100" alt="">
-              </span>
-              <span class="title">Наличными
-в банкомате</span>
-            </span>
-              <RadioButton v-model="isCard" val="card" name="pay-method"/>
-            </label>
-          </div>
-        </div>
-        <BaseButton bg="#3A2784" color="#fff" @click="goToConfirm">
-          ПОДТВЕРДИТЬ
-        </BaseButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "@/components/layout/Header/Header";
-import RadioButton from "@/components/base/RadioButton";
+import Header from '@/components/layout/Header/Header'
+import RadioButton from '@/components/base/RadioButton'
 
 export default {
   components: {
@@ -78,26 +80,38 @@ export default {
   },
   data() {
     return {
-      cardNumber: "",
-      isCard: ""
+      cardNumber: '',
+      isCard: ''
     }
   },
   methods: {
     goToConfirm() {
-      this.$router.push("/approved/confirm")
+      this.$router.push('/approved/confirm')
     }
   }
 }
 </script>
-<style scoped lang="scss">
+<style scoped lang='scss'>
 
 .page {
   background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
   min-height: 30vh;
   border-radius: 0 0 20px 20px;
 
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    min-height: 50vh;
+  }
+
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
@@ -125,12 +139,29 @@ export default {
       min-width: 100px;
       display: inline-block;
     }
+
+    &--wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-gap: 30px;
+
+      @media (min-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+    }
   }
 
   &__radio-btn {
     width: 28px;
     height: 28px;
     color: #A0A0C5;
+  }
+
+  &__action {
+    max-width: 325px;
+    margin: 0 auto;
   }
 }
 

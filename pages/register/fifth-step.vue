@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 5 из 6</p>
@@ -86,7 +86,7 @@ export default {
 <style lang='scss' scoped>
 .page {
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 30vh;
+  min-height: 40vh;
   border-radius: 0 0 20px 20px;
 
   @media (min-width: 900px) {

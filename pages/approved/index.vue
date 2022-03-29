@@ -1,13 +1,16 @@
 <template>
   <div class='page'>
-    <div class='container py-3'>
+    <Header v-if='isDesktop' logo-small/>
+    <div class='container py-3 page--wrap'>
       <div class='page__header d-flex flex-column align-items-center'>
-        <div class="page__inner-container text-center">
-          <h3 class='page__title mt-3 mb-0'>152 000 ₸</h3>
-          <p class='mt-0 mb-1'>Ваша заявка одобрена!</p>
-          <p class='mt-0 px-2 mb-4'>
-            Максимальная сумма микрокредита — 152 000 ₸
-          </p>
+        <div class="page__inner-container text-center page__header--inner">
+          <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>152 000 ₸</h3>
+          <div :class='{"my-4 ml-1": isDesktop}'>
+            <p class='m-0' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
+            <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
+              Максимальная сумма микрокредита — 152 000 ₸
+            </p>
+          </div>
         </div>
       </div>
       <div class='page__body p-4'>
@@ -65,16 +68,21 @@
 
 <script>
 import InputRange from '@/components/common/InputRange/InputRange.vue'
+import Header from '@/components/layout/Header/Header'
 
 export default {
-  components: {InputRange},
+  components: { Header, InputRange},
 
   data() {
     return {
       code: '',
       sum: 152000,
-      duration: 15
+      duration: 15,
+      isDesktop: false
     }
+  },
+  mounted() {
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
   methods: {
     giveToMoney() {
@@ -89,21 +97,49 @@ export default {
 .page {
   background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
 
+  @media (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    max-height: 50vh;
+    min-height: auto;
+  }
+
   &__inner-container {
     max-width: 450px;
     margin: 0 auto;
+  }
+
+  &--wrap {
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__header {
     background: linear-gradient(226.59deg, #FFDF11 27.08%, #FF8D65 112.49%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px 10px 0 0;
+
+    &--inner {
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 900px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
   }
 
   &__title {
     font-weight: 800;
-    font-size: 66px;
-    line-height: 74px;
+    font-size: 60px;
+    line-height: 70px;
+    white-space: nowrap;
   }
 
   &__body {

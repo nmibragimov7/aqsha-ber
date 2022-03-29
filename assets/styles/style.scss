@@ -1,5 +1,6 @@
 @import "variables";
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @-ms-viewport {
   width: device-width;
 }
@@ -7,7 +8,6 @@
 html {
   box-sizing: border-box;
   -ms-overflow-style: scrollbar;
-  background-color: #E7EFF8;
 }
 
 *,
@@ -26,18 +26,20 @@ body {
   background-color: $backgroundColor;
 }
 
-.w-100 {
-  width: 100%;
-}
-
-.bg-bodyBg{
+.bg-bodyBg {
   background-color: $backgroundColor;
 }
-.bg-white{
+
+.bg-white {
   background-color: #fff;
 }
-.text-center{
+
+.text-center {
   text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
 }
 
 .w-100 {
@@ -46,6 +48,10 @@ body {
 
 .h-100 {
   height: 100%;
+}
+
+.m-0 {
+  margin: 0;
 }
 
 .promo {
@@ -79,7 +85,7 @@ body {
     }
 
     &--active {
-      transform: scale(1.15);
+      transform: scaleY(1.5) scaleX(1.1);
       background: #FFC117;
     }
   }

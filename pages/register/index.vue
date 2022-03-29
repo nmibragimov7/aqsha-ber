@@ -1,8 +1,11 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
+        <div v-if='isDesktop' class="page__decor">
+          <img src="/svg/money_decor.svg" class="w-100" alt="">
+        </div>
         <h1 class='text-center page__title m-0 mb-4'>152 000 ₸</h1>
         <p class='text-center page__text m-0 mb-4'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
         <p class='text-center page__desc m-0 mb-4'>Не переживайте — на этом этапе вы нам ничего не должны!</p>
@@ -54,8 +57,12 @@ export default {
       form: {
         phone: null,
         code: ''
-      }
+      },
+      isDesktop: false
     }
+  },
+  mounted() {
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
   methods: {
     inputHandler(value) {
@@ -72,16 +79,16 @@ export default {
 <style lang='scss' scoped>
 .page {
   background: url("assets/images/money_1.svg") no-repeat 0 55%,
-  url("assets/images/money_2.svg") no-repeat 100% 30%,
-  url("assets/images/money_3.svg") no-repeat 0 15%,
-  linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+    url("assets/images/money_2.svg") no-repeat 100% 30%,
+    url("assets/images/money_3.svg") no-repeat 0 15%,
+    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
   min-height: 70vh;
   border-radius: 0 0 20px 20px;
+  position: relative;
 
   @media (min-width: 900px) {
     background: url("assets/images/money_4.svg") no-repeat 85% 30%,
     url("assets/images/money_3.svg") no-repeat 35% 15%,
-    //url("assets/images/money_5.svg") no-repeat 0 50%,
     linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
     min-height: 50vh;
   }
@@ -92,6 +99,14 @@ export default {
     @media (min-width: 900px) {
       max-width: 800px;
     }
+  }
+
+  &__decor {
+    position: absolute;
+    left: -15%;
+    bottom: 15%;
+    max-width: 60%;
+    z-index: 10;
   }
 
   &__body {

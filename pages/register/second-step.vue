@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p v-if='!isAuth' class='text-center page__step m-0 mb-4'>Шаг 2 из 6</p>
@@ -76,6 +76,10 @@ export default {
 
   &__wrap {
     position: relative;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__body {
