@@ -3,9 +3,9 @@
     <Header logoSmall />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <p v-if='!isAuth' class='text-center page__step m-0 mb-2'>Шаг 4 из 6</p>
-        <p class='text-center page__text m-0 mb-2'>Сделайте селфи</p>
-        <div v-if='!isAuth' class='steps d-flex align-items-center justify-content-between mb-3'>
+        <p v-if='!isAuth' class='text-center page__step m-0 mb-3'>Шаг 4 из 6</p>
+        <p class='text-center page__text m-0 mb-3'>Сделайте селфи</p>
+        <div v-if='!isAuth' class='steps d-flex align-items-center justify-content-between'>
           <div v-for='num in 6'
                :key='num'
                class='steps__dot'
