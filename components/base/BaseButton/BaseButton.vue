@@ -1,7 +1,7 @@
 <template>
   <div :style='{width: width + "%"}'>
     <button v-if='!icon'
-            :class="['button', classes, { normal, uppercase, prev, next, history }]"
+            :class="['button', classes, { normal, uppercase, prev, next, history ,small}]"
             :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
             v-on='$listeners'>
@@ -10,14 +10,14 @@
     <button v-if='icon'
             :class="['button button__icon-wrap',
               classes,
-              { normal, uppercase }]"
+              { normal, uppercase ,small}]"
             :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
             v-on='$listeners'>
       <span class='button__icon'>
         <img class='w-100'
              :src='icon.includes(".") ? require(`@/assets/images/${icon}`) : require(`@/assets/images/${icon}.svg`)'
-             :alt='icon' />
+             :alt='icon'/>
       </span>
       <span class='button__text'>
         <slot></slot>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'BaseButton',
+  name: "BaseButton",
   props: {
     width: {
       type: Number,
@@ -36,7 +36,11 @@ export default {
     },
     classes: {
       type: String,
-      default: ''
+      default: ""
+    },
+    small: {
+      type: Boolean,
+      default:false
     },
     isLoading: {
       type: Boolean,
@@ -48,15 +52,15 @@ export default {
     },
     color: {
       type: String,
-      default: ''
+      default: ""
     },
     bg: {
       type: String,
-      default: ''
+      default: ""
     },
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     normal: {
       type: Boolean,
@@ -92,10 +96,13 @@ export default {
   color: #000;
   border: none;
   cursor: pointer;
-  padding: 15px;
+  padding: 14px;
   font-size: 20px;
   border-radius: 42px;
-
+  &.small{
+    padding:9px;
+    font-size: 15px;
+  }
   &.uppercase {
     text-transform: uppercase;
   }

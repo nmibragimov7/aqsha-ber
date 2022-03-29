@@ -33,7 +33,7 @@ export default {
 }
 .promo{
   &__desktop{
-    background: url("@/assets/images/header-background2.png") no-repeat 85% bottom, linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+    background: url("@/assets/images/header-background2.png") no-repeat 85% bottom / 49%, linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   }
 }
 </style>

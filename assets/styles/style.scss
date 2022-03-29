@@ -1,5 +1,5 @@
 @import "variables";
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @-ms-viewport {
   width: device-width;
@@ -20,7 +20,7 @@ body {
   margin: 0;
   color: $fontColor;
   overflow-x: hidden;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 34px;
   background-color: $backgroundColor;
