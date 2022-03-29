@@ -63,6 +63,11 @@ body {
 }
 
 .steps {
+  margin-bottom: 1rem;
+
+  @media (min-width: 900px) {
+    margin-bottom: 4rem;
+  }
 
   &__dot {
     width: 100%;
