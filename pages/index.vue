@@ -1,10 +1,10 @@
 <template>
   <div class='py-3'>
     <div class='container'>
-      <div class='row align-items-stretch'>
+      <div class='row align-items-stretch' :class="{'my-5':isDesktop}">
         <template v-for='(card, index) in cards'>
           <div :key='index' class='col-12 col-lg-4'>
-            <Card>
+            <Card classes="pt-4">
               <div class="px-3">
                 <img class='card__image'
                      :src='"~/assets/images/"+card.image+".png"'
@@ -17,15 +17,17 @@
         </template>
       </div>
     </div>
-    <div class='promotion__wrap'>
-      <div class="container">
-        <div class='promotion'>
-          <div class='promotion__block'>
-            <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
-            <BaseButton classes='promotion__button' color='#FFF'>Подробнее</BaseButton>
+    <div :class="{'container':isDesktop}">
+      <div class='promotion__wrap' :class="{'my-5':isDesktop}">
+        <div class="container">
+          <div class='promotion'>
+            <div class='promotion__block'>
+              <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
+              <BaseButton classes='promotion__button' color='#FFF'>Подробнее</BaseButton>
+            </div>
+            <img class='promotion__image' src='~/assets/images/pig.png'/>
+            <img class='promotion__image--large' src='~/assets/images/pig-large.png'/>
           </div>
-          <img class='promotion__image' src='~/assets/images/pig.png'/>
-          <img class='promotion__image--large' src='~/assets/images/pig-large.png'/>
         </div>
       </div>
     </div>
@@ -35,9 +37,9 @@
           <template v-for='(information, index) in infos'>
             <div :key='index' class='col-12 col-lg-6'>
               <Card classes='info bg-white'>
-                <img src="@/assets/images/get.png" class="info__get w-100" v-if='information.image === "get"'
+                <img v-if='information.image === "get"' src="@/assets/images/get.png" class="info__get w-100"
                      alt="qweqw">
-                <img src="@/assets/images/repay.png" class="info__repay w-100" v-if='information.image === "repay"'
+                <img v-if='information.image === "repay"' src="@/assets/images/repay.png" class="info__repay w-100"
                      alt="qwqe">
                 <div class="px-4">
                   <p class='card__title'>{{ information.title }}</p>
@@ -54,27 +56,29 @@
         </div>
       </div>
     </div>
-    <div class="container bg-bodyBg pt-5">
-      <h2 class='m-0 types__title'>Виды микрокредитов</h2>
-      <div class='row align-items-stretch'>
-        <template v-for='(type, index) in types'>
-          <div :key='index' class='col-12 col-lg-6'>
-            <Card classes='p-0 types__item'>
-              <div class='types__header d-flex flex-column justify-content-center align-items-center'
-                   :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
-                <p class='types__header--title m-0'>{{ type.header.title }}</p>
-                <p class='types__header--text m-0'>{{ type.header.text }}</p>
-              </div>
-              <div class='types__body d-flex flex-column justify-content-center align-items-center'>
-                <p class='types__body--title m-0 mb-4'>{{ type.body.title }}</p>
-                <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
-                <BaseButton classes='card__button' :width='60'>
-                  <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>ПОДРОБНЕЕ</nuxt-link>
-                </BaseButton>
-              </div>
-            </Card>
-          </div>
-        </template>
+    <div class="bg-bodyBg">
+      <div class="container pt-5">
+        <h2 class='m-0 types__title'>Виды микрокредитов</h2>
+        <div class='row align-items-stretch'>
+          <template v-for='(type, index) in types'>
+            <div :key='index' class='col-12 col-lg-6'>
+              <Card classes='p-0 types__item'>
+                <div class='types__header d-flex flex-column justify-content-center align-items-center'
+                     :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
+                  <p class='types__header--title m-0'>{{ type.header.title }}</p>
+                  <p class='types__header--text m-0'>{{ type.header.text }}</p>
+                </div>
+                <div class='types__body d-flex flex-column justify-content-center align-items-center'>
+                  <p class='types__body--title m-0 mb-4'>{{ type.body.title }}</p>
+                  <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
+                  <BaseButton classes='card__button' :width='60'>
+                    <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>ПОДРОБНЕЕ</nuxt-link>
+                  </BaseButton>
+                </div>
+              </Card>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
     <div class='promo__wrap company'>
@@ -105,11 +109,11 @@
       <h2 class='m-0 types__title'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
-                   :activeIndex='activeFaqIndex'
-                   @faqHandler='faqHandler'
+                   :active-index='activeFaqIndex'
                    :index='index'
                    :question='faq.question'
-                   :answer='faq.answer'/>
+                   :answer='faq.answer'
+                   @faqHandler='faqHandler'/>
       </template>
     </div>
   </div>
@@ -131,8 +135,12 @@ export default {
       infos,
       types,
       faqs,
-      activeFaqIndex: null
+      activeFaqIndex: null,
+      isDesktop:false
     }
+  },
+  mounted() {
+    this.isDesktop = this.contentDisplay === "desktop"
   },
   methods: {
     faqHandler(index) {
@@ -158,21 +166,19 @@ export default {
     display: none;
     @media (min-width: 900px) {
       display: block;
-      margin-bottom: 40px;
+      max-width: 150px;
+      margin:0 auto 20px;
     }
   }
 
   &__title {
     font-size: 30px;
     font-weight: 800;
-    margin-bottom: 15px;
+    margin: 10px 0;
   }
 
   &__description {
     font-size: 20px;
-    @media (min-width: 900px) {
-      margin-bottom: 40px;
-    }
   }
 
   &__descriptions {
@@ -205,12 +211,10 @@ export default {
 
   &__wrap {
     background: linear-gradient(224.25deg, #FFDF11 31.92%, #FF8D65 90.72%);
-    margin: 0 auto 10% auto;
+    margin: 0 auto 30px auto;
     position: relative;
     @media (min-width: 900px) {
-      max-width: 1218px;
       border-radius: 25px;
-      margin-bottom: 5%;
     }
   }
 

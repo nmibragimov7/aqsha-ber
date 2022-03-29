@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class='promo__wrap d-flex flex-column' :class="{'h-100':isDesktop}">
+    <div class='promo__wrap d-flex flex-column' :class="{'h-100 promo__desktop':isDesktop}">
       <Header/>
       <Promo />
     </div>
@@ -30,5 +30,10 @@ export default {
 <style lang='scss' scoped>
 .h-100{
   height: 100vh;
+}
+.promo{
+  &__desktop{
+    background: url("@/assets/images/header-background2.png") no-repeat 85% bottom, linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  }
 }
 </style>

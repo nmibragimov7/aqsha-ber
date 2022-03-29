@@ -34,11 +34,6 @@
           </div>
         </div>
       </div>
-      <div v-if="isDesktop" class="col-7">
-        <div class="promo__desktop__image">
-
-        </div>
-      </div>
     </div>
     <ProcessedModal/>
   </div>
@@ -61,6 +56,9 @@ export default {
       return this.$store.getters["auth/isAuth"]
     }
   },
+  mounted() {
+    this.isDesktop = this.contentDisplay === "desktop"
+  },
   methods: {
     getHandler() {
       if (this.isAuth) {
@@ -73,9 +71,6 @@ export default {
         this.$router.replace("register")
       }, 5000)
     }
-  },
-  mounted() {
-    this.isDesktop = this.contentDisplay === "desktop"
   }
 }
 </script>
@@ -105,10 +100,7 @@ export default {
   &__img {
     margin-bottom: -31px;
   }
-  &__desktop__image{
-    height: 100%;
-    background: url("@/assets/images/header-background2.png") no-repeat center / cover;
-  }
+
 
   &__text {
     text-align: center;
