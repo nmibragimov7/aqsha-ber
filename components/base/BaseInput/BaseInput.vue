@@ -136,7 +136,7 @@ export default {
     position: absolute;
     font-size: 12px;
     top: -9px;
-    left: 15px;
+    left: 10px;
     background: #FFF;
     padding: 3px;
     color: rgba(50, 36, 67, 0.5);

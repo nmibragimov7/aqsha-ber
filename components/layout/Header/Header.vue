@@ -1,5 +1,5 @@
 <template>
-  <div class='header'>
+  <div class='header' v-click-outside='() => isOpen = false'>
     <div class='container header__container d-flex align-items-center'
          :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}]'>
       <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
@@ -130,6 +130,7 @@ export default {
     visibility: hidden;
     z-index: 10;
     box-shadow: 0 23px 33px rgba(0, 0, 0, 0.05);
+
     @media (min-width: 900px) {
       display: none;
     }
@@ -156,6 +157,7 @@ export default {
   }
 
   &__bars {
+
     &__wrap {
       cursor: pointer;
       position: absolute;
