@@ -9,6 +9,12 @@
             К сожалению, мы не можем одобрить микрокредит.
           </p>
         </div>
+        <div v-else-if='networkError'>
+          <h1 class='text-center page__title my-2'>Ошибка</h1>
+          <p class='text-center page__description'>
+            Проверьте подключение к интернету и попробуйте снова.
+          </p>
+        </div>
         <div v-else-if='smsError'>
           <h1 class='text-center page__title my-2'>Заблокированно</h1>
           <p class='text-center page__description'>
@@ -22,8 +28,8 @@
             Оформление закончено: вы получите одобренную сумму выбранным вами способом
           </p>
         </div>
-        <div v-if='smsError || creditDenied'
-             class='d-flex justify-content-center px-5 mt-4'>
+        <div v-if='smsError || creditDenied || networkError'
+             class='d-flex justify-content-center px-5' :class='{"mt-6": !isDesktop}'>
           <img src='@/assets/images/warning.png'
                style='z-index: 1'
                class='w-100'
@@ -35,7 +41,7 @@
         <div v-if='smsError && !isDesktop' class='page__decor page__decor--back'>
           <img src='/svg/money_decor_2.svg' class='w-100' alt=''>
         </div>
-        <div class='page__action'>
+        <div class='page__action' :class='{"mt-6": giveMoney}'>
           <BaseButton v-if='giveMoney' bg='#FFDF11' classes='mt-4' @click='goToMain'>
             В личный кабинет
           </BaseButton>
@@ -58,6 +64,7 @@ export default {
     return {
       creditDenied: false,
       smsError: false,
+      networkError: false,
       giveMoney: false,
       isDesktop: false
     }
@@ -65,6 +72,7 @@ export default {
   mounted() {
     this.creditDenied = this.$route.query.creditDenied
     this.smsError = this.$route.query.smsError
+    this.networkError = this.$route.query.networkError
     this.giveMoney = this.$route.query.giveMoney
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
@@ -76,34 +84,38 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.mt-6 {
+  margin-top: 6rem !important;
+}
+
 .page {
   position: relative;
   border-radius: 0 0 20px 20px;
-  min-height: 30vh;
+  min-height: 40vh;
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
 
   @media (min-width: 900px) {
     background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+      url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+      url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+      linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
   }
 
   &.giveMoney {
     background: url("assets/images/money_2.svg") no-repeat 100% 35%,
-    url("assets/images/money_3.svg") no-repeat 30% 15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+      url("assets/images/money_3.svg") no-repeat 30% 15%,
+      linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
 
     @media (min-width: 900px) {
       background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-      url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-      url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-      linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+        url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+        url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+        linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
     }
   }
 
   @media (min-width: 900px) {
-    min-height: 40vh;
+    min-height: 50vh;
   }
 
   &__wrap {
@@ -140,20 +152,20 @@ export default {
 
   &__decor {
     position: absolute;
-    top: 0%;
+    top: 25%;
     left: -20%;
     max-width: 50%;
     transform: rotate(-30deg);
 
     @media (min-width: 900px) {
-      top: 35%;
+      top: 50%;
       left: -30%;
     }
 
     &.smsError {
       right: 0%;
       left: auto;
-      top: 15%;
+      top: 30%;
       z-index: 1;
       transform: rotate(0deg);
       max-width: 50%;
@@ -161,7 +173,7 @@ export default {
 
     &--back {
       left: 0%;
-      top: 35%;
+      top: 50%;
       z-index: 0;
       filter: blur(0px);
       transform: rotate(5deg);
