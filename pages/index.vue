@@ -27,8 +27,10 @@
                 <BaseButton small next color='#FFF'>Подробнее</BaseButton>
               </div>
             </div>
-            <div class="promotion__image">
-              <img class='w-100' src='~/assets/images/pig-large.png'/>
+            <div class="promotion__image-wrap">
+              <div class="promotion__image">
+                <img src='~/assets/images/pig-large.png'/>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +113,7 @@
               </NuxtLink>
             </div>
             <div class="about__button-first-col">
-              <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+              <BaseButton >ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
             </div>
           </div>
           <div class="col-md-6">
@@ -119,7 +121,7 @@
               <img src='/images/large_logo.png' alt='About'/>
             </NuxtLink>
             <div class="about__button">
-              <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+              <BaseButton >ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
             </div>
           </div>
         </div>
@@ -179,6 +181,7 @@ export default {
 .card {
   &__hands {
     min-height: 460px;
+    border-radius: 30px;
   }
 
   &__about {
@@ -249,6 +252,10 @@ export default {
 }
 
 .promotion {
+  &__block{
+    max-width: 45%;
+  }
+  position: relative;
   &.desktop {
     max-width: 65%;
     margin: 0 auto;
@@ -264,9 +271,17 @@ export default {
     }
   }
 
-  &__image {
-    max-width: 100px;
-    transform: scale(1.75);
+  &__image-wrap {
+    position: absolute;
+    right:0;
+    top:50%;
+    transform: translateY(-50%);
+  }
+  &__image{
+    max-width: clamp(100px,16vh,200px);
+    &>img{
+      width:100%;
+    }
   }
 
   &__title {
@@ -287,11 +302,6 @@ export default {
   background: #fff;
 
   &__get, &__repay {
-    //background: url("assets/images/get.png") 0% 0% no-repeat !important;
-    //@media (min-width: 900px) {
-    //  background: url("assets/images/get-large.png") 0% 0% no-repeat !important;
-    //  background-position: -20% 0% !important;
-    //}
     position: absolute;
     top: 0;
   }
@@ -352,7 +362,8 @@ export default {
 
     &--title {
       font-weight: 800;
-      font-size: 46px;
+      font-size: clamp(16px,4.5vh,46px);
+      line-height: 50px;
 
     }
 
@@ -422,8 +433,11 @@ export default {
     display: none;
     @media (min-width: 768px){
       display: block;
+      width:56%;
     }
     &-first-col{
+      margin: 0 auto;
+      width:60%;
       @media (min-width: 768px){
         display: none;
       }
