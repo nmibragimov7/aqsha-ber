@@ -8,7 +8,7 @@
           <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
             <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
             <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
-              Максимальная сумма микрокредита — 152 000 ₸
+              Максимальная сумма микрокредита - 152 000 ₸
             </p>
           </div>
         </div>
