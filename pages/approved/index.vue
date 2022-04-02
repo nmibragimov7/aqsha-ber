@@ -3,10 +3,10 @@
     <Header v-if='isDesktop' logo-small/>
     <div class='container py-3 page--wrap'>
       <div class='page__header d-flex flex-column align-items-center'>
-        <div class="page__inner-container text-center page__header--inner">
+        <div class="page__inner-container page__header--inner" :class='{"text-center": !isDesktop}'>
           <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>152 000 ₸</h3>
-          <div :class='{"my-4 ml-1": isDesktop}'>
-            <p class='m-0' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
+          <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
+            <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
             <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
               Максимальная сумма микрокредита — 152 000 ₸
             </p>
@@ -137,7 +137,7 @@ export default {
 
   &__title {
     font-weight: 800;
-    font-size: 60px;
+    font-size: 52px;
     line-height: 70px;
     white-space: nowrap;
   }
