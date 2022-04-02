@@ -96,9 +96,13 @@ export default {
   color: #000;
   border: none;
   cursor: pointer;
-  padding: 14px;
-  font-size: 20px;
+  font-size: 14px;
+  padding: 12px 10px;
   border-radius: 42px;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    padding: 14px 12px;
+  }
   &.small{
     padding:9px;
     font-size: 15px;
