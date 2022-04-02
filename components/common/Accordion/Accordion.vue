@@ -56,7 +56,7 @@ export default {
 
   &__question {
     position: relative;
-    padding: 20px 40px;
+    padding: 20px 70px 20px 30px;
     font-weight: 700;
     height: 80px;
     line-height: 150%;
@@ -69,10 +69,12 @@ export default {
   &__img {
     position: absolute;
     top: 50%;
-    right: 40px;
+    right: 30px;
     transform: translateY(-50%);
     transition: all 0.4s;
+
     @media (min-width: 900px) {
+      right: 40px;
       display: none;
     }
 

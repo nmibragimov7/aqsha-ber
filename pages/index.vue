@@ -1,5 +1,5 @@
 <template>
-  <div class='py-3 mt-5 bg-bodyBg'>
+  <div class='py-3 bg-bodyBg'>
     <div class='container'>
       <div class='row align-items-stretch' :class="{'my-5':isDesktop}">
         <template v-for='(card, index) in cards'>
@@ -39,7 +39,7 @@
         <div class='row'>
           <template v-for='(information, index) in infos'>
             <div :key='index' class='col-12 mb-4 col-md-6'>
-              <Card classes='bg-white card__hands py-5 h-100 justify-content-end'>
+              <Card rounded classes='bg-white card__hands py-5 h-100 justify-content-end'>
                 <div class="info__get">
                   <img v-if='information.image === "get"' src="@/assets/images/get.png" class="w-100"
                        alt="qweqw">

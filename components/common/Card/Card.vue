@@ -12,8 +12,8 @@ export default {
       type: String,
       default: ''
     },
-    rounded:{
-      type:Boolean,
+    rounded: {
+      type: Boolean,
       default: false
     }
   }
@@ -27,9 +27,11 @@ export default {
   z-index: 10;
   cursor: pointer;
   background: rgb(255, 255, 255);
-  &.rounded{
+
+  &.rounded {
     border-radius: 10px;
   }
+
   @media (min-width: 550px) {
     margin-bottom: 0;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);

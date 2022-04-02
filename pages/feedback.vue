@@ -2,7 +2,7 @@
   <div class='page' :class='{giveMoney}'>
     <Header logo-small />
     <div class='container page__wrap'>
-      <div class='page__body px-4' :class='{giveMoney}'>
+      <div class='page__body px-4 d-flex flex-column justify-content-between' :class='{giveMoney}'>
         <div v-if='creditDenied'>
           <h1 class='text-center page__title my-2'>Отказано</h1>
           <p class='text-center page__description'>
@@ -29,7 +29,7 @@
           </p>
         </div>
         <div v-if='smsError || creditDenied || networkError'
-             class='d-flex justify-content-center px-5' :class='{"mt-6": !isDesktop}'>
+             class='d-flex justify-content-center px-5'>
           <img src='@/assets/images/warning.png'
                style='z-index: 1'
                class='w-100'
@@ -84,10 +84,6 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-.mt-6 {
-  margin-top: 6rem !important;
-}
-
 .page {
   position: relative;
   border-radius: 0 0 20px 20px;
@@ -127,6 +123,7 @@ export default {
     right: 0;
     top: 0;
     left: 0;
+    min-height: 50vh;
 
     @media (min-width: 900px) {
       margin: 0 auto 0 auto;
@@ -183,6 +180,7 @@ export default {
 
   &__action {
     max-width: 325px;
+    min-width: 325px;
     margin: 0 auto;
   }
 }
