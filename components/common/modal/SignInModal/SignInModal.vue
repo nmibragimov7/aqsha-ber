@@ -3,12 +3,15 @@
     <div class='modal-signIn d-flex flex-column align-items-center'>
       <template v-if='!isSendCode'>
         <p class='m-0 mb-3 modal-signIn__title'>Личный кабинет</p>
-        <BaseInput v-model='form.username'
+        <BaseInput v-model='form.phone'
                    placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
                    mask='+7 (# # #) # # # - # # - # #'
                    class='mb-3' />
+        <BaseInput v-model='form.password'
+                   type="password"
+                   class='mb-3' />
         <BaseButton classes='modal-signIn__button'
-                    @click='sendCodeHandler'>ВХОД
+                    @click='sign'>ВХОД
         </BaseButton>
         <p style='font-weight: 700'>Регистрация</p>
       </template>
@@ -24,10 +27,12 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 import BaseInput from '../../../base/BaseInput/BaseInput'
 import BaseButton from '../../../base/BaseButton/BaseButton'
 import SendCode from '../../SendCode/SendCode'
 import { cleanNumber } from '../../../../helpers/maskUtils'
+import {tokenLs} from "../../../../assets/js/ls";
 
 export default {
   name: 'SignInModal',
@@ -35,12 +40,17 @@ export default {
   data() {
     return {
       form: {
-        username: '',
-        code: ''
+        phone: '',
+        code: '',
+        password:""
       },
       isSendCode: false,
-      isLoaded: false
     }
+  },
+  computed:{
+    ...mapState({
+      isLoaded:(state)=>state.auth.loaded
+    })
   },
   methods: {
     sendCodeHandler() {
@@ -52,14 +62,15 @@ export default {
     sendCode() {
       this.$requests.login({
         body: {
-          username: cleanNumber(this.form.username),
-          code: this.form.code
+          phone: cleanNumber(this.form.username),
+          password: this.form.code
         },
         options: {},
         onStart: () => {
           this.isLoaded = true
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+          console.log(data)
           this.$store.commit('auth/setAuth', true)
           this.$modal.hide('signIn')
         },
@@ -67,6 +78,30 @@ export default {
         },
         onFinally: () => {
           this.isLoaded = false
+        }
+      })
+    },
+    sign(){
+      this.$requests.login({
+        body: {
+          phone: cleanNumber(this.form.phone),
+          password: this.form.password
+        },
+        options: {},
+        onStart: () => {
+          this.$store.commit("auth/start")
+        },
+        onSuccess: (response) => {
+          if(response.data.Success){
+            tokenLs.save(response.data.Data)
+            this.$store.commit('auth/setAuth', true)
+            this.$modal.hide('signIn')
+          }
+        },
+        onError: (e) => {
+        },
+        onFinally: () => {
+          this.$store.commit("auth/end")
         }
       })
     }

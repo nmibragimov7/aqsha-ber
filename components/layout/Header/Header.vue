@@ -1,5 +1,5 @@
 <template>
-  <div class='header' v-click-outside='() => isOpen = false'>
+  <div v-click-outside='() => isOpen = false' class='header'>
     <div class='container header__container d-flex align-items-center'
          :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}]'>
       <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
@@ -46,7 +46,7 @@
                     class='header__link p-2 ml-2'>
             {{ menu.title }}
           </NuxtLink>
-          <div class='p-2 ml-2'>
+          <div v-if="!isAuth" class='p-2 ml-2'>
             <nuxt-link class='header__link' to='/login'>Вход</nuxt-link>
             <span class='header__link'>/</span>
             <nuxt-link class='header__link' to='/register'>Регистрация</nuxt-link>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
 import { menus } from '../../../fixstures/menus'
 import SignInModal from '../../common/modal/SignInModal/SignInModal'
 
@@ -76,6 +77,11 @@ export default {
       menus,
       isOpen: false
     }
+  },
+  computed:{
+    ...mapGetters({
+      isAuth:"auth/isAuth"
+    })
   },
   methods: {
     barsHandler() {
@@ -149,6 +155,7 @@ export default {
     &--link {
       text-decoration: none;
       color: #322443;
+      cursor: pointer;
 
       &.nuxt-link-exact-active {
         font-weight: bold;

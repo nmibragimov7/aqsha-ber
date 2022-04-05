@@ -1,8 +1,9 @@
+import {tokenLs} from "@/assets/js/ls";
 
 export default {
   state: () => ({
     profile: null,
-    isAuth: false,
+    isAuth: tokenLs.get(),
     loaded: false
   }),
   mutations: {
@@ -15,6 +16,9 @@ export default {
     end(state) {
       state.loaded = false
     }
+  },
+  actions:{
+
   },
   getters: {
     profile: (state) => {
