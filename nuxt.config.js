@@ -28,6 +28,8 @@ export default {
     '~plugins/axios.js',
     '~plugins/click_outside.js',
     {src:"~plugins/watchWindow.js",mode:"client"},
+    {src:"~plugins/token.js",mode:"client"},
+    {src:"~plugins/perms.js",mode:"client"},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,7 +46,6 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy:true
@@ -57,7 +58,6 @@ export default {
       }
     }
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

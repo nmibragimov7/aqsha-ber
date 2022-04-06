@@ -13,25 +13,24 @@
             <li class="pl-1">Введите данные карты, на которую вы хотите получить деньги</li>
             <li class="pl-1">Получите смс-код и введите его для подписания договора</li>
           </ol>
-          <p class="px-3">После этого деньги моментально  зачислятся на вашу карту</p>
+          <p class="px-3">После этого деньги моментально зачислятся на вашу карту</p>
         </div>
-        <div class="page__list py-5 mb-5 px-2">
+        <div v-if="isAuth" class="page__list py-5 mb-5 px-2">
           <h3 class="text-center m-0">Наличными в банкомате</h3>
           <ol class="mb-2">
-
-
-
 
 
             <li class="pl-1">Пройдите регистрацию</li>
             <li class="pl-1">выберите сумму и срок микрокредита</li>
             <li class="pl-1">выберите способ «Наличными в банкомате»</li>
             <li class="pl-1">получите смс-код и введите его для подписания договора</li>
-            <li class="pl-1">получите секретный код из двух частей, и в течение 24 часов в любом банкомате Halyk Bank введите номер телефона, секретный код и сумму одобренного микрокредита</li>
+            <li class="pl-1">получите секретный код из двух частей, и в течение 24 часов в любом банкомате Halyk Bank
+              введите номер телефона, секретный код и сумму одобренного микрокредита
+            </li>
           </ol>
           <p class="px-3">Если вы ввели все данные верно, банкомат выдаст деньги</p>
         </div>
-        <div class="page__list py-5 mb-5 px-2">
+        <div v-if="isAuth" class="page__list py-5 mb-5 px-2">
           <h3 class="text-center m-0">На QIWI-кошелек</h3>
           <ol class="mb-2">
             <li class="pl-1">пройдите регистрацию</li>
@@ -61,14 +60,20 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 import Header from "@/components/layout/Header/Header";
 
 export default {
-  components:{
+  components: {
     Header
   },
-  methods:{
-    goToMain(){
+  computed: {
+    ...mapGetters({
+      isAuth:"auth/isAuth"
+    })
+  },
+  methods: {
+    goToMain() {
       this.$router.push("/")
     }
   }
@@ -79,27 +84,32 @@ export default {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   min-height: 25vh;
   border-radius: 0 0 20px 20px;
-  &__wrap{
+
+  &__wrap {
     position: relative;
   }
-  &__body{
+
+  &__body {
     position: absolute;
-    right:0;
-    top:0;
-    left:0;
+    right: 0;
+    top: 0;
+    left: 0;
   }
+
   &__title {
-    margin-top:0;
+    margin-top: 0;
     color: #fff;
     font-size: 24px;
     font-weight: 500;
   }
-  &__list{
+
+  &__list {
     background: #fff;
     border-radius: 15px;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
     color: #322443;
-    & li{
+
+    & li {
       margin-bottom: 0;
     }
   }

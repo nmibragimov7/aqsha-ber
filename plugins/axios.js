@@ -1,3 +1,4 @@
+
 export const modifyAxios = (axios) => {
   const methods = ['get', 'post', 'delete', 'patch', 'put']
 
@@ -37,13 +38,18 @@ export const modifyAxios = (axios) => {
 }
 
 
-export default ({ $axios }, inject) => {
+export default ({ $axios, store }, inject) => {
   const api = $axios.create({
     headers: {
       common: {
         'X-App-Type': 'AqshaBer.Web',
         'X-App-Ver': 1
       }
+    }
+  })
+  api.onRequest((config)=>{
+    if(store.getters["auth/isAuth"]){
+      config.headers.common.Authorization = store.getters["auth/isAuth"]
     }
   })
   api.setBaseURL('/api')

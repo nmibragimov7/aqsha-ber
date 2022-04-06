@@ -30,7 +30,7 @@
               <p class='py-2 mb-3 mt-0'>{{ menu.title }}</p>
             </NuxtLink>
             <hr class='mb-4'>
-            <div class='mb-5'>
+            <div v-if="!isAuth" class='mb-5'>
               <span class='header__pop-up-menu--link' @click='signInHandler'>Вход</span>
               <span class='header__pop-up-menu--link'>/</span>
               <nuxt-link class='header__pop-up-menu--link' to='/register'>Регистрация</nuxt-link>
@@ -60,8 +60,8 @@
 
 <script>
 import {mapGetters} from "vuex"
-import { menus } from '../../../fixstures/menus'
 import SignInModal from '../../common/modal/SignInModal/SignInModal'
+import { menus } from '@/fixstures/menus'
 
 export default {
   name: 'Header',

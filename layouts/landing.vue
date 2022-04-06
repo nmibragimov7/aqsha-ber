@@ -16,6 +16,7 @@ import Footer from '../components/layout/Footer/Footer'
 
 export default {
   components: {Header,Promo, Footer},
+  mixins:["token"],
   data(){
     return {
       isDesktop:false

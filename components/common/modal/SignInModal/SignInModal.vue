@@ -49,7 +49,7 @@ export default {
   },
   computed:{
     ...mapState({
-      isLoaded:(state)=>state.auth.loaded
+      isLoaded:(state)=>state.auth.loaded,
     })
   },
   methods: {
@@ -70,7 +70,6 @@ export default {
           this.isLoaded = true
         },
         onSuccess: (data) => {
-          console.log(data)
           this.$store.commit('auth/setAuth', true)
           this.$modal.hide('signIn')
         },

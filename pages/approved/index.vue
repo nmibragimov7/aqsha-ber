@@ -72,7 +72,7 @@ import Header from '@/components/layout/Header/Header'
 
 export default {
   components: { Header, InputRange},
-
+  mixins:"perms",
   data() {
     return {
       code: '',
@@ -83,6 +83,7 @@ export default {
   },
   mounted() {
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
+    this.$store.dispatch("pay/getClientRate")
   },
   methods: {
     giveToMoney() {
