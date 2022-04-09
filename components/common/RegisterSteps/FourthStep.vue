@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logoSmall />
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p v-if='!isAuth' class='text-center page__step m-0 mb-3'>Шаг 4 из 6</p>
@@ -16,53 +16,50 @@
                      :blocks='blocks'
                      icon='self-icon'
                      text='Открыть камеру'
-                     isFourthStep
-                     @pickFile='pickFile' />
+                     is-fourth-step
+                     @pickFile='(file) => $emit("pickFile", "avatarFile", file)' />
         <PickDocResult v-else
-                       :file='file'
-                       :isAuth='isAuth'
-                       path='/register/fifth-step'
-                       @goBack='goBack' />
+                       :file='avatarFile'
+                       @stepHandler='$emit("stepHandler", "FifthStep")'
+                       @goBack='$emit("goBack", "avatarFile")' />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '../../components/layout/Header/Header'
-import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
-import ScanDocForm from '@/components/common/ScanDocForm/ScanDocForm'
+
+import Header from '../../layout/Header/Header'
+import ScanDocForm from '../ScanDocForm/ScanDocForm'
+import PickDocResult from '../PickDocResult/PickDocResult'
 
 export default {
-  components: { PickDocResult, Header, ScanDocForm },
+  components: { PickDocResult, ScanDocForm, Header },
+  props: {
+    isDesktop: {
+      type: Boolean,
+      default: false
+    },
+    avatarFile: {
+      default: null
+    },
+    isLoadedFile: {
+      type: Boolean,
+      default: false
+    },
+    isAuth: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      isLoadedFile: false,
-      file: null,
       blocks: [
         {
           img: 'selfi_get',
           text: ['Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку.']
         }
       ]
-    }
-  },
-  computed: {
-    isAuth() {
-      return this.$store.getters['auth/isAuth']
-    }
-  },
-  methods: {
-    stepHandler() {
-      this.$router.replace('/register/fifth-step')
-    },
-    pickFile(file) {
-      this.file = file
-      this.isLoadedFile = !!file
-    },
-    goBack() {
-      this.file = null
-      this.isLoadedFile = false
     }
   }
 }

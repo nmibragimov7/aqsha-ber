@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logo-small/>
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p class='text-center page__step m-0 mb-2'>Шаг 6 из 6</p>
@@ -15,66 +15,76 @@
           <h5 class='text-center text-bold m-0 mb-4'>Сведения о работе</h5>
           <div class='page__form--wrap'>
             <div class='mb-4'>
-              <BaseInput v-model='form.placeOfWork' label='Место работы (название)'/>
+              <BaseInput :value='placeOfWork'
+                         label='Место работы (название)'
+                         @input='value => $emit("inputHandler", "placeOfWork", value)' />
             </div>
             <div class='mb-4'>
-              <BaseInput v-model='form.position' label='Должность'/>
+              <BaseInput :value='position'
+                         label='Должность'
+                         @input='value => $emit("inputHandler", "position", value)' />
             </div>
-            <div class="row justify-content-between">
+            <div class='row justify-content-between'>
               <div class='col-6'>
-                <BaseInput v-model='form.income' label='Ежемес. доходы'/>
+                <BaseInput :value='income'
+                           label='Ежемес. доходы'
+                           @input='value => $emit("inputHandler", "income", value)' />
               </div>
               <div class='col-6'>
-                <BaseInput v-model='form.expenses' label='Ежемес. расходы'/>
+                <BaseInput :value='expenses'
+                           label='Ежемес. расходы'
+                           @input='value => $emit("inputHandler", "expenses", value)' />
               </div>
             </div>
             <BaseButton v-if='isDesktop'
                         uppercase
                         next
                         classes='mt-4'
-                        @click='confirm'>подтвердить</BaseButton>
+                        @click='confirm'>подтвердить
+            </BaseButton>
           </div>
         </div>
         <BaseButton v-if='!isDesktop'
                     uppercase
                     next
                     classes='mt-4'
-                    @click='confirm'>подтвердить</BaseButton>
+                    @click='$emit("confirm")'>подтвердить
+        </BaseButton>
       </div>
     </div>
-    <ProcessedModal/>
+    <ProcessedModal />
   </div>
 </template>
 
 <script>
-import Header from "../../components/layout/Header/Header"
-import BaseInput from "../../components/base/BaseInput/BaseInput"
-import BaseButton from "../../components/base/BaseButton/BaseButton"
-import ProcessedModal from '../../components/common/modal/ProcessedModal/ProcessedModal'
+
+import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
+import BaseButton from '../../base/BaseButton/BaseButton'
+import BaseInput from '../../base/BaseInput/BaseInput'
+import Header from '../../layout/Header/Header'
 
 export default {
-  components: { ProcessedModal, BaseButton, BaseInput, Header},
-  data() {
-    return {
-      form: {
-        placeOfWork: "",
-        position: "",
-        income: "",
-        expenses: "",
-      },
-      isDesktop: false
-    }
-  },
-  mounted() {
-    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
-  },
-  methods: {
-    confirm() {
-      this.$modal.show('processed')
-      setTimeout(() => {
-        this.$modal.hide('processed')
-        this.$router.push('/approved')
-      }, 5000)
+  components: { Header, BaseInput, BaseButton, ProcessedModal },
+  props: {
+    isDesktop: {
+      type: Boolean,
+      default: false
+    },
+    placeOfWork: {
+      type: String,
+      default: ''
+    },
+    position: {
+      type: String,
+      default: ''
+    },
+    income: {
+      type: String,
+      default: ''
+    },
+    expenses: {
+      type: String,
+      default: ''
     }
   }
 }

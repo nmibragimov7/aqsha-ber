@@ -12,44 +12,41 @@
                :class='[{"steps__dot--active": num === 3}]'></div>
         </div>
         <ScanDocForm v-if='!isLoadedFile'
-                     icon="scan_icon.png"
+                     icon='scan_icon.png'
                      text='Сканировать'
-                     @pickFile='pickFile'/>
+                     @pickFile='(file) => $emit("pickFile", "backDocFile", file)' />
         <PickDocResult v-else
-                       :file='file'
-                       path='/register/fourth-step'
-                       @goBack='goBack'/>
+                       :file='backDocFile'
+                       @stepHandler='$emit("stepHandler", "FourthStep")'
+                       @goBack='$emit("goBack", "backDocFile")' />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '../../components/layout/Header/Header'
-import ScanDocForm from '../../components/common/ScanDocForm/ScanDocForm'
-import PickDocResult from '../../components/common/PickDocResult/PickDocResult'
+
+import Header from '../../layout/Header/Header'
+import ScanDocForm from '../ScanDocForm/ScanDocForm'
+import PickDocResult from '../PickDocResult/PickDocResult'
 
 export default {
   components: { PickDocResult, ScanDocForm, Header },
-  data() {
-    return {
-      isLoadedFile: false,
-      file: null
-    }
-  },
-  computed: {
-    isAuth() {
-      return this.$store.getters['auth/isAuth']
-    }
-  },
-  methods: {
-    pickFile(file) {
-      this.file = file
-      this.isLoadedFile = !!file
+  props: {
+    isDesktop: {
+      type: Boolean,
+      default: false
     },
-    goBack() {
-      this.file = null
-      this.isLoadedFile = false
+    backDocFile: {
+      default: null
+    },
+    isLoadedFile: {
+      type: Boolean,
+      default: false
+    },
+    isAuth: {
+      type: Boolean,
+      default: false
     }
   }
 }

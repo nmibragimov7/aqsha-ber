@@ -34,23 +34,35 @@
           <div class='page__form--wrap'>
             <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
             <div class='mb-3'>
-              <BaseInput v-model='form.city' classes="text-center" placeholder='Город' />
+              <BaseInput :value='city'
+                         classes="text-center"
+                         placeholder='Город'
+                         @input='value => $emit("inputHandler", "city", value)' />
             </div>
             <div class='mb-3'>
-              <BaseInput v-model='form.street' classes="text-center" placeholder='Улица' />
+              <BaseInput :value='street'
+                         classes="text-center"
+                         placeholder='Улица'
+                         @input='value => $emit("inputHandler", "street", value)' />
             </div>
             <div class="row mb-3 justify-content-between">
               <div class='col-6'>
-                <BaseInput v-model='form.home' classes="text-center" placeholder='Дом' />
+                <BaseInput :value='home'
+                           classes="text-center"
+                           placeholder='Дом'
+                           @input='value => $emit("inputHandler", "home", value)' />
               </div>
               <div class='col-6'>
-                <BaseInput v-model='form.apartment' classes="text-center" placeholder='Квартира' />
+                <BaseInput :value='apartment'
+                           classes="text-center"
+                           placeholder='Квартира'
+                           @input='value => $emit("inputHandler", "apartment", value)' />
                 <p class='page__form--desc text-center mt-2'>- Если нет номера квартиры, поставьте прочерк</p>
               </div>
             </div>
             <BaseButton uppercase
                         next
-                        @click='stepHandler'>подтвердить</BaseButton>
+                        @click='$emit("stepHandler", "SixthStep")'>подтвердить</BaseButton>
           </div>
         </div>
       </div>
@@ -59,25 +71,32 @@
 </template>
 
 <script>
-import Header from '../../components/layout/Header/Header'
-import BaseInput from '../../components/base/BaseInput/BaseInput'
-import BaseButton from '../../components/base/BaseButton/BaseButton'
 
+import Header from '../../layout/Header/Header'
+import BaseInput from '../../base/BaseInput/BaseInput'
+import BaseButton from '../../base/BaseButton/BaseButton'
 export default {
   components: { BaseButton, BaseInput, Header },
-  data() {
-    return {
-      form: {
-        city: '',
-        street: '',
-        home: '',
-        apartment: ''
-      }
-    }
-  },
-  methods: {
-    stepHandler() {
-      this.$router.replace("/register/sixth-step")
+  props: {
+    isDesktop: {
+      type: Boolean,
+      default: false
+    },
+    city: {
+      type: String,
+      default: ''
+    },
+    street: {
+      type: String,
+      default: ''
+    },
+    home: {
+      type: String,
+      default: ''
+    },
+    apartment: {
+      type: String,
+      default: ''
     }
   }
 }

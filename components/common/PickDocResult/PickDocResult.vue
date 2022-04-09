@@ -2,8 +2,8 @@
   <div class='page__form'>
     <div class='page__form--small d-flex flex-column align-items-center'>
       <div class='page__feedback text-center mb-4'>Успешно отсканировано</div>
-      <img :src='imagePreview'
-           v-show='showPreview'
+      <img v-show='showPreview'
+           :src='imagePreview'
            alt='Scan'
            class='mb-4' />
       <BaseButton prev
@@ -21,16 +21,8 @@ export default {
   name: 'PickDocResult',
   components: { BaseButton },
   props: {
-    path: {
-      type: String,
-      default: ''
-    },
     file: {
       default: null
-    },
-    isAuth: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -53,11 +45,7 @@ export default {
   },
   methods: {
     stepHandler() {
-      if(this.isAuth) {
-        this.$router.replace('/approved')
-        return
-      }
-      this.$router.replace(this.path)
+      this.$emit("stepHandler")
     }
   }
 }

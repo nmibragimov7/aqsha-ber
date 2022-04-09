@@ -62,7 +62,7 @@ export default {
   methods: {
     getHandler() {
       if (this.isAuth) {
-        this.$router.replace("register/second-step")
+        this.$router.replace("register")
         return
       }
       this.$modal.show("processed")
