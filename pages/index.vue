@@ -113,7 +113,7 @@
               </NuxtLink>
             </div>
             <div class="about__button-first-col">
-              <BaseButton >ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+              <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
             </div>
           </div>
           <div class="col-md-6">
@@ -121,7 +121,7 @@
               <img src='/images/large_logo.png' alt='About'/>
             </NuxtLink>
             <div class="about__button">
-              <BaseButton >ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+              <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
             </div>
           </div>
         </div>
@@ -252,10 +252,12 @@ export default {
 }
 
 .promotion {
-  &__block{
+  &__block {
     max-width: 45%;
   }
+
   position: relative;
+
   &.desktop {
     max-width: 65%;
     margin: 0 auto;
@@ -273,14 +275,16 @@ export default {
 
   &__image-wrap {
     position: absolute;
-    right:0;
-    top:50%;
+    right: 0;
+    top: 50%;
     transform: translateY(-50%);
   }
-  &__image{
-    max-width: clamp(100px,16vh,200px);
-    &>img{
-      width:100%;
+
+  &__image {
+    max-width: clamp(100px, 16vh, 200px);
+
+    & > img {
+      width: 100%;
     }
   }
 
@@ -362,7 +366,7 @@ export default {
 
     &--title {
       font-weight: 800;
-      font-size: clamp(16px,4.5vh,46px);
+      font-size: clamp(16px, 4.5vh, 46px);
       line-height: 50px;
 
     }
@@ -405,22 +409,24 @@ export default {
 
 .about {
   color: #FFF;
-  &__first-col{
-    order:1;
+
+  &__first-col {
+    order: 1;
     text-align: center;
-    @media (min-width: 768px){
-      order:0;
+    @media (min-width: 768px) {
+      order: 0;
       text-align: left;
     }
   }
 
   &__img {
-    width:50%;
+    width: 50%;
     display: block;
     margin: 0 auto;
-    @media (min-width: 768px){
-      width:100%;
+    @media (min-width: 768px) {
+      width: 100%;
     }
+
     & > img {
       width: 100%;
     }
@@ -431,14 +437,15 @@ export default {
     max-width: 400px;
     margin: -40px auto 0;
     display: none;
-    @media (min-width: 768px){
+    @media (min-width: 768px) {
       display: block;
-      width:56%;
+      width: 56%;
     }
-    &-first-col{
+
+    &-first-col {
       margin: 0 auto;
-      width:60%;
-      @media (min-width: 768px){
+      width: 60%;
+      @media (min-width: 768px) {
         display: none;
       }
     }

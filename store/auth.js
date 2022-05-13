@@ -2,7 +2,8 @@ export default {
   state: () => ({
     profile: null,
     isAuth: null,
-    loaded: false
+    loaded: false,
+    registrationData: {}
   }),
   mutations: {
     setAuth(state, payload) {
@@ -13,6 +14,24 @@ export default {
     },
     end(state) {
       state.loaded = false
+    },
+    addRegistrationData(state, payload) {
+      state.registrationData = {
+        ...state.registrationData,
+        ...payload
+      }
+    }
+  },
+  actions: {
+    getClientRateAnonymous(ctx, iin) {
+      this.$requests.getClientRateAnonymous({
+        body: {
+          iin
+        },
+        onSuccess(data) {
+          console.log(data)
+        }
+      })
     }
   },
   getters: {
@@ -24,6 +43,6 @@ export default {
     },
     loaded: (state) => {
       return state.loaded
-    }
+    },
   }
 }

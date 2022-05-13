@@ -25,7 +25,7 @@
             </div>
             <div class='mb-3'>
               <BaseButton classes='promo__button' @click='getHandler'>
-                {{ isAuth ? "ПОЛУЧИТЬ ДЕНЬГИ" : "Рассчитать сумму кредита!" }}
+                {{ isAuth ? "Рассчитать сумму кредита!" : "ПОЛУЧИТЬ ДЕНЬГИ" }}
               </BaseButton>
             </div>
             <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор
@@ -63,13 +63,14 @@ export default {
     getHandler() {
       if (this.isAuth) {
         this.$router.replace("register")
-        return
+        return false
       }
-      this.$modal.show("processed")
-      setTimeout(() => {
-        this.$modal.hide("processed")
-        this.$router.replace("register")
-      }, 5000)
+      console.log(this.$store.dispatch("auth/getClientRateAnonymous", this.valueInput))
+      // this.$modal.show("processed")
+      // setTimeout(() => {
+      //   this.$modal.hide("processed")
+      //   this.$router.replace("register")
+      // }, 5000)
     }
   }
 }
@@ -80,23 +81,28 @@ export default {
   color: #FFF;
   width: 100%;
   flex-grow: 1;
-  &__container{
+
+  &__container {
     height: 100%;
   }
-  &__payments{
+
+  &__payments {
     align-self: center;
     margin-bottom: 10vh;
-    .promo__title{
-      font-size: clamp(40px,6.5vh,70px);
+
+    .promo__title {
+      font-size: clamp(40px, 6.5vh, 70px);
       line-height: 58px;
       text-align: left;
     }
-    .promo__description{
-      font-size: clamp(27px,3.5vh,35px);
+
+    .promo__description {
+      font-size: clamp(27px, 3.5vh, 35px);
       text-align: left;
       font-weight: normal;
     }
   }
+
   &__img {
     margin-bottom: -31px;
   }
@@ -122,13 +128,14 @@ export default {
 }
 
 .form {
-  &.desktop{
-    top:0;
+  &.desktop {
+    top: 0;
     background: none;
-    padding:0;
+    padding: 0;
     max-width: 340px;
     margin-top: 35px;
   }
+
   background: rgba(255, 255, 255, 0.36);
   backdrop-filter: blur(15px);
   border-radius: 10px;
