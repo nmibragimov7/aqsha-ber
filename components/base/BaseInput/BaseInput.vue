@@ -5,6 +5,7 @@
       <input
         v-mask='mask'
         :type='visibility'
+        :masked="false"
         :placeholder='placeholder'
         :style='{color, backgroundColor: bg}'
         :class="['input',

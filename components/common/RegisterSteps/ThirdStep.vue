@@ -17,10 +17,11 @@
                      @pickFile='(file) => $emit("pickFile", "backDocFile", file)' />
         <PickDocResult v-else
                        :file='backDocFile'
-                       @stepHandler='$emit("stepHandler", "FourthStep")'
+                       @stepHandler='confirmRegistration'
                        @goBack='$emit("goBack", "backDocFile")' />
       </div>
     </div>
+    <ProcessedModal/>
   </div>
 </template>
 
@@ -29,15 +30,19 @@
 import Header from '../../layout/Header/Header'
 import ScanDocForm from '../ScanDocForm/ScanDocForm'
 import PickDocResult from '../PickDocResult/PickDocResult'
+import ProcessedModal from "@/components/common/modal/ProcessedModal/ProcessedModal"
 
 export default {
-  components: { PickDocResult, ScanDocForm, Header },
+  components: { PickDocResult, ScanDocForm, Header,ProcessedModal },
   props: {
     isDesktop: {
       type: Boolean,
       default: false
     },
     backDocFile: {
+      default: null
+    },
+    frontDocFile: {
       default: null
     },
     isLoadedFile: {
@@ -47,6 +52,22 @@ export default {
     isAuth: {
       type: Boolean,
       default: false
+    }
+  },
+  methods:{
+    confirmRegistration(){
+      const successCall = ()=>{
+        this.$emit("stepHandler", "FourthStep")
+        this.$modal.hide("processed")
+      }
+      this.$modal.show("processed")
+      if(this.frontDocFile && this.backDocFile){
+        this.$store.dispatch("auth/confirmRegistration",{
+          frontfile:this.frontDocFile,
+          backfile:this.backDocFile,
+          successCall
+        })
+      }
     }
   }
 }

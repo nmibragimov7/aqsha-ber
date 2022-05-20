@@ -1,12 +1,12 @@
 <template>
   <div class='page'>
-    <Header logo-small />
+    <Header logo-small/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <div v-if='isDesktop' class="page__decor">
           <img src="/svg/money_decor.svg" class="w-100" alt="">
         </div>
-        <h1 class='text-center page__title m-0 mb-4'>152 000 ₸</h1>
+        <h1 class='text-center page__title m-0 mb-4'>{{ user.SumDefault }} ₸</h1>
         <p class='text-center page__text m-0 mb-4'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
         <p class='text-center page__desc m-0 mb-4'>Не переживайте — на этом этапе вы нам ничего не должны!</p>
         <p class='text-center page__step m-0 mb-2'>Шаг 1 из 6</p>
@@ -29,29 +29,33 @@
           <div class='page__form--wrap'>
             <p class='text-center m-0 mb-3'>Проверьте номер телефона — на него придет смс с кодом</p>
             <BaseInput :value='phone'
-                       @input='value => $emit("inputHandler", "phone", value)'
-                       isRegister
+                       is-register
                        mask='+7 (# # #) # # # - # # - # #'
-                       placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _' />
+                       placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
+                       @input='value => $emit("inputHandler", "phone", value)'/>
             <BaseButton classes='mt-3'
-                        @click='$modal.show("sendCode")'>получить смс</BaseButton>
+                        @click='sendCode'>получить смс
+            </BaseButton>
           </div>
         </div>
       </div>
     </div>
     <SendCodeModal :code='code'
-                   @stepHandler='$emit("stepHandler", "SecondStep")'
-                   @inputHandler='value => $emit("inputHandler", "code", value)' />
+                   @stepHandler='confirmSmsCode'
+                   @inputHandler='value => $emit("inputHandler", "code", value)'/>
   </div>
 </template>
 
 <script>
-import Header from '../../layout/Header/Header'
-import BaseInput from '../../base/BaseInput/BaseInput'
-import BaseButton from '../../base/BaseButton/BaseButton'
-import SendCodeModal from '../modal/SendCodeModal/SendCodeModal'
+import {mapGetters} from "vuex";
+import Header from "../../layout/Header/Header"
+import BaseInput from "../../base/BaseInput/BaseInput"
+import BaseButton from "../../base/BaseButton/BaseButton"
+import SendCodeModal from "../modal/SendCodeModal/SendCodeModal"
+import {cleanNumber} from "~/helpers/maskUtils";
+
 export default {
-  name: 'FirstStep',
+  name: "FirstStep",
   components: {
     SendCodeModal,
     BaseButton,
@@ -64,10 +68,46 @@ export default {
       default: false
     },
     code: {
-      type: String
+      type: String,
+      default: ""
     },
     phone: {
-      type: String
+      type: String,
+      default: ""
+    }
+  },
+  computed:{
+    ...mapGetters({
+      user:"auth/userData"
+    })
+  },
+  methods: {
+    sendCode() {
+      const successCallBack = () => {
+        this.$modal.show("sendCode")
+      }
+      this.$store.dispatch("auth/registerClient", {
+        phone: cleanNumber(this.phone),
+        successCallBack
+      })
+      //
+    },
+    confirmSmsCode() {
+      const _this = this
+      this.$requests.confirmRegisterCode({
+        body: {
+          iin: this.$store.state.auth.userData.iin,
+          code: this.code
+        },
+        onSuccess(response) {
+          if (response.data.Success) {
+            _this.$emit("stepHandler", "SecondStep")
+          }
+        },
+        onError(){
+          alert("ошибка")
+        }
+      })
     }
   }
 }

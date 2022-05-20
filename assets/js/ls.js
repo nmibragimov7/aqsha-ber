@@ -18,4 +18,5 @@ const lsStorage = (key)=>{
   }
 }
 
-export const tokenLs = lsStorage("token")
+export const tokenLs = lsStorage("token");
+export const tokenRegister = lsStorage("tokenRegister");

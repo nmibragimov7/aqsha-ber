@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logo-small />
+    <Header logo-small/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <p v-if='!isAuth' class='text-center page__step m-0 mb-3'>Шаг 4 из 6</p>
@@ -17,24 +17,27 @@
                      icon='self-icon'
                      text='Открыть камеру'
                      is-fourth-step
-                     @pickFile='(file) => $emit("pickFile", "avatarFile", file)' />
+                     @pickFile='(file) => $emit("pickFile", "avatarFile", file)'/>
         <PickDocResult v-else
                        :file='avatarFile'
-                       @stepHandler='$emit("stepHandler", "FifthStep")'
-                       @goBack='$emit("goBack", "avatarFile")' />
+                       @stepHandler='uploadSelfi'
+                       @goBack='$emit("goBack", "avatarFile")'/>
       </div>
+      <ProcessedModal/>
     </div>
   </div>
 </template>
 
 <script>
 
-import Header from '../../layout/Header/Header'
-import ScanDocForm from '../ScanDocForm/ScanDocForm'
-import PickDocResult from '../PickDocResult/PickDocResult'
+import Header from "../../layout/Header/Header"
+import ScanDocForm from "../ScanDocForm/ScanDocForm"
+import PickDocResult from "../PickDocResult/PickDocResult"
+import ProcessedModal from "@/components/common/modal/ProcessedModal/ProcessedModal"
+import {tokenRegister} from "@/assets/js/ls";
 
 export default {
-  components: { PickDocResult, ScanDocForm, Header },
+  components: {PickDocResult, ScanDocForm, Header, ProcessedModal},
   props: {
     isDesktop: {
       type: Boolean,
@@ -56,10 +59,38 @@ export default {
     return {
       blocks: [
         {
-          img: 'selfi_get',
-          text: ['Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку.']
+          img: "selfi_get",
+          text: ["Сделайте селфи. Снимите головной убор и очки, убедитесь, что лицо хорошо освещено и попадает в рамку."]
         }
       ]
+    }
+  },
+  methods: {
+    uploadSelfi() {
+      if (this.avatarFile) {
+        const _this = this;
+        const multiForm = new FormData();
+        _this.$modal.show("processed")
+        multiForm.append("file", this.avatarFile)
+        _this.$requests.uploadSelfie({
+          options:{
+            headers: {
+              "content-type": "multipart/form-data",
+              "Authorization": `Bearer ${tokenRegister.get()}`
+            }
+          },
+          body: multiForm,
+          onSuccess(response) {
+            if (response.data.Success) {
+              _this.$emit("stepHandler", "FifthStep")
+              _this.$modal.hide("processed");
+            }
+          },
+          onError() {
+            alert("Ошибка")
+          }
+        })
+      }
     }
   }
 }

@@ -4,11 +4,11 @@
     <div class='container py-3 page--wrap'>
       <div class='page__header d-flex flex-column align-items-center'>
         <div class="page__inner-container page__header--inner" :class='{"text-center": !isDesktop}'>
-          <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>152 000 ₸</h3>
+          <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
           <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
             <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
             <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
-              Максимальная сумма микрокредита - 152 000 ₸
+              Максимальная сумма микрокредита - {{ userData.SumMax }} ₸
             </p>
           </div>
         </div>
@@ -18,18 +18,18 @@
           <div class='d-flex justify-content-between align-items-center mt-2'>
             <span class='mr-2 info__title'>Вы берёте сумму</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>{{ sum }} ₸</span>
+            <span class='ml-2 info__info'>{{ userData.SumDefault }} ₸</span>
           </div>
           <div class='mt-3'>
-            <InputRange v-model='sum' :max='152000'/>
+            <InputRange v-model='userData.SumDefault' :min="userData.SumMin" :step="userData.SumIncrementValue" :max='userData.SumMax'/>
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
             <span class='mr-2 info__title'>Срок возврата</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>{{ duration }} дней</span>
+            <span class='ml-2 info__info'>{{ userData.DaysDefault }} дней</span>
           </div>
           <div class='mt-3'>
-            <InputRange v-model='duration' purple :max='30'/>
+            <InputRange v-model='userData.DaysDefault' :min="userData.DaysMin" purple :max='userData.DaysMax'/>
           </div>
           <div class='mt-4'>
             <div class='page__stars my-3'/>
@@ -39,7 +39,7 @@
           <div class='d-flex mt-3 justify-content-between align-items-center'>
             <span class='mr-2 info__bold'>Процент по микрокредиту:</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>0,1%</span>
+            <span class='ml-2 info__title'>{{ userData.PercentNormal }}%</span>
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
             <span class='mr-2 info__bold'>Переплата по микрокредиту:</span>
@@ -67,27 +67,65 @@
 </template>
 
 <script>
-import InputRange from '@/components/common/InputRange/InputRange.vue'
-import Header from '@/components/layout/Header/Header'
+import {mapGetters} from "vuex";
+import InputRange from "@/components/common/InputRange/InputRange.vue"
+import Header from "@/components/layout/Header/Header"
+import {tokenRegister} from "@/assets/js/ls";
 
 export default {
-  components: { Header, InputRange},
-  mixins:"perms",
+  components: {Header, InputRange},
+  mixins: "perms",
+  computed: {
+    ...mapGetters({
+      user: "auth/userData"
+    })
+  },
   data() {
     return {
-      code: '',
-      sum: 152000,
-      duration: 15,
-      isDesktop: false
+      code: "",
+      userData:{
+        "SumMin": 0,
+        "SumMax": 0,
+        "SumDefault": 0,
+        "DaysMin": 0,
+        "DaysMax": 0,
+        "DaysDefault": 0,
+        "PercentNormal": 0,
+        "SumIncrementValue": 1000
+      },
+      isDesktop:false
     }
   },
   mounted() {
-    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
-    this.$store.dispatch("pay/getClientRate")
+    if(!this.user.SumDefault){
+        this.$router.push("/")
+    }else{
+      this.userData ={...this.user}
+    }
+    this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
+    // this.$store.dispatch("pay/getClientRate")
   },
   methods: {
     giveToMoney() {
-      this.$router.push('/approved/select-card')
+      const onSuccess = (response)=>{
+        if(response.data.Success){
+          this.$router.push("/approved/select-card")
+        }
+
+      }
+      const token = tokenRegister.get()
+      this.$requests.addVerificationRequest({
+        options: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        },
+        body: {
+          sum: this.SumDefault,
+          days: this.DaysDefault
+        },
+        onSuccess
+      })
     }
   }
 }

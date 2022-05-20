@@ -16,7 +16,7 @@
               <BaseInput
                 v-model='valueInput'
                 placeholder='Введите ИИН'
-                mask='#### #### #### ####'
+                mask='### ### ### ###'
                 bg='transparent'
                 color='#FFF'
                 is-promo
@@ -25,7 +25,7 @@
             </div>
             <div class='mb-3'>
               <BaseButton classes='promo__button' @click='getHandler'>
-                {{ isAuth ? "Рассчитать сумму кредита!" : "ПОЛУЧИТЬ ДЕНЬГИ" }}
+                ПОЛУЧИТЬ ДЕНЬГИ
               </BaseButton>
             </div>
             <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор
@@ -41,6 +41,7 @@
 
 <script>
 import ProcessedModal from "../modal/ProcessedModal/ProcessedModal"
+import {cleanNumber} from "~/helpers/maskUtils";
 
 export default {
   name: "Promo",
@@ -61,16 +62,16 @@ export default {
   },
   methods: {
     getHandler() {
-      if (this.isAuth) {
+      this.$modal.show("processed")
+      const successCall = ()=>{
+        this.$modal.hide("processed")
         this.$router.replace("register")
-        return false
       }
-      console.log(this.$store.dispatch("auth/getClientRateAnonymous", this.valueInput))
-      // this.$modal.show("processed")
-      // setTimeout(() => {
-      //   this.$modal.hide("processed")
-      //   this.$router.replace("register")
-      // }, 5000)
+      const data ={
+        iin:cleanNumber(this.valueInput,false),
+        successCall
+      }
+      this.$store.dispatch("auth/getClientRateAnonymous", data)
     }
   }
 }

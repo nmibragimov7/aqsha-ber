@@ -62,7 +62,7 @@
             </div>
             <BaseButton uppercase
                         next
-                        @click='$emit("stepHandler", "SixthStep")'>подтвердить</BaseButton>
+                        @click='saveData'>подтвердить</BaseButton>
           </div>
         </div>
       </div>
@@ -97,6 +97,14 @@ export default {
     apartment: {
       type: String,
       default: ''
+    }
+  },
+  methods:{
+    saveData(){
+      this.$store.commit("auth/addRegistrationData",{
+        "Address": `${this.city} ${this.street} ${this.home}/${this.apartment}`,
+      })
+      this.$emit("stepHandler", "SixthStep")
     }
   }
 }

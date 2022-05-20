@@ -42,7 +42,7 @@ export default ({ $axios, store }, inject) => {
   const api = $axios.create({
     headers: {
       common: {
-        'X-App-Type': 'AqshaBer.Web',
+        'X-App-Type': 'Web',
         'X-App-Ver': 1
       }
     }

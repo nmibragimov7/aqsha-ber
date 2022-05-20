@@ -9,9 +9,10 @@
              :home='form.home'
              :apartment='form.apartment'
              :place-of-work='form.placeOfWork'
-             :position='form.position'
-             :income='form.income'
-             :expenses='form.expenses'
+             :relative-name="form.relativeName"
+             :friend-name="form.friendName"
+             :friend-number="form.friendNumber"
+             :relative-number="form.relativeNumber"
              :front-doc-file='form.frontDocFile'
              :back-doc-file='form.backDocFile'
              :avatar-file='form.avatarFile'
@@ -30,7 +31,6 @@ import ThirdStep from '../../components/common/RegisterSteps/ThirdStep'
 import FourthStep from '../../components/common/RegisterSteps/FourthStep'
 import FifthStep from '../../components/common/RegisterSteps/FifthStep'
 import SixthStep from '../../components/common/RegisterSteps/SixthStep'
-
 export default {
   components: {
     FirstStep,
@@ -49,13 +49,15 @@ export default {
         street: '',
         home: '',
         apartment: '',
-        placeOfWork: "",
         position: "",
-        income: "",
-        expenses: "",
         frontDocFile: null,
         backDocFile: null,
-        avatarFile: null
+        avatarFile: null,
+        relativeName:"",
+        relativeNumber:"",
+        friendName:"",
+        friendNumber:""
+
       },
       isLoadedFile: false,
       isDesktop: false,
@@ -68,7 +70,9 @@ export default {
     }
   },
   mounted() {
-    if(this.isAuth) {
+    if(!this.$store.state.auth.userData.iin){
+      this.$router.push('/');
+    } else if(this.isAuth) {
       this.currentComponent = 'SecondStep'
     }
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
