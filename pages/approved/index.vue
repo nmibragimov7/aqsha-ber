@@ -1,9 +1,9 @@
 <template>
   <div class='page'>
-    <Header v-if='isDesktop' logo-small/>
+    <Header v-if='isDesktop' logo-small />
     <div class='container py-3 page--wrap'>
       <div class='page__header d-flex flex-column align-items-center'>
-        <div class="page__inner-container page__header--inner" :class='{"text-center": !isDesktop}'>
+        <div class='page__inner-container page__header--inner' :class='{"text-center": !isDesktop}'>
           <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
           <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
             <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
@@ -14,14 +14,15 @@
         </div>
       </div>
       <div class='page__body p-4'>
-        <div class="page__inner-container">
+        <div class='page__inner-container'>
           <div class='d-flex justify-content-between align-items-center mt-2'>
             <span class='mr-2 info__title'>Вы берёте сумму</span>
             <span class='page__dotted'></span>
             <span class='ml-2 info__info'>{{ userData.SumDefault }} ₸</span>
           </div>
           <div class='mt-3'>
-            <InputRange v-model='userData.SumDefault' :min="userData.SumMin" :step="userData.SumIncrementValue" :max='userData.SumMax'/>
+            <InputRange v-model='userData.SumDefault' :min='userData.SumMin' :step='userData.SumIncrementValue'
+                        :max='userData.SumMax' />
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
             <span class='mr-2 info__title'>Срок возврата</span>
@@ -29,12 +30,12 @@
             <span class='ml-2 info__info'>{{ userData.DaysDefault }} дней</span>
           </div>
           <div class='mt-3'>
-            <InputRange v-model='userData.DaysDefault' :min="userData.DaysMin" purple :max='userData.DaysMax'/>
+            <InputRange v-model='userData.DaysDefault' :min='userData.DaysMin' purple :max='userData.DaysMax' />
           </div>
           <div class='mt-4'>
-            <div class='page__stars my-3'/>
-            <BaseInput v-model='code' placeholder='ПРОМОКОД'/>
-            <div class='page__stars my-3'/>
+            <div class='page__stars my-3' />
+            <BaseInput v-model='code' placeholder='ПРОМОКОД' />
+            <div class='page__stars my-3' />
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
             <span class='mr-2 info__bold'>Процент по микрокредиту:</span>
@@ -51,7 +52,7 @@
             <span class='page__dotted'></span>
             <span class='ml-2 info__info'>000000₸</span>
           </div>
-          <div class='page__stars my-3'/>
+          <div class='page__stars my-3' />
           <div class='d-flex mt-4 justify-content-between align-items-center'>
             <span class='mr-2 info__info'>ИТОГО К ВОЗВРАТУ:</span>
             <span class='page__dotted'></span>
@@ -67,53 +68,63 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import InputRange from "@/components/common/InputRange/InputRange.vue"
-import Header from "@/components/layout/Header/Header"
-import {tokenRegister} from "@/assets/js/ls";
+import { mapGetters } from 'vuex'
+import InputRange from '@/components/common/InputRange/InputRange.vue'
+import Header from '@/components/layout/Header/Header'
+import { tokenRegister } from '@/assets/js/ls'
 
 export default {
-  components: {Header, InputRange},
-  mixins: "perms",
+  components: { Header, InputRange },
+  mixins: 'perms',
   computed: {
     ...mapGetters({
-      user: "auth/userData"
-    })
+      user: 'auth/userData'
+    }),
+    isAuth() {
+      return this.$store.getters['auth/isAuth']
+    }
   },
   data() {
     return {
-      code: "",
-      userData:{
-        "SumMin": 0,
-        "SumMax": 0,
-        "SumDefault": 0,
-        "DaysMin": 0,
-        "DaysMax": 0,
-        "DaysDefault": 0,
-        "PercentNormal": 0,
-        "SumIncrementValue": 1000
+      code: '',
+      userData: {
+        'SumMin': 0,
+        'SumMax': 0,
+        'SumDefault': 0,
+        'DaysMin': 0,
+        'DaysMax': 0,
+        'DaysDefault': 0,
+        'PercentNormal': 0,
+        'SumIncrementValue': 1000
       },
-      isDesktop:false
+      isDesktop: false
     }
   },
   mounted() {
-    if(!this.user.SumDefault){
-        this.$router.push("/")
-    }else{
-      this.userData ={...this.user}
+    if (!this.user.SumDefault) {
+      this.$router.push('/')
+    } else {
+      this.userData = { ...this.user }
     }
-    this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
     // this.$store.dispatch("pay/getClientRate")
   },
   methods: {
     giveToMoney() {
-      const onSuccess = (response)=>{
-        if(response.data.Success){
-          this.$router.push("/approved/select-card")
+      const onSuccess = (response) => {
+        if (response.data.Success) {
+          this.$router.push('/approved/select-card')
         }
-
+        if (response.data.ErrorCode === 1) {
+          this.$router.push({
+            path: '/feedback',
+            query: {
+              creditDenied: true
+            }
+          })
+        }
       }
-      const token = tokenRegister.get()
+      const token = tokenRegister.get() ? tokenRegister.get() : this.isAuth
       this.$requests.addVerificationRequest({
         options: {
           headers: {

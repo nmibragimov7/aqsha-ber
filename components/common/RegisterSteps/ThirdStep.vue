@@ -21,7 +21,7 @@
                        @goBack='$emit("goBack", "backDocFile")' />
       </div>
     </div>
-    <ProcessedModal/>
+    <ProcessedModal />
   </div>
 </template>
 
@@ -30,10 +30,10 @@
 import Header from '../../layout/Header/Header'
 import ScanDocForm from '../ScanDocForm/ScanDocForm'
 import PickDocResult from '../PickDocResult/PickDocResult'
-import ProcessedModal from "@/components/common/modal/ProcessedModal/ProcessedModal"
+import ProcessedModal from '@/components/common/modal/ProcessedModal/ProcessedModal'
 
 export default {
-  components: { PickDocResult, ScanDocForm, Header,ProcessedModal },
+  components: { PickDocResult, ScanDocForm, Header, ProcessedModal },
   props: {
     isDesktop: {
       type: Boolean,
@@ -54,17 +54,17 @@ export default {
       default: false
     }
   },
-  methods:{
-    confirmRegistration(){
-      const successCall = ()=>{
-        this.$emit("stepHandler", "FourthStep")
-        this.$modal.hide("processed")
+  methods: {
+    confirmRegistration() {
+      const successCall = () => {
+        this.$emit('stepHandler', 'FourthStep')
+        this.$modal.hide('processed')
       }
-      this.$modal.show("processed")
-      if(this.frontDocFile && this.backDocFile){
-        this.$store.dispatch("auth/confirmRegistration",{
-          frontfile:this.frontDocFile,
-          backfile:this.backDocFile,
+      this.$modal.show('processed')
+      if (this.frontDocFile && this.backDocFile) {
+        this.$store.dispatch('auth/confirmRegistration', {
+          frontfile: this.frontDocFile,
+          backfile: this.backDocFile,
           successCall
         })
       }

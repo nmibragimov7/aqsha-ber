@@ -10,7 +10,8 @@
         :style='{color, backgroundColor: bg}'
         :class="['input',
           `${classes}`,
-          {'input__promo': isPromo,
+          {'input--error': hasError,
+          'input__promo': isPromo,
           'input__footer': isFooter,
           'input__password': isPassword,
           'input__register': isRegister}]"
@@ -99,6 +100,10 @@ export default {
     isRegister: {
       type: Boolean,
       default: false
+    },
+    hasError: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -131,6 +136,10 @@ export default {
   &::placeholder {
     color: rgba(0, 0, 0, 0.25);
     font-size: 22px;
+  }
+
+  &--error {
+    border: 1px solid red;
   }
 
   &__label {

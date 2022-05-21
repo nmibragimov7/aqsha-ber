@@ -9,10 +9,10 @@
              :home='form.home'
              :apartment='form.apartment'
              :place-of-work='form.placeOfWork'
-             :relative-name="form.relativeName"
-             :friend-name="form.friendName"
-             :friend-number="form.friendNumber"
-             :relative-number="form.relativeNumber"
+             :relative-name='form.relativeName'
+             :friend-name='form.friendName'
+             :friend-number='form.friendNumber'
+             :relative-number='form.relativeNumber'
              :front-doc-file='form.frontDocFile'
              :back-doc-file='form.backDocFile'
              :avatar-file='form.avatarFile'
@@ -25,12 +25,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import FirstStep from '../../components/common/RegisterSteps/FirstStep'
 import SecondStep from '../../components/common/RegisterSteps/SecondStep'
 import ThirdStep from '../../components/common/RegisterSteps/ThirdStep'
 import FourthStep from '../../components/common/RegisterSteps/FourthStep'
 import FifthStep from '../../components/common/RegisterSteps/FifthStep'
 import SixthStep from '../../components/common/RegisterSteps/SixthStep'
+
 export default {
   components: {
     FirstStep,
@@ -49,14 +52,14 @@ export default {
         street: '',
         home: '',
         apartment: '',
-        position: "",
+        position: '',
         frontDocFile: null,
         backDocFile: null,
         avatarFile: null,
-        relativeName:"",
-        relativeNumber:"",
-        friendName:"",
-        friendNumber:""
+        relativeName: '',
+        relativeNumber: '',
+        friendName: '',
+        friendNumber: ''
 
       },
       isLoadedFile: false,
@@ -67,13 +70,20 @@ export default {
   computed: {
     isAuth() {
       return this.$store.getters['auth/isAuth']
-    }
+    },
+    ...mapGetters({
+      user: 'auth/userData'
+    })
   },
   mounted() {
-    if(!this.$store.state.auth.userData.iin){
-      this.$router.push('/');
-    } else if(this.isAuth) {
-      this.currentComponent = 'SecondStep'
+    if (this.isAuth) {
+      if(this.user.HasSelfie && this.user.HasDocumentBackSide && this.user.HasDocumentFrontSide) {
+        this.$router.push({
+          path: '/approved'
+        })
+      } else {
+        this.currentComponent = 'SecondStep'
+      }
     }
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
@@ -83,10 +93,10 @@ export default {
     },
     stepHandler(componentName) {
       componentName === 'SecondStep' && this.$modal.hide('sendCode')
-      if(componentName === 'ThirdStep' || componentName === 'FourthStep' || componentName === 'FifthStep') {
+      if (componentName === 'ThirdStep' || componentName === 'FourthStep' || componentName === 'FifthStep') {
         this.isLoadedFile = false
       }
-      if(componentName === 'FifthStep' && this.isAuth) {
+      if (componentName === 'FifthStep' && this.isAuth) {
         this.$router.replace('/approved')
         return
       }

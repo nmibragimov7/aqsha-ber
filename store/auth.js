@@ -22,9 +22,42 @@ export default {
         ...state.userData,
         ...payload
       }
+    },
+    getClientState(state, payload) {
+      state.userData = {
+        ...state.userData,
+        ...payload
+      }
     }
   },
   actions: {
+    getClientRate(ctx, data) {
+      const requests = this.$requests
+
+      this.$requests.getClientRate({
+        onSuccess(response) {
+          ctx.commit("addRegistrationData", {
+            ...response.data.Data
+          })
+
+          if (response.data.Success) {
+            requests.getClientState({
+              onSuccess(response){
+                if(response.data.Success){
+                  ctx.commit("getClientState", {
+                    ...response.data.Data
+                  })
+                  data.successCall();
+                }
+              },
+              onError(){
+                alert("ошибка")
+              }
+            })
+          }
+        }
+      })
+    },
     getClientRateAnonymous(ctx, data) {
       this.$requests.getClientRateAnonymous({
         body: {
@@ -60,7 +93,6 @@ export default {
       const multiForm = new FormData()
       multiForm.append("file", payload.backfile)
       requests.registrationComplete({
-
         options: {
           headers: {
             "content-type": "multipart/form-data"

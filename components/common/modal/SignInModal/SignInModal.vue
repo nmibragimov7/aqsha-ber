@@ -6,11 +6,13 @@
         <BaseInput v-model='form.phone'
                    placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
                    mask='+7 (# # #) # # # - # # - # #'
+                   :hasError='$v.form.$error'
                    class='mb-3' />
         <BaseInput v-model='form.password'
-                   type="password"
+                   type='password'
                    class='mb-3' />
         <BaseButton classes='modal-signIn__button'
+                    :disabled='$v.form.$error'
                     @click='sign'>ВХОД
         </BaseButton>
         <p style='font-weight: 700'>Регистрация</p>
@@ -27,12 +29,14 @@
 </template>
 
 <script>
-import {mapState} from "vuex"
+import { mapState } from 'vuex'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+
 import BaseInput from '../../../base/BaseInput/BaseInput'
 import BaseButton from '../../../base/BaseButton/BaseButton'
 import SendCode from '../../SendCode/SendCode'
 import { cleanNumber } from '../../../../helpers/maskUtils'
-import {tokenLs} from "../../../../assets/js/ls";
+import { tokenLs } from '../../../../assets/js/ls'
 
 export default {
   name: 'SignInModal',
@@ -42,15 +46,24 @@ export default {
       form: {
         phone: '',
         code: '',
-        password:""
+        password: ''
       },
-      isSendCode: false,
+      isSendCode: false
     }
   },
-  computed:{
+  computed: {
     ...mapState({
-      isLoaded:(state)=>state.auth.loaded,
+      isLoaded: (state) => state.auth.loaded
     })
+  },
+  validations: {
+    form: {
+      phone: {
+        required,
+        minLength: minLength(28),
+        maxLength: maxLength(28)
+      }
+    }
   },
   methods: {
     sendCodeHandler() {
@@ -80,29 +93,32 @@ export default {
         }
       })
     },
-    sign(){
-      this.$requests.login({
-        body: {
-          phone: cleanNumber(this.form.phone),
-          password: this.form.password
-        },
-        options: {},
-        onStart: () => {
-          this.$store.commit("auth/start")
-        },
-        onSuccess: (response) => {
-          if(response.data.Success){
-            tokenLs.save(response.data.Data)
-            this.$store.commit('auth/setAuth', true)
-            this.$modal.hide('signIn')
+    sign() {
+      this.$v.form.$touch()
+      if (!this.$v.form.$error) {
+        this.$requests.login({
+          body: {
+            phone: cleanNumber(this.form.phone),
+            password: this.form.password
+          },
+          options: {},
+          onStart: () => {
+            this.$store.commit('auth/start')
+          },
+          onSuccess: (response) => {
+            if (response.data.Success) {
+              tokenLs.save(response.data.Data)
+              this.$store.commit('auth/setAuth', response.data.Data)
+              this.$modal.hide('signIn')
+            }
+          },
+          onError: (e) => {
+          },
+          onFinally: () => {
+            this.$store.commit('auth/end')
           }
-        },
-        onError: (e) => {
-        },
-        onFinally: () => {
-          this.$store.commit("auth/end")
-        }
-      })
+        })
+      }
     }
   }
 }

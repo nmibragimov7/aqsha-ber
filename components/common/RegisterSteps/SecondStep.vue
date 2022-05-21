@@ -6,9 +6,9 @@
         <p v-if='!isAuth' class='text-center page__step m-0 mb-4'>Шаг 2 из 6</p>
         <p v-if='!isLoadedFile && isDesktop' class='text-center page__text m-0 mb-2'>Сделайте фото лицевой стороны
           удостоверения личности или загрузите готовое фото</p>
-        <p v-else-if='!isLoadedFile && !isDesktop' class='text-center page__text m-0 mb-2'>Сделайте фото лицевой стороны
+        <p v-else class='text-center page__text m-0 mb-2'>Сделайте фото лицевой стороны
           вашего удостоверения личности</p>
-        <p v-else class='text-center page__text m-0 mb-2'>Сделайте фото обратной стороны удостоверения личности</p>
+<!--        <p v-else class='text-center page__text m-0 mb-2'>Сделайте фото обратной стороны удостоверения личности</p>-->
         <div v-if='!isAuth' class='steps d-flex align-items-center justify-content-between mb-4'>
           <div v-for='num in 6'
                :key='num'

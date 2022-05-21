@@ -1,10 +1,10 @@
 <template>
   <div class='page'>
-    <Header logo-small/>
+    <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <div v-if='isDesktop' class="page__decor">
-          <img src="/svg/money_decor.svg" class="w-100" alt="">
+        <div v-if='isDesktop' class='page__decor'>
+          <img src='/svg/money_decor.svg' class='w-100' alt=''>
         </div>
         <h1 class='text-center page__title m-0 mb-4'>{{ user.SumDefault }} ₸</h1>
         <p class='text-center page__text m-0 mb-4'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
@@ -32,8 +32,10 @@
                        is-register
                        mask='+7 (# # #) # # # - # # - # #'
                        placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
-                       @input='value => $emit("inputHandler", "phone", value)'/>
+                       :hasError='$v.phone.$error'
+                       @input='value => $emit("inputHandler", "phone", value)' />
             <BaseButton classes='mt-3'
+                        :disabled='$v.phone.$error'
                         @click='sendCode'>получить смс
             </BaseButton>
           </div>
@@ -42,20 +44,22 @@
     </div>
     <SendCodeModal :code='code'
                    @stepHandler='confirmSmsCode'
-                   @inputHandler='value => $emit("inputHandler", "code", value)'/>
+                   @inputHandler='value => $emit("inputHandler", "code", value)' />
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import Header from "../../layout/Header/Header"
-import BaseInput from "../../base/BaseInput/BaseInput"
-import BaseButton from "../../base/BaseButton/BaseButton"
-import SendCodeModal from "../modal/SendCodeModal/SendCodeModal"
-import {cleanNumber} from "~/helpers/maskUtils";
+import { mapGetters } from 'vuex'
+import { maxLength, minLength, required } from 'vuelidate/lib/validators'
+
+import Header from '../../layout/Header/Header'
+import BaseInput from '../../base/BaseInput/BaseInput'
+import BaseButton from '../../base/BaseButton/BaseButton'
+import SendCodeModal from '../modal/SendCodeModal/SendCodeModal'
+import { cleanNumber } from '~/helpers/maskUtils'
 
 export default {
-  name: "FirstStep",
+  name: 'FirstStep',
   components: {
     SendCodeModal,
     BaseButton,
@@ -69,28 +73,37 @@ export default {
     },
     code: {
       type: String,
-      default: ""
+      default: ''
     },
     phone: {
       type: String,
-      default: ""
+      default: ''
     }
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      user:"auth/userData"
+      user: 'auth/userData'
     })
+  },
+  validations: {
+    phone: {
+      required,
+      minLength: minLength(28),
+      maxLength: maxLength(28)
+    }
   },
   methods: {
     sendCode() {
-      const successCallBack = () => {
-        this.$modal.show("sendCode")
+      this.$v.phone.$touch()
+      if (!this.$v.phone.$error) {
+        const successCallBack = () => {
+          this.$modal.show('sendCode')
+        }
+        this.$store.dispatch('auth/registerClient', {
+          phone: cleanNumber(this.phone),
+          successCallBack
+        })
       }
-      this.$store.dispatch("auth/registerClient", {
-        phone: cleanNumber(this.phone),
-        successCallBack
-      })
-      //
     },
     confirmSmsCode() {
       const _this = this
@@ -101,11 +114,11 @@ export default {
         },
         onSuccess(response) {
           if (response.data.Success) {
-            _this.$emit("stepHandler", "SecondStep")
+            _this.$emit('stepHandler', 'SecondStep')
           }
         },
-        onError(){
-          alert("ошибка")
+        onError() {
+          alert('ошибка')
         }
       })
     }

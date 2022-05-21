@@ -27,6 +27,7 @@ export default {
     '~plugins/vmask.js',
     '~plugins/axios.js',
     '~plugins/click_outside.js',
+    '~plugins/vuelidate.js',
     {src:"~plugins/watchWindow.js",mode:"client"},
     {src:"~plugins/token.js",mode:"client"},
     {src:"~plugins/perms.js",mode:"client"},

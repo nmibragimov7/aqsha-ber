@@ -8,25 +8,32 @@
           <h2 class='promo__description mt-1'>на карту и наличными</h2>
         </div>
         <div>
-          <div v-if="!isDesktop" class='promo__img'>
+          <div v-if='!isDesktop' class='promo__img'>
             <img src='@/assets/images/header-background2.png' class='w-100' alt=''>
           </div>
           <div class='form' :class="{'desktop':isDesktop}">
             <div class='mb-3'>
               <BaseInput
+                v-if='!isAuth'
                 v-model='valueInput'
                 placeholder='Введите ИИН'
                 mask='### ### ### ###'
+                :hasError='$v.valueInput.$error'
                 bg='transparent'
                 color='#FFF'
                 is-promo
                 icon='document'
-                classes='header text-center'/>
+                classes='header text-center' />
+              <base-button v-else
+                           uppercase
+                           next
+                           @click='$router.push("/lc")'>Личный кабинет</base-button>
             </div>
             <div class='mb-3'>
-              <BaseButton classes='promo__button' @click='getHandler'>
+              <base-button :disabled='$v.valueInput.$error'
+                          @click='getHandler'>
                 ПОЛУЧИТЬ ДЕНЬГИ
-              </BaseButton>
+              </base-button>
             </div>
             <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор
               и
@@ -35,43 +42,59 @@
         </div>
       </div>
     </div>
-    <ProcessedModal/>
+    <ProcessedModal />
   </div>
 </template>
 
 <script>
-import ProcessedModal from "../modal/ProcessedModal/ProcessedModal"
-import {cleanNumber} from "~/helpers/maskUtils";
+import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
+import BaseButton from '~/components/base/BaseButton/BaseButton'
+import { cleanNumber } from '~/helpers/maskUtils'
+import { isValidHandler } from '~/helpers/isValidIin'
 
 export default {
-  name: "Promo",
-  components: {ProcessedModal},
+  name: 'Promo',
+  components: { BaseButton, ProcessedModal },
   data() {
     return {
-      valueInput: "",
+      valueInput: '',
       isDesktop: false
     }
   },
   computed: {
     isAuth() {
-      return this.$store.getters["auth/isAuth"]
+      return this.$store.getters['auth/isAuth']
     }
   },
   mounted() {
-    this.isDesktop = this.contentDisplay === "desktop"
+    this.isDesktop = this.contentDisplay === 'desktop'
+  },
+  validations: {
+    valueInput: {
+      isValidIin(value) {
+        return isValidHandler(cleanNumber(value, false))
+      }
+    }
   },
   methods: {
     getHandler() {
-      this.$modal.show("processed")
-      const successCall = ()=>{
-        this.$modal.hide("processed")
-        this.$router.replace("register")
+      this.$v.valueInput.$touch()
+      if (!this.$v.valueInput.$error) {
+        this.$modal.show('processed')
+        const successCall = () => {
+          this.$modal.hide('processed')
+          this.$router.replace('register')
+        }
+        const data = {
+          iin: cleanNumber(this.valueInput, false),
+          successCall
+        }
+        if(this.isAuth) {
+          this.$store.dispatch('auth/getClientRate', data)
+        } else {
+          this.$store.dispatch('auth/getClientRateAnonymous', data)
+        }
       }
-      const data ={
-        iin:cleanNumber(this.valueInput,false),
-        successCall
-      }
-      this.$store.dispatch("auth/getClientRateAnonymous", data)
     }
   }
 }

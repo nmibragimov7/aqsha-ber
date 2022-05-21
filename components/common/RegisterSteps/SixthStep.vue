@@ -28,6 +28,7 @@
               <BaseInput :value='relativeNumber'
                          label='Номер телефона'
                          mask='+7 (# # #) # # # - # # - # #'
+                         :hasError='$v.relativeNumber.$error'
                          @input='value => $emit("inputHandler", "relativeNumber", value)' />
             </div>
             <div class='mb-4'>
@@ -39,12 +40,14 @@
               <BaseInput :value='friendNumber'
                          label='Номер телефона'
                          mask='+7 (# # #) # # # - # # - # #'
+                         :hasError='$v.friendNumber.$error'
                          @input='value => $emit("inputHandler", "friendNumber", value)' />
             </div>
             <BaseButton v-if='isDesktop'
                         uppercase
                         next
                         classes='mt-4'
+                        :disabled='$v.relativeNumber.$error || $v.friendNumber.$error'
                         @click='confirm'>подтвердить
             </BaseButton>
           </div>
@@ -53,6 +56,7 @@
                     uppercase
                     next
                     classes='mt-4'
+                    :disabled='$v.relativeNumber.$error || $v.friendNumber.$error'
                     @click='confirm'>подтвердить
         </BaseButton>
       </div>
@@ -62,6 +66,7 @@
 </template>
 
 <script>
+import { maxLength, minLength, required } from 'vuelidate/lib/validators'
 
 import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
 import BaseButton from '../../base/BaseButton/BaseButton'
@@ -98,41 +103,57 @@ export default {
       default: ''
     }
   },
+  validations: {
+    friendNumber: {
+      required,
+      minLength: minLength(28),
+      maxLength: maxLength(28)
+    },
+    relativeNumber: {
+      required,
+      minLength: minLength(28),
+      maxLength: maxLength(28)
+    }
+  },
   methods:{
     confirm(){
-      const onSuccess = (response)=>{
-        if(response.data.Success){
-          this.$emit("confirm")
-        }
-      }
-      const state = this.$store.getters["auth/userData"]
-      const phones = []
-      if(this.relativeName && this.relativeNumber){
-        phones.push({
-          name:this.relativeName,
-          phone:cleanNumber(this.relativeNumber)
-        })
-      }
-      if(this.friendName && this.friendNumber){
-        phones.push({
-          name:this.friendName,
-          phone:cleanNumber(this.friendNumber)
-        })
-      }
-      this.$requests.uploadAdditionalData({
-        options:{
-          headers:{
-           "Authorization":`Bearer ${tokenRegister.get()}`
+      this.$v.friendNumber.$touch()
+      this.$v.relativeNumber.$touch()
+      if (!this.$v.friendNumber.$error && !this.$v.relativeNumber.$error) {
+        const onSuccess = (response)=>{
+          if(response.data.Success){
+            this.$emit("confirm")
           }
-        },
-        body:{
-          "Address": state.Address,
-          "WorkCompany": this.placeOfWork,
-          "Email":"te@m.ru",
-          "Phones":phones
-        },
-        onSuccess
-      })
+        }
+        const state = this.$store.getters["auth/userData"]
+        const phones = []
+        if(this.relativeName && this.relativeNumber){
+          phones.push({
+            name:this.relativeName,
+            phone:cleanNumber(this.relativeNumber)
+          })
+        }
+        if(this.friendName && this.friendNumber){
+          phones.push({
+            name:this.friendName,
+            phone:cleanNumber(this.friendNumber)
+          })
+        }
+        this.$requests.uploadAdditionalData({
+          options:{
+            headers:{
+              "Authorization":`Bearer ${tokenRegister.get()}`
+            }
+          },
+          body:{
+            "Address": state.Address,
+            "WorkCompany": this.placeOfWork,
+            "Email":"te@m.ru",
+            "Phones":phones
+          },
+          onSuccess
+        })
+      }
     }
   }
 }

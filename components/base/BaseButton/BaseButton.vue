@@ -1,7 +1,7 @@
 <template>
   <div :style='{width: width + "%"}'>
     <button v-if='!icon'
-            :class="['button', classes, { normal, uppercase, prev, next, history ,small}]"
+            :class="['button', classes, { normal, uppercase, prev, next, history, small, disabled}]"
             :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
             v-on='$listeners'>
@@ -10,7 +10,7 @@
     <button v-if='icon'
             :class="['button button__icon-wrap',
               classes,
-              { normal, uppercase ,small}]"
+              { normal, uppercase, small, disabled}]"
             :style='{color: color, backgroundColor: bg}'
             :disabled='disabled || isLoading'
             v-on='$listeners'>
@@ -109,6 +109,9 @@ export default {
   }
   &.uppercase {
     text-transform: uppercase;
+  }
+  &.disabled {
+    opacity: 0.5;
   }
 
   &__icon-wrap {
