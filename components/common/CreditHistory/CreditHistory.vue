@@ -1,8 +1,8 @@
 <template>
   <div class='profile__block p-4 mt-4'>
     <h2 class='history__title text-center'>Кредитная история</h2>
-    <div class='history__line' />
-    <HistoryCard />
+    <div class='history__line'/>
+    <HistoryCard v-for="h of history" :key="h.CreditId" :history="h"/>
     <div class='d-flex flex-column align-items-center mt-4'>
       <button class='history__show-more d-inline-flex align-items-center'>Показать полностью
         <img class='ml-1' src='@/assets/images/arrow.svg' alt=''>
@@ -12,11 +12,19 @@
   </div>
 </template>
 <script>
-import HistoryCard from '@/components/common/CreditHistory/HistoryCard.vue'
+import HistoryCard from "@/components/common/CreditHistory/HistoryCard.vue"
 
 export default {
   components: {
     HistoryCard
+  },
+  props: {
+    history: {
+      type: Array,
+      default(){
+        return [];
+      }
+    }
   }
 }
 </script>

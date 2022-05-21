@@ -6,9 +6,9 @@
           <div class='profile__image h-100 w-100'></div>
         </div>
         <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
-          <p class='m-0 d-flex flex-column justify-content-between'>Иванов</p>
-          <p class='m-0'>Иван</p>
-          <p class='m-0'>Иванович</p>
+          <p class='m-0 d-flex flex-column justify-content-between'>{{ user.Surname }}</p>
+          <p class='m-0'>{{ user.Name }}</p>
+          <p v-if="user.MiddleName" class='m-0'>{{ user.MiddleName }}</p>
           <p class='m-0'>№ 21312421</p>
           <p class='m-0'>ИИН 000 302 500 679</p>
         </div>
@@ -16,15 +16,15 @@
       <div class='row mb-0'>
         <div class='col-6 col-lg-4'>
           <p class='m-0'><b>Дата рождения:</b></p>
-          <p class='m-0'>+ 777 200 28 77</p>
+          <p class='m-0'>{{ new Date(user.BirthDate) | date("dd.MM.yyyy") }}</p>
         </div>
         <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
           <p class='m-0'><b>Пол:</b></p>
-          <p class='m-0'>Мужской</p>
+          <p class='m-0'>{{ user.Gender === 0 ? "Мужской" : "Женский" }}</p>
         </div>
         <div class='col-6 col-lg-4'>
-          <p class='m-0'><b>Телефон::</b></p>
-          <p class='m-0'>28.07.2985</p>
+          <p class='m-0'><b>Телефон:</b></p>
+          <p class='m-0'>+7 {{ user.Phone | VMask("(###)-###-##-##") }}</p>
         </div>
         <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
           <p class='m-0'><b>E-mail:</b></p>
@@ -35,24 +35,24 @@
     <template #page__footer>
       <div class='page__action'>
         <BaseButton bg='#3A2784' color='#fff' classes='mt-4'>
-          + новый микрокредит
+          <span class="uppercase">+ новый микрокредит</span>
         </BaseButton>
       </div>
-      <CreditHistory />
+      <CreditHistory :history="history"/>
       <div class='profile__block p-4 mt-4'>
         <div class='profile__block--wrap'>
           <BaseInput v-model='password'
                      class='mb-3'
                      type='password'
                      is-paassword
-                     :placeholder='isPassExist ? "Старый пароль": "Пароль"' />
+                     :placeholder='isPassExist ? "Старый пароль": "Пароль"'/>
           <BaseInput v-if='isPassExist' v-model='newPassword'
                      class='mb-3'
                      type='password'
                      is-password
-                     placeholder='Новый пароль' />
+                     placeholder='Новый пароль'/>
           <div class='d-flex justify-content-between'>
-            <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]' />
+            <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]'/>
           </div>
           <span class='profile__level-hint mb-3'>Ненадежный</span>
           <p class='m-0 mb-3 text-center profile__description'>
@@ -61,30 +61,77 @@
             <br>
             <span class='profile__description--red'>Не используйте пробелы и кириллицу.</span>
           </p>
-          <BaseButton classes='profile__button--blue'>Сохранить</BaseButton>
+          <BaseButton classes='profile__button--blue' @click="changePassword">Сохранить</BaseButton>
         </div>
       </div>
     </template>
   </PageWrap>
 </template>
 <script>
-import PageWrap from '@/components/common/PageWrap.vue'
-import BaseInput from '@/components/base/BaseInput/BaseInput'
-import BaseButton from '@/components/base/BaseButton/BaseButton'
-import CreditHistory from '@/components/common/CreditHistory/CreditHistory'
+import PageWrap from "@/components/common/PageWrap.vue"
+import BaseInput from "@/components/base/BaseInput/BaseInput"
+import BaseButton from "@/components/base/BaseButton/BaseButton"
+import CreditHistory from "@/components/common/CreditHistory/CreditHistory"
 
 export default {
-  components: { CreditHistory, BaseButton, BaseInput, PageWrap },
+  components: {CreditHistory, BaseButton, BaseInput, PageWrap},
   data() {
     return {
       password: null,
       newPassword: null,
-      isPassExist: false,
-      isDesktop: false
+      isPassExist: true,
+      isDesktop: false,
+      history: [],
+      user: {
+        BirthDate: "2001-06-27T00:00:00",
+        Email: null,
+        MiddleName: null,
+        Gender: 0,
+        Name: "Anonim",
+        Phone: "7024829563",
+        Surname: "Anonim"
+      }
     }
   },
   mounted() {
-    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
+    this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
+    this.getClientInfo();
+    this.getHistory()
+
+  },
+  methods: {
+    getClientInfo() {
+      const _this = this
+      this.$requests.getClientInfo({
+        onSuccess(response) {
+          if (response.data.Success) {
+            _this.user = response.data.Data
+          }
+        }
+      })
+    },
+    getHistory() {
+      const _this = this
+      this.$requests.getLoanHistory({
+        onSuccess(response) {
+          if (response.data.Success) {
+            _this.history = response.data.Data
+          }
+        }
+      })
+    },
+    changePassword() {
+      const oldPassword = this.password; const password = this.newPassword;
+      this.$requests.changePassword({
+        body: {
+          oldPassword,
+          password
+        },
+        onSuccess(res) {
+          console.log(res)
+        }
+      })
+    }
   }
 }
 </script>

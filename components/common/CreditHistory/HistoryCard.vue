@@ -1,8 +1,8 @@
 <template>
   <div class="history__content">
     <div class="d-flex my-2 align-items-center justify-content-between">
-      <div class="mr-2"><b>152 000тг</b></div>
-      <div class="mr-2"><span>до 20.02.15</span></div>
+      <div class="mr-2"><b>{{ history.Sum }}тг</b></div>
+      <div class="mr-2"><span>до {{ new Date(history.LastOperationDate) | date('dd.MM.yyyy') }}</span></div>
       <div>
         <div class="d-flex align-items-center">
           <p class="my-0 mr-2">Текущий</p>
@@ -22,3 +22,16 @@
     <div class="history__line mt-3"/>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    history: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  }
+}
+</script>
