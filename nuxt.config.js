@@ -31,6 +31,7 @@ export default {
     {src:"~plugins/watchWindow.js",mode:"client"},
     {src:"~plugins/token.js",mode:"client"},
     {src:"~plugins/perms.js",mode:"client"},
+    {src:"~plugins/dateFns.js"},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

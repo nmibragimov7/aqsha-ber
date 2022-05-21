@@ -1,3 +1,4 @@
+
 export const modifyAxios = (axios) => {
   const methods = ['get', 'post', 'delete', 'patch', 'put']
 
@@ -46,10 +47,9 @@ export default ({ $axios, store }, inject) => {
       }
     }
   })
-  api.onRequest((config) => {
-    console.log(store.getters['auth/isAuth'])
-    if (store.getters['auth/isAuth']) {
-      config.headers.common.Authorization = `Bearer ${store.getters['auth/isAuth']}`
+  api.onRequest((config)=>{
+    if(store.getters["auth/isAuth"]){
+      config.headers.common.Authorization = `Bearer ${store.getters["auth/isAuth"]}`
     }
   })
   api.setBaseURL('/api')
@@ -70,7 +70,9 @@ export default ({ $axios, store }, inject) => {
     getVerificationRequestStatus: axiosModified.get('/GetVerificationRrequestStatus'),
     confirmContractCode: axiosModified.post('/ConfirmContractCode'),
     processingMoney: axiosModified.post('/ProcessingMoney'),
-    getClientFIO: axiosModified.post('/GetClientFIO')
+    getClientInfo: axiosModified.get('/GetClientInfo'),
+    getLoanHistory:axiosModified.get("/GetLoanHistory"),
+    changePassword:axiosModified.post("/ChangePassword")
   }
 
   inject('requests', requests)
