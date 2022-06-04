@@ -1,5 +1,5 @@
 <template>
-  <div :class="['card', classes, 'd-flex', 'flex-column', 'align-items-center',{rounded}]">
+  <div :class="['card', classes, 'd-flex', 'flex-column', 'align-items-center', {rounded}]" :style="{background: bg}">
     <slot></slot>
   </div>
 </template>
@@ -15,6 +15,10 @@ export default {
     rounded: {
       type: Boolean,
       default: false
+    },
+    bg: {
+      type: String,
+      default: '#F8F9F9'
     }
   }
 }
@@ -26,7 +30,6 @@ export default {
   position: relative;
   z-index: 10;
   cursor: pointer;
-  background: rgb(255, 255, 255);
 
   &.rounded {
     border-radius: 10px;

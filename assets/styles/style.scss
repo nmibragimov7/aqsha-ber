@@ -22,14 +22,25 @@ body {
   margin: 0;
   color: $fontColor;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: Circe;
   font-size: 16px;
-  line-height: 34px;
+  line-height: 1.5rem;
+  //line-height: 34px;
   background-color: $backgroundColor;
+}
+
+.font-gilroy {
+  font-family: Gilroy;
 }
 
 .bg-bodyBg {
   background-color: $backgroundColor;
+}
+
+.bg-info {
+  background: url("/svg/info-icon.svg") no-repeat 0% -5% / 50%,
+              url("/svg/info-icon2.svg") no-repeat 15% 35%/18%,
+              url("/svg/info-icon3.svg") no-repeat 100% 128% / 50%;
 }
 
 .bg-white {
@@ -59,7 +70,13 @@ body {
 .promo {
 
   &__wrap {
-    background: linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+    background: url("/svg/promo-icon5.svg") no-repeat 3% 22%/17%,
+                url("/svg/promo-icon5.svg") no-repeat 87% 34% / 11%,
+                url("/svg/promo-icon.svg") no-repeat -12% -13%/62%,
+                url("/svg/promo-icon2.svg") no-repeat 0% 54%/35%,
+                url("/svg/promo-icon3.svg") no-repeat 100% 30% / 30%,
+                url("/svg/promo-icon4.svg") no-repeat 100% 64%/42%,
+                linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
     border-radius: 0 0 33px 33px;
   }
 }
@@ -99,6 +116,7 @@ body {
 }
 
 .container {
+  //max-width: 370px;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;

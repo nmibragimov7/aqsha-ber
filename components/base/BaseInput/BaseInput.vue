@@ -127,6 +127,7 @@ export default {
   border-radius: 10px;
   padding: 15px 15px;
   outline: none;
+  font-family: inherit;
   font-style: normal;
   font-weight: normal;
   font-size: 17px;

@@ -4,7 +4,7 @@
          :class="{' flex-column justify-content-between align-items-center h-100':!isDesktop}">
       <div :class="{'col-5 promo__payments':isDesktop}">
         <div class='promo__text'>
-          <h2 class='promo__title my-2'>мгновенные выплаты</h2>
+          <h2 class='promo__title font-gilroy my-2'>мгновенные выплаты</h2>
           <h2 class='promo__description mt-1'>на карту и наличными</h2>
         </div>
         <div>
@@ -35,7 +35,7 @@
                 ПОЛУЧИТЬ ДЕНЬГИ
               </base-button>
             </div>
-            <p class='mt-0 mb-0 form__text'> нажимая на кнопку “рассчитать сумму кредита” вы даете свое согласие на сбор
+            <p class='mt-0 mb-0 form__text'> нажимая на кнопку “получить деньги” вы даете свое согласие на сбор
               и
               обработку данных</p>
           </div>
@@ -171,6 +171,7 @@ export default {
     text-align: center;
     font-size: 14px;
     line-height: 24px;
+    text-decoration: underline;
   }
 }
 </style>

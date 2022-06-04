@@ -1,7 +1,7 @@
 <template>
   <div class='py-3 bg-bodyBg'>
     <div class='container'>
-      <div class='row align-items-stretch' :class="{'my-5':isDesktop}">
+      <div class='row py-4 bg-info align-items-stretch' :class="{'my-5':isDesktop}">
         <template v-for='(card, index) in cards'>
           <div :key='index' class='col-12 col-lg-4 mb-4'>
             <div class="card__about p-3  ">
@@ -9,8 +9,8 @@
                 <img class='card__image'
                      :src='"~/assets/images/"+card.image+".png"'
                      :alt='card.title'/>
-                <p class='card__title'>{{ card.title }}</p>
-                <p class='card__description'>{{ card.description }}</p>
+                <p class='card__title font-gilroy'>{{ card.title }}</p>
+                <p class='card__text'>{{ card.description }}</p>
               </div>
             </div>
           </div>
@@ -20,9 +20,9 @@
     <div :class="{'container':isDesktop}">
       <div class='promotion__wrap' :class="{'my-5 py-4':isDesktop}">
         <div class="container">
-          <div class='promotion d-flex align-items-center justify-content-between' :class="{'desktop':isDesktop}">
+          <div class='promotion py-4 d-flex align-items-center justify-content-between' :class="{'desktop':isDesktop}">
             <div class='promotion__block'>
-              <p class='promotion__title m-0'>Первый микрокредит под 0,1%</p>
+              <p class='promotion__title m-0 font-gilroy'>Первый микрокредит под 0,1%</p>
               <div v-if="isDesktop" class="promotion__button mt-3">
                 <BaseButton small next color='#FFF'>Подробнее</BaseButton>
               </div>
@@ -51,14 +51,14 @@
                        alt="qwqe">
                 </div>
                 <div class="px-4">
-                  <p class='card__title'>{{ information.title }}</p>
+                  <p class='card__title font-gilroy'>{{ information.title }}</p>
                   <ul class='card__descriptions'>
                     <li v-for='(d, idx) in information.description' :key='idx'>{{ d }}</li>
                   </ul>
                 </div>
                 <div class="px-5 w-100">
-                  <BaseButton next>
-                    <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>ПОДРОБНЕЕ</nuxt-link>
+                  <BaseButton :width='80' small next>
+                    <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>Подробнее</nuxt-link>
                   </BaseButton>
                 </div>
               </Card>
@@ -67,10 +67,10 @@
         </div>
       </div>
       <div class="container pt-5">
-        <h2 class='m-0 types__title'>Виды микрокредитов</h2>
+        <h2 class='m-0 types__title font-gilroy'>Виды микрокредитов</h2>
         <div class='row'>
           <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6 mb-4'>
-            <Card classes="pb-4" rounded>
+            <Card classes="pb-4" rounded bg='#FFF'>
               <div class="flex-grow-1">
                 <div class='types__header d-flex flex-column justify-content-center align-items-center'
                      :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
@@ -78,13 +78,13 @@
                   <p class='types__header--text m-0'>{{ type.header.text }}</p>
                 </div>
                 <div class='types__body mt-4 d-flex flex-column justify-content-center align-items-center'>
-                  <p class='types__body--title m-0 mb-2'>{{ type.body.title }}</p>
-                  <p class='types__body--text m-0'>{{ type.body.text }}</p>
+                  <p class='types__body--title font-gilroy m-0 mb-4'>{{ type.body.title }}</p>
+                  <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
                 </div>
               </div>
               <div class="types__body w-100 mt-3">
-                <BaseButton small classes="py-3" next>
-                  <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>ПОДРОБНЕЕ</nuxt-link>
+                <BaseButton :width='80' small next>
+                  <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>Подробнее</nuxt-link>
                 </BaseButton>
               </div>
             </Card>
@@ -96,20 +96,23 @@
       <div class="container">
         <div class='row about align-items-center'>
           <div class="col-md-6 about__first-col">
-            <h3 class='m-0 mb-4 about__title'>О компании</h3>
-            <p class='m-0 mb-1'>Простой и надежный сервис для быстрого получения микрокредитов.
-            </p>
-            <p class="my-2">
-              Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
-            </p>
-            <p class="my-2"> Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
-              за минуту. Получить деньги можно на карту или наличными.</p>
-            <div class='d-inline-flex'>
+            <h3 class='m-0 mb-5 about__title font-gilroy'>О компании</h3>
+            <div class='about__text mx-auto mb-4'>
+              <p class='m-0 mb-3'>
+                Простой и надежный сервис для быстрого получения микрокредитов.
+              </p>
+              <p class="m-0 mb-3">
+                Мы рядом, когда вам нужна помощь, чтобы хватило денег до зарплаты или на срочную покупку.
+              </p>
+              <p class="m-0"> Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
+                за минуту. Получить деньги можно на карту или наличными.</p>
+            </div>
+            <div class='d-inline-flex mb-4'>
               <NuxtLink to='/' class="mr-4">
-                <p class='about__link'>Документы</p>
+                <p class='about__link m-0'>Документы</p>
               </NuxtLink>
               <NuxtLink to='/'>
-                <p class='about__link'>Контакты</p>
+                <p class='about__link m-0'>Контакты</p>
               </NuxtLink>
             </div>
             <div class="about__button-first-col">
@@ -128,7 +131,7 @@
       </div>
     </div>
     <div class='container mb-5'>
-      <h2 class='m-0 types__title'>Частые вопросы</h2>
+      <h2 class='m-0 types__title font-gilroy'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
                    :active-index='activeFaqIndex'
@@ -223,13 +226,13 @@ export default {
     margin: 10px 0;
   }
 
-  &__description {
-    font-size: 20px;
+  &__text {
+    max-width: 79%;
+    margin: 0 auto;
   }
 
   &__descriptions {
     text-align: left;
-    font-size: 20px;
     line-height: 150%;
   }
 
@@ -239,10 +242,12 @@ export default {
 }
 
 .hands {
-  border-bottom-left-radius: 33px;
-  border-bottom-right-radius: 33px;
+  //border-bottom-left-radius: 33px;
+  //border-bottom-right-radius: 33px;
   overflow: hidden;
-  background: #fff;
+  box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
+  border-radius: 0px 0px 30px 30px;
+  background: #F8F9F9;
   @media screen and (min-width: 550px) {
     background: transparent;
     & > .row {
@@ -276,12 +281,12 @@ export default {
   &__image-wrap {
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
   }
 
   &__image {
-    max-width: clamp(100px, 16vh, 200px);
+    max-width: clamp(100px, 24vh, 200px);
 
     & > img {
       width: 100%;
@@ -366,7 +371,7 @@ export default {
 
     &--title {
       font-weight: 800;
-      font-size: clamp(16px, 4.5vh, 46px);
+      font-size: clamp(16px, 6vh, 46px);
       line-height: 50px;
 
     }
@@ -420,7 +425,7 @@ export default {
   }
 
   &__img {
-    width: 50%;
+    width: 80%;
     display: block;
     margin: 0 auto;
     @media (min-width: 768px) {
@@ -454,6 +459,10 @@ export default {
   &__title {
     font-size: 46px;
     font-weight: 800;
+  }
+
+  &__text {
+    max-width: 315px;
   }
 
   &__link {

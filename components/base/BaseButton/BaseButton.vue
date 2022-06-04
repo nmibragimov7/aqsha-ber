@@ -1,5 +1,5 @@
 <template>
-  <div :style='{width: width + "%"}'>
+  <div :style='{width: width + "%"}' class='mx-auto'>
     <button v-if='!icon'
             :class="['button', classes, { normal, uppercase, prev, next, history, small, disabled}]"
             :style='{color: color, backgroundColor: bg}'
@@ -96,6 +96,7 @@ export default {
   color: #000;
   border: none;
   cursor: pointer;
+  font-family: inherit;
   font-size: 14px;
   padding: 12px 10px;
   border-radius: 42px;
