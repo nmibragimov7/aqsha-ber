@@ -6,10 +6,12 @@
         <div v-if='isDesktop' class='page__decor'>
           <img src='/svg/money_decor.svg' class='w-100' alt=''>
         </div>
-        <h1 class='text-center page__title m-0 mb-4'>{{ user.SumDefault }} ₸</h1>
-        <p class='text-center page__text m-0 mb-4'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
-        <p class='text-center page__desc m-0 mb-4'>Не переживайте — на этом этапе вы нам ничего не должны!</p>
-        <p class='text-center page__step m-0 mb-2'>Шаг 1 из 6</p>
+        <h1 class='text-center page__title mt-4 mb-4'>{{ user.SumDefault }} ₸</h1>
+        <div class="page__description">
+          <p class='text-center page__text page__text mt-3 mb-3'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
+          <p class='text-center page__desc mt-1 mb-4'>Не переживайте — на этом этапе вы нам ничего не должны!</p>
+        </div>
+        <p class='text-center page__step mt-1 mb-2'>Шаг 1 из 6</p>
         <p class='text-center page__text m-0 mb-4'>Пройдите все 6 шагов, чтобы зарегистрироваться. После этого вы
           сможете
           выбрать сумму микрокредита и подписать договор.</p>
@@ -34,7 +36,8 @@
                        placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
                        :hasError='$v.phone.$error'
                        @input='value => $emit("inputHandler", "phone", value)' />
-            <BaseButton classes='mt-3'
+            <BaseButton classes='mt-3 font-gilroy'
+                        uppercase
                         :disabled='$v.phone.$error'
                         @click='sendCode'>получить смс
             </BaseButton>
@@ -135,14 +138,16 @@ export default {
   min-height: 70vh;
   border-radius: 0 0 20px 20px;
   position: relative;
-
+  &__description{
+    margin:0 auto;
+    max-width: 72.5%;
+  }
   @media (min-width: 900px) {
     background: url("assets/images/money_4.svg") no-repeat 85% 30%,
     url("assets/images/money_3.svg") no-repeat 35% 15%,
     linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
     min-height: 50vh;
   }
-
   &__wrap {
     position: relative;
 
@@ -168,8 +173,9 @@ export default {
   }
 
   &__title {
-    font-size: 68px;
+    font-size: 74px;
     font-weight: 800;
+    text-shadow: 0 4px 9px rgba(0, 0, 0, 0.25);
   }
 
   &__title,
@@ -189,7 +195,7 @@ export default {
 
   &__step {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   &__form {

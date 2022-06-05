@@ -37,20 +37,22 @@
       <div v-for='(block, index) in items'
            :key='index'
            class='row mb-3 d-flex align-items-center'>
-        <div class='col-4'>
+        <div class='col-3'>
           <div class='d-flex justify-content-center'>
             <img :src='"~/assets/images/" + block.img + ".svg"'
                  :alt='block.img' />
           </div>
         </div>
-        <div class='col-8'>
-          <p v-for='(t, idx) in block.text'
-             :key='idx'
-             class='m-0'>{{ t }}</p>
+        <div class='col-9'>
+          <div class="pl-1">
+            <p v-for='(t, idx) in block.text'
+               :key='idx'
+               class='m-0 text-small'>{{ t }}</p>
+          </div>
         </div>
       </div>
       <BaseButton :icon='icon' classes='mb-2' @click='openCamera'>{{ text }}</BaseButton>
-      <BasePickFile name='load-document'
+      <BasePickFile v-if="isDesktop" name='load-document'
                     text='Загрузить'
                     @pickFile='pickFile' />
     </div>
@@ -93,11 +95,11 @@ export default {
         return [
           {
             img: 'scan',
-            text: ['Сделайте фото лицевой стороны удостоверения личности или загрузите готовое фото. Оборотную сторону удостоверения нужно будет отсканировать.'],
+            text: ['Подготовьте документ: вам нужно будет отсканировать сначала лицевую, затем обратную сторону удостоврения личности'],
           },
           {
             img: 'photo',
-            text: ['Наведите камеру на удостоверение. Расположите документ так, чтобы он попадал в рамку и убедитесь, что весь текст считывается.'],
+            text: ['Наведите камеру на удостоверение. Расположите документ так, чтобы весь документ попадал в кадр и убедитесь что фокус камеры наведён на текст'],
           }
         ]
       }
@@ -168,9 +170,9 @@ export default {
 <style lang='scss'>
 .page {
   &__form {
-    padding: 50px 40px;
+    padding: 50px 35px;
     background: #FFFFFF;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     height: 100%;
     line-height: 150%;
@@ -185,5 +187,9 @@ export default {
     min-width: 315px;
     margin: 0 auto;
   }
+}
+.text-small{
+  font-size: 0.8rem;
+  line-height: 1.3rem;
 }
 </style>

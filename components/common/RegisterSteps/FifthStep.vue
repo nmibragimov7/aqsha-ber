@@ -14,17 +14,17 @@
         <div class='page__form mb-3'>
           <div class='page__form--wrap'>
             <div class='mb-2 d-flex justify-content-between align-items-center'>
-              <span class='page__form--text'>Имя:</span>
+              <span class='page__form--text font-gilroy'>Имя:</span>
               <span class="page__dotted"></span>
               <span>Иван</span>
             </div>
             <div class='mb-2 d-flex justify-content-between align-items-center'>
-              <span class='page__form--text'>Фамилия:</span>
+              <span class='page__form--text font-gilroy'>Фамилия:</span>
               <span class="page__dotted"></span>
               <span>Иванов</span>
             </div>
             <div class='d-flex justify-content-between align-items-center'>
-              <span class='page__form--text'>Отчество:</span>
+              <span class='page__form--text font-gilroy'>Отчество:</span>
               <span class="page__dotted"></span>
               <span>Иванович</span>
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class='page__form d-flex flex-column'>
           <div class='page__form--wrap'>
-            <p class='page__form--text mb-3 mx-auto'>Адрес прописки:</p>
+            <p class='page__form--text mb-3 text-center font-gilroy mx-auto'>Адрес прописки:</p>
             <div class='mb-3'>
               <BaseInput :value='city'
                          classes="text-center"
@@ -62,6 +62,7 @@
             </div>
             <BaseButton uppercase
                         next
+                        :disabled="$v.$invalid"
                         @click='saveData'>подтвердить</BaseButton>
           </div>
         </div>
@@ -72,6 +73,7 @@
 
 <script>
 
+import {minLength, required} from "vuelidate/lib/validators";
 import Header from '../../layout/Header/Header'
 import BaseInput from '../../base/BaseInput/BaseInput'
 import BaseButton from '../../base/BaseButton/BaseButton'
@@ -97,6 +99,21 @@ export default {
     apartment: {
       type: String,
       default: ''
+    }
+  },
+  validations:{
+    city:{
+      required,
+      minLength: minLength(3),
+    } ,
+    street:{
+      required
+    },
+    home:{
+      required
+    },
+    apartment:{
+      required
     }
   },
   methods:{
@@ -163,7 +180,8 @@ export default {
     border-radius: 10px;
 
     &--text {
-      font-weight: 800;
+      font-weight: 700;
+      font-size: 1.1rem;
     }
 
     &--desc {

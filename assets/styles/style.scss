@@ -30,9 +30,11 @@ body {
 }
 
 .font-gilroy {
-  font-family: Gilroy;
+  font-family: Gilroy !important;
 }
-
+.vm--overlay{
+  backdrop-filter: blur(2px);
+}
 .bg-bodyBg {
   background-color: $backgroundColor;
 }

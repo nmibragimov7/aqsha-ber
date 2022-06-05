@@ -15,7 +15,7 @@
       </div>
     </div>
     <div>
-      <input class="range__default" type="range" :class="{purple}" :min="min" :step="step" :max="max" @input="changeHandler">
+      <input class="range__default" :value="value" type="range" :class="{purple}" :min="min" :step="step" :max="max" @input="changeHandler">
     </div>
   </div>
 
@@ -97,7 +97,6 @@ export default {
       this.isClicked = false
     },
     changeHandler($event) {
-      console.log('kek')
       // this.$emit('input', Math.round(this.max / 11 * this.activeIdx))
       this.$emit('input', parseInt($event.target.value))
     }

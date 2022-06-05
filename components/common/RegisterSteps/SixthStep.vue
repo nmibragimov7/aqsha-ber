@@ -13,12 +13,12 @@
         </div>
         <div class='page__form d-flex flex-column mt-4'>
           <div class='page__form--wrap'>
-            <div class='mb-4 mt-3'>
+            <div class='mb-3 mt-3'>
               <BaseInput :value='placeOfWork'
                          label='Место работы (название)'
                          @input='value => $emit("inputHandler", "placeOfWork", value)' />
             </div>
-            <p class="text-center my-3">Доверительные контакты</p>
+            <p class="text-center mb-3 mt-1">Доверительные контакты</p>
             <div class='mb-4'>
               <BaseInput :value='relativeName'
                          label='Имя родственника'
@@ -56,7 +56,7 @@
                     uppercase
                     next
                     classes='mt-4'
-                    :disabled='$v.relativeNumber.$error || $v.friendNumber.$error'
+                    :disabled='$v.$invalid'
                     @click='confirm'>подтвердить
         </BaseButton>
       </div>
@@ -104,6 +104,9 @@ export default {
     }
   },
   validations: {
+    placeOfWork: {
+      required,
+    },
     friendNumber: {
       required,
       minLength: minLength(28),

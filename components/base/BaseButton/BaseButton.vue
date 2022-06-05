@@ -40,7 +40,7 @@ export default {
     },
     small: {
       type: Boolean,
-      default:false
+      default: false
     },
     isLoading: {
       type: Boolean,
@@ -89,7 +89,7 @@ export default {
 <style lang='scss' scoped>
 .button {
   width: 100%;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   background: #FFDF11;
   box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.25);
@@ -97,20 +97,23 @@ export default {
   border: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 1rem;
   padding: 12px 10px;
   border-radius: 42px;
   @media screen and (min-width: 768px) {
     font-size: 14px;
     padding: 14px 12px;
   }
-  &.small{
-    padding:9px;
+
+  &.small {
+    padding: 9px;
     font-size: 15px;
   }
+
   &.uppercase {
     text-transform: uppercase;
   }
+
   &.disabled {
     opacity: 0.5;
   }
@@ -136,7 +139,7 @@ export default {
 
   &__text {
     text-align: left;
-    min-width: 120px;
+    min-width: 93px;
     margin-left: 10px;
   }
 
@@ -156,7 +159,6 @@ export default {
     border: 1px solid rgba(162, 162, 201, 0.47);
     font-size: 14px;
     background: rgba(162, 162, 201, 0.06);
-    padding: 15px;
   }
 
   &.next {

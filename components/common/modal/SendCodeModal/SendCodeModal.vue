@@ -1,5 +1,5 @@
 <template>
-  <modal name='sendCode' :width='370' height='auto'>
+  <modal name='sendCode' :shiftY="0.4" :width='370' height='auto' :styles="{borderRadius:'17px'}">
     <div class='modal-getMoney d-flex flex-column align-items-center'>
       <SendCode name='sendCode'
                 :code='code'
@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
 .modal-getMoney {
   padding: 20px 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);

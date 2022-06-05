@@ -4,7 +4,7 @@
          alt='Close'
          class='code--close'
          @click='close' />
-    <p class='text-center m-0 mb-3 code__title'>Введите код из СМС</p>
+    <p class='text-center my-4 code__title'>Введите код из СМС</p>
     <div class='code__input--wrap'>
       <div class='position__absolute'>
         <div class='d-flex align-items-center justify-content-between mb-3'>
@@ -17,7 +17,7 @@
               @input='inputHandler($event, idx)'>
           </div>
         </div>
-        <BaseButton classes='code__button' @click='sendCode'>{{ btnText }}</BaseButton>
+        <BaseButton classes='code__button mt-2' @click='sendCode'>{{ btnText }}</BaseButton>
         <p class='text-center code__text'>Отправить еще раз</p>
       </div>
     </div>
@@ -129,6 +129,7 @@ export default {
 
   &__title {
     font-weight: 800;
+    font-size: 1.3rem;
   }
 
   &__button {
@@ -138,10 +139,10 @@ export default {
 
   &__input {
     height: 125px;
-    color: #7080A9;
     font-weight: 800;
     font-size: 72px;
     border: 1px solid rgba(162, 162, 201, 0.47);
+    color: rgba(112, 128, 169, 0.57);
     border-radius: 10px;
     border: 1px solid #A2A2C9;
     margin: 0 5px;
@@ -159,7 +160,7 @@ export default {
     &--wrap {
       position: relative;
       width: 320px;
-      height: 284px;
+      height: 240px;
     }
 
     &--hidden {
@@ -180,7 +181,7 @@ export default {
   }
 
   &__text {
-    font-weight: 700;
+    font-weight: 600;
   }
 
   &--close {

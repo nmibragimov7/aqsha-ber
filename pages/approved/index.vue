@@ -4,7 +4,7 @@
     <div class='container py-3 page--wrap'>
       <div class='page__header d-flex flex-column align-items-center'>
         <div class='page__inner-container page__header--inner' :class='{"text-center": !isDesktop}'>
-          <h3 class='page__title m-0' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
+          <h3 class='page__title m-0 font-gilroy' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
           <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
             <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
             <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
@@ -38,25 +38,25 @@
             <div class='page__stars my-3' />
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold'>Процент по микрокредиту:</span>
+            <span class='mr-2 info__bold font-gilroy'>Процент по микрокредиту:</span>
             <span class='page__dotted'></span>
             <span class='ml-2 info__title'>{{ userData.PercentNormal }}%</span>
           </div>
           <div class='d-flex mt-3 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold'>Переплата по микрокредиту:</span>
+            <span class='mr-2 info__bold font-gilroy'>Переплата по микрокредиту:</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>0,00000₸</span>
+            <span class='ml-2 info__title'>{{ percentSum }}₸</span>
           </div>
           <div class='d-flex mt-4 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold'>Ежемесячный платёж</span>
+            <span class='mr-2 info__bold font-gilroy'>Ежемесячный платёж</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>000000₸</span>
+            <span class='ml-2 info__info font-gilroy'>000000₸</span>
           </div>
           <div class='page__stars my-3' />
           <div class='d-flex mt-4 justify-content-between align-items-center'>
-            <span class='mr-2 info__info'>ИТОГО К ВОЗВРАТУ:</span>
+            <span class='mr-2 info__info font-gilroy'>ИТОГО К ВОЗВРАТУ:</span>
             <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>000 000₸</span>
+            <span class='ml-2 info__title'>{{ result }}₸</span>
           </div>
           <BaseButton classes='mt-4' @click='giveToMoney'>
             Получить деньги
@@ -82,6 +82,12 @@ export default {
     }),
     isAuth() {
       return this.$store.getters['auth/isAuth']
+    },
+    percentSum(){
+      return this.userData.SumDefault* (this.userData.PercentNormal * 0.01) * this.userData.DaysDefault;
+    },
+    result(){
+      return this.userData.SumDefault + this.percentSum;
     }
   },
   data() {
@@ -187,7 +193,7 @@ export default {
 
   &__title {
     font-weight: 800;
-    font-size: 52px;
+    font-size: 4rem;
     line-height: 70px;
     white-space: nowrap;
   }

@@ -7,9 +7,9 @@
            alt='Scan'
            class='mb-4' />
       <BaseButton prev
-                  classes='mb-2'
+                  classes='mb-3'
                   @click='$emit("goBack")'>Назад</BaseButton>
-      <BaseButton next @click='stepHandler'>Далее</BaseButton>
+      <BaseButton uppercase next @click='stepHandler'>Далее</BaseButton>
     </div>
   </div>
 </template>
