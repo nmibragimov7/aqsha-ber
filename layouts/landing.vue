@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div>
     <div class='promo__wrap d-flex flex-column' :class="{'h-100 promo__desktop':isDesktop}">
       <Header/>
       <Promo />

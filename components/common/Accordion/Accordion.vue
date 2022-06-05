@@ -57,7 +57,6 @@ export default {
   &__question {
     position: relative;
     padding: 20px 70px 20px 30px;
-    font-weight: 700;
     height: 80px;
     line-height: 150%;
 

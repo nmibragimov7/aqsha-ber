@@ -1,5 +1,5 @@
 <template>
-  <div class='footer__wrap pb-3 pt-5'>
+  <div class='footer__wrap pb-5 pt-5'>
     <div class='container'>
       <div class='footer row'>
         <div class="col-12 mb-4 footer__col col-md-6">
@@ -24,12 +24,12 @@
                        placeholder='Что-то еще?'
                        class='mb-4'
                        is-footer />
-            <BaseButton :width="70" uppercase >Оставить заявку</BaseButton>
+            <BaseButton :width="100" uppercase >Оставить заявку</BaseButton>
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <div class='row justify-content-between'>
-            <div class='col-6 col-md-12 mb-2 d-flex justify-content-between'>
+          <div class='footer__contact row justify-content-between'>
+            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between'>
               <div class="footer__item">
                 <div>
                   <p class="my-0">РК, 0500004, г.Алматы</p>
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <div class='col-6 col-md-12 mb-2 d-flex justify-content-between'>
+            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between'>
               <div class="footer__item">
                 <div>
                   <p class="my-0"><a class='footer__item--link' href="tel:+7 (727) 364 88 88 ">+7 (727) 364 88 88 </a></p>
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-12 mb-2">
+            <div class="col-6 col-md-12 mb-4">
               <div>
                 <div class="d-flex flex-column">
                   <NuxtLink to='/documents' class='footer__item--link'>
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-12 mb-2">
+            <div class="col-6 col-md-12 mb-4">
               <div>
                 <NuxtLink to='/lc' class='footer__item--link'>
                   <span>Личный кабинет</span>
@@ -104,13 +104,21 @@ export default {
     }
   }
   &__wrap {
-    background: linear-gradient(60deg, #F17C85 0%, #a258c5 27.08%, #5D54AB 49.32%, #3854e3 85.59%);
+    background: url("/svg/promo-icon2.svg") no-repeat 0% 69%/40%,
+                url("/svg/promo-icon4.svg") no-repeat 100% 5%/35%,
+                url("/svg/promo-icon5.svg") no-repeat 85% 21%/14%,
+                linear-gradient(60deg, #F17C85 0%, #a258c5 27.08%, #5D54AB 49.32%, #3854e3 85.59%)
+  }
+
+  &__contact {
+    margin: 0 auto;
+    width: 85%;
   }
 
   &__form {
     margin: 0 auto;
     text-align: center;
-    width:78%;
+    width: 79%;
 
 
     &--title {
@@ -124,8 +132,9 @@ export default {
 
     &-text {
         width:81%;
-        &>h3{
+        & > h3{
           font-size: 27px;
+          line-height: 2rem;
         }
     }
 
@@ -149,7 +158,7 @@ export default {
 
     &--text {
       font-size: 11px;
-      line-height: 24px;
+      line-height: 18px;
     }
   }
 }

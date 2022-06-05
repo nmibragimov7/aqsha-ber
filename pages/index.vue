@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class='promo__wrap mb-5 py-5 company'>
+    <div class='promo__wrap py-5 company'>
       <div class="container">
         <div class='row about align-items-center'>
           <div class="col-md-6 about__first-col">
@@ -130,8 +130,8 @@
         </div>
       </div>
     </div>
-    <div class='container mb-5'>
-      <h2 class='m-0 types__title font-gilroy'>Частые вопросы</h2>
+    <div class='container py-7 bg-fag'>
+      <h2 class='m-0 about__title font-gilroy'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
                    :active-index='activeFaqIndex'
@@ -179,7 +179,11 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
+.py-7 {
+  padding-top: 5.5rem;
+  padding-bottom: 6rem;
+}
 
 .card {
   &__hands {
@@ -359,6 +363,7 @@ export default {
     text-align: center;
     font-size: 36px;
     font-weight: 800;
+    line-height: 2rem;
     margin-bottom: 6% !important;
     @media (min-width: 900px) {
       font-size: min(7.5vh, 60px);
@@ -415,7 +420,7 @@ export default {
 .about {
   color: #FFF;
 
-  &__first-col {
+  &__first-col::v-deep {
     order: 1;
     text-align: center;
     @media (min-width: 768px) {
@@ -457,8 +462,11 @@ export default {
   }
 
   &__title {
+    text-align: center;
     font-size: 46px;
     font-weight: 800;
+    line-height: 2.5rem;
+    margin-bottom: 6%;
   }
 
   &__text {
@@ -473,7 +481,8 @@ export default {
 }
 
 .company {
-  transform: translateY(-48px);
+  //transform: translateY(-48px);
+  margin-top: -48px;
   @media screen and (min-width: 675px) {
     transform: translateY(0);
     margin-top: 40px;

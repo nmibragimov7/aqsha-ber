@@ -41,8 +41,14 @@ body {
 
 .bg-info {
   background: url("/svg/info-icon.svg") no-repeat 0% -5% / 50%,
-              url("/svg/info-icon2.svg") no-repeat 15% 35%/18%,
+              url("/svg/info-icon2.svg") no-repeat 15% 35% /18%,
               url("/svg/info-icon3.svg") no-repeat 100% 128% / 50%;
+}
+
+.bg-fag {
+  background: url("/svg/faq-icon.svg") no-repeat 0% 100% / 40%,
+              url("/svg/faq-icon2.svg") no-repeat 100% -47% / 50%,
+              url("/svg/faq-icon3.svg") no-repeat 67% 2% / 16%
 }
 
 .bg-white {
