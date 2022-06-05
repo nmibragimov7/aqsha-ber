@@ -41,7 +41,7 @@
         <div class='row'>
           <template v-for='(information, index) in infos'>
             <div :key='index' class='col-12 mb-4 col-md-6'>
-              <Card rounded classes='bg-white card__hands py-5 h-100 justify-content-end'>
+              <Card rounded classes='bg-white card__hands py-5 mt-2 h-100 justify-content-end'>
                 <div class="info__get">
                   <img v-if='information.image === "get"' src="@/assets/images/get.png" class="w-100"
                        alt="qweqw">
@@ -58,7 +58,9 @@
                 </div>
                 <div class="px-5 w-100">
                   <BaseButton :width='80' small next>
-                    <nuxt-link style='text-decoration: none; color: #FFF' :to='information.path'>Подробнее</nuxt-link>
+                    <nuxt-link style='text-decoration: none; color: #FFF;font-weight: 500' :to='information.path'>
+                      Подробнее
+                    </nuxt-link>
                   </BaseButton>
                 </div>
               </Card>
@@ -66,28 +68,30 @@
           </template>
         </div>
       </div>
-      <div class="container pt-5">
-        <h2 class='m-0 types__title font-gilroy'>Виды микрокредитов</h2>
-        <div class='row'>
-          <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6 mb-4'>
-            <Card classes="pb-4" rounded bg='#FFF'>
-              <div class="flex-grow-1">
-                <div class='types__header d-flex flex-column justify-content-center align-items-center'
-                     :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
-                  <p class='types__header--title mb-3 mt-0'>{{ type.header.title }}</p>
-                  <p class='types__header--text m-0'>{{ type.header.text }}</p>
+      <div class="decoration">
+        <div class="container pt-5">
+          <h2 class='m-0 types__title font-gilroy'>Виды микрокредитов</h2>
+          <div class='row'>
+            <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6 mb-4'>
+              <Card shadow="0px 4px 4px rgba(0, 0, 0, 0.25)" classes="pb-4" rounded bg='rgba(255, 255, 255, 0.8)'>
+                <div class="flex-grow-1">
+                  <div class='types__header d-flex flex-column justify-content-center align-items-center'
+                       :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
+                    <p class='types__header--title mb-3 mt-0'>{{ type.header.title }}</p>
+                    <p class='types__header--text m-0'>{{ type.header.text }}</p>
+                  </div>
+                  <div class='types__body mt-4 d-flex flex-column justify-content-center align-items-center'>
+                    <p class='types__body--title font-gilroy m-0 mb-4'>{{ type.body.title }}</p>
+                    <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
+                  </div>
                 </div>
-                <div class='types__body mt-4 d-flex flex-column justify-content-center align-items-center'>
-                  <p class='types__body--title font-gilroy m-0 mb-4'>{{ type.body.title }}</p>
-                  <p class='types__body--text m-0 mb-4'>{{ type.body.text }}</p>
+                <div class="types__body w-100 mt-3">
+                  <BaseButton :width='80' small next>
+                    <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>Подробнее</nuxt-link>
+                  </BaseButton>
                 </div>
-              </div>
-              <div class="types__body w-100 mt-3">
-                <BaseButton :width='80' small next>
-                  <nuxt-link style='text-decoration: none; color: #FFF' :to='type.path'>Подробнее</nuxt-link>
-                </BaseButton>
-              </div>
-            </Card>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +120,7 @@
               </NuxtLink>
             </div>
             <div class="about__button-first-col">
-              <BaseButton>ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
+              <BaseButton classes="font-gilroy">ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
             </div>
           </div>
           <div class="col-md-6">
@@ -187,7 +191,7 @@ export default {
 
 .card {
   &__hands {
-    min-height: 460px;
+    min-height: 420px;
     border-radius: 30px;
   }
 
@@ -251,6 +255,8 @@ export default {
   overflow: hidden;
   box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
   border-radius: 0px 0px 30px 30px;
+  position: relative;
+  z-index: 3;
   background: #F8F9F9;
   @media screen and (min-width: 550px) {
     background: transparent;
@@ -475,7 +481,7 @@ export default {
 
   &__link {
     color: #FFF;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: underline;
   }
 }
@@ -486,6 +492,21 @@ export default {
   @media screen and (min-width: 675px) {
     transform: translateY(0);
     margin-top: 40px;
+  }
+}
+
+.decoration {
+  position: relative;
+
+  &::before {
+    content: "";
+    background: url("/svg/promo_icon_6.png") no-repeat left top /contain;
+    width:250px;
+    height: 250px;
+    display: inline-block;
+    position: absolute;
+    left:0;
+    top:-135px;
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <modal name='sendCode' :shiftY="0.4" :width='370' height='auto' :styles="{borderRadius:'17px'}">
+  <modal name='sendCode' :shift-y="0.4" :width='370' height='auto' :styles="{borderRadius:'17px'}">
     <div class='modal-getMoney d-flex flex-column align-items-center'>
       <SendCode name='sendCode'
                 :code='code'
-                btnText='ДАЛЕЕ'
+                btn-text='ДАЛЕЕ'
                 @stepHandler='(value, index) => $emit("stepHandler", value, index)'
                 @inputHandler='value => $emit("inputHandler", value)' />
     </div>
@@ -17,7 +17,8 @@ export default {
   name: 'SendCodeModal',
   props: {
     code: {
-      type: String
+      type: String,
+      default:""
     }
   },
   components: { SendCode }
