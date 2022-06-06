@@ -1,5 +1,5 @@
 <template>
-  <div :class="['card', classes, 'd-flex', 'flex-column', 'align-items-center', {rounded}]" :style="{background: bg}">
+  <div :class="['card', classes, 'd-flex', 'flex-column', 'align-items-center', {rounded}]" :style="{background: bg,'box-shadow':shadow}">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     classes: {
       type: String,
       default: ''
+    },
+    shadow:{
+      type:String,
+      default:""
     },
     rounded: {
       type: Boolean,
