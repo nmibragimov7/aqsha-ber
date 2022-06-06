@@ -73,7 +73,7 @@
           <h2 class='m-0 types__title font-gilroy'>Виды микрокредитов</h2>
           <div class='row'>
             <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6 mb-4'>
-              <Card shadow="0px 4px 4px rgba(0, 0, 0, 0.25)" classes="pb-4" rounded bg='rgba(255, 255, 255, 0.8)'>
+              <Card shadow="0px 4px 4px rgba(0, 0, 0, 0.25)" classes="pb-4" rounded bg='#FFF'>
                 <div class="flex-grow-1">
                   <div class='types__header d-flex flex-column justify-content-center align-items-center'
                        :class='[{"types__header--first": index === 0}, {"types__header--last": index === 1}]'>
