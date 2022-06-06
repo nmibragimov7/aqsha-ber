@@ -29,7 +29,7 @@
         </div>
         <div class="col-12 col-md-6">
           <div class='footer__contact row justify-content-between'>
-            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between'>
+            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between p-0'>
               <div class="footer__item">
                 <div>
                   <p class="my-0">РК, 0500004, г.Алматы</p>
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between'>
+            <div class='col-6 col-md-12 mb-4 d-flex justify-content-between p-0'>
               <div class="footer__item">
                 <div>
                   <p class="my-0"><a class='footer__item--link' href="tel:+7 (727) 364 88 88 ">+7 (727) 364 88 88 </a></p>
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-12 mb-4">
+            <div class="col-6 col-md-12 mb-4 p-0">
               <div>
                 <div class="d-flex flex-column">
                   <NuxtLink to='/documents' class='footer__item--link'>
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-md-12 mb-4">
+            <div class="col-6 col-md-12 mb-4 p-0">
               <div>
                 <NuxtLink to='/lc' class='footer__item--link'>
                   <span>Личный кабинет</span>
