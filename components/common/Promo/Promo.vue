@@ -30,7 +30,7 @@
                            @click='$router.push("/lc")'>Личный кабинет</base-button>
             </div>
             <div class='mb-3'>
-              <base-button :disabled='$v.valueInput.$error'
+              <base-button :disabled='!valueInput.length || $v.valueInput.$error'
                           @click='getHandler'>
                 ПОЛУЧИТЬ ДЕНЬГИ
               </base-button>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 import ProcessedModal from '../modal/ProcessedModal/ProcessedModal'
 import BaseButton from '~/components/base/BaseButton/BaseButton'
 import { cleanNumber } from '~/helpers/maskUtils'
@@ -73,7 +75,8 @@ export default {
     valueInput: {
       isValidIin(value) {
         return isValidHandler(cleanNumber(value, false))
-      }
+      },
+      required
     }
   },
   methods: {
