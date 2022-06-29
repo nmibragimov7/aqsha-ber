@@ -2,11 +2,11 @@
   <PageWrap title='Личный кабинет'>
     <div class='page__header p-4'>
       <div class='row mb-2'>
-        <div class='col-6 col-lg-4'>
+        <div class='col-6 col-lg-4 mb-3'>
           <div class='profile__image h-100 w-100'></div>
         </div>
-        <div class='col-6 col-lg-8' :class='{"p-0": !isDesktop}'>
-          <p class='m-0 d-flex flex-column justify-content-between'>{{ user.Surname }}</p>
+        <div class='col-6 col-lg-8 d-flex flex-column justify-content-between' :class='{"p-0": !isDesktop}'>
+          <p class='m-0 '>{{ user.Surname }}</p>
           <p class='m-0'>{{ user.Name }}</p>
           <p v-if="user.MiddleName" class='m-0'>{{ user.MiddleName }}</p>
           <p class='m-0'>№ 21312421</p>
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class='row mb-0'>
-        <div class='col-6 col-lg-4'>
+        <div class='col-6 col-lg-4 my-1'>
           <p class='m-0'><b>Дата рождения:</b></p>
           <p class='m-0'>{{ new Date(user.BirthDate) | date("dd.MM.yyyy") }}</p>
         </div>
@@ -64,6 +64,9 @@
           <BaseButton classes='profile__button--blue' @click="changePassword">Сохранить</BaseButton>
         </div>
       </div>
+      <div style="height: 300px" class="px-3 mt-4">
+        <BaseButton uppercase @click="goDocuments">Документы</BaseButton>
+      </div>
     </template>
   </PageWrap>
 </template>
@@ -109,6 +112,9 @@ export default {
           }
         }
       })
+    },
+    goDocuments(){
+      this.$router.push("/documents")
     },
     getHistory() {
       const _this = this
@@ -156,6 +162,7 @@ export default {
   &__image {
     background-color: #C4C4C4;
     max-width: 135px;
+    min-height: 157px;
   }
 
   &__block {

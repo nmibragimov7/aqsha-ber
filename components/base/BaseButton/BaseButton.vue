@@ -89,7 +89,7 @@ export default {
 <style lang='scss' scoped>
 .button {
   width: 100%;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   background: #FFDF11;
   box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.25);
@@ -97,7 +97,7 @@ export default {
   border: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 12px 10px;
   border-radius: 42px;
   @media screen and (min-width: 768px) {

@@ -44,7 +44,6 @@
         <div class="page__list py-5 mb-5 px-2">
           <h3 class="text-center m-0">Наличными в АО «Казпочта»</h3>
           <ol class="mb-2">
-            <li class="pl-1">пройдите регистрацию</li>
             <li class="pl-1">Получите смс-код</li>
             <li class="pl-1">Пройдите в любое отделение АО «Казпочта»</li>
             <li class="pl-1">Предъявите кассиру удостоверение личности и назовите код</li>
@@ -69,14 +68,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isAuth:"auth/isAuth"
+      isAuth: "auth/isAuth"
     })
   },
   methods: {
     goToMain() {
       this.$router.push("/")
     }
-  }
+  },
+
 }
 </script>
 <style scoped lang="scss">
@@ -94,6 +94,7 @@ export default {
     right: 0;
     top: 0;
     left: 0;
+    padding-bottom: 100px;
   }
 
   &__title {
@@ -114,4 +115,6 @@ export default {
     }
   }
 }
+
+
 </style>

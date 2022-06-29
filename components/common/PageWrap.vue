@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <Header logo-small />
+    <Header logo-small/>
     <div class='container page__wrap'>
       <div class='page__body px-4'>
         <div class='text-center page__info'>
@@ -11,7 +11,7 @@
             </p>
           </slot>
         </div>
-        <div class='page__content'>
+        <div class='page__content' :class="{'bg-white':!bgTransparent}">
           <slot></slot>
         </div>
         <slot name='page__footer'>
@@ -34,6 +34,10 @@ export default {
     title: {
       type: String,
       default: 'Подписание договора'
+    },
+    bgTransparent: {
+      type: Boolean,
+      default: false
     },
     subtitle: {
       type: String,
@@ -94,7 +98,6 @@ export default {
   }
 
   &__content {
-    background: #fff;
     border-radius: 15px;
     color: #322443;
     font-size: 18px;

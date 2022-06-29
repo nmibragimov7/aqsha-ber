@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header logoSmall/>
+    <Header logo-small/>
     <div class="container page__wrap">
       <div class="page__body px-4">
         <h1 class="text-center page__title mb-4">Документы</h1>
@@ -14,7 +14,7 @@
             <li class="py-1">Реквизиты ТОО МФО «Взаймы»</li>
           </ul>
         </div>
-        <BaseButton @click="goToMain" bg="#3A2784" color="#fff">
+        <BaseButton uppercase bg="#3A2784" color="#fff" @click="goToMain">
           На главную
         </BaseButton>
       </div>
@@ -48,6 +48,7 @@ export default {
     position: absolute;
     right:0;
     top:0;
+
     left:0;
   }
   &__title {
