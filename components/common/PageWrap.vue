@@ -11,7 +11,7 @@
             </p>
           </slot>
         </div>
-        <div class='page__content' :class="{'bg-white':!bgTransparent}">
+        <div class='page__content' :class="{'bg':!bgTransparent}">
           <slot></slot>
         </div>
         <slot name='page__footer'>
@@ -101,7 +101,10 @@ export default {
     border-radius: 15px;
     color: #322443;
     font-size: 18px;
-    box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
+    &.bg{
+      box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
+      background-color: white;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header logoSmall/>
+    <Header logo-small/>
     <div class="container page__wrap">
       <div class="page__body px-4">
         <h1 class="text-center page__title mb-3">Способы погашения</h1>
@@ -103,13 +103,13 @@ export default {
       isAuth: "auth/isAuth"
     })
   },
+  mounted() {
+    this.creditId = this.$route.query.id
+  },
   methods: {
     goToMain() {
       this.$router.push("/")
     }
-  },
-  mounted() {
-    this.creditId = this.$route.query.id
   }
 }
 </script>

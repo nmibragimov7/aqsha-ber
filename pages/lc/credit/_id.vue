@@ -1,5 +1,5 @@
 <template>
-  <PageWrap title="Детали кредита" bgTransparent>
+  <PageWrap title="Детали кредита" bg-transparent>
     <p class="detail__title font-gilroy bg-white">
       Текущий
     </p>
@@ -27,10 +27,10 @@
 №00000000000000</span>
         </li>
         <li class="mt-3 d-flex gap-1">
-          <BaseButton history bg='#3A2784' color="white">
+          <BaseButton history bg='#3A2784' color="white" @click="$router.push('/lc/credit/extend/1')">
             Продлить
           </BaseButton>
-          <BaseButton history>
+          <BaseButton history @click="$router.push('/lc/credit/repay/1')">
             Погасить
           </BaseButton>
         </li>
