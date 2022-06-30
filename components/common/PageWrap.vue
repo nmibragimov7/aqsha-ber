@@ -57,13 +57,9 @@ export default {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   min-height: 25vh !important;
   border-radius: 0 0 20px 20px;
-
-  @media (min-width: 900px) {
-    min-height: 50vh !important;
-    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  @media screen and (min-width: 600px) {
+    background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
+    min-height: 50vh;
   }
 
   &__wrap {
