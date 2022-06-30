@@ -25,11 +25,12 @@
 import Header from "@/components/layout/Header/Header";
 
 export default {
-  components:{
+  components: {
     Header
   },
-  methods:{
-    goToMain(){
+  layout: "withFooter",
+  methods: {
+    goToMain() {
       this.$router.push("/")
     }
   }
@@ -39,29 +40,38 @@ export default {
 
 .page {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  @media screen and (min-width: 600px) {
+    background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
+    min-height: 30vh;
+  }
   min-height: 25vh;
   border-radius: 0 0 20px 20px;
-  &__wrap{
+
+  &__wrap {
     position: relative;
   }
-  &__body{
-    position: absolute;
-    right:0;
-    top:0;
 
-    left:0;
+  &__body {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    left: 0;
   }
+
   &__title {
-    margin-top:0;
+    margin-top: 0;
     color: #fff;
     font-size: 24px;
     font-weight: 500;
   }
-  &__content{
+
+  &__content {
     border-radius: 15px;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
     color: #322443;
   }
+
   &__list {
     list-style: none;
 
