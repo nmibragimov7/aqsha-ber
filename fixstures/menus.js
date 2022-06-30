@@ -8,8 +8,12 @@ export const menus = [
     path: "/documents"
   },
   {
-    title: "Способы получения и погашения",
+    title: "Получение",
     path: "/give-methods"
+  },
+  {
+    title: "Погашение",
+    path: "/repayment-methods"
   },
   {
     title: "Контакты",

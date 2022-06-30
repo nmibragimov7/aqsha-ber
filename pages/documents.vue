@@ -42,7 +42,7 @@ export default {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   @media screen and (min-width: 600px) {
     background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
-    min-height: 30vh;
+    min-height: 40vh;
   }
   min-height: 25vh;
   border-radius: 0 0 20px 20px;
@@ -55,8 +55,10 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
-
     left: 0;
+    max-width: 678px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   &__title {
@@ -73,6 +75,8 @@ export default {
   }
 
   &__list {
+    width: 50%;
+    margin: 0 auto;
     list-style: none;
 
     & > li {
