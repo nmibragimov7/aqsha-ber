@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class='promo__wrap d-flex flex-column' :class="{'h-100 promo__desktop':isDesktop}">
+    <div class='promo__wrap d-flex flex-column'
+         :class="{'h-100 promo__desktop': isDesktop}">
       <Header/>
       <Promo />
     </div>
@@ -33,8 +34,10 @@ export default {
   height: 100vh;
 }
 .promo{
-  &__desktop{
-    background: url("@/assets/images/header-background2.png") no-repeat 85% bottom / 49%, linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+
+  &__desktop {
+    padding-top: 33px;
+    background: url("/images/promo_desktop_group.png") no-repeat center/cover;
   }
 }
 </style>

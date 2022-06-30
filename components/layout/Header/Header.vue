@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside='() => isOpen = false' class='header'>
-    <div class='container header__container d-flex align-items-center'
-         :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}]'>
+    <div class='container header__container d-flex'
+         :class='[{"justify-content-center": !logoSmall}, {"justify-content-end": logoSmall}, {"align-items-center": !isDesktop}]'>
       <NuxtLink to='/' class='header__logo' :class='[{"header__logo--small": logoSmall}]'>
         <img src='~/assets/images/logo.svg' alt='Logo' />
       </NuxtLink>
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class='header__item'>
+      <div class='header__item' :class='{"mt-4": isDesktop}'>
         <div class='header__navs flex-grow-1 d-flex'>
           <NuxtLink v-for='(menu, index) in menus'
                     :key='index'
@@ -46,10 +46,10 @@
                     class='header__link p-2 ml-2'>
             {{ menu.title }}
           </NuxtLink>
-          <div v-if="!isAuth" class='p-2 ml-2'>
-            <nuxt-link class='header__link' to='/login'>Вход</nuxt-link>
-            <span class='header__link'>/</span>
-            <nuxt-link class='header__link' to='/register'>Регистрация</nuxt-link>
+          <div v-if="!isAuth" class='p-2 ml-2 header__link'>
+            <span @click='signInHandler'>Вход</span>
+            <span>/</span>
+            <nuxt-link to='/register'>Регистрация</nuxt-link>
           </div>
         </div>
       </div>
@@ -75,13 +75,17 @@ export default {
   data() {
     return {
       menus,
-      isOpen: false
+      isOpen: false,
+      isDesktop: null
     }
   },
   computed:{
     ...mapGetters({
       isAuth:"auth/isAuth"
-    })
+    }),
+  },
+  mounted() {
+    this.isDesktop = this.contentDisplay === "desktop"
   },
   methods: {
     barsHandler() {
@@ -108,11 +112,15 @@ export default {
   &__logo {
     max-width: 115px;
 
+    @media (min-width: 900px) {
+      max-width: 267px;
+    }
+
     &--small {
       max-width: 84px;
 
       @media (min-width: 900px) {
-        max-width: 115px;
+        max-width: 178px;
       }
     }
 
@@ -202,6 +210,16 @@ export default {
     text-decoration: underline;
     color: #FFF;
     font-size: 18px;
+    text-underline-offset: 4px;
+    cursor: pointer;
+
+    & > a {
+      color: #FFF;
+    }
+
+    @media (min-width: 900px) {
+      font-size: 20px;
+    }
   }
 
   @media (min-width: 900px) {
@@ -216,7 +234,6 @@ export default {
 
     &__item {
       display: flex;
-      align-items: center;
     }
   }
 }

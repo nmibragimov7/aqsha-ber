@@ -1,8 +1,8 @@
 <template>
   <div class='promo'>
     <div class='container promo__container d-flex'
-         :class="{' flex-column justify-content-between align-items-center h-100':!isDesktop}">
-      <div :class="{'col-5 promo__payments':isDesktop}">
+         :class="{' flex-column justify-content-between align-items-center h-100': !isDesktop}">
+      <div :class="{'col-5 promo__payments': isDesktop}">
         <div class='promo__text'>
           <h2 class='promo__title font-gilroy my-2'>мгновенные выплаты</h2>
           <h2 class='promo__description mt-1'>на карту и наличными</h2>

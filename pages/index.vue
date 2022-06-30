@@ -1,7 +1,7 @@
 <template>
   <div class='py-3 bg-bodyBg'>
     <div class='container'>
-      <div class='row py-4 bg-info align-items-stretch' :class="{'my-5':isDesktop}">
+      <div class='row py-4 align-items-stretch' :class="[{'my-5': isDesktop}, {'bg-info': !isDesktop}]">
         <template v-for='(card, index) in cards'>
           <div :key='index' class='col-12 col-lg-4 mb-4'>
             <div class="card__about p-3  ">
@@ -17,8 +17,8 @@
         </template>
       </div>
     </div>
-    <div :class="{'container':isDesktop}">
-      <div class='promotion__wrap' :class="{'my-5 py-4':isDesktop}">
+    <div :class="{'container': isDesktop}">
+      <div class='promotion__wrap' :class="{'my-5 py-4': isDesktop}">
         <div class="container">
           <div class='promotion py-4 d-flex align-items-center justify-content-between' :class="{'desktop':isDesktop}">
             <div class='promotion__block'>
@@ -68,11 +68,11 @@
           </template>
         </div>
       </div>
-      <div class="decoration">
+      <div class="decoration" :class='{"mb-5": isDesktop}'>
         <div class="container pt-5">
           <h2 class='m-0 types__title font-gilroy'>Виды микрокредитов</h2>
           <div class='row'>
-            <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6 mb-4'>
+            <div v-for='(type, index) in types' :key='index' class='col-12 col-md-6' :class='{"mb-4": !isDesktop}'>
               <Card shadow="0px 4px 4px rgba(0, 0, 0, 0.25)" classes="pb-4" rounded bg='#FFF'>
                 <div class="flex-grow-1">
                   <div class='types__header d-flex flex-column justify-content-center align-items-center'
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class='promo__wrap py-5 company'>
+    <div class='promo__wrap py-5 company' :class='{"promo__desktop": isDesktop}'>
       <div class="container">
         <div class='row about align-items-center'>
           <div class="col-md-6 about__first-col">
@@ -110,14 +110,14 @@
               </p>
               <p class="m-0"> Работаем честно, быстро и удобно: никаких скрытых комиссий, рассмотрение
                 за минуту. Получить деньги можно на карту или наличными.</p>
-            </div>
-            <div class='d-inline-flex mb-4'>
-              <NuxtLink to='/' class="mr-4">
-                <p class='about__link m-0'>Документы</p>
-              </NuxtLink>
-              <NuxtLink to='/'>
-                <p class='about__link m-0'>Контакты</p>
-              </NuxtLink>
+              <div class='d-inline-flex mx-auto mt-4'>
+                <NuxtLink to='/' class="mr-4">
+                  <p class='about__link m-0'>Документы</p>
+                </NuxtLink>
+                <NuxtLink to='/'>
+                  <p class='about__link m-0'>Контакты</p>
+                </NuxtLink>
+              </div>
             </div>
             <div class="about__button-first-col">
               <BaseButton classes="font-gilroy">ПОЛУЧИТЬ ДЕНЬГИ</BaseButton>
@@ -134,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div class='container py-7 bg-fag'>
+    <div class='container py-7' :class="{'bg-fag': !isDesktop}">
       <h2 class='m-0 about__title font-gilroy'>Частые вопросы</h2>
       <template v-for='(faq, index) in faqs'>
         <Accordion :key='index'
@@ -250,16 +250,17 @@ export default {
 }
 
 .hands {
-  //border-bottom-left-radius: 33px;
-  //border-bottom-right-radius: 33px;
   overflow: hidden;
-  box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
-  border-radius: 0px 0px 30px 30px;
   position: relative;
   z-index: 3;
   background: #F8F9F9;
+  box-shadow: 0px 23px 33px rgba(0, 0, 0, 0.05);
+  border-radius: 0px 0px 30px 30px;
+
   @media screen and (min-width: 550px) {
-    background: transparent;
+    background: inherit;
+    border-radius: 0;
+    box-shadow: none;
     & > .row {
       margin-top: 30px;
     }
@@ -283,6 +284,7 @@ export default {
     margin: 0 auto;
     position: relative;
     z-index: 20;
+
     @media (min-width: 900px) {
       border-radius: 25px;
     }
@@ -398,7 +400,7 @@ export default {
     }
 
     &--last {
-      background: linear-gradient(226.59deg, #FF8D65 27.08%, #3A2784 112.49%);
+      background: linear-gradient(226.59deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
       border-radius: 10px 10px 0px 0px;
       color: #FFF;
@@ -439,9 +441,9 @@ export default {
     width: 80%;
     display: block;
     margin: 0 auto;
-    @media (min-width: 768px) {
-      width: 100%;
-    }
+    //@media (min-width: 768px) {
+    //  width: 100%;
+    //}
 
     & > img {
       width: 100%;
@@ -507,6 +509,10 @@ export default {
     position: absolute;
     left:0;
     top:-135px;
+
+    @media (min-width: 900px) {
+      background: inherit;
+    }
   }
 }
 </style>

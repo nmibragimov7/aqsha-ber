@@ -27,7 +27,6 @@ body {
   font-family: Circe;
   font-size: 16px;
   line-height: 1.5rem;
-  //line-height: 34px;
   background-color: $backgroundColor;
 }
 
@@ -40,19 +39,23 @@ body {
 }
 
 .bg-bodyBg {
-  background-color: $backgroundColor;
+  background: $backgroundColor;
+
+  @media (min-width: 900px) {
+    background: url("/images/body_desktop_group.png") no-repeat center/cover, $backgroundColor;
+  }
 }
 
 .bg-info {
   background: url("/svg/info-icon.svg") no-repeat 0% -5% / 50%,
-  url("/svg/info-icon2.svg") no-repeat 15% 35% /18%,
-  url("/svg/info-icon3.svg") no-repeat 100% 128% / 50%;
+              url("/svg/info-icon2.svg") no-repeat 15% 35% /18%,
+              url("/svg/info-icon3.svg") no-repeat 100% 128% / 50%;
 }
 
 .bg-fag {
   background: url("/svg/faq-icon.svg") no-repeat 0% 100% / 40%,
-  url("/svg/faq-icon2.svg") no-repeat 100% -47% / 50%,
-  url("/svg/faq-icon3.svg") no-repeat 67% 2% / 16%
+              url("/svg/faq-icon2.svg") no-repeat 100% -47% / 50%,
+              url("/svg/faq-icon3.svg") no-repeat 67% 2% / 16%
 }
 
 .bg-white {
@@ -100,8 +103,14 @@ body {
     url("/svg/promo-icon2.svg") no-repeat 0% 54%/35%,
     url("/svg/promo-icon3.svg") no-repeat 100% 30% / 30%,
     url("/svg/promo-icon4.svg") no-repeat 100% 64%/42%,
-    linear-gradient(270deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+    linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
     border-radius: 0 0 33px 33px;
+  }
+
+  &__desktop {
+    //background: linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+    border-radius: 33px;
+    background: url("/images/promo_desktop_group_2.png") no-repeat center/cover;
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class='footer__wrap pb-5 pt-5'>
+  <div class='footer__wrap pb-5 pt-5' :class='{"footer__desktop": isDesktop}'>
     <div class='container'>
       <div class='footer row'>
         <div class="col-12 mb-4 footer__col col-md-6">
@@ -89,9 +89,13 @@ export default {
     return {
       name: "",
       phone: "",
-      anything: ""
+      anything: "",
+      isDesktop: null
     }
-  }
+  },
+  mounted() {
+    this.isDesktop = this.contentDisplay === "desktop"
+  },
 }
 </script>
 
@@ -107,7 +111,13 @@ export default {
     background: url("/svg/promo-icon2.svg") no-repeat 0% 69%/40%,
                 url("/svg/promo-icon4.svg") no-repeat 100% 5%/35%,
                 url("/svg/promo-icon5.svg") no-repeat 85% 21%/14%,
-                linear-gradient(60deg, #F17C85 0%, #a258c5 27.08%, #5D54AB 49.32%, #3854e3 85.59%)
+                linear-gradient(45deg, #F17C85 0%, #a258c5 27.08%, #5D54AB 49.32%, #3854e3 85.59%);
+  }
+
+  &__desktop {
+    border-top-left-radius: 33px;
+    border-top-right-radius: 33px;
+    background: url("/images/footer_desktop_group.png") no-repeat center/cover;
   }
 
   &__contact {
