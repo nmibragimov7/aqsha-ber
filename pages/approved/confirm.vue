@@ -81,11 +81,9 @@ export default {
   min-height: 40vh;
   border-radius: 0 0 20px 20px;
 
-  @media (min-width: 900px) {
-    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  @media screen and (min-width: 600px) {
+    background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
+    min-height: 50vh;
   }
 
   &__inner-container {

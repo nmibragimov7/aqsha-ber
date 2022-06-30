@@ -21,8 +21,8 @@
             К сожалению, вы исчерпали попытки ввода кода.
           </p>
         </div>
-        <div class='give_money'
-             v-else-if='giveMoney'>
+        <div v-else-if='giveMoney'
+             class='give_money'>
           <h1 class='text-center page__title my-2'>152 000 ₸</h1>
           <p class='text-center page__description mt-4'>
             Оформление закончено: вы получите одобренную сумму выбранным вами способом
@@ -89,13 +89,11 @@ export default {
   border-radius: 0 0 20px 20px;
   min-height: 40vh;
   background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-
-  @media (min-width: 900px) {
-    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-      url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-      url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-      linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  @media screen and (min-width: 600px) {
+    background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
+    min-height: 30vh;
   }
+
 
   &.giveMoney {
     background: url("assets/images/money_2.svg") no-repeat 100% 35%,
