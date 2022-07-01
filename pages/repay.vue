@@ -16,71 +16,67 @@
             <span class='ml-2 info__info'>дд.мм.гг</span>
           </li>
         </ul>
-        <div class="page__list pt-2 pb-2 mb-4 px-2">
-          <div class="d-flex align-items-center">
-            <div class="img__wrap" style="width: 32%">
-              <img style="width: 100px" src="/svg/pay-cards.svg" alt="" class="img">
+        <div class='page__list--wrap'>
+          <div class="page__list pt-2 pb-2 px-2" :class='{"mb--4": !isDesktop}'>
+            <div class="d-flex align-items-center">
+              <div class="img__wrap" style="width: 32%">
+                <img style="width: 100px" src="/svg/pay-cards.svg" alt="" class="img">
+              </div>
+              <h3 class="text-center m-0 ">Банковская карта</h3>
             </div>
-            <h3 class="text-center m-0 ">Банковская карта</h3>
-          </div>
 
-          <ol class="mb-4">
-            <li class="pl-1">зайдите в личный кабинет</li>
-            <li class="pl-1">выберите вкладку кредита и нажмите «Погасить»</li>
-            <li class="pl-1"> выберите способ «Банковская карта»</li>
-            <li class="pl-1">выберите нужную карту или добавьте новую</li>
-          </ol>
-        </div>
-        <div class="page__list pt-3 pb-3 mb-4 px-3">
-          <div class="d-flex align-items-center">
-            <div class="img__wrap" style="width: 25%">
-              <img src="/svg/kazpochta.svg" alt="" class="img" style="width: 75px">
+            <ol class="mb-4">
+              <li class="pl-1">зайдите в личный кабинет</li>
+              <li class="pl-1">выберите вкладку кредита и нажмите «Погасить»</li>
+              <li class="pl-1"> выберите способ «Банковская карта»</li>
+              <li class="pl-1">выберите нужную карту или добавьте новую</li>
+            </ol>
+          </div>
+          <div class="page__list pt-3 pb-3 px-3" :class='{"mb--4": !isDesktop}'>
+            <div class="d-flex align-items-center">
+              <div class="img__wrap" style="width: 25%">
+                <img src="/svg/kazpochta.svg" alt="" class="img" style="width: 75px">
+              </div>
+              <h3 class="text-center m-0">Наличными в АО «Казпочта»</h3>
             </div>
-            <h3 class="text-center m-0">Наличными в АО «Казпочта»</h3>
+            <ol class="mb-2 mt-0">
+              <li class="pl-1">придите в почтовое отделение</li>
+              <li class="pl-1">сообщите оператору свой ИИН</li>
+              <li class="pl-1">подтвердите сумму погашения</li>
+              <li class="pl-1">внесите необходимую сумму погашения</li>
+            </ol>
           </div>
-          <ol class="mb-2 mt-0">
-            <li class="pl-1">придите в почтовое отделение</li>
-            <li class="pl-1">сообщите оператору свой ИИН</li>
-            <li class="pl-1">подтвердите сумму погашения</li>
-            <li class="pl-1">внесите необходимую сумму погашения</li>
-          </ol>
-        </div>
-
-<!--        3-->
-        <div class="page__list pt-3 pb-3 mb-4 px-3">
-          <div class="d-flex align-items-center">
-            <div class="img__wrap" style="width: 28%">
-              <img src="/svg/qiwi-wallet.svg" alt="" class="img" style="width: 75px">
+          <div class="page__list pt-3 pb-3 px-3" :class='{"mb--4": !isDesktop}'>
+            <div class="d-flex align-items-center">
+              <div class="img__wrap" style="width: 28%">
+                <img src="/svg/qiwi-wallet.svg" alt="" class="img" style="width: 75px">
+              </div>
+              <h3 class="m-0">Через терминалы и QIWI-кошелек</h3>
             </div>
-            <h3 class="m-0">Через терминалы и QIWI-кошелек</h3>
+            <ol class="mb-2 mt-0">
+              <li class="pl-1">выберите в терминале раздел «Погашение кредитов/фин.услуги» /«МКО и МФО»/Ақша Бер</li>
+              <li class="pl-1"> выберите «Погашение микрокредита»</li>
+              <li class="pl-1"> введите ИИН</li>
+              <li class="pl-1"> проверьте данные и подтвердите правильность</li>
+              <li class="pl-1">  внесите необходимую сумму и нажмите «Оплатить»</li>
+            </ol>
           </div>
-          <ol class="mb-2 mt-0">
-            <li class="pl-1">выберите в терминале раздел «Погашение кредитов/фин.услуги» /«МКО и МФО»/Ақша Бер</li>
-            <li class="pl-1"> выберите «Погашение микрокредита»</li>
-            <li class="pl-1"> введите ИИН</li>
-            <li class="pl-1"> проверьте данные и подтвердите правильность</li>
-            <li class="pl-1">  внесите необходимую сумму и нажмите «Оплатить»</li>
-          </ol>
-        </div>
-
-        <div class="page__list pt-2 pb-2 mb-4 px-3">
-          <div class="d-flex align-items-center">
-            <div class="img__wrap" style="width: 25%">
-              <img src="/svg/kassa.svg" alt="" class="img" style="width: 75px">
+          <div class="page__list pt-2 pb-2 px-3" :class='{"mb--4": !isDesktop}'>
+            <div class="d-flex align-items-center">
+              <div class="img__wrap" style="width: 25%">
+                <img src="/svg/kassa.svg" alt="" class="img" style="width: 75px">
+              </div>
+              <h3 class="text-center m-0">Через терминалы Касса 24</h3>
             </div>
-            <h3 class="text-center m-0">Через терминалы Касса 24</h3>
+            <ol class="mb-2 mt-0">
+              <li class="pl-1">выберите в терминале раздел «Оплата услуг»/ «Финансовые организации» /«МФО и МКО»/Ақша Бер</li>
+              <li class="pl-1"> выберите «Погашение микрокредита»</li>
+              <li class="pl-1"> введите номер телефона</li>
+              <li class="pl-1"> внесите необходимую сумму и нажмите «Оплатить»</li>
+            </ol>
           </div>
-          <ol class="mb-2 mt-0">
-            <li class="pl-1">выберите в терминале раздел «Оплата услуг»/ «Финансовые организации» /«МФО и МКО»/Ақша Бер</li>
-            <li class="pl-1"> выберите «Погашение микрокредита»</li>
-            <li class="pl-1"> введите номер телефона</li>
-            <li class="pl-1"> внесите необходимую сумму и нажмите «Оплатить»</li>
-          </ol>
         </div>
-
-      <div style="height: 150px"/>
-
-      </div>
+      <div style="height: 150px"/></div>
     </div>
   </div>
 </template>
@@ -95,7 +91,8 @@ export default {
   },
   data() {
     return {
-      creditId: null
+      creditId: null,
+      isDesktop: false
     }
   },
   computed: {
@@ -105,6 +102,7 @@ export default {
   },
   mounted() {
     this.creditId = this.$route.query.id
+    this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
   },
   methods: {
     goToMain() {
@@ -120,7 +118,7 @@ export default {
   border-radius: 0 0 20px 20px;
   @media screen and (min-width: 600px) {
     background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
-    min-height: 30vh;
+    min-height: 50vh;
   }
   &__wrap {
     position: relative;
@@ -146,6 +144,16 @@ export default {
     border-radius: 15px;
     box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
     color: #322443;
+
+    &--wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 30px;
+
+      @media (min-width: 900px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
 
     & li {
       margin-bottom: 0;

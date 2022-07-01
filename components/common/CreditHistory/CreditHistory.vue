@@ -7,7 +7,9 @@
       <button class='history__show-more d-inline-flex align-items-center'>Показать полностью
         <img class='ml-1' src='@/assets/images/arrow.svg' alt=''>
       </button>
-      <BaseButton bg='#3A2784' color='#fff' classes='mt-3' normal>Как погасить</BaseButton>
+      <div class='mx-auto mw-325 w-100'>
+        <BaseButton bg='#3A2784' color='#fff' classes='mt-3' normal>Как погасить</BaseButton>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +31,10 @@ export default {
 }
 </script>
 <style lang='scss'>
+.mw-325 {
+  max-width: 325px;
+}
+
 .history {
 
   &__action {

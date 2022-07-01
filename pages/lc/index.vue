@@ -61,7 +61,7 @@
             <br>
             <span class='profile__description--red'>Не используйте пробелы и кириллицу.</span>
           </p>
-          <BaseButton classes='profile__button--blue' @click="changePassword">Сохранить</BaseButton>
+          <BaseButton classes='profile__button--blue' next @click="changePassword">Изменить</BaseButton>
         </div>
       </div>
       <div style="height: 300px" class="px-3 mt-4">
@@ -100,7 +100,6 @@ export default {
     this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
     this.getClientInfo();
     this.getHistory()
-
   },
   methods: {
     getClientInfo() {
@@ -178,7 +177,7 @@ export default {
 
     &--wrap {
       @media (min-width: 900px) {
-        max-width: 385px;
+        max-width: 325px;
         margin: 0 auto;
       }
     }

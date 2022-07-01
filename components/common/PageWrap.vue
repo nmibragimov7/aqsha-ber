@@ -59,7 +59,7 @@ export default {
   border-radius: 0 0 20px 20px;
   @media screen and (min-width: 600px) {
     background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
-    min-height: 50vh;
+    min-height: 50vh !important;
   }
 
   &__wrap {
@@ -86,6 +86,7 @@ export default {
 
     @media (min-width: 900px) {
       font-size: 46px;
+      line-height: 50px;
     }
   }
 
@@ -97,6 +98,7 @@ export default {
     border-radius: 15px;
     color: #322443;
     font-size: 18px;
+
     &.bg{
       box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
       background-color: white;

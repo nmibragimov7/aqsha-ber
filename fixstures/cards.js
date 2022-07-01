@@ -20,13 +20,13 @@ export const infos = [
     image: "get",
     title: "Как получить",
     description: ["На карту", "Наличными в АО «Казпочта»"],
-    path: ""
+    path: "/give-methods"
   },
   {
     image: "repay",
     title: "Как погасить",
     description: ["Картой онлайн", "Наличными в АО «Казпочта»","QIWI-кошелек и терминалы", "Терминалы Касса24"],
-    path: ""
+    path: "/repayment-methods"
   },
 ];
 export const types = [

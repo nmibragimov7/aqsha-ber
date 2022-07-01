@@ -58,8 +58,8 @@
                 </div>
                 <div class="px-5 w-100">
                   <BaseButton :width='80' small next>
-                    <nuxt-link style='text-decoration: none; color: #FFF;font-weight: 500' :to='information.path'>
-                      Подробнее
+                    <nuxt-link :to='information.path' class='card__button'>
+                      Подробнее1
                     </nuxt-link>
                   </BaseButton>
                 </div>
@@ -245,7 +245,7 @@ export default {
   }
 
   &__button {
-    background: #3A2784 !important;
+    text-decoration: none; color: #FFF;font-weight: 500
   }
 }
 

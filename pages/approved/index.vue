@@ -2,65 +2,68 @@
   <div class='page'>
     <Header v-if='isDesktop' logo-small />
     <div class='container py-3 page--wrap'>
-      <div class='page__header d-flex flex-column align-items-center'>
-        <div class='page__inner-container page__header--inner' :class='{"text-center": !isDesktop}'>
-          <h3 class='page__title m-0 font-gilroy' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
-          <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
-            <p class='m-0 px-2' :class='{"mb-1": !isDesktop}'>Ваша заявка одобрена!</p>
-            <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
-              Максимальная сумма микрокредита - {{ userData.SumMax }} ₸
-            </p>
+      <div class='page__item'>
+        <div class='page__header d-flex flex-column align-items-center'>
+          <p v-if='isDesktop' class='my-4 text-bold' style='font-size: 20px'>Ваша заявка одобрена!</p>
+          <div class='page__inner-container page__header--inner' :class='{"text-center": !isDesktop}'>
+            <h3 class='page__title m-0 font-gilroy' :class='{"mt-3": !isDesktop}'>{{ userData.SumDefault }} ₸</h3>
+            <div :class='{"my-4 ml-1": isDesktop}' style='line-height: 26px'>
+              <p v-if='!isDesktop' class='m-0 px-2'>Ваша заявка одобрена!</p>
+              <p class='m-0 px-2' :class='{"mb-4": !isDesktop}'>
+                Максимальная сумма микрокредита - {{ userData.SumMax }} ₸
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='page__body p-4'>
-        <div class='page__inner-container'>
-          <div class='d-flex justify-content-between align-items-center mt-2'>
-            <span class='mr-2 info__title'>Вы берёте сумму</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>{{ userData.SumDefault }} ₸</span>
-          </div>
-          <div class='mt-3'>
-            <InputRange v-model='userData.SumDefault' :min='userData.SumMin' :step='userData.SumIncrementValue'
-                        :max='userData.SumMax' />
-          </div>
-          <div class='d-flex mt-3 justify-content-between align-items-center'>
-            <span class='mr-2 info__title'>Срок возврата</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>{{ userData.DaysDefault }} дней</span>
-          </div>
-          <div class='mt-3'>
-            <InputRange v-model='userData.DaysDefault' :min='userData.DaysMin' purple :max='userData.DaysMax' />
-          </div>
-          <div class='mt-4'>
+        <div class='page__body p-4'>
+          <div class='page__inner-container'>
+            <div class='d-flex justify-content-between align-items-center mt-2'>
+              <span class='mr-2 info__title'>Вы берёте сумму</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info'>{{ userData.SumDefault }} ₸</span>
+            </div>
+            <div class='mt-3'>
+              <InputRange v-model='userData.SumDefault' :min='userData.SumMin' :step='userData.SumIncrementValue'
+                          :max='userData.SumMax' />
+            </div>
+            <div class='d-flex mt-3 justify-content-between align-items-center'>
+              <span class='mr-2 info__title'>Срок возврата</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info'>{{ userData.DaysDefault }} дней</span>
+            </div>
+            <div class='mt-3'>
+              <InputRange v-model='userData.DaysDefault' :min='userData.DaysMin' purple :max='userData.DaysMax' />
+            </div>
+            <div class='mt-4'>
+              <div class='page__stars my-3' />
+              <BaseInput v-model='code' placeholder='ПРОМОКОД' />
+              <div class='page__stars my-3' />
+            </div>
+            <div class='d-flex mt-3 justify-content-between align-items-center'>
+              <span class='mr-2 info__bold font-gilroy'>Процент по микрокредиту:</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__title'>{{ userData.PercentNormal }}%</span>
+            </div>
+            <div class='d-flex mt-3 justify-content-between align-items-center'>
+              <span class='mr-2 info__bold font-gilroy'>Переплата по микрокредиту:</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__title'>{{ percentSum }}₸</span>
+            </div>
+            <div class='d-flex mt-4 justify-content-between align-items-center'>
+              <span class='mr-2 info__bold font-gilroy'>Ежемесячный платёж</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info font-gilroy'>000000₸</span>
+            </div>
             <div class='page__stars my-3' />
-            <BaseInput v-model='code' placeholder='ПРОМОКОД' />
-            <div class='page__stars my-3' />
+            <div class='d-flex mt-4 justify-content-between align-items-center'>
+              <span class='mr-2 info__info font-gilroy'>ИТОГО К ВОЗВРАТУ:</span>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__title'>{{ result }}₸</span>
+            </div>
+            <BaseButton classes='mt-4' @click='giveToMoney'>
+              Получить деньги
+            </BaseButton>
           </div>
-          <div class='d-flex mt-3 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold font-gilroy'>Процент по микрокредиту:</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>{{ userData.PercentNormal }}%</span>
-          </div>
-          <div class='d-flex mt-3 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold font-gilroy'>Переплата по микрокредиту:</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>{{ percentSum }}₸</span>
-          </div>
-          <div class='d-flex mt-4 justify-content-between align-items-center'>
-            <span class='mr-2 info__bold font-gilroy'>Ежемесячный платёж</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info font-gilroy'>000000₸</span>
-          </div>
-          <div class='page__stars my-3' />
-          <div class='d-flex mt-4 justify-content-between align-items-center'>
-            <span class='mr-2 info__info font-gilroy'>ИТОГО К ВОЗВРАТУ:</span>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__title'>{{ result }}₸</span>
-          </div>
-          <BaseButton classes='mt-4' @click='giveToMoney'>
-            Получить деньги
-          </BaseButton>
         </div>
       </div>
     </div>
@@ -151,11 +154,16 @@ export default {
 
 <style lang='scss' scoped>
 .page {
-  background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  background-image: linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  min-height: 100vh;
 
-  @media screen and (min-width: 600px) {
-    background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
+  @media screen and (min-width: 900px) {
+    background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
+                url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+                url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+                linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
     min-height: 50vh;
+    border-radius: 0 0 20px 20px;
   }
   &__inner-container {
     max-width: 450px;
@@ -163,9 +171,23 @@ export default {
   }
 
   &--wrap {
+    position: relative;
+    max-width: 371px;
 
     @media (min-width: 900px) {
       max-width: 800px;
+    }
+  }
+
+  &__item {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    left: 0;
+    line-height: 150%;
+
+    @media (min-width: 900px) {
+      top: 0;
     }
   }
 

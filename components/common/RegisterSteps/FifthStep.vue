@@ -61,6 +61,7 @@
               </div>
             </div>
             <BaseButton uppercase
+                        class='mb-4'
                         next
                         :disabled="$v.$invalid"
                         @click='saveData'>подтвердить</BaseButton>
@@ -129,15 +130,15 @@ export default {
 
 <style lang='scss' scoped>
 .page {
-  background: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  background: linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   min-height: 40vh;
   border-radius: 0 0 20px 20px;
 
   @media (min-width: 900px) {
     background: url("assets/images/promo_icon.png") no-repeat 0 0/20%,
-    url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
-    url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+                url("assets/images/promo_icon_2.png") no-repeat 10% 100%/15%,
+                url("assets/images/promo_icon_3.png") no-repeat 100% 70%/15%,
+                linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
     min-height: 50vh;
   }
 
@@ -194,7 +195,7 @@ export default {
       width: 100%;
 
       @media (min-width: 900px) {
-        width: 45%;
+        width: 55%;
         margin: 0 auto;
       }
     }

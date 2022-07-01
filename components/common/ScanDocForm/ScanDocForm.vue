@@ -20,17 +20,17 @@
           </div>
           <div v-if='isFourthStep' class='page__buttons'>
             <BaseButton :icon='icon' classes='mb-2' @click='openCamera'>{{ text }}</BaseButton>
-            <BasePickFile name='load-document'
-                          text='Загрузить'
-                          @pickFile='pickFile' />
+<!--            <BasePickFile name='load-document'-->
+<!--                          text='Загрузить'-->
+<!--                          @pickFile='pickFile' />-->
           </div>
         </div>
       </div>
       <div v-if='!isFourthStep' class='page__buttons'>
         <BaseButton :icon='icon' classes='mb-2' @click='openCamera'>{{ text }}</BaseButton>
-        <BasePickFile name='load-document'
-                      text='Загрузить'
-                      @pickFile='pickFile' />
+<!--        <BasePickFile name='load-document'-->
+<!--                      text='Загрузить'-->
+<!--                      @pickFile='pickFile' />-->
       </div>
     </div>
     <div v-else class='page__form'>

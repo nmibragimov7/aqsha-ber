@@ -14,9 +14,11 @@
             <li class="py-1">Реквизиты ТОО МФО «Взаймы»</li>
           </ul>
         </div>
-        <BaseButton uppercase bg="#3A2784" color="#fff" @click="goToMain">
-          На главную
-        </BaseButton>
+        <div class='mt-30 mw-360 w-100 mx-auto' :class='{"mt-50": isDesktop}'>
+          <BaseButton uppercase bg="#3A2784" color="#fff" @click="goToMain">
+            На главную
+          </BaseButton>
+        </div>
       </div>
     </div>
   </div>
@@ -28,7 +30,15 @@ export default {
   components: {
     Header
   },
+  data() {
+    return {
+      isDesktop: null
+    }
+  },
   layout: "withFooter",
+  mounted() {
+    this.isDesktop = this.contentDisplay === "desktop"
+  },
   methods: {
     goToMain() {
       this.$router.push("/")
@@ -37,6 +47,17 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.mw-360 {
+  max-width: 360px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
 
 .page {
   background-image: linear-gradient(120deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);

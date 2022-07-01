@@ -22,10 +22,12 @@
                :class='[{"steps__dot--active": num === 1}]'></div>
         </div>
         <div class='page__info page__form mb-4'>
-          <p class='text-center text-bold m-0 mb-4'>Для регистрации иполучения микрокредита вам понадобится:</p>
-          <p class='text-center m-0'>1. Удостоверение личности</p>
-          <p class='text-center m-0'>2. Мобильный телефон</p>
-          <p class='text-center m-0'>3. Веб-камера</p>
+          <div class='w-100 mw-295 mx-auto'>
+            <p class='text-center text-bold m-0 mb-4'>Для регистрации иполучения микрокредита вам понадобится:</p>
+            <p class='text-center m-0'>1. Удостоверение личности</p>
+            <p class='text-center m-0'>2. Мобильный телефон</p>
+            <p class='text-center m-0'>3. Веб-камера</p>
+          </div>
         </div>
         <div class='page__form'>
           <div class='page__form--wrap'>
@@ -130,24 +132,31 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.mw-295 {
+    max-width: 295px;
+}
+
 .page {
   background: url("assets/images/money_1.svg") no-repeat 0 55%,
-  url("assets/images/money_2.svg") no-repeat 100% 30%,
-  url("assets/images/money_3.svg") no-repeat 0 15%,
-  linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+              url("assets/images/money_2.svg") no-repeat 100% 30%,
+              url("assets/images/money_3.svg") no-repeat 0 15%,
+              linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   min-height: 70vh;
   border-radius: 0 0 20px 20px;
   position: relative;
+
   &__description{
     margin:0 auto;
     max-width: 72.5%;
   }
+
   @media (min-width: 900px) {
     background: url("assets/images/money_4.svg") no-repeat 85% 30%,
-    url("assets/images/money_3.svg") no-repeat 35% 15%,
-    linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-    min-height: 50vh;
+                url("assets/images/money_3.svg") no-repeat 35% 15%,
+                linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+    min-height: 55vh;
   }
+
   &__wrap {
     position: relative;
 

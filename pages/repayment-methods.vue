@@ -3,7 +3,7 @@
     <Header logo-small/>
     <div class="container page__wrap">
       <div class="page__body px-4">
-        <h1 class="text-center page__title mb-3" :class='{"mb-5": isDesktop}'>Способы получения</h1>
+        <h1 class="text-center page__title mb-3" :class='{"mb-5": isDesktop}'>Способы погашения</h1>
         <div class='page__row'>
           <div class="page__list py-4 mb-4 px-2">
             <img v-if='isDesktop' class='h-50 w-100' src='/svg/bank-card.svg' alt=''/>
@@ -15,7 +15,6 @@
               <li class="pl-1">введите данные карты, на которую вы хотите получить деньги</li>
               <li class="pl-1">получите смс-код и введите его для подписания договора</li>
             </ol>
-            <p class="px-3">После этого деньги моментально зачислятся на вашу карту</p>
           </div>
           <div class="page__list py-4 mb-5 px-2">
             <img v-if='isDesktop' class='h-50 w-100' src='/svg/kaz-mail.svg' alt=''/>
@@ -26,32 +25,28 @@
               <li class="pl-1">пройдите в любое отделение АО «Казпочта»</li>
               <li class="pl-1">предъявите кассиру удостоверение личности и назовите код</li>
             </ol>
-            <p class="px-3">После этого кассир выдаст вам деньги</p>
           </div>
-<!--          <div v-if="isAuth" class="page__list py-4 mb-5 px-2">-->
-<!--            <h3 class="text-center m-0">Наличными в банкомате</h3>-->
-<!--            <ol class="mb-2">-->
-<!--              <li class="pl-1">пройдите регистрацию</li>-->
-<!--              <li class="pl-1">выберите сумму и срок микрокредита</li>-->
-<!--              <li class="pl-1">выберите способ «Наличными в банкомате»</li>-->
-<!--              <li class="pl-1">получите смс-код и введите его для подписания договора</li>-->
-<!--              <li class="pl-1">получите секретный код из двух частей, и в течение 24 часов в любом банкомате Halyk Bank-->
-<!--                введите номер телефона, секретный код и сумму одобренного микрокредита-->
-<!--              </li>-->
-<!--            </ol>-->
-<!--            <p class="px-3">Если вы ввели все данные верно, банкомат выдаст деньги</p>-->
-<!--          </div>-->
-<!--          <div v-if="isAuth" class="page__list py-4 mb-5 px-2">-->
-<!--            <h3 class="text-center m-0">На QIWI-кошелек</h3>-->
-<!--            <ol class="mb-2">-->
-<!--              <li class="pl-1">пройдите регистрацию</li>-->
-<!--              <li class="pl-1">выберите сумму и срок микрокредита</li>-->
-<!--              <li class="pl-1">выберите способ «QIWI-кошелек»</li>-->
-<!--              <li class="pl-1">введите номер телефона кошелька QIWI, на который вы хотите получить деньги</li>-->
-<!--              <li class="pl-1">получите смс-код и введите его для подписания договора</li>-->
-<!--            </ol>-->
-<!--            <p class="px-3">После этого полученный микрокредит отобразится на счете кошелька QIWI</p>-->
-<!--          </div>-->
+          <div class="page__list py-4 mb-5 px-2">
+            <img v-if='isDesktop' class='h-50 w-100' src='/svg/qiwi-wallet.svg' alt=''/>
+            <h3 class="text-center m-0">Наличными в банкомате</h3>
+            <ol class="mb-2">
+              <li class="pl-1">выберите в терминале раздел «Погашение кредитов/фин.услуги» /«МКО и МФО»/Ақша Бер</li>
+              <li class="pl-1">выберите «Погашение микрокредита»</li>
+              <li class="pl-1">введите ИИН</li>
+              <li class="pl-1">проверьте данные и подтвердите правильность</li>
+              <li class="pl-1">внесите необходимую сумму и нажмите «Оплатить»</li>
+            </ol>
+          </div>
+          <div class="page__list py-4 mb-5 px-2">
+            <img v-if='isDesktop' class='h-50 w-100' src='/svg/kassa.svg' alt=''/>
+            <h3 class="text-center m-0">На QIWI-кошелек и в терминалах</h3>
+            <ol class="mb-2">
+              <li class="pl-1">выберите в терминале раздел «Погашение кредитов/фин.услуги» /«МКО и МФО»/Ақша Бер</li>
+              <li class="pl-1">выберите «Погашение микрокредита»</li>
+              <li class="pl-1">введите номер телефона</li>
+              <li class="pl-1">внесите необходимую сумму и нажмите «Оплатить»</li>
+            </ol>
+          </div>
         </div>
         <div class='mt-30 mw-360 w-100 mx-auto' :class='{"mt-100": isDesktop}'>
           <BaseButton classes="mb-3" uppercase>
@@ -67,22 +62,15 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import Header from "@/components/layout/Header/Header";
+import Header from '../components/layout/Header/Header'
 
 export default {
-  components: {
-    Header
-  },
+  name: 'repayment-methods',
+  components: { Header },
   data() {
     return {
       isDesktop: null
     }
-  },
-  computed: {
-    ...mapGetters({
-      isAuth: "auth/isAuth"
-    })
   },
   mounted() {
     this.isDesktop = this.contentDisplay === "desktop"
@@ -92,10 +80,10 @@ export default {
       this.$router.push("/")
     }
   },
-
 }
 </script>
-<style lang="scss" scoped>
+
+<style lang='scss' scoped>
 .h-50 {
   height: 50px;
 }

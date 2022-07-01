@@ -6,58 +6,59 @@
         <h1 class='text-center page__title mb-4'>Способы получения</h1>
         <div class='page__option--wrap mb-5'>
           <div class='page__option'>
-            <div class='px-3 py-4'>
+            <div class='px-3 py-4 h-100'>
               <label class='d-flex align-items-center justify-content-between mb-4'>
-            <span class='d-inline-flex align-items-center mr-2'>
-              <span class='page__option-image mr-3'>
-                <img src='/svg/pay-cards.svg' class='w-100' alt=''>
-              </span>
-              <span class='title'>На карту любого банка</span>
-            </span>
+                <span class='d-inline-flex align-items-center mr-2'>
+                  <span class='page__option-image mr-3'>
+                    <img src='/svg/pay-cards.svg' class='w-100' alt=''>
+                  </span>
+                  <span class='title'>На карту любого банка</span>
+                </span>
                 <RadioButton v-model='isCard' val='card' name='pay-method' />
               </label>
               <BaseInput v-model='cardNumber' mask='####-####-####-####' placeholder='Номер дебетовой карты' />
             </div>
           </div>
           <div class='page__option'>
-            <div class='px-3 py-4'>
-              <label class='d-flex align-items-center justify-content-between mb-1'>
-            <span class='d-inline-flex align-items-center mr-2'>
-              <span class='page__option-image mr-3'>
-                <img src='/svg/kazpochta.svg' class='w-100' alt=''>
-              </span>
-              <span class='title'>Наличнымив АО «Казпочта»</span>
-            </span>
+            <div class='px-3 py-4 h-100'>
+              <label class='d-flex align-items-center justify-content-between mb-4'>
+                <span class='d-inline-flex align-items-center mr-2'>
+                  <span class='page__option-image mr-3'>
+                    <img src='/svg/kazpochta.svg' class='w-100' alt=''>
+                  </span>
+                  <span class='title'>Наличнымив АО «Казпочта»</span>
+                </span>
                 <RadioButton v-model='isCard' val='card' name='pay-method' />
               </label>
+              <p class='m-0 text-center' style='color: rgba(50, 36, 67, 0.5)'>Отправим смс с кодом на ваш номер</p>
             </div>
           </div>
-          <div class='page__option'>
-            <div class='px-3 py-4'>
-              <label class='d-flex align-items-center justify-content-between mb-1'>
-            <span class='d-inline-flex align-items-center mr-2'>
-              <span class='page__option-image mr-3'>
-                <img src='/svg/qiwi-wallet.svg' class='w-100' alt=''>
-              </span>
-              <span class='title'>На QIWI-кошелёк</span>
-            </span>
-                <RadioButton v-model='isCard' val='card' name='pay-method' />
-              </label>
-            </div>
-          </div>
-          <div class='page__option'>
-            <div class='px-3 py-4'>
-              <label class='d-flex align-items-center justify-content-between mb-1'>
-            <span class='d-inline-flex align-items-center'>
-              <span class='page__option-image mr-3 mr-2'>
-                <img src='/svg/halyk-pay.svg' class='w-100' alt=''>
-              </span>
-              <span class='title'>Наличнымив банкомате</span>
-            </span>
-                <RadioButton v-model='isCard' val='card' name='pay-method' />
-              </label>
-            </div>
-          </div>
+<!--          <div class='page__option'>-->
+<!--            <div class='px-3 py-4'>-->
+<!--              <label class='d-flex align-items-center justify-content-between mb-1'>-->
+<!--            <span class='d-inline-flex align-items-center mr-2'>-->
+<!--              <span class='page__option-image mr-3'>-->
+<!--                <img src='/svg/qiwi-wallet.svg' class='w-100' alt=''>-->
+<!--              </span>-->
+<!--              <span class='title'>На QIWI-кошелёк</span>-->
+<!--            </span>-->
+<!--                <RadioButton v-model='isCard' val='card' name='pay-method' />-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class='page__option'>-->
+<!--            <div class='px-3 py-4'>-->
+<!--              <label class='d-flex align-items-center justify-content-between mb-1'>-->
+<!--            <span class='d-inline-flex align-items-center'>-->
+<!--              <span class='page__option-image mr-3 mr-2'>-->
+<!--                <img src='/svg/halyk-pay.svg' class='w-100' alt=''>-->
+<!--              </span>-->
+<!--              <span class='title'>Наличнымив банкомате</span>-->
+<!--            </span>-->
+<!--                <RadioButton v-model='isCard' val='card' name='pay-method' />-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <div class='page__action'>
           <BaseButton bg='#3A2784' color='#fff' @click='goToConfirm'>
@@ -94,7 +95,7 @@ export default {
 <style scoped lang='scss'>
 
 .page {
-  background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
+  background-image: linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
   min-height: 30vh;
   border-radius: 0 0 20px 20px;
 
@@ -133,7 +134,7 @@ export default {
 
     &-image {
       max-width: 180px;
-      min-width: 100px;
+      min-width: 80px;
       display: inline-block;
     }
 

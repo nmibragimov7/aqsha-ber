@@ -4,7 +4,7 @@
       Текущий
     </p>
     <div class="mt-2 bg-white detail__content">
-      <ul class='page__inner-container page__list pl-3 pr-3 pt-4 pb-4 font-default'>
+      <ul class='page__inner-container page__list pl-3 pr-3 pt-4 pb-4 font-default mw-600 mx-auto'>
         <li class='mb-4 d-flex justify-content-between align-items-center'>
           <b>Сумма микрокредита:</b>
           <span class='page__dotted'></span>
@@ -23,10 +23,9 @@
         <li class=' d-flex justify-content-between align-items-center'>
           <b>Способ получения:</b>
           <span class='page__dotted'></span>
-          <span class='ml-2 detail__value'>Дебетовая карта
-№00000000000000</span>
+          <span class='ml-2 detail__value'>Дебетовая карта №00000000000000</span>
         </li>
-        <li class="mt-3 d-flex gap-1">
+        <li class="mt-3 d-flex gap-1 mw-310 mx-auto">
           <BaseButton history bg='#3A2784' color="white" @click="$router.push('/lc/credit/extend/1')">
             Продлить
           </BaseButton>
@@ -37,9 +36,11 @@
       </ul>
     </div>
     <template #page__footer>
-      <BaseButton bg='#3A2784' color="white" @click="goToGiveMethods">
-        Как погасить
-      </BaseButton>
+      <div class='mw-310 mx-auto'>
+        <BaseButton bg='#3A2784' color="white" @click="goToGiveMethods">
+          Как погасить
+        </BaseButton>
+      </div>
     </template>
   </PageWrap>
 </template>
@@ -48,6 +49,7 @@ import PageWrap from "~/components/common/PageWrap";
 
 export default {
   components: {PageWrap},
+  layout: "withFooter",
   methods:{
     goToGiveMethods(){
       this.$router.push("/repay?id=1");
@@ -56,6 +58,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.mw-600 {
+  max-width: 600px;
+}
+
+.mw-310 {
+  max-width: 310px;
+}
+
 .detail {
   &__title {
     text-align: center;

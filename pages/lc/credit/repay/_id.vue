@@ -32,15 +32,15 @@
       </ul>
     </template>
     <template v-else>
-      <div class="">
-        <div class='page__option bg-white block mb-3'>
+      <div class="page__option--wrap">
+        <div class='page__option bg-white block' :class='{"grid-row": isDesktop}'>
           <div class='px-3 py-4'>
             <label class='d-flex align-items-center justify-content-between mb-3'>
             <span class='d-inline-flex align-items-center mr-2'>
               <span class='page__option-image mr-3'>
                 <img src='/svg/pay-cards.svg' class='w-100' alt=''>
               </span>
-              <span class='title'>Картой онлайн</span>
+              <span class='title text-bold'>Картой онлайн</span>
             </span>
               <RadioButton val='card' name='pay-method'/>
             </label>
@@ -71,41 +71,40 @@
             </label>
           </div>
         </div>
-        <div class='page__option bg-white block mb-3'>
+        <div class='page__option bg-white block'>
           <div class='px-3 py-4'>
             <label class='d-flex align-items-center justify-content-between'>
             <span class='d-inline-flex align-items-center mr-2'>
               <span class='page__option-image mr-3'>
                 <img src='/svg/kazpochta.svg' class='w-100' alt=''>
               </span>
-              <span class='title'>Наличными
-в АО «Казпочта»</span>
+              <span class='title text-bold'>Наличными в АО «Казпочта»</span>
             </span>
               <RadioButton val='card' name='pay-method'/>
             </label>
           </div>
         </div>
-        <div class='page__option bg-white block mb-3'>
+        <div class='page__option bg-white block'>
           <div class='px-3 py-4'>
             <label class='d-flex align-items-center justify-content-between'>
             <span class='d-inline-flex align-items-center mr-2'>
               <span class='page__option-image mr-3'>
                 <img src='/svg/qiwi-wallet.svg' class='w-100' alt=''>
               </span>
-              <span class='title'>Через терминалы и QIWI-кошелек»</span>
+              <span class='title text-bold'>Через терминалы и QIWI-кошелек»</span>
             </span>
               <RadioButton val='card' name='pay-method'/>
             </label>
           </div>
         </div>
-        <div class='page__option bg-white block mb-4'>
+        <div class='page__option bg-white block'>
           <div class='px-3 py-4'>
             <label class='d-flex align-items-center justify-content-between'>
             <span class='d-inline-flex align-items-center mr-2'>
               <span class='page__option-image mr-3'>
                 <img src='/svg/kassa.svg' class='w-100' alt=''>
               </span>
-              <span class='title'>Через терминалы Касса 24</span>
+              <span class='title text-bold'>Через терминалы Касса 24</span>
             </span>
               <RadioButton val='card' name='pay-method'/>
             </label>
@@ -134,14 +133,23 @@ import RadioButton from "~/components/base/RadioButton";
 
 export default {
   components: {PageWrap, RadioButton},
+  layout: "withFooter",
   data() {
     return {
-      currentStep: 2
+      currentStep: 2,
+      isDesktop: null
     }
+  },
+  mounted() {
+    this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
   }
 }
 </script>
 <style lang="scss" scoped>
+.grid-row {
+  grid-row: span 3 / 4;
+}
+
 .block {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
@@ -160,6 +168,21 @@ export default {
     background-position: center;
     background-size: contain;
     height: 8px;
+  }
+
+  &__option--wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    margin-bottom: 30px;
+
+    @media (min-width: 900px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-gap: 20px 30px;
+      margin-bottom: 40px;
+    }
   }
 }
 

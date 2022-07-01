@@ -9,25 +9,30 @@
             Внимательно ознакомьтесь с условиями оформления вашего кредита
           </p>
         </div>
-        <ul class='page__inner-container page__list p-4'>
-          <li class='mb-4 d-flex justify-content-between align-items-center'>
-            <b>Сумма микрокредита:</b>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>000 000₸</span>
-          </li>
-          <li class='mb-4 d-flex justify-content-between align-items-center'>
-            <b>Срок погашения:</b>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>000 000₸</span>
-          </li>
-          <li class=' d-flex justify-content-between align-items-center'>
-            <b>Сумма к погашению:</b>
-            <span class='page__dotted'></span>
-            <span class='ml-2 info__info'>000 000₸</span>
-          </li>
-        </ul>
+        <div class='page__list'>
+          <ul class='page__inner-container p-4'>
+            <li class='mb-4 d-flex justify-content-between align-items-center'>
+              <b>Сумма микрокредита:</b>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info'>000 000₸</span>
+            </li>
+            <li class='mb-4 d-flex justify-content-between align-items-center'>
+              <b>Срок погашения:</b>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info'>000 000₸</span>
+            </li>
+            <li class=' d-flex justify-content-between align-items-center'>
+              <b>Сумма к погашению:</b>
+              <span class='page__dotted'></span>
+              <span class='ml-2 info__info'>000 000₸</span>
+            </li>
+          </ul>
+        </div>
         <div class='page__action'>
           <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
+          <BaseButton class='mb-2'>
+            ПОСМОТРЕТЬ ДОГОВОР
+          </BaseButton>
           <BaseButton bg='#3A2784' @click='confirm' color='#fff'>
             ПОДТВЕРДИТЬ
           </BaseButton>
@@ -83,12 +88,14 @@ export default {
 
   @media screen and (min-width: 600px) {
     background: url("/images/bg-on-anotherpage.png") no-repeat center / cover;
-    min-height: 50vh;
+    min-height: 40vh;
   }
 
   &__inner-container {
-    max-width: 450px;
-    margin: 0 auto;
+    @media (min-width: 900px) {
+      width: 55%;
+      margin: 0 auto;
+    }
   }
 
   &__wrap {
@@ -124,11 +131,17 @@ export default {
 
   &__list {
     background: #fff;
-    list-style: none;
+    box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
     border-radius: 15px;
+    list-style: none;
     color: #322443;
     font-size: 18px;
-    box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.05), -7px -7px 13px rgba(0, 0, 0, 0.07);
+    max-width: 450px;
+    margin: 0 auto;
+
+    @media (min-width: 900px) {
+      max-width: 800px;
+    }
   }
 
   &__hint {

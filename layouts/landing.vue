@@ -33,10 +33,12 @@ export default {
 .h-100{
   height: 100vh;
 }
+
 .promo{
 
   &__desktop {
     padding-top: 33px;
+    border-radius: 0 0 33px 33px !important;
     background: url("/images/promo_desktop_group.png") no-repeat center/cover;
   }
 }

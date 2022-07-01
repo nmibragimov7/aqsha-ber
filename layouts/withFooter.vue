@@ -3,9 +3,7 @@
     <div class="flex-grow-1">
       <Nuxt/>
     </div>
-    <footer class="footer">
-
-    </footer>
+    <footer class="footer"></footer>
   </div>
 </template>
 
