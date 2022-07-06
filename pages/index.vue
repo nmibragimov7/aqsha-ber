@@ -298,7 +298,11 @@ export default {
   }
 
   &__image {
-    max-width: clamp(100px, 35vh, 300px);
+    max-width: clamp(100px, 21vh, 300px);
+
+    @media (min-width: 900px) {
+      max-width: clamp(100px, 35vh, 300px);
+    }
 
     & > img {
       width: 100%;

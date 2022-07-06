@@ -117,11 +117,11 @@ export default {
     }
   },
   mounted() {
-    // if (!this.user.SumDefault) {
-    //   this.$router.push('/')
-    // } else {
-    //   this.userData = { ...this.user }
-    // }
+    if (!this.user.SumDefault) {
+      this.$router.push('/')
+    } else {
+      this.userData = { ...this.user }
+    }
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
     // this.$store.dispatch("pay/getClientRate")
   },
