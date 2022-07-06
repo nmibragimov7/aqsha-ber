@@ -29,7 +29,7 @@
           </ul>
         </div>
         <div class='page__action'>
-          <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь со всеми условиями.</p>
+          <p class='text-center  my-4 page__hint'>Нажимая кнопку “подтвердить” вы соглашаетесь <a href='/'>со всеми условиями</a>.</p>
           <BaseButton class='mb-2'>
             ПОСМОТРЕТЬ ДОГОВОР
           </BaseButton>
@@ -40,6 +40,7 @@
       </div>
     </div>
     <SendCodeModal :code='form.code'
+                   text='ПОДТВЕРДИТЬ'
                    @stepHandler='stepHandler'
                    @inputHandler='inputHandler' />
   </div>
@@ -82,8 +83,8 @@ export default {
 
 <style lang='scss' scoped>
 .page {
-  background-image: linear-gradient(45deg, #8055A1, #6C83F3, #AE6E9C);
-  min-height: 40vh;
+  background-image: linear-gradient(45deg, #F17C85 0%, #A267C3 27.08%, #5D54AB 49.32%, #8799F2 85.59%);
+  min-height: 30vh;
   border-radius: 0 0 20px 20px;
 
   @media screen and (min-width: 600px) {
@@ -145,7 +146,14 @@ export default {
   }
 
   &__hint {
-    font-size: 14px;
+    font-size: 12px;
+    color: #322443;
+    width: 80%;
+    margin: 0 auto;
+
+    & > a {
+      color: #322443;
+    }
   }
 
   &__action {

@@ -69,6 +69,9 @@ export default {
             ...response.data.Data
           })
           data.successCall()
+        },
+        onError() {
+          data.errorCall()
         }
       })
     },
@@ -80,7 +83,7 @@ export default {
         },
         onSuccess(response) {
           if (response.data.Message === "ok") {
-            payload.successCallBack()
+            payload.successCall()
           }
         },
         onError() {
@@ -117,17 +120,17 @@ export default {
               body: multiForm,
               onSuccess(response){
                 if(response.data.Success){
-                  payload.successCall();
+                  payload.successCall()
                 }
               },
               onError(){
-                alert("ошибка")
+                payload.errorCall()
               }
             })
           }
         },
         onError(){
-          alert("ошибка")
+          payload.errorCall()
         }
       })
     }

@@ -3,7 +3,7 @@
     <div class='modal-getMoney d-flex flex-column align-items-center'>
       <SendCode name='sendCode'
                 :code='code'
-                btn-text='ДАЛЕЕ'
+                :btn-text='text'
                 @stepHandler='(value, index) => $emit("stepHandler", value, index)'
                 @inputHandler='value => $emit("inputHandler", value)' />
     </div>
@@ -19,6 +19,10 @@ export default {
     code: {
       type: String,
       default:""
+    },
+    text: {
+      type: String,
+      default: 'ДАЛЕЕ'
     }
   },
   components: { SendCode }

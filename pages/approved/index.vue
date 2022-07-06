@@ -36,7 +36,14 @@
             </div>
             <div class='mt-4'>
               <div class='page__stars my-3' />
-              <BaseInput v-model='code' placeholder='ПРОМОКОД' />
+              <BaseInput :value='code'
+                         @input='(value) => sendPromoCode(value)'
+                         :hasError='validations.$dirty && !validations.isValidPromoCode'
+                         :validations='validations'
+                         :icon='validations.$dirty ? !validations.isValidPromoCode ? "error-icon" : "success-icon" : null'
+                         left='auto'
+                         right='20px'
+                         placeholder='ПРОМОКОД' />
               <div class='page__stars my-3' />
             </div>
             <div class='d-flex mt-3 justify-content-between align-items-center'>
@@ -48,11 +55,6 @@
               <span class='mr-2 info__bold font-gilroy'>Переплата по микрокредиту:</span>
               <span class='page__dotted'></span>
               <span class='ml-2 info__title'>{{ percentSum }}₸</span>
-            </div>
-            <div class='d-flex mt-4 justify-content-between align-items-center'>
-              <span class='mr-2 info__bold font-gilroy'>Ежемесячный платёж</span>
-              <span class='page__dotted'></span>
-              <span class='ml-2 info__info font-gilroy'>000000₸</span>
             </div>
             <div class='page__stars my-3' />
             <div class='d-flex mt-4 justify-content-between align-items-center'>
@@ -96,6 +98,11 @@ export default {
   data() {
     return {
       code: '',
+      validations: {
+        $dirty: false,
+        $error: false,
+        isValidPromoCode: false
+      },
       userData: {
         'SumMin': 0,
         'SumMax': 0,
@@ -110,15 +117,33 @@ export default {
     }
   },
   mounted() {
-    if (!this.user.SumDefault) {
-      this.$router.push('/')
-    } else {
-      this.userData = { ...this.user }
-    }
+    // if (!this.user.SumDefault) {
+    //   this.$router.push('/')
+    // } else {
+    //   this.userData = { ...this.user }
+    // }
     this.contentDisplay === 'desktop' ? this.isDesktop = true : this.isDesktop = false
     // this.$store.dispatch("pay/getClientRate")
   },
   methods: {
+    sendPromoCode(value) {
+      this.code = value
+      if(value) {
+        const isValidPromoCode = Math.round(Math.random())
+        this.validations = {
+          $dirty: true,
+          $error: !isValidPromoCode,
+          isValidPromoCode: !!isValidPromoCode
+        }
+        return
+      }
+
+      this.validations = {
+        $dirty: false,
+        $error: false,
+        isValidPromoCode: false
+      }
+    },
     giveToMoney() {
       const onSuccess = (response) => {
         if (response.data.Success) {

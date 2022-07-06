@@ -60,12 +60,16 @@ export default {
         this.$emit('stepHandler', 'FourthStep')
         this.$modal.hide('processed')
       }
+      const errorCall = () => {
+        this.$modal.hide('processed')
+      }
       this.$modal.show('processed')
       if (this.frontDocFile && this.backDocFile) {
         this.$store.dispatch('auth/confirmRegistration', {
           frontfile: this.frontDocFile,
           backfile: this.backDocFile,
-          successCall
+          successCall,
+          errorCall
         })
       }
     }

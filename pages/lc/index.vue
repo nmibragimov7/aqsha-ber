@@ -6,7 +6,7 @@
           <div class='profile__image h-100 w-100'></div>
         </div>
         <div class='col-6 col-lg-8 d-flex flex-column justify-content-between' :class='{"p-0": !isDesktop}'>
-          <p class='m-0 '>{{ user.Surname }}</p>
+          <p class='m-0'>{{ user.Surname }}</p>
           <p class='m-0'>{{ user.Name }}</p>
           <p v-if="user.MiddleName" class='m-0'>{{ user.MiddleName }}</p>
           <p class='m-0'>№ 21312421</p>
@@ -45,23 +45,43 @@
                      class='mb-3'
                      type='password'
                      is-paassword
+                     :hasError='$v.password && $v.password.$dirty && $v.password.$error'
+                     :validations='$v.password'
                      :placeholder='isPassExist ? "Старый пароль": "Пароль"'/>
-          <BaseInput v-if='isPassExist' v-model='newPassword'
+          <BaseInput v-if='isPassExist'
+                     :value='newPassword'
+                     @input='value => inputHandler(value)'
                      class='mb-3'
                      type='password'
                      is-password
+                     :hasError='$v.newPassword && $v.newPassword.$dirty && $v.newPassword.$error'
+                     :validations='$v.newPassword'
                      placeholder='Новый пароль'/>
-          <div class='d-flex justify-content-between'>
-            <div v-for='num in 4' :key='num' :class='["profile__level" , {"mr-2":num <4}]'/>
+          <div v-if='newPassword'
+               class='d-flex justify-content-between'>
+            <div v-for='num in 4'
+                 :key='num'
+                 :class='["profile__level" ,
+                          {"mr-2": num < 4, "opacity": num > reliability}]'/>
           </div>
-          <span class='profile__level-hint mb-3'>Ненадежный</span>
+          <span v-if='reliability === 1' class='profile__level-hint mb-3'>Ненадежный</span>
+          <span v-if='reliability === 2' class='profile__level-hint mb-3'>Слабо надежный</span>
+          <span v-if='reliability === 3' class='profile__level-hint mb-3'>Надежный</span>
+          <span v-if='reliability === 4' class='profile__level-hint mb-3'>Очень надежный</span>
           <p class='m-0 mb-3 text-center profile__description'>
             Должен состоять минимум из 8 символов и содержать
             хотя бы одну цифру, символ и заглавную букву.
             <br>
             <span class='profile__description--red'>Не используйте пробелы и кириллицу.</span>
           </p>
-          <BaseButton classes='profile__button--blue' next @click="changePassword">Изменить</BaseButton>
+          <div class='profile__line mb-3'/>
+          <p class='m-0 mb-3 text-center profile__description text-black'>
+            Мы отправим код подтверждения смены пароля смс-сообщением.
+          </p>
+          <BaseButton classes='profile__button--blue'
+                      :disabled='$v.password.$error || $v.newPassword.$error'
+                      next
+                      @click="changePassword">Изменить</BaseButton>
         </div>
       </div>
       <div style="height: 300px" class="px-3 mt-4">
@@ -71,6 +91,8 @@
   </PageWrap>
 </template>
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 import PageWrap from "@/components/common/PageWrap.vue"
 import BaseInput from "@/components/base/BaseInput/BaseInput"
 import BaseButton from "@/components/base/BaseButton/BaseButton"
@@ -85,6 +107,7 @@ export default {
       isPassExist: true,
       isDesktop: false,
       history: [],
+      reliability: 0,
       user: {
         BirthDate: "2001-06-27T00:00:00",
         Email: null,
@@ -96,12 +119,57 @@ export default {
       }
     }
   },
+  validations: {
+    password: {
+      isValidPassword(value) {
+        if(!value) {
+          return true
+        }
+        return this.isValidPassword(value)
+      },
+      required
+    },
+    newPassword: {
+      isValidPassword(value) {
+        if(!value) {
+          return true
+        }
+        return this.isValidPassword(value)
+      },
+      required
+    }
+  },
   mounted() {
     this.contentDisplay === "desktop" ? this.isDesktop = true : this.isDesktop = false
     this.getClientInfo();
     this.getHistory()
   },
   methods: {
+    isValidPassword(value) {
+      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value)
+    },
+    inputHandler(value) {
+      this.newPassword = value
+      if(!value) {
+        this.reliability = 0
+      }
+      // первый уровень минимум 1 строчная и 1 заглавная буква
+      if(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{2,}$/.test(value)) {
+        this.reliability = 1
+      }
+      // второй уровень минимум 1 строчная, 1 заглавная буква и одна цифра
+      if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{3,}$/.test(value)) {
+        this.reliability = 2
+      }
+      // третий уровень минимум 1 строчная, 1 заглавная буква, одна цифра и 1 спец символ
+      if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/.test(value)) {
+        this.reliability = 3
+      }
+      // четвертый уровень минимум 1 строчная, 1 заглавная буква, одна цифра, 1 спец символ и минимум 8 символов
+      if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value)) {
+        this.reliability = 4
+      }
+    },
     getClientInfo() {
       const _this = this
       this.$requests.getClientInfo({
@@ -126,24 +194,40 @@ export default {
       })
     },
     changePassword() {
-      const oldPassword = this.password; const password = this.newPassword;
-      this.$requests.changePassword({
-        body: {
-          oldPassword,
-          password
-        },
-        onSuccess(res) {
-          console.log(res)
-        }
-      })
+      this.$v.password.$touch()
+      this.$v.newPassword.$touch()
+      if (!this.$v.password.$error && !this.$v.newPassword.$error) {
+        const oldPassword = this.password;
+        const password = this.newPassword;
+        this.$requests.changePassword({
+          body: {
+            oldPassword,
+            password
+          },
+          onSuccess(res) {
+            console.log(res)
+          }
+        })
+      }
     }
   }
 }
 </script>
 
 <style lang='scss' scoped>
+.opacity {
+  opacity: 0;
+}
+
+.text-black {
+  width: 60%;
+  margin: 0 auto;
+  color: #322443 !important;
+}
+
 .page {
   &__header {
+    font-size: 16px;
 
     @media (min-width: 900px) {
       padding: 25px 100px !important;
@@ -157,6 +241,10 @@ export default {
 }
 
 .profile {
+
+  &__line {
+    border: 1px solid #D3D3E6;
+  }
 
   &__image {
     background-color: #C4C4C4;

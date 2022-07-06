@@ -6,22 +6,22 @@
     <div class="mt-2 bg-white detail__content">
       <ul class='page__inner-container page__list pl-3 pr-3 pt-4 pb-4 font-default mw-600 mx-auto'>
         <li class='mb-4 d-flex justify-content-between align-items-center'>
-          <b>Сумма микрокредита:</b>
+          <b class='font-gilroy'>Сумма микрокредита:</b>
           <span class='page__dotted'></span>
           <span class='ml-2 info__info'>000 000₸</span>
         </li>
         <li class='mb-4 d-flex justify-content-between align-items-center'>
-          <b>Дата получения:</b>
+          <b class='font-gilroy'>Дата получения:</b>
           <span class='page__dotted'></span>
           <span class='ml-2 info__info'>000 000₸</span>
         </li>
         <li class='mb-4 d-flex justify-content-between align-items-center'>
-          <b>Дата погашения:</b>
+          <b class='font-gilroy'>Дата погашения:</b>
           <span class='page__dotted'></span>
           <span class='ml-2 info__info'>дд.мм.гг</span>
         </li>
         <li class=' d-flex justify-content-between align-items-center'>
-          <b>Способ получения:</b>
+          <b class='font-gilroy'>Способ получения:</b>
           <span class='page__dotted'></span>
           <span class='ml-2 detail__value'>Дебетовая карта №00000000000000</span>
         </li>

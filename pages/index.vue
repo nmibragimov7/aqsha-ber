@@ -18,7 +18,7 @@
       </div>
     </div>
     <div :class="{'container': isDesktop}">
-      <div class='promotion__wrap' :class="{'my-5 py-4': isDesktop}">
+      <div class='promotion__wrap' :class="{'my-5': isDesktop}">
         <div class="container">
           <div class='promotion py-4 d-flex align-items-center justify-content-between' :class="{'desktop':isDesktop}">
             <div class='promotion__block'>
@@ -293,12 +293,12 @@ export default {
   &__image-wrap {
     position: absolute;
     right: 0;
-    top: 55%;
+    top: 45%;
     transform: translateY(-50%);
   }
 
   &__image {
-    max-width: clamp(100px, 24vh, 200px);
+    max-width: clamp(100px, 35vh, 300px);
 
     & > img {
       width: 100%;
@@ -441,9 +441,6 @@ export default {
     width: 80%;
     display: block;
     margin: 0 auto;
-    //@media (min-width: 768px) {
-    //  width: 100%;
-    //}
 
     & > img {
       width: 100%;
@@ -489,7 +486,6 @@ export default {
 }
 
 .company {
-  //transform: translateY(-48px);
   margin-top: -48px;
   @media screen and (min-width: 675px) {
     transform: translateY(0);

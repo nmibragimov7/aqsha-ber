@@ -8,7 +8,7 @@
         </div>
         <h1 class='text-center page__title mt-4 mb-4'>{{ user.SumDefault }} ₸</h1>
         <div class="page__description">
-          <p class='text-center page__text page__text mt-3 mb-3'>Предварительно одобренная сумма микрокредита. Поздравляем!</p>
+          <p class='text-center page__text page__text mt-3 mb-0'>Поздравляем! Предварительно одобренная сумма микрокредита.</p>
           <p class='text-center page__desc mt-1 mb-4'>Не переживайте — на этом этапе вы нам ничего не должны!</p>
         </div>
         <p class='text-center page__step mt-1 mb-2'>Шаг 1 из 6</p>
@@ -36,7 +36,8 @@
                        is-register
                        mask='+7 (# # #) # # # - # # - # #'
                        placeholder='+7 (_ _ _) _ _ _ - _ _ - _ _'
-                       :hasError='$v.phone.$error'
+                       :hasError='$v.phone && $v.phone.$dirty && $v.phone.$error'
+                       :validations='$v.phone'
                        @input='value => $emit("inputHandler", "phone", value)' />
             <BaseButton classes='mt-3 font-gilroy'
                         uppercase
@@ -99,14 +100,16 @@ export default {
   },
   methods: {
     sendCode() {
+      this.$modal.show('sendCode')
+
       this.$v.phone.$touch()
       if (!this.$v.phone.$error) {
-        const successCallBack = () => {
+        const successCall = () => {
           this.$modal.show('sendCode')
         }
         this.$store.dispatch('auth/registerClient', {
           phone: cleanNumber(this.phone),
-          successCallBack
+          successCall
         })
       }
     },

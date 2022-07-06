@@ -3,7 +3,7 @@
     <Header logo-small />
     <div class='container page__wrap'>
       <div class='page__body px-4'>
-        <h1 class='text-center page__title mb-4'>Способы получения</h1>
+        <h1 class='text-center page__title text-bold mb-4'>Способы получения</h1>
         <div class='page__option--wrap mb-5'>
           <div class='page__option'>
             <div class='px-3 py-4 h-100'>
@@ -16,7 +16,12 @@
                 </span>
                 <RadioButton v-model='isCard' val='card' name='pay-method' />
               </label>
-              <BaseInput v-model='cardNumber' mask='####-####-####-####' placeholder='Номер дебетовой карты' />
+              <BaseInput v-if='isDesktop || (!isDesktop && isCard === "card")'
+                         v-model='cardNumber'
+                         mask='####-####-####-####'
+                         :hasError='$v.cardNumber && $v.cardNumber.$dirty && $v.cardNumber.$error'
+                         :validations='$v.cardNumber'
+                         placeholder='Номер дебетовой карты' />
             </div>
           </div>
           <div class='page__option'>
@@ -28,40 +33,19 @@
                   </span>
                   <span class='title'>Наличнымив АО «Казпочта»</span>
                 </span>
-                <RadioButton v-model='isCard' val='card' name='pay-method' />
+                <RadioButton v-model='isCard' val='post' name='pay-method' />
               </label>
-              <p class='m-0 text-center' style='color: rgba(50, 36, 67, 0.5)'>Отправим смс с кодом на ваш номер</p>
+              <p v-if='isDesktop || (!isDesktop && isCard === "post")'
+                 class='m-0 text-center'
+                 style='color: rgba(50, 36, 67, 0.5)'>Отправим смс с кодом на ваш номер</p>
             </div>
           </div>
-<!--          <div class='page__option'>-->
-<!--            <div class='px-3 py-4'>-->
-<!--              <label class='d-flex align-items-center justify-content-between mb-1'>-->
-<!--            <span class='d-inline-flex align-items-center mr-2'>-->
-<!--              <span class='page__option-image mr-3'>-->
-<!--                <img src='/svg/qiwi-wallet.svg' class='w-100' alt=''>-->
-<!--              </span>-->
-<!--              <span class='title'>На QIWI-кошелёк</span>-->
-<!--            </span>-->
-<!--                <RadioButton v-model='isCard' val='card' name='pay-method' />-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class='page__option'>-->
-<!--            <div class='px-3 py-4'>-->
-<!--              <label class='d-flex align-items-center justify-content-between mb-1'>-->
-<!--            <span class='d-inline-flex align-items-center'>-->
-<!--              <span class='page__option-image mr-3 mr-2'>-->
-<!--                <img src='/svg/halyk-pay.svg' class='w-100' alt=''>-->
-<!--              </span>-->
-<!--              <span class='title'>Наличнымив банкомате</span>-->
-<!--            </span>-->
-<!--                <RadioButton v-model='isCard' val='card' name='pay-method' />-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
         <div class='page__action'>
-          <BaseButton bg='#3A2784' color='#fff' @click='goToConfirm'>
+          <BaseButton bg='#3A2784'
+                      color='#fff'
+                      :disabled='(isCard === "card" && $v.cardNumber.$error) || !isCard'
+                      @click='goToConfirm'>
             ПОДТВЕРДИТЬ
           </BaseButton>
         </div>
@@ -71,6 +55,8 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 import Header from '@/components/layout/Header/Header'
 import RadioButton from '@/components/base/RadioButton'
 
@@ -82,12 +68,28 @@ export default {
   data() {
     return {
       cardNumber: '',
-      isCard: ''
+      isCard: '',
+      isDesktop: false
     }
+  },
+  validations: {
+    cardNumber: {
+      required
+    }
+  },
+  mounted() {
+    this.isDesktop = this.contentDisplay === 'desktop'
   },
   methods: {
     goToConfirm() {
-      this.$router.push('/approved/confirm')
+      if(this.isCard === 'card') {
+        this.$v.cardNumber.$touch()
+        if (!this.$v.cardNumber.$error) {
+          this.$router.push('/approved/confirm')
+        }
+      } else {
+        this.$router.push('/approved/confirm')
+      }
     }
   }
 }
@@ -122,7 +124,6 @@ export default {
   &__title {
     color: #fff;
     font-size: 24px;
-    font-weight: 500;
   }
 
   &__option {
@@ -146,7 +147,8 @@ export default {
 
       @media (min-width: 900px) {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        margin-bottom: 100px !important;
+        //grid-template-rows: repeat(2, 1fr);
       }
     }
   }

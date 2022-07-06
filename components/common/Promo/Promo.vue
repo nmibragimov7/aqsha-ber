@@ -18,7 +18,8 @@
                 v-model='valueInput'
                 placeholder='Введите ИИН'
                 mask='### ### ### ###'
-                :hasError='$v.valueInput.$error'
+                :hasError='$v.valueInput && $v.valueInput.$dirty && $v.valueInput.$error'
+                :validations='$v.valueInput'
                 bg='transparent'
                 color='#FFF'
                 is-promo
@@ -88,9 +89,13 @@ export default {
           this.$modal.hide('processed')
           this.$router.replace('register')
         }
+        const errorCall = () => {
+          this.$modal.hide('processed')
+        }
         const data = {
           iin: cleanNumber(this.valueInput, false),
-          successCall
+          successCall,
+          errorCall
         }
         if(this.isAuth) {
           this.$store.dispatch('auth/getClientRate', data)

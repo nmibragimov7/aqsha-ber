@@ -1,7 +1,10 @@
 <template>
   <div :class="['input__wrap']" :style='{width: width + "%"}'>
     <label>
-      <span v-if='label' class='input__label'>{{ label }}</span>
+      <span v-if='label'
+            class='input__label'
+            :class="{'input__label--error': hasError,
+                     'input__label--success': validations && validations.$dirty && !validations.$error}">{{ label }}</span>
       <input
         v-mask='mask'
         :type='visibility'
@@ -11,6 +14,7 @@
         :class="['input',
           `${classes}`,
           {'input--error': hasError,
+          'input--success': validations && validations.$dirty && !validations.$error,
           'input__promo': isPromo,
           'input__footer': isFooter,
           'input__password': isPassword,
@@ -19,8 +23,23 @@
         :readonly='readonly'
         @input="$emit('input', $event.target.value)"
       />
+      <small v-if='validations && validations.$dirty && ("isValidPromoCode" in validations) && !validations.isValidPromoCode'
+             class='input__message input__message--error'>Проверьте правильность написания</small>
+      <small v-if='validations && validations.$dirty && ("isValidPromoCode" in validations) && validations.isValidPromoCode'
+             class='input__message input__message--success'>Промокод активирован</small>
+      <small v-if='validations && validations.$dirty && ("isValidPassword" in validations) && !validations.isValidPassword'
+             class='input__message input__message--error'>не валидный пароль</small>
+      <small v-if='validations && validations.$dirty && ("isValidIin" in validations) && !validations.isValidIin'
+             class='input__message input__message--error'>не валидный ИИН</small>
+      <small v-if='validations && validations.$dirty && ("required" in validations) && !validations.required'
+             class='input__message input__message--error'>обязательное поле</small>
+      <small v-if='validations && validations.$dirty && ("minLength" in validations) && !validations.minLength'
+             class='input__message input__message--error'>минимальное количество {{validations.$params.minLength.min}}</small>
+      <small v-if='validations && validations.$dirty && ("maxLength" in validations) && !validations.maxLength'
+             class='input__message input__message--error'>максимальное количество {{validations.$params.maxLength.max}}</small>
       <img v-if='icon'
            class='input__icon'
+           :style='{left: left, right: right}'
            :src='require(`@/assets/images/${icon}.svg`)' />
       <img v-if='type === "password"'
            draggable="false"
@@ -104,6 +123,17 @@ export default {
     hasError: {
       type: Boolean,
       default: false
+    },
+    validations: {
+      default: null
+    },
+    left: {
+      type: String,
+      default: '20px'
+    },
+    right: {
+      type: String,
+      default: 'auto'
     }
   },
   data() {
@@ -114,7 +144,6 @@ export default {
   methods: {
     passwordHandler(type) {
       this.visibility = type
-      // this.visibility === 'text' ? this.visibility = 'password' : this.visibility = 'text'
     }
   }
 }
@@ -139,8 +168,23 @@ export default {
     font-size: 22px;
   }
 
+  &__value {
+
+    &--error {
+      color: #ED6E6E !important;
+    }
+
+    &--success {
+      color: #81C688 !important;
+    }
+  }
+
   &--error {
-    border: 1px solid red;
+    border-color: #ED6E6E !important;
+  }
+
+  &--success {
+    border-color: #81C688 !important;
   }
 
   &__label {
@@ -152,11 +196,34 @@ export default {
     padding: 3px;
     color: rgba(50, 36, 67, 0.5);
     line-height: 100%;
+
+    &--error {
+      color: #ED6E6E !important;
+    }
+
+    &--success {
+      color: #81C688 !important;
+    }
+  }
+
+  &__message {
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    left: 0;
+
+    &--error {
+      color: #ED6E6E !important;
+    }
+
+    &--success {
+      color: #81C688 !important;
+    }
   }
 
   &__icon {
     position: absolute;
-    left: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -171,7 +238,7 @@ export default {
 
   &__password {
     color: #afafc0;
-    font-size: 26px;
+    //font-size: 26px;
     padding: 12px 60px 12px 15px;
 
     &--icon {

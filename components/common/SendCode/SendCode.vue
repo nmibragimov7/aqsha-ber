@@ -6,7 +6,9 @@
          @click='close' />
     <p class='text-center my-4 code__title'>Введите код из СМС</p>
     <div class='code__input--wrap'>
-      <div class='position__absolute'>
+      <div>
+        <small v-if='attemptsCount < 3'
+               class='code__label--error position__absolute mb-2'>Осталось {{attemptsCount}} {{attemptsCount > 1 ? 'попытки': 'попытка'}}</small>
         <div class='d-flex align-items-center justify-content-between mb-3'>
           <div v-for='idx of codeLength' :key='idx'>
             <input
@@ -14,10 +16,12 @@
               type='number'
               @keydown='onKeyDown($event, idx)'
               class='code__input'
+              :class='[{"code__input--error": attemptsCount < 3}]'
               @input='inputHandler($event, idx)'>
           </div>
         </div>
-        <BaseButton classes='code__button mt-2' @click='sendCode'>{{ btnText }}</BaseButton>
+        <BaseButton classes='code__button mt-2'
+                    @click='sendCode'>{{ btnText }}</BaseButton>
         <p class='text-center code__text'>Отправить еще раз</p>
       </div>
     </div>
@@ -46,7 +50,8 @@ export default {
   data() {
     return {
       data: '',
-      codeLength: 4
+      codeLength: 4,
+      attemptsCount: 3
     }
   },
   methods: {
@@ -93,13 +98,17 @@ export default {
       }
     },
     sendCode() {
-      switch (this.name) {
-        case 'signIn':
-          this.$emit('sendCode')
-          break
-        case 'sendCode':
-          this.$emit('stepHandler')
-          break
+      if(this.attemptsCount > 1) {
+        this.attemptsCount--
+      } else {
+        switch (this.name) {
+          case 'signIn':
+            this.$emit('sendCode')
+            break
+          case 'sendCode':
+            this.$emit('stepHandler')
+            break
+        }
       }
     },
     close() {
@@ -121,11 +130,21 @@ export default {
 
   &__absolute {
     position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
 .code {
   position: relative;
+
+  &__label {
+
+    &--error {
+      color: #ED6E6E !important;
+    }
+  }
 
   &__title {
     font-weight: 800;
@@ -155,6 +174,10 @@ export default {
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
+    }
+
+    &--error {
+      border-color: #ED6E6E !important;
     }
 
     &--wrap {

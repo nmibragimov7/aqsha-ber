@@ -87,7 +87,7 @@ export default {
             }
           },
           onError() {
-            alert("Ошибка")
+            _this.$modal.hide("processed");
           }
         })
       }

@@ -16,31 +16,39 @@
             <div class='mb-3 mt-3'>
               <BaseInput :value='placeOfWork'
                          label='Место работы (название)'
+                         :hasError='$v.placeOfWork && $v.placeOfWork.$dirty && $v.placeOfWork.$error'
+                         :validations='$v.placeOfWork'
                          @input='value => $emit("inputHandler", "placeOfWork", value)' />
             </div>
             <p class="text-center mb-3 mt-1">Доверительные контакты</p>
             <div class='mb-4'>
               <BaseInput :value='relativeName'
                          label='Имя родственника'
+                         :hasError='$v.relativeName && $v.relativeName.$dirty && $v.relativeName.$error'
+                         :validations='$v.relativeName'
                          @input='value => $emit("inputHandler", "relativeName", value)' />
             </div>
             <div class='mb-4'>
               <BaseInput :value='relativeNumber'
                          label='Номер телефона'
                          mask='+7 (# # #) # # # - # # - # #'
-                         :hasError='$v.relativeNumber.$error'
+                         :hasError='$v.relativeNumber && $v.relativeNumber.$dirty && $v.relativeNumber.$error'
+                         :validations='$v.relativeNumber'
                          @input='value => $emit("inputHandler", "relativeNumber", value)' />
             </div>
             <div class='mb-4'>
               <BaseInput :value='friendName'
                          label='Имя друга или коллеги'
+                         :hasError='$v.friendName && $v.friendName.$dirty && $v.friendName.$error'
+                         :validations='$v.friendName'
                          @input='value => $emit("inputHandler", "friendName", value)' />
             </div>
             <div class='mb-4'>
               <BaseInput :value='friendNumber'
                          label='Номер телефона'
                          mask='+7 (# # #) # # # - # # - # #'
-                         :hasError='$v.friendNumber.$error'
+                         :hasError='$v.friendNumber && $v.friendNumber.$dirty && $v.friendNumber.$error'
+                         :validations='$v.friendNumber'
                          @input='value => $emit("inputHandler", "friendNumber", value)' />
             </div>
             <BaseButton v-if='isDesktop'
@@ -56,7 +64,7 @@
                     uppercase
                     next
                     classes='mt-4'
-                    :disabled='$v.$invalid'
+                    :disabled='$v.$error'
                     @click='confirm'>подтвердить
         </BaseButton>
       </div>
@@ -107,10 +115,16 @@ export default {
     placeOfWork: {
       required,
     },
+    friendName: {
+      required
+    },
     friendNumber: {
       required,
       minLength: minLength(28),
       maxLength: maxLength(28)
+    },
+    relativeName: {
+      required
     },
     relativeNumber: {
       required,
@@ -120,9 +134,16 @@ export default {
   },
   methods:{
     confirm(){
+      this.$v.placeOfWork.$touch()
+      this.$v.friendName.$touch()
       this.$v.friendNumber.$touch()
+      this.$v.relativeName.$touch()
       this.$v.relativeNumber.$touch()
-      if (!this.$v.friendNumber.$error && !this.$v.relativeNumber.$error) {
+      if (!this.$v.placeOfWork.$error
+        && !this.$v.friendName.$error
+        && !this.$v.friendNumber.$error
+        && !this.$v.relativeName.$error
+        && !this.$v.relativeNumber.$error) {
         const onSuccess = (response)=>{
           if(response.data.Success){
             this.$emit("confirm")

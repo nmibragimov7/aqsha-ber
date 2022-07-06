@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      stream: null
     }
   },
   watch: {
@@ -35,11 +36,11 @@ export default {
       async handler(value) {
         if (value) {
           try {
-            const stream = await navigator.mediaDevices.getUserMedia({
+            this.stream = await navigator.mediaDevices.getUserMedia({
               audio: false,
               video: true
             })
-            this.$refs.videoRef.srcObject = stream
+            this.$refs.videoRef.srcObject = this.stream
             this.$refs.videoRef.oncanplay = () => {
               this.isLoading = false
             }
@@ -57,9 +58,6 @@ export default {
     snapShot() {
       const canvas = document.createElement("canvas")
       const ctx = canvas.getContext("2d")
-      // const ratio = this.$refs.videoRef.offsetWidth/this.$refs.videoRef.offsetHeight;
-      // const w = this.$refs.videoRef.offsetWidth-100;
-      // const h = parseInt(w/ratio,10);
       canvas.width = this.$refs.videoRef.offsetWidth
       canvas.height = this.$refs.videoRef.offsetHeight
       ctx.drawImage(this.$refs.videoRef, 0, 0, this.$refs.videoRef.offsetWidth, this.$refs.videoRef.offsetHeight)
@@ -69,7 +67,9 @@ export default {
       })
     },
     closeCamera(data = {message: "Отмена"}) {
-      this.$refs.videoRef.pause();
+      this.stream.getTracks().forEach(track => {
+        track.stop();
+      });
       this.$emit("close", data)
     }
   }
